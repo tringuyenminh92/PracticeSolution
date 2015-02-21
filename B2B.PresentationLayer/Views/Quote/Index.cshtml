@@ -1,0 +1,52 @@
+﻿<script src="~/Scripts/Custom/QuoteController.js"></script>
+
+<div class="row">
+    <button id="btId" type="button" class="btn btn-primary btn-group-sm">Message</button>
+    <div id="alertId" role="alert"></div>
+</div>
+<div class="row">
+    <div ng-controller="quoteController">
+        <button id="btnLoadData" type="button" class="btn btn-primary btn-group-sm" ng-click="loadData()">Load Data</button>
+        <div id="gridId" class="gridStyle" external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
+        </div>
+    </div>
+
+</div>
+<br />
+
+<br />
+
+<br />
+
+<br />
+<div class="row">
+    <div ng-controller="modalDemoController">
+        <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">I'm a modal!</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li ng-repeat="item in items">
+                    <a ng-click="selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+        </script>
+        <button class="btn btn-default" ng-click="open()">Open me!</button>
+        <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
+        <button class="btn btn-default" ng-click="open('sm')">Small modal</button>
+        <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+    </div>
+</div>
+
+
+
+
+
+
