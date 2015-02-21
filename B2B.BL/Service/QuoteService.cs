@@ -30,38 +30,5 @@ namespace B2B.BL.Service
         //Flag to check if error level was enabled.
         private static readonly bool isErrorEnabled = logger.IsErrorEnabled;
 
-        IQuoteRepository _quoteRepository;
-        /// <summary>
-        /// Initializes a new instance of the <see cref="QuoteService"/> class.
-        /// </summary>
-        /// <param name="quoteRepository">The quote repository.</param>
-        public QuoteService(IQuoteRepository quoteRepository)
-        {
-            _quoteRepository = quoteRepository;
-        }
-
-        /// <summary>
-        /// Gets the quotes.
-        /// </summary>
-        /// <param name="loggedUser">The logged user.</param>
-        /// <param name="showAll">if set to <c>true</c> [show all].</param>
-        /// <returns>List{QuotesModel}.</returns>
-        public IEnumerable<QuotesModel> GetQuotes(string loggedUser, bool showAll = false)
-        {
-            //try
-            //{
-            //Automapper for converting the source entity to destination entity
-            Mapper.CreateMap<SP_SelectQuotes_Result, QuotesModel>();
-
-            var quoteList = _quoteRepository.GetQuotes(loggedUser, showAll).AsEnumerable();
-            return Mapper.Map<IEnumerable<SP_SelectQuotes_Result>, IEnumerable<QuotesModel>>(quoteList);
-            //}
-            //catch (Exception)
-            //{
-            //    logger.Error("");
-            //    throw;
-            //}
-
-        }
     }
 }
