@@ -9,6 +9,5 @@ namespace B2B.BL.IService
 {
     public interface IQuoteService
     {
-       IEnumerable<QuotesModel> GetQuotes(string loggedUser, bool showAll = false);
     }
 }
