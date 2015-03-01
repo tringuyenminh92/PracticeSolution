@@ -26,7 +26,7 @@ function QuoteController($scope, $http, $modalInstance) {
     $scope.deleteCellTemplate = '<button ng-click="getExternalScopes().deleteRow(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-trash"/></button> ';
     $scope.gridOptions.columnDefs = [
           { name: '_delete', displayName: "", cellTemplate: $scope.deleteCellTemplate, width: 25, enableFiltering: false, enableCellEdit: false },
-  	      { name: 'name', displayName: 'Name', width: 150 },
+  	      { name: 'name', displayName: 'Name', headerCellTemplate: '<div title="Tooltip Content">Name</div>', width: 150 },
   	      { name: 'tuoi', displayName: 'tuoi', width: 50 }
     ];
     $scope.gridOptions.paginationPageSizes = [25, 50, 75];
