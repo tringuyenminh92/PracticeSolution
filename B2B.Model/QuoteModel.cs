@@ -10,6 +10,7 @@ namespace B2B.Model
     public class QuotesModel
     {
         public int? auto { get; set; }
+        //Vinh pham comment
 
         public string Quote_number { get; set; }
 
