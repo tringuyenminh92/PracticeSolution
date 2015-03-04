@@ -11,6 +11,7 @@ namespace B2B.Model
     {
         //Khuyen - test
         public int? auto { get; set; }
+        //Vinh pham comment
 
         public string Quote_number { get; set; }
 
