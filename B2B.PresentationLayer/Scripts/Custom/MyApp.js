@@ -1,26 +1,37 @@
 ﻿
 (function () {
-
     angular.module("GlobalModule", ['ui.bootstrap', 'ngTouch', 'ui.grid', 'ui.grid.pagination', 'ui.grid.edit', 'ui.grid.resizeColumns',
                                     'ui.grid.selection', 'ui.grid.moveColumns', 'ui.grid.saveState', 'ui.bootstrap']);
-
 })();
 
-//Alert class to show error message
+//Alert class to show error message in div 
 function Alert(element, message, type, position, size, delayTime) {
 
     position = position || "right";
     size = delayTime || "4";
     delayTime = delayTime || 3000;
-    var selft = $("#" + element);
+    var self = $("#" + element);
 
-    this.ShowAlert = function () {
-        $(selft).removeClass();
-        $(selft).addClass("pull-" + position);
-        $(selft).addClass("col-md-" + size);
-        $(selft).addClass("alert alert-" + type);
-        $(selft).text(message);
-        $(selft).fadeIn().delay(delayTime).fadeOut();
+    this.Show = function () {
+        $(self).removeClass();
+        $(self).addClass("pull-" + position);
+        $(self).addClass("col-md-" + size);
+        $(self).addClass("alert alert-" + type);
+        $(self).text(message);
+        $(self).fadeIn().delay(delayTime).fadeOut();
+    }
+}
+
+//Wait-Dialog class to show Processing message in modal
+function WaitDialog() {
+
+    var pleaseWaitDiv = $('<div class="modal fade" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="basicModal" aria-hidden="true" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1>Processing...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="progress-bar" style="width: 100%;"/></div></div></div></div></div>');
+
+    this.Show = function () {
+        pleaseWaitDiv.modal();
+    }
+    this.Hide = function () {
+        pleaseWaitDiv.modal('hide');
     }
 }
 

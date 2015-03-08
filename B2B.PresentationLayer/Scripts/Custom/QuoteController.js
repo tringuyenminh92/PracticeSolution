@@ -2,12 +2,11 @@
 $(function () {
     $('#btId').click(function () {
         var al = new Alert("alertId", "thoong baos", "success");
-        al.ShowAlert();
+        al.Show();
     });
 })
 
 angular.module("GlobalModule").controller("quoteController", QuoteController);
-
 QuoteController.$inject = ['$scope', '$http'];
 function QuoteController($scope, $http, $modalInstance) {
 
