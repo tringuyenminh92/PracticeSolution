@@ -2,6 +2,7 @@
 (function () {
     angular.module("GlobalModule", ['ui.bootstrap', 'ngTouch', 'ui.grid', 'ui.grid.pagination', 'ui.grid.edit', 'ui.grid.resizeColumns',
                                     'ui.grid.selection', 'ui.grid.moveColumns', 'ui.grid.saveState', 'ui.bootstrap']);
+
 })();
 
 //Alert class to show error message in div 
@@ -13,12 +14,22 @@ function Alert(element, message, type, position, size, delayTime) {
     var self = $("#" + element);
 
     this.Show = function () {
+
+        $(self).empty();
         $(self).removeClass();
         $(self).addClass("pull-" + position);
         $(self).addClass("col-md-" + size);
         $(self).addClass("alert alert-" + type);
-        $(self).text(message);
+        $(self).append('<a href="#" class="close" id="closeAlertTag" >&times;</a>' + message);
         $(self).fadeIn().delay(delayTime).fadeOut();
+        var atag = $('#closeAlertTag')
+        atag.click(function () {
+            $($(atag).parent()).hide();
+        });
+    }
+
+    this.Hide = function () {
+        $(self).fadeOut();
     }
 }
 

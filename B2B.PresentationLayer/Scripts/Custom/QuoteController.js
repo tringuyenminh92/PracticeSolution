@@ -1,7 +1,7 @@
 ﻿
 $(function () {
-    $('#btId').click(function () {
-        var al = new Alert("alertId", "thoong baos", "success");
+    $('#alertButton').click(function () {
+        var al = new Alert("alertDiv", "thoong baos", "success");
         al.Show();
     });
 })
