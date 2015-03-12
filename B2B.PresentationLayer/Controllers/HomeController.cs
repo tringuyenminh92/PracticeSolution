@@ -28,5 +28,24 @@ namespace B2B.PresentationLayer.Controllers
 
             return View();
         }
+
+        public ActionResult New()
+        {
+            ViewBag.Message = "Your new page.";
+
+            return View();
+        }
+
+        public ActionResult SignUp()
+        {
+            return View();
+        }
+
+        public JsonResult CheckSignUp( string user, string pass)
+        {
+
+            return Json(new { username= "", pass="" });
+        }
+
     }
 }
