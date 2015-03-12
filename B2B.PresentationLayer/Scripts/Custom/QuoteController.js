@@ -1,6 +1,12 @@
 ﻿
-angular.module("GlobalModule").controller("quoteController", QuoteController);
+$(function () {
+    $('#alertButton').click(function () {
+        var al = new Alert("alertDiv", "thoong baos", "success");
+        al.Show();
+    });
+})
 
+angular.module("GlobalModule").controller("quoteController", QuoteController);
 QuoteController.$inject = ['$scope', '$http'];
 function QuoteController($scope, $http, $modalInstance) {
 
@@ -17,8 +23,8 @@ function QuoteController($scope, $http, $modalInstance) {
             $scope.myData = data;
         }).error(function (data, status, headers, config) {
             // log 
-            var al = new Alert("alertId", "Load Failed", "danger");
-            al.ShowAlert();
+            var alertInstance = new Alert("alertId", "Load Failed", "danger");
+            alertInstance.ShowAlert();
         });
     };
 
@@ -35,53 +41,3 @@ function QuoteController($scope, $http, $modalInstance) {
     $scope.gridOptions.enableFiltering = true;
 }
 
-$(function () {
-    $('#btId').click(function () {
-        var al = new Alert("alertId", "thoong baos", "success");
-        al.ShowAlert();
-    });
-})
-
-angular.module("GlobalModule").controller("modalInstanceController", ModalInstanceController);
-ModalInstanceController.$inject = ['$scope', '$modalInstance','items'];
-function ModalInstanceController($scope, $modalInstance, items) {
-
-    $scope.items = items;
-    $scope.selected = {
-        item: $scope.items[0]
-    };
-
-
-    $scope.ok = function () {
-        //Close and Pass result
-        $modalInstance.close("abc");
-    };
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-
-}
-
-angular.module("GlobalModule").controller("modalDemoController", ModalDemoController);
-ModalDemoController.$inject = ['$scope', '$modal'];
-function ModalDemoController($scope, $modal) {
-
-    $scope.items = ['item1', 'item2', 'item3'];
-
-    $scope.open = function (size) {
-
-        var modalInstance = $modal.open({
-            templateUrl: 'myModalContent.html',
-            controller: 'modalInstanceController',
-            size: size,
-            resolve: {
-                items: function () { return $scope.items; }
-            }
-        });
-        modalInstance.result.then(function (selectedItem) {
-            //Read result of modal and set to $scope.selected
-            $scope.selected = selectedItem;
-        }, function () {
-        });
-    };
-}

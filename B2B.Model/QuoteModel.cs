@@ -9,6 +9,7 @@ namespace B2B.Model
 {
     public class QuotesModel
     {
+        //Khuyen - test
         public int? auto { get; set; }
         //Vinh pham comment
 
