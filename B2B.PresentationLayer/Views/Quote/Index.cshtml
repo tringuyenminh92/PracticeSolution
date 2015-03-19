@@ -17,7 +17,7 @@
 
 <div class="row">
     <button id="alertButton" type="button" class="btn btn-primary btn-group-sm">Message</button>
-    <div id="alertDiv" role="alert"/>
+    <div id="alertDiv" role="alert" />
 </div>
 <div class="row">
     <div ng-controller="quoteController">
@@ -26,6 +26,7 @@
         </div>
     </div>
 </div>
+
 <br />
 
 <br />
@@ -40,6 +41,12 @@
         @*<button class="btn btn-default" ng-click="open('lg','messageModal.html')">Large modal</button>
             <button class="btn btn-default" ng-click="open('sm','messageModal.html')">Small modal</button>*@
         @* <div ng-show="selected">Selection from a modal: {{ selected }}</div>*@
+
+        <input type="text" name="pass1" ng-model="pass1" >
+        <br />
+        <input type="text" name="pass2" ng-model="pass2">
+        <span ng-show="pass2!=pass1">Invalid email address.</span>
+        <button> abc</button>
     </div>
 </div>
 

@@ -49,7 +49,8 @@ namespace B2B.PresentationLayer
                                                                 "~/Scripts/Angular/bootstrap.js",
                                                                 "~/Scripts/Angular/ui-grid-unstable.js",
                                                                 "~/Scripts/Angular/ng-grid-1.3.2.js",
-                                                                "~/Scripts/Angular/angular-touch.js"));
+                                                                "~/Scripts/Angular/angular-touch.js",
+                                                                "~/Scripts/Angular/angular-route.js"));
             bundles.Add(new ScriptBundle("~/bundles/Custom").Include("~/Scripts/Custom/MyApp.js"));
 
         }

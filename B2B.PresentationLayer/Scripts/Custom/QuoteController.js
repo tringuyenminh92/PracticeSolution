@@ -7,8 +7,8 @@ $(function () {
 })
 
 angular.module("GlobalModule").controller("quoteController", QuoteController);
-QuoteController.$inject = ['$scope', '$http'];
-function QuoteController($scope, $http, $modalInstance) {
+QuoteController.$inject = ['$scope', '$http','$location'];
+function QuoteController($scope, $http,$location, $modalInstance) {
 
     $scope.$scope = $scope;
     $scope.myData = [];
@@ -21,6 +21,7 @@ function QuoteController($scope, $http, $modalInstance) {
     $scope.loadData = function () {
         $http.get("Quote/GetQuotes").success(function (data, status, headers, config) {
             $scope.myData = data;
+            $location.url('http://www.google.com')
         }).error(function (data, status, headers, config) {
             // log 
             var alertInstance = new Alert("alertId", "Load Failed", "danger");
