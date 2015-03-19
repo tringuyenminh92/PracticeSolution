@@ -40,11 +40,20 @@ namespace B2B.PresentationLayer.Controllers
         {
             return View();
         }
-
-        public JsonResult CheckSignUp( string user, string pass)
+        public ActionResult ChangePassword()
         {
+            return View();
+        }
 
-            return Json(new { username= "", pass="" });
+
+
+        public Boolean CheckSignUp( string user, string pass)
+        {
+            if(user.Equals("vinh") )
+            { return true; }
+            return false;
+            
+            //return Json(new { username= "anh", pass="anh" });
         }
 
     }
