@@ -15,7 +15,7 @@ namespace B2B.DAL.Repository
         }
         public void Insert(sys_KhachhangSelect_Result khachhangModel)
         {
-            dbContext.sys_KhachhangInsert(khachhangModel.KhachhangId, khachhangModel.QuanhuyenId, khachhangModel.TinhthanhId, khachhangModel.NhomKhachhangId,
+            dbContext.sys_KhachhangInsert(khachhangModel.KhachhangId, khachhangModel.QuanhuyenId, khachhangModel.TinhthanhId, khachhangModel.NhomKhachhangId, khachhangModel.AccountId,
                 khachhangModel.ThoigianCongno, khachhangModel.ToahangCongno, khachhangModel.Step, khachhangModel.Ngaysinh, khachhangModel.NgayCapnhat, khachhangModel.HanmucCongno,
                 khachhangModel.Gioitinh, khachhangModel.Active, khachhangModel.Code, khachhangModel.HotenKhachhang, khachhangModel.CMND, khachhangModel.Diachi,
                 khachhangModel.DiachiGiaohang, khachhangModel.Linkanh, khachhangModel.Ghichu, khachhangModel.Mobile, khachhangModel.Fax, khachhangModel.MasoThue, khachhangModel.TenTaikhoan,

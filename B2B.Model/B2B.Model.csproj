@@ -41,12 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountModel.cs" />
+    <Compile Include="KhachhangModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuanhuyenModel.cs" />
     <Compile Include="QuoteModel.cs" />
     <Compile Include="QuoteSectionModel.cs" />
     <Compile Include="QuoteSummaryModel.cs" />
     <Compile Include="SalesGroupModel.cs" />
     <Compile Include="SalesOfficeModel.cs" />
+    <Compile Include="TinhthanhModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

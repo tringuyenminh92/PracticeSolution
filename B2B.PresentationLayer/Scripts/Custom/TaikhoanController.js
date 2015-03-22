@@ -1,4 +1,4 @@
-﻿angular.module("GlobalModule").controller("taikhoanController", TaikhoanController);
+﻿y angular.module("GlobalModule").controller("taikhoanController", TaikhoanController);
 
 TaikhoanController.$inject = ['$scope', '$http'];
 function TaikhoanController($scope, $http) {
@@ -10,7 +10,7 @@ function TaikhoanController($scope, $http) {
         tencongty: "", diachicongty: "", chucvu: "", dienthoaicongty: "",
         tentaikhoan: "", sotaikhoan: "", nganhang: "", masothue: ""};
     $scope.XulyDangky = function () {
-        $http.post("/Taikhoan/XulyDangky",  JSON.stringify($scope.account) ).success(function (data, status, headers, config) {
+        $http.post("/Taikhoan/XulyDangky", JSON.stringify($scope.account) ).success(function (data, status, headers, config) {
             if (data) {
                 alert(data);
             }
