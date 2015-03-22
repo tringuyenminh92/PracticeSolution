@@ -1,4 +1,4 @@
-﻿y angular.module("GlobalModule").controller("taikhoanController", TaikhoanController);
+﻿angular.module("GlobalModule").controller("taikhoanController", TaikhoanController);
 
 TaikhoanController.$inject = ['$scope', '$http'];
 function TaikhoanController($scope, $http) {
