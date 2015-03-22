@@ -32,7 +32,7 @@ namespace B2B.PresentationLayer.Controllers
         }
         public JsonResult XulyDangky(KhachhangModel account)
         {
-            return Json(account.tentaikhoan, JsonRequestBehavior.AllowGet);
+            return Json(account._HotenKhachhang, JsonRequestBehavior.AllowGet);
         }
         public JsonResult DisplayTinhthanh()
         {

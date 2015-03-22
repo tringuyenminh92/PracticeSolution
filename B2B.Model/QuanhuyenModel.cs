@@ -8,14 +8,14 @@ namespace B2B.Model
 {
     public class QuanhuyenModel
     {
-        public Guid _QuanhuyenId;
-        public Nullable<Guid> _TinhthanhId;
-        public Nullable<Int32> _Step;
-        public Nullable<DateTime> _NgayCapnhat;
-        public Nullable<Boolean> _Active;
-        public Byte[] _Version;
-        public String _Code;
-        public String _TenQuanhuyen;
-        public String _Ghichu;
+        public Guid _QuanhuyenId { get; set; }
+        public Nullable<Guid> _TinhthanhId { get; set; }
+        public Nullable<Int32> _Step { get; set; }
+        public Nullable<DateTime> _NgayCapnhat { get; set; }
+        public Nullable<Boolean> _Active { get; set; }
+        public Byte[] _Version { get; set; }
+        public String _Code { get; set; }
+        public String _TenQuanhuyen { get; set; }
+        public String _Ghichu { get; set; }
     }
 }
