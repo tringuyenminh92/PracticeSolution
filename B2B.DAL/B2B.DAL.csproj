@@ -186,6 +186,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QuoteSystem.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Repository\AccountRepository.cs" />
     <Compile Include="Repository\KhachhangRepository.cs" />
     <Compile Include="Repository\QuanhuyenRepository.cs" />
     <Compile Include="Repository\QuoteRepository.cs" />

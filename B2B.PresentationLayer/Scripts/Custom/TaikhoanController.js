@@ -2,6 +2,7 @@
 
 TaikhoanController.$inject = ['$scope', '$http'];
 function TaikhoanController($scope, $http) {
+    $scope.tab = 1;
     $scope.account = {
         username: "", pass: "", passnhaplai: "", hoten: "",
         ngaysinh: "", cmnd: "", gioitinh: "", diachi: "",
@@ -21,5 +22,11 @@ function TaikhoanController($scope, $http) {
             //al.ShowAlert();
         });
     }
-
+    
+    $scope.Hientab = function (item) {
+        @$scope.tab = item;
+    }
+    $scope.getClass=function(){
+        return 
+    }
 }
