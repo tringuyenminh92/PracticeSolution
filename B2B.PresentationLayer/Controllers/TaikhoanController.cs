@@ -30,9 +30,21 @@ namespace B2B.PresentationLayer.Controllers
         {
             return View();
         }
+        public ActionResult SuaTaikhoan()
+        {
+            return View();
+        }
+        public ActionResult SuaTaikhoan1()
+        {
+            return View();
+        }
+        public ActionResult SuaTaikhoan2()
+        {
+            return View();
+        }
         public JsonResult XulyDangky(KhachhangModel account)
         {
-            return Json(account._HotenKhachhang, JsonRequestBehavior.AllowGet);
+            return Json(account.HotenKhachhang, JsonRequestBehavior.AllowGet);
         }
         public JsonResult DisplayTinhthanh()
         {

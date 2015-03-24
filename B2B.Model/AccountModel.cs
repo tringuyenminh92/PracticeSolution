@@ -8,5 +8,8 @@ namespace B2B.Model
 {
     public class AccountModel
     {
+        public Guid AccountId { get; set; }
+        public String AccountName { get; set; }
+        public String _Password { get; set; }
     }
 }
