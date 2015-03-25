@@ -397,6 +397,7 @@
     <Content Include="Views\Taikhoan\Dangky.cshtml" />
     <Content Include="Views\Taikhoan\SuaTaikhoan1.cshtml" />
     <Content Include="Views\Taikhoan\Suataikhoan2.cshtml" />
+    <Content Include="Views\Taikhoan\SuaTaikhoan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
