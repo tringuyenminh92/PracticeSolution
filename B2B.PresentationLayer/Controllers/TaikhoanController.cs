@@ -15,11 +15,15 @@ namespace B2B.PresentationLayer.Controllers
         // GET: /Taikhoan/
         TinhthanhService _tinhthanhService;
         QuanhuyenService _quanhuyenService;
+        AccountService _accountService;
+        KhachhangService _khachhangService;
 
         public TaikhoanController() 
         { 
             _tinhthanhService = new TinhthanhService();
             _quanhuyenService = new QuanhuyenService();
+            _accountService = new AccountService();
+            _khachhangService = new KhachhangService();
         }
         public ActionResult Index()
         {
@@ -34,17 +38,17 @@ namespace B2B.PresentationLayer.Controllers
         {
             return View();
         }
-        public ActionResult SuaTaikhoan1()
+        public JsonResult XulyDangky(KhachhangModel khachhang, AccountModel account)
         {
-            return View();
-        }
-        public ActionResult SuaTaikhoan2()
-        {
-            return View();
-        }
-        public JsonResult XulyDangky(KhachhangModel account)
-        {
-            return Json(account.HotenKhachhang, JsonRequestBehavior.AllowGet);
+            if(_accountService.Insert(account))
+            {
+                khachhang.AccountId = account.AccountId;
+                if(_khachhangService.Insert(khachhang))
+                {
+                    return Json(new { thongbao = "Đăng ký thành công", kq = true }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            return Json(new { thongbao = "Đăng ký không thành công", kq = false }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult DisplayTinhthanh()
         {
