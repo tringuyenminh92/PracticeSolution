@@ -9,7 +9,7 @@
             <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Đăng nhập</a></div>
         </div>
         <div class="panel-body">
-            <form id="signupform" class="form-horizontal" role="form">
+            <div id="signupform" class="form-horizontal">
 
                 <div id="signupalert" style="display:none" class="alert alert-danger">
                     <p>Lỗi: <span></span></p>
@@ -17,20 +17,20 @@
                 <div class="form-group">
                     <label for="hoten" class="col-md-3 control-label">Họ tên</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" name="hoten" placeholder="Họ tên" ng-model="account.hoten">
+                        <input type="text" class="form-control" name="hoten" placeholder="Họ tên" ng-model="khachhang.HotenKhachhang">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="username" class="col-md-3 control-label">Tên đăng nhập</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" name="username" placeholder="Tên đăng nhập" ng-model="account.username" required>
+                        <input type="text" class="form-control" name="username" placeholder="Tên đăng nhập" ng-model="account.AccountName" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-md-3 control-label">Password</label>
                     <div class="col-md-9">
-                        <input type="password" class="form-control" name="password" placeholder="Password" ng-model="account.pass">
+                        <input type="password" class="form-control" name="password" placeholder="Password" ng-model="account.C_Password">
                     </div>
                 </div>
                 <div class="form-group">
@@ -43,7 +43,7 @@
                 <div style="border-top: 1px solid #999; padding-top: 20px;margin-left:30px; margin-right: 30px" class="form-group">
                     <input type="button" id="btn-signup" class="btn btn-info btn-block" value="Đăng ký" ng-click="XulyDangky()">
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

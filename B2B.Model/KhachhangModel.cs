@@ -7,12 +7,10 @@ namespace B2B.Model
 {
     public class KhachhangModel
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Passnhaplai { get; set; }
         public Guid KhachhangId { get; set; }
         public Nullable<Guid> QuanhuyenId { get; set; }
         public Nullable<Guid> TinhthanhId { get; set; }
+        public Nullable<Guid> AccountId { get; set; }
         public Nullable<Guid> NhomKhachhangId { get; set; }
         public Nullable<Int32> ThoigianCongno { get; set; }
         public Nullable<Int32> ToahangCongno { get; set; }
@@ -42,5 +40,6 @@ namespace B2B.Model
         public String DiachiCongty { get; set; }
         public String PhoneCongty { get; set; }
         public String Tel { get; set; }
+        public KhachhangModel() { KhachhangId = Guid.NewGuid(); }
     }
 }
