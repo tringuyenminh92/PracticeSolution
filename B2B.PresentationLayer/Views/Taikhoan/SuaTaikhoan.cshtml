@@ -4,12 +4,12 @@
 <script src="~/Scripts/Custom/TaikhoanController.js"></script>
 <h2>Thay đổi thông tin tài khoản</h2>
 <div ng-controller="taikhoanController">
-    <ul class="nav nav-tabs nav-justified" role="tablist">
-        <li ng-class="(tab==1)?'active':''" ng-click="Hientab(1)">Thông tin đăng nhập</li>
-        <li ng-class="(tab==2)?'active':''" ng-click="Hientab(2)">Thông tin cơ bản</li>
-        <li ng-class="(tab==3?'active':''" ng-click="Hientab(3)">Thông tin công ty</li>
+    <ul class="nav nav-tabs nav-justified">
+        <li ng-class="{active: isActive==1}" ng-click="Hientab(1)"><a>Thông tin đăng nhập</a></li>
+        <li ng-class="{active: isActive==2}" ng-click="Hientab(2)"><a>Thông tin cơ bản</a></li>
+        <li ng-class="{active: isActive==3}" ng-click="Hientab(3)"><a>Thông tin công ty</a></li>
     </ul>
-    <div class="container-fluid" style="background-color:white" ng-show="tab==1">
+    <div class="container-fluid" style="background-color:white" ng-show="isActive==1">
             <div style="margin-top:50px" class="mainbox col-md-8 col-md-offset-2" ng-controller="taikhoanController" ng-init="">
                 <form id="formsuathongtindangnhap" class="form-horizontal" role="form">
 
@@ -39,53 +39,43 @@
             </div>
     </div>
 
-    <div class="container-fluid" style="background-color:white" ng-show="tab==2">
+    <div class="container-fluid" style="background-color:white" ng-show="isActive==2">
         <div ng-controller="taikhoanController" ng-init="">
             <form id="thongtincoban" class="form-horizontal" role="form">
-
                 <div id="saithongtincoban" ng-show="isShowWhenError" class="alert alert-danger">
                     <p>
                         Lỗi: <span></span>
                     </p>
                 </div>
-
                 <div class="col-md-6">
                     <div>
                         <label for="hoten">Họ tên</label>
                         <input type="text" class="form-control" name="hoten" placeholder="Họ tên khách hàng" ng-model="account.hoten">
                     </div>
-
                     <div>
                         <label for="chungminhnhandan">Số chứng minh nhân dân</label>
                         <input type="text" class="form-control" name="chungminhnhandan" placeholder="Số chứng minh nhân dân" ng-model="account.cmnd">
                     </div>
-
                     <div>
                         <label for="diachi">Địa chỉ</label>
                         <input type="text" class="form-control" name="diachi" placeholder="Địa chỉ" ng-model="account.diachi">
                     </div>
 
-
                     <div>
                         <label for="tinhthanh">Tỉnh thành</label>
                         <select class="form-control" name="tinhthanh" ng-model="account.tinhthanh"></select>
                     </div>
-
                     <div>
                         <label for="mobile">Mobile</label>
                         <input type="number" class="form-control" name="mobile" placeholder="Mobile" ng-model="account.mobile">
                     </div>
-
                     <div>
                         <label for="email">Email</label>
                         <input type="email" class="form-control" name="email" placeholder="Email" ng-model="account.email">
                     </div>
 
-
                 </div>
-
                 <div class="col-md-6">
-
                     <div class="">
                         <div class="row">
                             <div class="col-md-6">
@@ -104,38 +94,32 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
 
                     <div>
                         <label for="diachigiao">Địa chỉ giao hàng</label>
                         <input type="text" class="form-control" name="diachigiaohang" placeholder="Địa chỉ giao hàng" ng-model="account.dichigiaohang">
                     </div>
 
-
                     <div class="">
                         <label for="quanhuyen">Quận huyện</label>
                         <select class="form-control" name="quanhuyen" ng-model="account.quanhuyen"></select>
                     </div>
-
                     <div>
                         <label for="tel">Tel</label>
                         <input type="number" class="form-control" name="tel" placeholder="Tel" ng-model="account.tel">
                     </div>
 
-
                     <div>
                         <label for="tax">Tax</label>
                         <input type="text" class="form-control" name="tax" placeholder="Tax" ng-model="account.tax">
                     </div>
-
                 </div>
             </form>
         </div>
-</div>
+    </div>
 
-    <div class="container-fluid" ng-show="tab==3">
+    <div class="container-fluid" ng-show="isActive==3">
         abc
     </div>
 </div>
