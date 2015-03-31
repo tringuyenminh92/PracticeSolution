@@ -11,7 +11,7 @@
     </ul>
     <div class="container-fluid" style="background-color:white" ng-show="isActive==1">
             <div style="margin-top:50px" class="mainbox col-md-8 col-md-offset-2" ng-controller="taikhoanController" ng-init="">
-                <form id="formsuathongtindangnhap" class="form-horizontal" role="form">
+                <div id="formsuathongtindangnhap" class="form-horizontal">
 
                     <div id="signupalert" style="display:none" class="alert alert-danger">
                         <p>Lỗi: <span></span></p>
@@ -29,97 +29,176 @@
                             <input type="text" class="form-control" name="username" placeholder="Tên đăng nhập" ng-model="account.username" required>
                         </div>
                     </div>
-
-                    <div style="border-top: 1px solid #999; padding-top: 20px" class="form-group">
+                    <div class="form-group">
                         <div class="col-md-offset-4 col-md-8">
-                            <input type="button" id="btn-signup" class="btn btn-info" value="Hoàn tất" ">
+                            <a href="/Taikhoan/DoiPassword">
+                                Đổi mật khẩu
+                            </a>
                         </div>
                     </div>
-                </form>
+                    <div style="border-top: 1px solid #999; padding-top: 20px" class="form-group">
+                        <div class="col-md-offset-4 col-md-8">
+                            <input type="button" id="btn-signup" class="btn btn-info" value="Đồng ý" ng-click="ThaydoiThongtinDangnhap">
+                        </div>
+                    </div>
+                </div>
             </div>
     </div>
 
-    <div class="container-fluid" style="background-color:white" ng-show="isActive==2">
+    <div class="container-fluid" style="background-color:white; padding-top:20px; padding-bottom:20px" ng-show="isActive==2">
         <div ng-controller="taikhoanController" ng-init="">
-            <form id="thongtincoban" class="form-horizontal" role="form">
+            <div id="thongtincoban" class="form-horizontal">
                 <div id="saithongtincoban" ng-show="isShowWhenError" class="alert alert-danger">
                     <p>
                         Lỗi: <span></span>
                     </p>
                 </div>
-                <div class="col-md-6">
-                    <div>
+                <div class="col-md-6" style="padding-right:30px;">
+                    <div class="form-group">
                         <label for="hoten">Họ tên</label>
                         <input type="text" class="form-control" name="hoten" placeholder="Họ tên khách hàng" ng-model="account.hoten">
                     </div>
-                    <div>
+                    <div class="form-group">
                         <label for="chungminhnhandan">Số chứng minh nhân dân</label>
                         <input type="text" class="form-control" name="chungminhnhandan" placeholder="Số chứng minh nhân dân" ng-model="account.cmnd">
                     </div>
-                    <div>
+                    <div class="form-group">
                         <label for="diachi">Địa chỉ</label>
                         <input type="text" class="form-control" name="diachi" placeholder="Địa chỉ" ng-model="account.diachi">
                     </div>
-
-                    <div>
+                    
+                    <div class="form-group">
                         <label for="tinhthanh">Tỉnh thành</label>
                         <select class="form-control" name="tinhthanh" ng-model="account.tinhthanh"></select>
                     </div>
-                    <div>
-                        <label for="mobile">Mobile</label>
-                        <input type="number" class="form-control" name="mobile" placeholder="Mobile" ng-model="account.mobile">
+                    <div class="form-group">
+                        <label for="quanhuyen">Quận huyện</label>
+                        <select class="form-control" name="quanhuyen" ng-model="account.quanhuyen"></select>
                     </div>
-                    <div>
+                    <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" name="email" placeholder="Email" ng-model="account.email">
                     </div>
 
+
                 </div>
-                <div class="col-md-6">
-                    <div class="">
-                        <div class="row">
+                <div class="col-md-6" style="padding-left:30px;">
+                    @*<div class="">*@
+                    @*<div class="row">*@
+                    <div class="form-group">
+                        <label for="ngaysinh">Ngày sinh</label>
+                        <input type="date" class="form-control" name="ngaysinh" placeholder="Ngày sinh" ng-model="account.ngaysinh">
+                    </div>
+                    <div class="form-group">
+                        <label for="gioitinh">Giới tính</label>
+                        <div class="row" style="margin-bottom:3px">
                             <div class="col-md-6">
-                                <label for="ngaysinh">Ngày sinh</label>
-                                <input type="date" class="form-control" name="ngaysinh" placeholder="Ngày sinh" ng-model="account.ngaysinh">
-                            </div>
-                            <div class="">
-                                <label>Giới tính</label>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <input type="radio" name="gioitinh" checked ng-model="account.gioitinh" class="col-sm-3">1
-                                    </div>
-                                    <div class="col-sm-3 ">
-                                        <input type="radio" name="gioitinh" ng-model="account.gioitinh" class="col-sm-3">2
-                                    </div>
-                                </div>
+                                <label class=" radio-inline col-sm-3">
+                                    <input class="col-sm-3" type="radio" checked name="gioitinh" ng-model="account.gioitinh">
+                                    Nam
+                                </label>
+                                <label class="radio-inline col-sm-3">
+                                    <input class="col-sm-3" type="radio" name="gioitinh" ng-model="account.gioitinh">
+                                    Nữ
+                                </label>
                             </div>
                         </div>
                     </div>
+                    @*<div class="row form-control" style="margin-left:0px">
+                <div class="col-sm-3">
+                    <input type="radio" name="gioitinh" checked ng-model="account.gioitinh" class="col-sm-3">Nam
+                </div>
+                <div class="col-sm-3 ">
+                    <input type="radio" name="gioitinh" ng-model="account.gioitinh" class="col-sm-3">Nữ
+                </div>
+            </div>*@
 
-                    <div>
+                    @*</div>*@
+                    @*</div>*@
+                    <div class="form-group">
                         <label for="diachigiao">Địa chỉ giao hàng</label>
                         <input type="text" class="form-control" name="diachigiaohang" placeholder="Địa chỉ giao hàng" ng-model="account.dichigiaohang">
+                        
                     </div>
-
-                    <div class="">
-                        <label for="quanhuyen">Quận huyện</label>
-                        <select class="form-control" name="quanhuyen" ng-model="account.quanhuyen"></select>
+                    <div class="form-group">
+                        <label for="mobile">Mobile</label>
+                        <input type="number" class="form-control" name="mobile" placeholder="Mobile" ng-model="account.mobile">
                     </div>
-                    <div>
+                    <div class="form-group">
                         <label for="tel">Tel</label>
                         <input type="number" class="form-control" name="tel" placeholder="Tel" ng-model="account.tel">
                     </div>
-
-                    <div>
+                    <div class="form-group">
                         <label for="tax">Tax</label>
                         <input type="text" class="form-control" name="tax" placeholder="Tax" ng-model="account.tax">
                     </div>
                 </div>
-            </form>
+                <div class="col-md-6 form-group">
+                    <input type="button" id="btn-signup" class="btn btn-info" value="Đồng ý" ng-click="ThaydoiThongtinCoban">
+                </div>
+            </div>
+
+            
         </div>
     </div>
 
-    <div class="container-fluid" ng-show="isActive==3">
-        abc
+    <div class="container-fluid" style="background-color:white; padding-top:20px; padding-bottom:20px" ng-show="isActive==3">
+        <div id="thongtincongty" class="form-horizontal">
+
+            <div id="saithongtincongty" style="display:none" class="alert alert-danger">
+                <p>
+                    Lỗi: <span></span>
+                </p>
+            </div>
+
+            <div class="col-md-6" style="padding-right:30px;">
+                <div class="form-group">
+                    <label for="congty">Tên công ty</label>
+                    <input type="text" class="form-control" name="congty" placeholder="Tên công ty" ng-model="account.tencongty">
+                </div>
+
+                <div class="form-group">
+                    <label for="chucvu">Chức vụ</label>
+                    <input type="text" class="form-control" name="chucvu" placeholder="Chức vụ" ng-model="account.chucvu">
+                </div>
+
+                <div class="form-group">
+                    <label for="tentaikhoan">Tên tài khoản</label>
+                    <input type="text" class="form-control" name="tentaikhoan" placeholder="Tên tài khoản" ng-model="account.tentaikhoan">
+                </div>
+
+                <div class="form-group">
+                    <label for="nganhang">Ngân hàng</label>
+                    <input type="text" class="form-control" name="nganhang" placeholder="Ngân hàng" ng-model="account.nganhang">
+                </div>
+                
+            </div>
+
+            <div class="col-md-6" style="padding-left:30px;">
+                <div class="form-group">
+                    <label for="diachicongty">Địa chỉ công ty</label>
+                    <input type="text" class="form-control" name="diachicongty" placeholder="Địa chỉ công ty" ng-model="account.diachicongty">
+                </div>
+
+                <div class="form-group">
+                    <label for="dienthoaicongty">Điện thoại công ty</label>
+                    <input type="number" class="form-control" name="dienthoaicongty" placeholder="Điện thoại công ty" ng-model="account.dienthoaicongty">
+                </div>
+
+                <div class="form-group">
+                    <label for="sotaikhoan">Số tài khoản</label>
+                    <input type="text" class="form-control" name="sotaikhoan" placeholder="Số tài khoản" ng-model="account.sotaikhoan">
+                </div>
+
+                <div class="form-group">
+                    <label for="masothue">Mã số thuế</label>
+                    <input type="text" class="form-control" name="masothue" placeholder="Mã số thuế" ng-model="account.masothue">
+                </div>
+
+            </div>
+            <div class="col-md-6 form-group" >
+                <input type="button" id="btn-signup" class="btn btn-info" value="Đồng ý" ng-click="ThaydoiThongtinCoban">
+            </div>
+        </div>
     </div>
 </div>

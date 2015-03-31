@@ -38,6 +38,31 @@ namespace B2B.PresentationLayer.Controllers
         {
             return View();
         }
+        public ActionResult DoiPassword()
+        {
+            return View();
+        }
+        public JsonResult XulyDoiPassword(AccountModel account, string passnew)
+        {
+            //AccountModel model = service.getUser("vinhpham");
+            if (account.AccountPassword != "")
+            {
+                account.AccountPassword = passnew;
+                if(_accountService.Update(account))
+                {
+                    return Json(new { thongbao = "Đổi password thành công", kq = true }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            return Json(new { thongbao = "Đổi password không thành công", kq = false }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult KiemtraAccountName (AccountModel account)
+        {
+            if(_accountService.CheckAccountNameExist(account))
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult XulyDangky(KhachhangModel khachhang, AccountModel account)
         {
             if(_accountService.Insert(account))
