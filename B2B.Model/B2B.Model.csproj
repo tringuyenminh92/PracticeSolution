@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountModel.cs" />
+    <Compile Include="HanghoaModel.cs" />
     <Compile Include="KhachhangModel.cs" />
+    <Compile Include="NhomHanghoaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuanhuyenModel.cs" />
     <Compile Include="QuoteModel.cs" />
