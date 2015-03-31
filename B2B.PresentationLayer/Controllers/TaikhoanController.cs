@@ -59,9 +59,9 @@ namespace B2B.PresentationLayer.Controllers
         {
             if(_accountService.CheckAccountNameExist(account))
             {
-                return Json(true, JsonRequestBehavior.AllowGet);
+                return Json(new { thongbao = "Trùng Account", kq = true }, JsonRequestBehavior.AllowGet);
             }
-            return Json(false, JsonRequestBehavior.AllowGet);
+            return Json(new { thongbao = "Ko trùng Account", kq = false }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult XulyDangky(KhachhangModel khachhang, AccountModel account)
         {

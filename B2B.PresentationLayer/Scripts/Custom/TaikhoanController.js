@@ -20,25 +20,35 @@ function TaikhoanController($scope, $http) {
             return false;
         }
         else {
-            $http.post("/Taikhoan/KiemtraAccountName", $scope.account).success(function (data, status, headers, config) {
-                if (data == true) {
-                    $scope.Loi.tenLoi = "TrungAccountName";
-                    $scope.Loi.hienthi = "Tên đăng nhập đã tồn tại";
-                    return false;
-                }
-                else {
-                    return true;
-                }
-            }).error(function (data, status, headers, config) {
-                // log 
-                //var al = new Alert("alertId", "Load Failed", "danger");
-                //al.ShowAlert();
-            });
+            return true;
         }
     }
-
+    $scope.KiemtraTrungAccountName = function () {
+        $http.post("/Taikhoan/KiemtraAccountName", { account: $scope.account }).success(function (data, status, headers, config) {
+            if (data.kq == true) {
+                alert("trùng accountname");
+                $scope.Loi.tenLoi = "TrungAccountName";
+                $scope.Loi.hienthi = "Tên đăng nhập đã tồn tại";
+                return true;
+            }
+            else {
+                alert("ko trùng accountname");
+                return false;
+            }
+        })
+        //alert("test");
+    }
+    
     $scope.XulyDangky = function () {
-        if ($scope.KiemtraDulieuVao()) {
+        if ($scope.KiemtraDulieuVao) {
+            //if($scope.KiemtraTrungAccountName == false)
+            //{
+            //    alert("OK");
+            //}
+            //else
+            //{
+            //    alert("Not f***king OK");
+            //}
             $http.post("/Taikhoan/XulyDangky", { khachhang: $scope.khachhang, account: $scope.account }).success(function (data, status, headers, config) {
                 alert(data.thongbao);
                 if (data.kq == true) {
