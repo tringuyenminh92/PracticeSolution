@@ -14,11 +14,18 @@ namespace B2B.BL.Service
     {
         KhachhangRepository repository;
         public KhachhangService() { repository = new KhachhangRepository(); }
+        public KhachhangModel GetKhachhangFromAccountId(string accountId)
+        {
+            Mapper.CreateMap<Khachhang, KhachhangModel>();
+            var kh = repository.GetKhachhangFromAccountId(accountId);
+            return Mapper.Map<Khachhang, KhachhangModel>(kh);
+        }
         public bool Insert(KhachhangModel khachhang)
         {
             Mapper.CreateMap<KhachhangModel, Khachhang>();
             Khachhang kh = Mapper.Map<KhachhangModel, Khachhang>(khachhang);
             return repository.Insert(kh);
         }
+
     }
 }

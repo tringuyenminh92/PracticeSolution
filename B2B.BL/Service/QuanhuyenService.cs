@@ -17,11 +17,11 @@ namespace B2B.BL.Service
         {
             repository = new QuanhuyenRepository();
         }
-        public IEnumerable<QuanhuyenModel> GetQuanhuyen()
+        public List<QuanhuyenModel> GetQuanhuyen()
         {
             Mapper.CreateMap<Tri_GetQuanhuyenActive_Result, QuanhuyenModel>();
             var listQuanhuyen = repository.GetQuanhuyen();
-            return Mapper.Map<IQueryable<Tri_GetQuanhuyenActive_Result>, IEnumerable<QuanhuyenModel>>(listQuanhuyen);
+            return Mapper.Map<IQueryable<Tri_GetQuanhuyenActive_Result>, List<QuanhuyenModel>>(listQuanhuyen);
         }
     }
 }
