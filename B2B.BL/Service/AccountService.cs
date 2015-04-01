@@ -23,10 +23,10 @@ namespace B2B.BL.Service
             Account acc = Mapper.Map<AccountModel, Account>(account);
             return repository.CheckAccountNameExist(acc);
         }
-        public AccountModel GetAccount(string username)
+        public AccountModel GetAccount(string accountId)
         {
             Mapper.CreateMap<Account, AccountModel>();
-            var acc = repository.GetAccount(username);
+            var acc = repository.GetAccount(accountId);
             return Mapper.Map<Account, AccountModel>(acc);
         }
         public bool Insert(AccountModel account)

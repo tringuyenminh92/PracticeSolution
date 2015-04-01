@@ -13,10 +13,10 @@ namespace B2B.DAL.Repository
         {
             dbContext = new B2BSystemEntities();
         }
-        public Account GetAccount(String accountName)
+        public Account GetAccount(string accountId)
         {
             //.Where(u => u.C_Username == username)
-            return dbContext.Accounts.AsQueryable<Account>().Where(u => u.AccountName == accountName).FirstOrDefault<Account>();
+            return dbContext.Accounts.AsQueryable<Account>().Where(u => u.AccountId == new Guid(accountId)).FirstOrDefault<Account>();
         }
         public bool CheckAccountNameExist(Account account)
         {

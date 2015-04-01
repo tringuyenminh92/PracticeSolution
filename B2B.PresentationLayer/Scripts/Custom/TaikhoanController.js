@@ -4,15 +4,21 @@ TaikhoanController.$inject = ['$scope', '$http'];
 function TaikhoanController($scope, $http) {
     $scope.Loi = { tenLoi: "", hienthi: "" };
     $scope.passnhaplai = "";
-    $scope.account = { AccountName: "", AccountPassword: ""};
-    $scope.khachhang = {
-        HotenKhachhang: "",
-        Ngaysinh: "", CMND: "", Gioitinh: "", Diachi: "",
-        DichiGiaohang: "", Tinhthanh: "", Quanhuyen: "",
-        Mobile: "", Tel: "", Email: "", Tax: "",
-        TenCongty: "", DiachiCongty: "", Chucvu: "", DienthoaiCongty: "",
-        Tentaikhoan: "", Sotaikhoan: "", Nganhang: "", Masothue: ""
-    };
+    
+
+    $scope.Dangky = function () {
+        $scope.account = { AccountName: "", AccountPassword: "" };
+        $scope.khachhang = {
+            HotenKhachhang: "",
+            Ngaysinh: "", CMND: "", Gioitinh: "", Diachi: "",
+            DichiGiaohang: "", Tinhthanh: "", Quanhuyen: "",
+            Mobile: "", Tel: "", Email: "", Tax: "",
+            TenCongty: "", DiachiCongty: "", Chucvu: "", DienthoaiCongty: "",
+            Tentaikhoan: "", Sotaikhoan: "", Nganhang: "", Masothue: ""
+        };
+    }
+
+    //Hàm kiểm tra dữ liệu đầu vào có null hay không
     $scope.KiemtraDulieuVao = function () {
         if ($scope.account.AccountName == "" || $scope.account.AccountPassword == "" || $scope.khachhang.HotenKhachhang == "") {
             $scope.Loi.tenLoi = "Null";
@@ -23,6 +29,8 @@ function TaikhoanController($scope, $http) {
             return true;
         }
     }
+
+    //Hàm kiểm tra accountName người dùng nhập có tồn tại ko
     $scope.KiemtraTrungAccountName = function () {
         $http.post("/Taikhoan/KiemtraAccountName", { account: $scope.account }).success(function (data, status, headers, config) {
             if (data.kq == true) {
@@ -39,6 +47,7 @@ function TaikhoanController($scope, $http) {
         //alert("test");
     }
     
+    //Hàm insert người dùng mới (vào bảng Account và Khachhang)
     $scope.XulyDangky = function () {
         if ($scope.KiemtraDulieuVao) {
             //if($scope.KiemtraTrungAccountName == false)
@@ -62,6 +71,7 @@ function TaikhoanController($scope, $http) {
         }
     }
     
+    //Các hàm hiển thị tab
     $scope.isActive = 1;
     $scope.Hientab = function (item) {
         $scope.isActive = item;
@@ -70,6 +80,7 @@ function TaikhoanController($scope, $http) {
         return 
     }
 
+    //Hàm đổi password (tìm account có accountName được truyền vào và đổi password của account đó)
     $scope.passold = '';
     $scope.passnew = '';
     var m = { AccountName: 'vinhpham', Password: $scope.passold };
@@ -83,5 +94,17 @@ function TaikhoanController($scope, $http) {
             // log 
             alert("Error.");
         });
+    }
+
+    //Hàm hiển thị các thông tin của account đang được sử dụng
+    $scope.HienthiThongtinTaikhoan = function () {
+        $http.post("/Taikhoan/HienthiThongtinTaikhoan", { accountId: "34b4f9ab-7d28-49f4-9bc4-27d70c6eba85" } ).success(function (data, status, headers, config) {
+            $scope.account = data.acc;
+            $scope.khachhang = data.kh;
+            if($scope.khachhang.Gioitinh == null)
+            {
+                $scope.khachhang.Gioitinh = true;
+            }
+        })
     }
 }

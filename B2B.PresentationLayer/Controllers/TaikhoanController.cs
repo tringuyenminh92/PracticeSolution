@@ -42,6 +42,12 @@ namespace B2B.PresentationLayer.Controllers
         {
             return View();
         }
+        public JsonResult HienthiThongtinTaikhoan(string accountId)
+        {
+            AccountModel acc = _accountService.GetAccount(accountId);
+            KhachhangModel kh = _khachhangService.GetKhachhangFromAccountId(accountId);
+            return Json(new { acc, kh }, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult XulyDoiPassword(AccountModel account, string passnew)
         {
             //AccountModel model = service.getUser("vinhpham");
@@ -77,11 +83,11 @@ namespace B2B.PresentationLayer.Controllers
         }
         public JsonResult DisplayTinhthanh()
         {
-            return Json(_tinhthanhService.GetTinhthanh().ToList(), JsonRequestBehavior.AllowGet);
+            return Json(_tinhthanhService.GetTinhthanh(), JsonRequestBehavior.AllowGet);
         }
         public JsonResult DisplayQuanhuyen()
         {
-            return Json(_quanhuyenService.GetQuanhuyen().ToList(), JsonRequestBehavior.AllowGet);
+            return Json(_quanhuyenService.GetQuanhuyen(), JsonRequestBehavior.AllowGet);
         }
     }
 }
