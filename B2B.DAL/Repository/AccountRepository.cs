@@ -47,10 +47,15 @@ namespace B2B.DAL.Repository
                 //dbContext.Accounts.Attach(account);
                 //dbContext.Entry(account).State = System.Data.EntityState.Modified;
                 //dbContext.SaveChanges();
-                Account acc = dbContext.Accounts.Single(a => a.AccountName == account.AccountName);
-                acc = account;
-                dbContext.SaveChanges();
-                return true;
+                //Account acc = dbContext.Accounts.Single(a => a.AccountName == account.AccountName);
+                Account acc = dbContext.Accounts.Find(account.AccountId);
+                if(acc!=null)
+                {
+                    dbContext.Entry(acc).CurrentValues.SetValues(account);
+                    dbContext.SaveChanges();
+                    return true;
+                }
+                return false;
             }
             catch (System.Exception ex)
             {

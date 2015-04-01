@@ -51,15 +51,18 @@ namespace B2B.PresentationLayer.Controllers
         public JsonResult XulyDoiPassword(AccountModel account, string passnew)
         {
             //AccountModel model = service.getUser("vinhpham");
-            if (account.AccountPassword != "")
+            account.AccountPassword = passnew;
+            var kq = _accountService.Update(account);
+            string thongbao;
+            if(kq)
             {
-                account.AccountPassword = passnew;
-                if(_accountService.Update(account))
-                {
-                    return Json(new { thongbao = "Đổi password thành công", kq = true }, JsonRequestBehavior.AllowGet);
-                }
+                thongbao = "Đổi password thành công";
             }
-            return Json(new { thongbao = "Đổi password không thành công", kq = false }, JsonRequestBehavior.AllowGet);
+            else
+            {
+                thongbao = "Đổi password không thành công";
+            }
+            return Json(new { thongbao = thongbao, kq = kq }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult KiemtraAccountName (AccountModel account)
         {
@@ -88,6 +91,20 @@ namespace B2B.PresentationLayer.Controllers
         public JsonResult DisplayQuanhuyen()
         {
             return Json(_quanhuyenService.GetQuanhuyen(), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ThaydoiThongtinDangnhap(AccountModel account)
+        {
+            var kq = _accountService.Update(account);
+            string thongbao;
+            if (kq)
+            {
+                thongbao = "Đổi thông tin thành công";
+            }
+            else
+            {
+                thongbao = "Đổi thông tin không thành công";
+            }
+            return Json(new { thongbao = thongbao, kq = kq }, JsonRequestBehavior.AllowGet);
         }
     }
 }
