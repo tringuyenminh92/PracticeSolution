@@ -51,7 +51,9 @@
     <Compile Include="IService\IQuoteService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AccountService.cs" />
+    <Compile Include="Service\DSHanghoaService.cs" />
     <Compile Include="Service\HanghoaService.cs" />
+    <Compile Include="Service\LoginService.cs" />
     <Compile Include="Service\NhomHanghoaService.cs" />
     <Compile Include="Service\QuanhuyenService.cs" />
     <Compile Include="Service\QuoteService.cs" />

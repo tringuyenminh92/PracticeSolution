@@ -187,7 +187,9 @@
       <DependentUpon>QuoteSystem.edmx</DependentUpon>
     </Compile>
     <Compile Include="Repository\AccountRepository.cs" />
+    <Compile Include="Repository\DSHanghoaReponsitory.cs" />
     <Compile Include="Repository\KhachhangRepository.cs" />
+    <Compile Include="Repository\LoginReponsitory.cs" />
     <Compile Include="Repository\QuanhuyenRepository.cs" />
     <Compile Include="Repository\QuoteRepository.cs" />
     <Compile Include="Repository\TinhthanhRepository.cs" />
