@@ -18,14 +18,22 @@ namespace B2B.BL.Service
             repository = new HanghoaRepository();
         }
 
-        public List<HanghoaModel> GetAllHanghoa()
+        public List<HanghoaModel> GetHanghoa()
         {
             Mapper.CreateMap<Hanghoa, HanghoaModel>();
-            var a = repository.GetAllHanghoa();
+            var a = repository.GetHanghoa();
             var modelList = Mapper.Map<IQueryable<Hanghoa>, List<HanghoaModel>>(a);
-
-
             return modelList;
+        }
+
+        public List<HanghoaModel> GetHanghoaTheoNhomHanghoa(NhomHanghoaModel nhomHanghoa)
+        {
+            Mapper.CreateMap<NhomHanghoaModel, NhomHanghoa>();
+            var nhomhh = Mapper.Map<NhomHanghoaModel, NhomHanghoa>(nhomHanghoa);
+            var lstHanghoa = repository.GetHanghoaTheoNhomHanghoa(nhomhh);
+
+            Mapper.CreateMap<Hanghoa, HanghoaModel>();
+            return Mapper.Map<IQueryable<Hanghoa>, List<HanghoaModel>>(lstHanghoa);
         }
 
     }

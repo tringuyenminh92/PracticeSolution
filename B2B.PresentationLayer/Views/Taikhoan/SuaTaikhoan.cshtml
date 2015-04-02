@@ -13,20 +13,18 @@
         <div style="margin-top:50px" class="mainbox col-md-8 col-md-offset-2">
             <div id="formsuathongtindangnhap" class="form-horizontal">
 
-                <div id="signupalert" style="display:none" class="alert alert-danger">
-                    <p>Lỗi: <span></span></p>
-                </div>
-                @*<div class="form-group">
-                    <label for="hoten" class="col-md-4 control-label">Họ tên</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="hoten" placeholder="Họ tên" ng-model="khachhang.HotenKhachhang">
-                    </div>
-                </div>*@
-
                 <div class="form-group">
                     <label for="username" class="col-md-4 control-label">Tên đăng nhập</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="username" placeholder="Tên đăng nhập" ng-model="account.AccountName">
+                        <input type="text" class="form-control" name="username" placeholder="Tên đăng nhập" ng-model="account.AccountName" ng-change="KiemtraTrungAccountName()">
+                    </div>
+                    <div class=" row help-block">
+                        <div class="col-md-offset-4 col-md-8" ng-show="Loi.tenLoi == 'Null' && account.AccountName == ''">
+                            <span class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> {{" " + Loi.hienthi + " tên đăng nhập"}}
+                        </div>
+                        <div class="col-md-offset-4 col-md-8" ng-show="Loi.tenLoi == 'TrungAccountName'" ng-hide="Loi.tenLoi !== TrungAccountName">
+                            <span class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> {{" " + Loi.hienthi}}
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -38,7 +36,7 @@
                 </div>
                 <div style="border-top: 1px solid #999; padding-top: 20px" class="form-group">
                     <div class="col-md-offset-4 col-md-8">
-                        <input type="button" id="btn-signup" class="btn btn-info" value="Đồng ý" ng-click="ThaydoiThongtinDangnhap()">
+                        <input type="button" id="btn-signup" ng-disabled="account.AccountName == '' || khachhang.HotenKhachhang == '' || Loi.tenLoi == 'TrungAccountName'" class="btn btn-info" value="Đồng ý" ng-click="ThaydoiThongtinTaikhoan()">
                     </div>
                 </div>
             </div>
@@ -55,9 +53,10 @@
                 </div>
                 <div class="col-md-6" style="padding-right:30px;">
                     <div class="form-group">
-                        <label for="hoten">Họ tên</label>
-                        <input type="text" class="form-control" name="hoten" placeholder="Họ tên khách hàng" ng-model="khachhang.HotenKhachhang">
+                        <label for="hoten">Họ tên</label>&nbsp<span class="glyphicon glyphicon-remove" style="color:#FF0004;" ng-show="Loi.tenLoi == 'Null' && khachhang.HotenKhachhang == ''"></span>
+                        <input type="text" class="form-control" name="hoten" placeholder="Họ tên khách hàng" ng-model="khachhang.HotenKhachhang" ng-change="KiemtraHotenKhachhang()">
                     </div>
+
                     <div class="form-group">
                         <label for="chungminhnhandan">Số chứng minh nhân dân</label>
                         <input type="text" class="form-control" name="chungminhnhandan" placeholder="Số chứng minh nhân dân" ng-model="khachhang.CMND">
@@ -94,7 +93,7 @@
                         <div class="row" style="margin-bottom:3px">
                             <div class="col-md-6">
                                 <label class=" radio-inline col-sm-3">
-                                    <input class="col-sm-3" type="radio" ng-checked="khachhang.Gioitinh==true" checked="" name="gioitinh" ng-model="khachhang.Gioitinh">
+                                    <input class="col-sm-3" type="radio" ng-checked="khachhang.Gioitinh==true" name="gioitinh" ng-model="khachhang.Gioitinh">
                                     Nam
                                 </label>
                                 <label class="radio-inline col-sm-3">
@@ -134,7 +133,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 form-group">
-                    <input type="button" id="btn-signup" class="btn btn-info" value="Đồng ý" ng-click="ThaydoiThongtinKhachhang()">
+                    <input type="button" id="btn-signup" ng-disabled="account.AccountName == '' || khachhang.HotenKhachhang == '' || Loi.tenLoi == 'TrungAccountName'" class="btn btn-info" value="Đồng ý" ng-click="KiemtraDulieuSuaTaikhoan()">
                 </div>
             </div>
 
@@ -154,22 +153,22 @@
             <div class="col-md-6" style="padding-right:30px;">
                 <div class="form-group">
                     <label for="congty">Tên công ty</label>
-                    <input type="text" class="form-control" name="congty" placeholder="Tên công ty" ng-model="account.tencongty">
+                    <input type="text" class="form-control" name="congty" placeholder="Tên công ty" ng-model="khachhang.Tencongty">
                 </div>
 
                 <div class="form-group">
                     <label for="chucvu">Chức vụ</label>
-                    <input type="text" class="form-control" name="chucvu" placeholder="Chức vụ" ng-model="account.chucvu">
+                    <input type="text" class="form-control" name="chucvu" placeholder="Chức vụ" ng-model="khachhang.Chucvu">
                 </div>
 
                 <div class="form-group">
                     <label for="tentaikhoan">Tên tài khoản</label>
-                    <input type="text" class="form-control" name="tentaikhoan" placeholder="Tên tài khoản" ng-model="account.tentaikhoan">
+                    <input type="text" class="form-control" name="tentaikhoan" placeholder="Tên tài khoản" ng-model="khachhang.TenTaikhoan">
                 </div>
 
                 <div class="form-group">
                     <label for="nganhang">Ngân hàng</label>
-                    <input type="text" class="form-control" name="nganhang" placeholder="Ngân hàng" ng-model="account.nganhang">
+                    <input type="text" class="form-control" name="nganhang" placeholder="Ngân hàng" ng-model="khachhang.Nganhang">
                 </div>
 
             </div>
@@ -177,27 +176,27 @@
             <div class="col-md-6" style="padding-left:30px;">
                 <div class="form-group">
                     <label for="diachicongty">Địa chỉ công ty</label>
-                    <input type="text" class="form-control" name="diachicongty" placeholder="Địa chỉ công ty" ng-model="account.diachicongty">
+                    <input type="text" class="form-control" name="diachicongty" placeholder="Địa chỉ công ty" ng-model="khachhang.DiachiCongty">
                 </div>
 
                 <div class="form-group">
                     <label for="dienthoaicongty">Điện thoại công ty</label>
-                    <input type="number" class="form-control" name="dienthoaicongty" placeholder="Điện thoại công ty" ng-model="account.dienthoaicongty">
+                    <input type="number" class="form-control" name="dienthoaicongty" placeholder="Điện thoại công ty" ng-model="khachhang.DienthoaiCongty">
                 </div>
 
                 <div class="form-group">
                     <label for="sotaikhoan">Số tài khoản</label>
-                    <input type="text" class="form-control" name="sotaikhoan" placeholder="Số tài khoản" ng-model="account.sotaikhoan">
+                    <input type="text" class="form-control" name="sotaikhoan" placeholder="Số tài khoản" ng-model="khachhang.SoTaikhoan">
                 </div>
 
                 <div class="form-group">
                     <label for="masothue">Mã số thuế</label>
-                    <input type="text" class="form-control" name="masothue" placeholder="Mã số thuế" ng-model="account.masothue">
+                    <input type="text" class="form-control" name="masothue" placeholder="Mã số thuế" ng-model="khachhang.MasoThue">
                 </div>
 
             </div>
             <div class="col-md-6 form-group">
-                <input type="button" id="btn-signup" class="btn btn-info" value="Đồng ý" ng-click="ThaydoiThongtinKhachhang()">
+                <input type="button" id="btn-signup" ng-disabled="account.AccountName == '' || khachhang.HotenKhachhang == '' || Loi.tenLoi == 'TrungAccountName'" class="btn btn-info" value="Đồng ý" ng-click="ThaydoiThongtinTaikhoan()">
             </div>
         </div>
     </div>

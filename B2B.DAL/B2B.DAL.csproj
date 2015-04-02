@@ -188,8 +188,9 @@
     </Compile>
     <Compile Include="Repository\AccountRepository.cs" />
     <Compile Include="Repository\DSHanghoaReponsitory.cs" />
+    <Compile Include="Repository\HanghoaRepository.cs" />
     <Compile Include="Repository\KhachhangRepository.cs" />
-    <Compile Include="Repository\LoginReponsitory.cs" />
+    <Compile Include="Repository\NhomHanghoaRepository.cs" />
     <Compile Include="Repository\QuanhuyenRepository.cs" />
     <Compile Include="Repository\QuoteRepository.cs" />
     <Compile Include="Repository\TinhthanhRepository.cs" />
@@ -794,7 +795,9 @@
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Database\DB_20150401.sql" />
+  </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="QuoteSystem.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

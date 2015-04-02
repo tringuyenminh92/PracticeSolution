@@ -8,12 +8,13 @@ namespace B2B.Model
 {
     public class NhomHanghoaModel
     {
-        public string NhomHanghoaId { get; set; }
-        public string Code { get; set; }
-        public string TenNhomHanghoa { get; set; }
-        public string Ghichu { get; set; }
-        public bool Active { get; set; }
-        public int Step { get; set; }
-        public DateTime NgayCapnhat { get; set; }
+        public Guid _NhomHanghoaId { get; set; }
+        public Nullable<Int32> _Step { get; set; }
+        public Nullable<DateTime> _NgayCapnhat { get; set; }
+        public Nullable<Boolean> _Active { get; set; }
+        public Byte[] _Version { get; set; }
+        public String _Code { get; set; }
+        public String _TenNhomHanghoa { get; set; }
+        public String _Ghichu { get; set; }
     }
 }
