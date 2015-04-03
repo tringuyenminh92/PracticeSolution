@@ -40,5 +40,8 @@ function QuoteController($scope, $http,$location, $modalInstance) {
     $scope.gridOptions.paginationPageSize = 25;
     $scope.gridOptions.data = "myData";
     $scope.gridOptions.enableFiltering = true;
+
+    //Demo show datetime formart
+    $scope.Giatri = Date.now();
 }
 
