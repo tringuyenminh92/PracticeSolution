@@ -36,7 +36,7 @@
                 </div>
                 <div style="border-top: 1px solid #999; padding-top: 20px" class="form-group">
                     <div class="col-md-offset-4 col-md-8">
-                        <input type="button" id="btn-signup" ng-disabled="account.AccountName == '' || khachhang.HotenKhachhang == '' || Loi.tenLoi == 'TrungAccountName'" class="btn btn-info" value="Đồng ý" ng-click="ThaydoiThongtinTaikhoan()">
+                        <input type="button" id="btn-signup" ng-disabled="account.AccountName == '' || Loi.tenLoi == 'TrungAccountName'" class="btn btn-info" value="Đồng ý" ng-click="ThaydoiThongtinDangnhap()">
                     </div>
                 </div>
             </div>
@@ -68,7 +68,9 @@
 
                     <div class="form-group">
                         <label for="tinhthanh">Tỉnh thành</label>
-                        <select class="form-control" name="tinhthanh" ng-model="khachhang.Tinhthanh"></select>
+                        <select class="form-control" name="tinhthanh" ng-model="khachhang.Tinhthanh" ng-options="obj.TinhthanhId as obj.TenTinhthanh for obj in tinhthanhs">
+                            <option value="">--Tỉnh thành--</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="quanhuyen">Quận huyện</label>
@@ -86,8 +88,14 @@
                     @*<div class="row">*@
                     <div class="form-group">
                         <label for="ngaysinh">Ngày sinh</label>
-                        <input type="date" class="form-control" name="ngaysinh" placeholder="Ngày sinh" ng-model="khachhang.Ngaysinh">
+                        <p class="input-group" style="margin-bottom:0px">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="khachhang.Ngaysinh" is-open="opened" datepicker-options="dateOptions" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
                     </div>
+
                     <div class="form-group">
                         <label for="gioitinh">Giới tính</label>
                         <div class="row" style="margin-bottom:3px">
@@ -133,7 +141,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 form-group">
-                    <input type="button" id="btn-signup" ng-disabled="account.AccountName == '' || khachhang.HotenKhachhang == '' || Loi.tenLoi == 'TrungAccountName'" class="btn btn-info" value="Đồng ý" ng-click="KiemtraDulieuSuaTaikhoan()">
+                    <input type="button" id="btn-signup" ng-disabled="khachhang.HotenKhachhang ==''" class="btn btn-info" value="Đồng ý" ng-click="ThaydoiThongtinKhachhang()">
                 </div>
             </div>
 
@@ -196,7 +204,7 @@
 
             </div>
             <div class="col-md-6 form-group">
-                <input type="button" id="btn-signup" ng-disabled="account.AccountName == '' || khachhang.HotenKhachhang == '' || Loi.tenLoi == 'TrungAccountName'" class="btn btn-info" value="Đồng ý" ng-click="ThaydoiThongtinTaikhoan()">
+                <input type="button" id="btn-signup" ng-disabled="khachhang.HotenKhachhang == ''" class="btn btn-info" value="Đồng ý" ng-click="ThaydoiThongtinKhachhang()">
             </div>
         </div>
     </div>
