@@ -106,5 +106,10 @@ namespace B2B.PresentationLayer.Controllers
             }
             return Json(new { thongbao = thongbao, kq = kq }, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ThaydoiThongtinKhachhang(KhachhangModel khachhang)
+        {
+            var kh = khachhang;
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
     }
 }
