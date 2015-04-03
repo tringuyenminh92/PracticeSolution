@@ -13,6 +13,10 @@ namespace B2B.DAL.Repository
         {
             dbContext = new B2BSystemEntities();
         }
+        public Khachhang GetKhachhangFromAccountId(string accountId)
+        {
+            return dbContext.Khachhangs.AsQueryable<Khachhang>().Where(u => u.AccountId == new Guid(accountId)).FirstOrDefault<Khachhang>(); 
+        }
         public bool Insert(Khachhang khachhang)
         {
             try

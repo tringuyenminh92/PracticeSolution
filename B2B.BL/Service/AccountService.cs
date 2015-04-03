@@ -17,11 +17,30 @@ namespace B2B.BL.Service
         {
             repository = new AccountRepository();
         }
+        public bool CheckAccountNameExist(AccountModel account)
+        {
+            Mapper.CreateMap<AccountModel, Account>();
+            Account acc = Mapper.Map<AccountModel, Account>(account);
+            return repository.CheckAccountNameExist(acc);
+        }
+        public AccountModel GetAccount(string accountId)
+        {
+            Mapper.CreateMap<Account, AccountModel>();
+            var acc = repository.GetAccount(accountId);
+            return Mapper.Map<Account, AccountModel>(acc);
+        }
         public bool Insert(AccountModel account)
         {
             Mapper.CreateMap<AccountModel, Account>();
             Account acc = Mapper.Map<AccountModel, Account>(account);
             return repository.Insert(acc);
+        }
+        public bool Update(AccountModel account)
+        {
+            Mapper.CreateMap<AccountModel, Account>();
+            Account acc = Mapper.Map<AccountModel, Account>(account);
+            return repository.Update(acc);
+
         }
     }
 }

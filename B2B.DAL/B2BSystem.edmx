@@ -4,14 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="B2BSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="B2BSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountId" />
           </Key>
           <Property Name="AccountId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="AccountName" Type="nvarchar" MaxLength="250" />
-          <Property Name="_Password" Type="nvarchar" MaxLength="250" />
+          <Property Name="AccountPassword" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="ChitietDonhang">
           <Key>
@@ -3194,8 +3194,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="B2BSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -3205,8 +3204,8 @@
           </Key>
           <Property Name="AccountId" Type="Guid" Nullable="false" />
           <Property Name="AccountName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="C_Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Khachhangs" Relationship="Self.FK_Khachhang_Account" FromRole="Account" ToRole="Khachhang" />
+          <Property Name="AccountPassword" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ChitietDonhang">
           <Key>
@@ -4935,20 +4934,20 @@
             <End Role="TinhtrangPhieuxuat" EntitySet="TinhtrangPhieuxuats" />
           </AssociationSet>
           <FunctionImport Name="Khuyen_GetBaogiaTheoNhomKhachhang" ReturnType="Collection(B2BSystemModel.Khuyen_GetBaogiaTheoNhomKhachhang_Result)">
-            <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
+          <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Khuyen_GetCongnoXuat" ReturnType="Collection(B2BSystemModel.Khuyen_GetCongnoXuat_Result)" />
           <FunctionImport Name="Khuyen_GetCongnoXuatMoinhatTheoKhachhang" ReturnType="Collection(B2BSystemModel.Khuyen_GetCongnoXuatMoinhatTheoKhachhang_Result)">
-            <Parameter Name="KhachhangId" Mode="In" Type="Guid" />
+          <Parameter Name="KhachhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Khuyen_GetDonhang" ReturnType="Collection(B2BSystemModel.Khuyen_GetDonhang_Result)" />
           <FunctionImport Name="Khuyen_GetHanghoa" ReturnType="Collection(B2BSystemModel.Khuyen_GetHanghoa_Result)" />
           <FunctionImport Name="Khuyen_GetHanghoaTheoNhom" ReturnType="Collection(B2BSystemModel.Khuyen_GetHanghoaTheoNhom_Result)">
-            <Parameter Name="NhomHanghoaId" Mode="In" Type="Guid" />
+          <Parameter Name="NhomHanghoaId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Khuyen_GetKhachhang" ReturnType="Collection(B2BSystemModel.Khuyen_GetKhachhang_Result)" />
           <FunctionImport Name="Khuyen_GetPhieuxuatTheoDonhang" ReturnType="Collection(B2BSystemModel.Khuyen_GetPhieuxuatTheoDonhang_Result)">
-            <Parameter Name="DonhangId" Mode="In" Type="Guid" />
+          <Parameter Name="DonhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Khuyen_GetThuchi" ReturnType="Collection(B2BSystemModel.Khuyen_GetThuchi_Result)" />
           <FunctionImport Name="sp_alterdiagram">
@@ -6389,14 +6388,14 @@
             <Parameter Name="Version" Mode="InOut" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="Tin_DeletePhieunhap">
-            <Parameter Name="PhieunhapId" Mode="In" Type="Guid" />
+          <Parameter Name="PhieunhapId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tin_GetChitietPhieunhapTheoPhieunhap" ReturnType="Collection(B2BSystemModel.Tin_GetChitietPhieunhapTheoPhieunhap_Result)">
-            <Parameter Name="PhieunhapId" Mode="In" Type="Guid" />
+          <Parameter Name="PhieunhapId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tin_GetHanghoaActive" ReturnType="Collection(B2BSystemModel.Tin_GetHanghoaActive_Result)" />
           <FunctionImport Name="Tin_GetHanghoaTheoKho" ReturnType="Collection(B2BSystemModel.Tin_GetHanghoaTheoKho_Result)">
-            <Parameter Name="KhoId" Mode="In" Type="Guid" />
+          <Parameter Name="KhoId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tin_GetNhomKhachhangActive" ReturnType="Collection(B2BSystemModel.Tin_GetNhomKhachhangActive_Result)" />
           <FunctionImport Name="Tin_GetPhieunhapTheoThang_Kho" ReturnType="Collection(B2BSystemModel.Tin_GetPhieunhapTheoThang_Kho_Result)">
@@ -6417,28 +6416,28 @@
             <Parameter Name="HanghoaId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tin_SelectChitietKiemkeTheoKiemke">
-            <Parameter Name="KiemkeId" Mode="In" Type="Guid" />
+          <Parameter Name="KiemkeId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tin_SelectCongnoNhap" ReturnType="Collection(B2BSystemModel.Tin_SelectCongnoNhap_Result)" />
           <FunctionImport Name="Tin_SelectKiemkeTheoKho">
-            <Parameter Name="KhoId" Mode="In" Type="Guid" />
+          <Parameter Name="KhoId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetChitietDonhangTheoDonhang" ReturnType="Collection(B2BSystemModel.Tri_GetChitietDonhangTheoDonhang_Result)">
-            <Parameter Name="DonhangId" Mode="In" Type="Guid" />
+          <Parameter Name="DonhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetDongiaTheoNhomKhachhang" ReturnType="Collection(B2BSystemModel.Tri_GetDongiaTheoNhomKhachhang_Result)">
-            <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
+          <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetDonhangTheoThang" ReturnType="Collection(B2BSystemModel.Tri_GetDonhangTheoThang_Result)">
             <Parameter Name="Ngaylap" Mode="In" Type="DateTime" />
             <Parameter Name="LoaiDonhangValue" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetHanghoaTheoNhomKhachhang" ReturnType="Collection(B2BSystemModel.Tri_GetHanghoaTheoNhomKhachhang_Result)">
-            <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
+          <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetKhachhangDemo" ReturnType="Collection(B2BSystemModel.Tri_GetKhachhangDemo_Result)" />
           <FunctionImport Name="Tri_GetKhachhangTheoNhomKhachhang" ReturnType="Collection(B2BSystemModel.Tri_GetKhachhangTheoNhomKhachhang_Result)">
-            <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
+          <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetKho" ReturnType="Collection(B2BSystemModel.Tri_GetKho_Result)" />
           <FunctionImport Name="Tri_GetKhuvucActive" ReturnType="Collection(B2BSystemModel.Tri_GetKhuvucActive_Result)" />
@@ -6446,57 +6445,57 @@
           <FunctionImport Name="Tri_GetNhanvien" ReturnType="Collection(B2BSystemModel.Tri_GetNhanvien_Result)" />
           <FunctionImport Name="Tri_GetNhanvienActive" ReturnType="Collection(B2BSystemModel.Tri_GetNhanvienActive_Result)" />
           <FunctionImport Name="Tri_GetNhanvienTheoPhongban" ReturnType="Collection(B2BSystemModel.Tri_GetNhanvienTheoPhongban_Result)">
-            <Parameter Name="PhongbanId" Mode="In" Type="Guid" />
+          <Parameter Name="PhongbanId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetNhomKhachhangActive" ReturnType="Collection(B2BSystemModel.Tri_GetNhomKhachhangActive_Result)" />
           <FunctionImport Name="Tri_GetQuanhuyenActive" ReturnType="Collection(B2BSystemModel.Tri_GetQuanhuyenActive_Result)" />
           <FunctionImport Name="Tri_GetQuanhuyenActiveTheoTinhthanh" ReturnType="Collection(B2BSystemModel.Tri_GetQuanhuyenActiveTheoTinhthanh_Result)">
-            <Parameter Name="TinhthanhId" Mode="In" Type="Guid" />
+          <Parameter Name="TinhthanhId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetQuanhuyenTheoTinhthanh" ReturnType="Collection(B2BSystemModel.Tri_GetQuanhuyenTheoTinhthanh_Result)">
-            <Parameter Name="TinhthanhId" Mode="In" Type="Guid" />
+          <Parameter Name="TinhthanhId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetThangNamNhapXuat" ReturnType="Collection(B2BSystemModel.Tri_GetThangNamNhapXuat_Result)" />
           <FunctionImport Name="Tri_GetTinhthanhActive" ReturnType="Collection(B2BSystemModel.Tri_GetTinhthanhActive_Result)" />
           <FunctionImport Name="Tri_GetTinhthanhTheoKhuvuc" ReturnType="Collection(B2BSystemModel.Tri_GetTinhthanhTheoKhuvuc_Result)">
-            <Parameter Name="KhuvucId" Mode="In" Type="Guid" />
+          <Parameter Name="KhuvucId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetTinhthanhVoiTenKhuvuc" ReturnType="Collection(B2BSystemModel.Tri_GetTinhthanhVoiTenKhuvuc_Result)" />
           <FunctionImport Name="Tri_GetTinhthanhWithTenKhuvuc" ReturnType="Collection(B2BSystemModel.Tri_GetTinhthanhWithTenKhuvuc_Result)" />
           <FunctionImport Name="Tri_GetTinhtrangDalap" ReturnType="Collection(B2BSystemModel.Tri_GetTinhtrangDalap_Result)">
-            <Parameter Name="Code" Mode="In" Type="String" />
+          <Parameter Name="Code" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetTonkhoTheoNgay" ReturnType="Collection(B2BSystemModel.Tri_GetTonkhoTheoNgay_Result)">
-            <Parameter Name="Ngay" Mode="In" Type="DateTime" />
+          <Parameter Name="Ngay" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="Vinh_GetChitietDonhangTheoDonHang" ReturnType="Collection(B2BSystemModel.Vinh_GetChitietDonhangTheoDonHang_Result)">
-            <Parameter Name="DonhangId" Mode="In" Type="Guid" />
+          <Parameter Name="DonhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Vinh_GetChitietPhieuxuatTheoPhieuxuat" ReturnType="Collection(B2BSystemModel.Vinh_GetChitietPhieuxuatTheoPhieuxuat_Result)">
-            <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
+          <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Vinh_GetDonhangTheoDonhangId" ReturnType="Collection(B2BSystemModel.Vinh_GetDonhangTheoDonhangId_Result)">
-            <Parameter Name="DonhangId" Mode="In" Type="Guid" />
+          <Parameter Name="DonhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Vinh_GetDonhangTheoThang_koloaidonhang" ReturnType="Collection(B2BSystemModel.Vinh_GetDonhangTheoThang_koloaidonhang_Result)">
-            <Parameter Name="Ngaylap" Mode="In" Type="DateTime" />
+          <Parameter Name="Ngaylap" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="Vinh_GetDonviActive" ReturnType="Collection(B2BSystemModel.Vinh_GetDonviActive_Result)" />
           <FunctionImport Name="Vinh_GetKhoActive" ReturnType="Collection(B2BSystemModel.Vinh_GetKhoActive_Result)" />
           <FunctionImport Name="Vinh_GetNguyennhanLydoActive" ReturnType="Collection(B2BSystemModel.Vinh_GetNguyennhanLydoActive_Result)" />
           <FunctionImport Name="Vinh_GetNhanvienTheoUserId" ReturnType="Collection(B2BSystemModel.Vinh_GetNhanvienTheoUserId_Result)">
-            <Parameter Name="UserId" Mode="In" Type="Guid" />
+          <Parameter Name="UserId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Vinh_GetNhomHanghoaActive" ReturnType="Collection(B2BSystemModel.Vinh_GetNhomHanghoaActive_Result)" />
           <FunctionImport Name="Vinh_GetPhieuxuatTheoMa" ReturnType="Collection(B2BSystemModel.Vinh_GetPhieuxuatTheoMa_Result)">
-            <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
+          <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Vinh_GetTinhtrangActive" ReturnType="Collection(B2BSystemModel.Vinh_GetTinhtrangActive_Result)" />
           <FunctionImport Name="Vinh_GetTinhtrangPhieuxuatMoiNhatTheoPhieuxuat" ReturnType="Collection(B2BSystemModel.Vinh_GetTinhtrangPhieuxuatMoiNhatTheoPhieuxuat_Result)">
-            <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
+          <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Vinh_GetTinhtrangPhieuxuatTheoPhieuxuat" ReturnType="Collection(B2BSystemModel.Vinh_GetTinhtrangPhieuxuatTheoPhieuxuat_Result)">
-            <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
+          <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Khuyen_GetBaogiaTheoNhomKhachhang_Result">
@@ -7917,9 +7916,9 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="B2BSystemModel.Account">
               <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="AccountPassword" ColumnName="AccountPassword" />
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="AccountName" ColumnName="AccountName" />
-                <ScalarProperty Name="C_Password" ColumnName="_Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

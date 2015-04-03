@@ -21,7 +21,7 @@ namespace B2B.DAL
     
         public System.Guid AccountId { get; set; }
         public string AccountName { get; set; }
-        public string C_Password { get; set; }
+        public string AccountPassword { get; set; }
     
         public virtual ICollection<Khachhang> Khachhangs { get; set; }
     }

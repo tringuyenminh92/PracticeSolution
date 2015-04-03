@@ -10,7 +10,7 @@ namespace B2B.Model
     {
         public Guid AccountId { get; set; }
         public String AccountName { get; set; }
-        public String C_Password { get; set; }
+        public String AccountPassword { get; set; }
         public AccountModel() { AccountId = Guid.NewGuid(); }
     }
 }

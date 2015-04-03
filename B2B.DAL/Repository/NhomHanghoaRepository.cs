@@ -14,9 +14,10 @@ namespace B2B.DAL.Repository
             dbContext = new B2BSystemEntities();
         }
 
-        public IQueryable<NhomHanghoa> GetAllNhomHanghoa()
+        public IQueryable<Vinh_GetNhomHanghoaActive_Result> GetNhomHanghoa()
         {
-            return dbContext.NhomHanghoas.AsQueryable<NhomHanghoa>();
+            return dbContext.Vinh_GetNhomHanghoaActive().AsQueryable<Vinh_GetNhomHanghoaActive_Result>();
+            //return dbContext.NhomHanghoas.AsQueryable<NhomHanghoa>();
         }
 
     }
