@@ -128,20 +128,23 @@ function TaikhoanController($scope, $http) {
     }
 
     //Hàm lưu thông tin khách hàng thay đổi
-    $scope.ThaydoiThongtinTaikhoan = function () {
-        //if ($scope.account.AccountName == "" || $scope.khachhang.HotenKhachhang == "") {
-        //    $scope.Loi.tenLoi = "Null";
-        //    $scope.Loi.hienthi = "Xin vui lòng nhập";
-        //    if ($scope.account.AccountName == "") {
-        //        $scope.isActive = 1;
-        //    }
-        //    else if ($scope.khachhang.HotenKhachhang == "") {
-        //        $scope.isActive = 2;
-        //    }
-        //}
-        //else {
-        //    alert('OK');
-        //}
-        Hientab(1);
+    $scope.ThaydoiThongtinKhachhang = function () {
+        
     }
+
+    //Hàm tạo Datepicker
+    $scope.open = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened = true;
+    };
+    $scope.format = 'dd/MM/yyyy';
+    
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+    };
+
+    //Load tinh thanh
 }
