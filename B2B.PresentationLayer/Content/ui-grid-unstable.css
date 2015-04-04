@@ -75,6 +75,7 @@
     position: relative;
     overflow: hidden;
     font-weight: bold;
+    background-color:#337ab7;
     /*background: #f3f3f3;
     background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(1, #ffffff));
     background: -ms-linear-gradient(bottom, #eeeeee, #ffffff);
@@ -82,14 +83,14 @@
     background: -o-linear-gradient(#ffffff, #eeeeee);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);*/
     /*Nguyen Minh Tri -01-02-2015- Border Radius*/
-    background: rgba(82,153,235,1);
+    /*background: rgba(82,153,235,1);
     background: -moz-linear-gradient(top, rgba(82,153,235,1) 0%, rgba(132,188,241,1) 35%, rgba(196,223,248,1) 52%, rgba(196,223,248,1) 100%);
     background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(82,153,235,1)), color-stop(35%, rgba(132,188,241,1)), color-stop(52%, rgba(196,223,248,1)), color-stop(100%, rgba(196,223,248,1)));
     background: -webkit-linear-gradient(top, rgba(82,153,235,1) 0%, rgba(132,188,241,1) 35%, rgba(196,223,248,1) 52%, rgba(196,223,248,1) 100%);
     background: -o-linear-gradient(top, rgba(82,153,235,1) 0%, rgba(132,188,241,1) 35%, rgba(196,223,248,1) 52%, rgba(196,223,248,1) 100%);
     background: -ms-linear-gradient(top, rgba(82,153,235,1) 0%, rgba(132,188,241,1) 35%, rgba(196,223,248,1) 52%, rgba(196,223,248,1) 100%);
     background: linear-gradient(to bottom, rgba(82,153,235,1) 0%, rgba(132,188,241,1) 35%, rgba(196,223,248,1) 52%, rgba(196,223,248,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5299eb', endColorstr='#c4dff8', GradientType=0 );
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5299eb', endColorstr='#c4dff8', GradientType=0 );*/
     color: #fff;
     -moz-border-radius-topleft: 15px;
     -moz-border-radius-topright: 15px;
@@ -1042,7 +1043,7 @@ div.ui-grid-cell input {
     /*Nguyen Minh Tri - 01-02-2015*/
     bottom: -32.5px;
     left: -1px;
-    background: rgba(164,205,244,1);
+    background: #337ab7;
     -moz-border-radius-bottomright: 5px;
     -moz-border-radius-bottomleft: 5px;
     border-bottom-right-radius: 5px;
