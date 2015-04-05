@@ -11,9 +11,9 @@ namespace B2B.DAL.Repository
         B2BSystemEntities dbContext;
         public TinhthanhRepository() { dbContext = new B2BSystemEntities(); }
 
-        public IQueryable<Tri_GetTinhthanhActive_Result> GetTinhthanh()
+        public IQueryable<Tri_GetTinhthanhActive_Result> GetTinhthanhActive()
         {
-            return dbContext.Tri_GetTinhthanhActive().AsQueryable();
+            return dbContext.Tri_GetTinhthanhActive().OrderBy(t=>t.TenTinhthanh).AsQueryable();
         }
 
     }
