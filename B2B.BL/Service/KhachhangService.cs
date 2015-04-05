@@ -26,6 +26,12 @@ namespace B2B.BL.Service
             Khachhang kh = Mapper.Map<KhachhangModel, Khachhang>(khachhang);
             return repository.Insert(kh);
         }
+        public bool Update(KhachhangModel khachhang)
+        {
+            Mapper.CreateMap<KhachhangModel, Khachhang>();
+            Khachhang kh = Mapper.Map<KhachhangModel, Khachhang>(khachhang);
+            return repository.Update(kh);
 
+        }
     }
 }

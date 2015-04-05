@@ -92,6 +92,10 @@ namespace B2B.PresentationLayer.Controllers
         {
             return Json(_quanhuyenService.GetQuanhuyenActiveTheoTinhthanh(tinhthanhId), JsonRequestBehavior.AllowGet);
         }
+        public JsonResult HienthiQuanhuyenFull()
+        {
+            return Json(_quanhuyenService.GetQuanhuyenActive(), JsonRequestBehavior.AllowGet);
+        }
         public JsonResult ThaydoiThongtinDangnhap(AccountModel account)
         {
             var kq = _accountService.Update(account);
@@ -108,8 +112,17 @@ namespace B2B.PresentationLayer.Controllers
         }
         public JsonResult ThaydoiThongtinKhachhang(KhachhangModel khachhang)
         {
-            var kh = khachhang;
-            return Json(true, JsonRequestBehavior.AllowGet);
+            var kq = _khachhangService.Update(khachhang);
+            string thongbao;
+            if (kq)
+            {
+                thongbao = "Đổi thông tin thành công";
+            }
+            else
+            {
+                thongbao = "Đổi thông tin không thành công";
+            }
+            return Json(new { thongbao = thongbao, kq = kq }, JsonRequestBehavior.AllowGet);
         }
     }
 }

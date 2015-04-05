@@ -30,5 +30,24 @@ namespace B2B.DAL.Repository
                 return false;
             }
         }
+
+        public bool Update(Khachhang khachhang)
+        {
+            try
+            {
+                Khachhang kh = dbContext.Khachhangs.Find(khachhang.KhachhangId);
+                if (kh != null)
+                {
+                    dbContext.Entry(kh).CurrentValues.SetValues(khachhang);
+                    dbContext.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (System.Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

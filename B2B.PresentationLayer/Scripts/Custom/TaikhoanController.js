@@ -11,7 +11,7 @@ function TaikhoanController($scope, $http) {
         $scope.khachhang = {
             HotenKhachhang: "",
             Ngaysinh: "", CMND: "", Gioitinh: "", Diachi: "",
-            DichiGiaohang: "", Tinhthanh: "", Quanhuyen: "",
+            DichiGiaohang: "", TinhthanhId: "", QuanhuyenId: "",
             Mobile: "", Tel: "", Email: "", Tax: "",
             TenCongty: "", DiachiCongty: "", Chucvu: "", DienthoaiCongty: "",
             TenTaikhoan: "", SoTaikhoan: "", Nganhang: "", MasoThue: ""
@@ -97,14 +97,13 @@ function TaikhoanController($scope, $http) {
             $scope.Loi.hienthi = "Password nhập không đúng, vui lòng nhập lại.";
         }
     }
-
+    //$scope.khachhang = {}
     $scope.accountNameTmp = "";
     //Hàm hiển thị các thông tin của account đang được sử dụng
     $scope.HienthiThongtinTaikhoan = function () {
         $http.post("/Taikhoan/HienthiThongtinTaikhoan", { accountId: "34b4f9ab-7d28-49f4-9bc4-27d70c6eba85" }).success(function (data, status, headers, config) {
             $scope.account = data.acc;
             $scope.khachhang = data.kh;
-            alert(data.kh.Tinhthanh + '');
             $scope.accountNameTmp = data.acc.AccountName;
             if ($scope.khachhang.Gioitinh == null) {
                 $scope.khachhang.Gioitinh = true;
@@ -130,7 +129,9 @@ function TaikhoanController($scope, $http) {
 
     //Hàm lưu thông tin khách hàng thay đổi
     $scope.ThaydoiThongtinKhachhang = function () {
-        
+        $http.post("/Taikhoan/ThaydoiThongtinKhachhang", { khachhang: $scope.khachhang }).success(function (data, status, headers, config) {
+            
+        });
     }
 
     //Hàm tạo Datepicker
@@ -162,21 +163,35 @@ function TaikhoanController($scope, $http) {
 
     }
 
-    //Load quan huyen'
+    //Load quan huyen theo tinh thanh
     $scope.HienthiQuanhuyen = function () {
-        $http.post("/Taikhoan/HienthiQuanhuyen", { tinhthanhId: $scope.khachhang.Tinhthanh }).success(function (data, status, headers, config) {
-            if ($scope.khachhang.Tinhthanh == null) {
-                $scope.quanhuyens = [];
-            }
-            else {
+        if ($scope.khachhang.TinhthanhId == null) {
+            $scope.quanhuyens = [];
+            $scope.khachhang.QuanhuyenId = null;
+        }
+        else {
+            $http.post("/Taikhoan/HienthiQuanhuyen", { tinhthanhId: $scope.khachhang.TinhthanhId }).success(function (data, status, headers, config) {
                 if (data) {
                     $scope.quanhuyens = data;
                 }
-            }
+            }).error(function (data, status, headers, config) {
+                // log 
+                alert("I am an alert box bug!");
+            });
+        }
+    }
 
+    //Load quan huyen full (khi load lan dau)
+    $scope.HienthiQuanhuyenFull = function () {
+        $http.post("/Taikhoan/HienthiQuanhuyenFull").success(function (data, status, headers, config) {
+            if (data) {
+                $scope.quanhuyens = data;
+            }
         }).error(function (data, status, headers, config) {
             // log 
             alert("I am an alert box bug!");
         });
     }
+
+
 }

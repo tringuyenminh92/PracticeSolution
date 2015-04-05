@@ -3,7 +3,7 @@
 }
 <script src="~/Scripts/Custom/TaikhoanController.js"></script>
 <h2>Thay đổi thông tin tài khoản</h2>
-<div ng-controller="taikhoanController" ng-init="HienthiTinhthanh();HienthiThongtinTaikhoan()">
+<div ng-controller="taikhoanController" ng-init="HienthiTinhthanh();HienthiThongtinTaikhoan();HienthiQuanhuyenFull()">
     <ul class="nav nav-tabs nav-justified">
         <li ng-class="{active: isActive==1}" ng-click="Hientab(1)"><a>Thông tin đăng nhập</a></li>
         <li ng-class="{active: isActive==2}" ng-click="Hientab(2)"><a>Thông tin cơ bản</a></li>
@@ -68,14 +68,14 @@
 
                     <div class="form-group">
                         <label for="tinhthanh">Tỉnh thành</label>
-                        <select class="form-control" name="tinhthanh" ng-model="khachhang.Tinhthanh" ng-options="obj.TinhthanhId as obj.TenTinhthanh for obj in tinhthanhs" ng-change="HienthiQuanhuyen()">
+                        <select class="form-control" name="tinhthanh" ng-model="khachhang.TinhthanhId" ng-options="obj.TinhthanhId as obj.TenTinhthanh for obj in tinhthanhs" ng-change="HienthiQuanhuyen()">
                             <option value="">--Tỉnh thành--</option>
                         </select>
                     </div>
                     @*<div> object is {{khachhang.Tinhthanh}}</div>*@
                     <div class="form-group">
                         <label for="quanhuyen">Quận huyện</label>
-                        <select class="form-control" name="quanhuyen" ng-model="khachhang.Quanhuyen" ng-options="obj.QuanhuyenId as obj.TenQuanhuyen for obj in quanhuyens">
+                        <select class="form-control" name="quanhuyen" ng-model="khachhang.QuanhuyenId" ng-options="obj.QuanhuyenId as obj.TenQuanhuyen for obj in quanhuyens">
                             <option value="">--Quận huyện--</option>
                         </select>
                     </div>
