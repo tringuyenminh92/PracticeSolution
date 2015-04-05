@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "DatHang";
+}
+<script src="~/Scripts/Custom/MuaHangController.js"></script>
+<div ng-app="myApp" class="row">
+    <div class="pull-left">
+        <div ng-controller="muaHangController">
+            <div class="pull-left">
+                
+                Nhomn Hang hoa:
+                <select ng-model="currentSelect"
+                        ng-options="obj as obj.TenNhomHanghoa for obj in nhomHanghoaDropdownlist"
+                        ng-init="LoadNhomHanghoa()"
+                        ng-change="LoadHanghoaTheoNhomHanghoa()"></select>
+                <br />
+                <div class="gridStyle" external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

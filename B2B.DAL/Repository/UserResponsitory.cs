@@ -25,10 +25,14 @@ namespace B2B.DAL.Repository
         {
             // 08a4415e9d594ff960030b921d42b91e
             //chưa so sánh id cua account
-            Account account = dbContext.Accounts.Single(a => a.AccountName == model.AccountName);
-            account.Password = model.Password;
+            //Account account = dbContext.Accounts.Single(a => a.AccountName == model.AccountName);
+            //account.Password = model.Password;
             return dbContext.SaveChanges();
         }
-
+        //Get list account
+        public IQueryable<Account> GetUser()
+        {
+            return dbContext.Accounts.AsQueryable();
+        }
     }
 }

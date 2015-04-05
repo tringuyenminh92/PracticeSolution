@@ -53,7 +53,6 @@ namespace B2B.DAL
         public DbSet<Phieuxuat> Phieuxuats { get; set; }
         public DbSet<Phongban> Phongbans { get; set; }
         public DbSet<Quanhuyen> Quanhuyens { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<Thuchi> Thuchis { get; set; }
         public DbSet<ThuoctinhHanghoa> ThuoctinhHanghoas { get; set; }
         public DbSet<Tinhthanh> Tinhthanhs { get; set; }
@@ -61,8 +60,8 @@ namespace B2B.DAL
         public DbSet<TinhtrangDonhang> TinhtrangDonhangs { get; set; }
         public DbSet<TinhtrangPhieunhap> TinhtrangPhieunhaps { get; set; }
         public DbSet<TinhtrangPhieuxuat> TinhtrangPhieuxuats { get; set; }
-        public DbSet<Tonkho> Tonkhoes { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Tonkho> Tonkhoes { get; set; }
     
         public virtual ObjectResult<Khuyen_GetBaogiaTheoNhomKhachhang_Result> Khuyen_GetBaogiaTheoNhomKhachhang(Nullable<System.Guid> nhomKhachhangId)
         {
@@ -5583,6 +5582,19 @@ namespace B2B.DAL
                 new ObjectParameter("PhieuxuatId", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Vinh_GetTinhtrangPhieuxuatTheoPhieuxuat_Result>("Vinh_GetTinhtrangPhieuxuatTheoPhieuxuat", phieuxuatIdParameter);
+        }
+    
+        public virtual ObjectResult<Tin_CheckLogin_Result> Tin_CheckLogin(string accountname, string accountpassword)
+        {
+            var accountnameParameter = accountname != null ?
+                new ObjectParameter("accountname", accountname) :
+                new ObjectParameter("accountname", typeof(string));
+    
+            var accountpasswordParameter = accountpassword != null ?
+                new ObjectParameter("accountpassword", accountpassword) :
+                new ObjectParameter("accountpassword", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_CheckLogin_Result>("Tin_CheckLogin", accountnameParameter, accountpasswordParameter);
         }
     }
 }
