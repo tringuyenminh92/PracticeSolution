@@ -22,8 +22,13 @@
 <div class="row">
     <div ng-controller="quoteController">
         <button id="btnLoadData" type="button" class="btn btn-primary btn-group-sm" ng-click="loadData()" ng-init="loadData()">Load Data</button>
-        <div class="gridStyle" external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
+        <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
         </div>
+        <br />
+        <br /><br />
+        
+
+    {{Giatri |  date:'yyyy-MM-dd HH:mm:ss Z'}}
     </div>
 </div>
 

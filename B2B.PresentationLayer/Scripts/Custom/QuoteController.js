@@ -7,8 +7,8 @@ $(function () {
 })
 
 angular.module("GlobalModule").controller("quoteController", QuoteController);
-QuoteController.$inject = ['$scope', '$http','$location'];
-function QuoteController($scope, $http,$location, $modalInstance) {
+QuoteController.$inject = ['$scope', '$http', '$location'];
+function QuoteController($scope, $http, $location, $modalInstance) {
 
     $scope.$scope = $scope;
     $scope.myData = [];
@@ -18,27 +18,36 @@ function QuoteController($scope, $http,$location, $modalInstance) {
         $scope.myData.splice(index, 1);
     };
 
+    $scope.getDetails = function (rowData) {
+        alert(rowData.name);
+    }
+
     $scope.loadData = function () {
         $http.get("Quote/GetQuotes").success(function (data, status, headers, config) {
             $scope.myData = data;
-            $location.url('http://www.google.com')
+            // $location.url('http://www.google.com')
         }).error(function (data, status, headers, config) {
             // log 
-            var alertInstance = new Alert("alertId", "Load Failed", "danger");
-            alertInstance.ShowAlert();
+            //var alertInstance = new Alert("alertId", "Load Failed", "danger");
+            //alertInstance.ShowAlert();
         });
     };
 
     $scope.gridOptions = {};
     $scope.deleteCellTemplate = '<button ng-click="getExternalScopes().deleteRow(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-trash"/></button> ';
+    $scope.detailsCellTemplate = '<button ng-click="getExternalScopes().getDetails(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-camera"/></button> ';
     $scope.gridOptions.columnDefs = [
           { name: '_delete', displayName: "", cellTemplate: $scope.deleteCellTemplate, width: 25, enableFiltering: false, enableCellEdit: false },
   	      { name: 'name', displayName: 'Name', headerCellTemplate: '<div title="Tooltip Content">Name</div>', width: 150 },
-  	      { name: 'tuoi', displayName: 'tuoi', width: 50 }
+  	      { name: 'tuoi', displayName: 'tuoi', width: 50 },
+          { name: 'Details', displayName: 'Details', width: 50, cellTemplate: $scope.detailsCellTemplate }
     ];
     $scope.gridOptions.paginationPageSizes = [25, 50, 75];
     $scope.gridOptions.paginationPageSize = 25;
     $scope.gridOptions.data = "myData";
-    $scope.gridOptions.enableFiltering = true;
+    $scope.gridOptions.enableFiltering = false;
+
+    //Demo show datetime formart
+    $scope.Giatri = Date.now();
 }
 

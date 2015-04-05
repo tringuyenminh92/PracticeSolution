@@ -5584,5 +5584,18 @@ namespace B2B.DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Vinh_GetTinhtrangPhieuxuatTheoPhieuxuat_Result>("Vinh_GetTinhtrangPhieuxuatTheoPhieuxuat", phieuxuatIdParameter);
         }
+    
+        public virtual ObjectResult<Tin_CheckLogin_Result> Tin_CheckLogin(string accountname, string accountpassword)
+        {
+            var accountnameParameter = accountname != null ?
+                new ObjectParameter("accountname", accountname) :
+                new ObjectParameter("accountname", typeof(string));
+    
+            var accountpasswordParameter = accountpassword != null ?
+                new ObjectParameter("accountpassword", accountpassword) :
+                new ObjectParameter("accountpassword", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_CheckLogin_Result>("Tin_CheckLogin", accountnameParameter, accountpasswordParameter);
+        }
     }
 }
