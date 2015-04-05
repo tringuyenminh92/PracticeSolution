@@ -3702,16 +3702,6 @@
           <NavigationProperty Name="Nhanviens" Relationship="Self.FK_Nhanvien_Quanhuyen" FromRole="Quanhuyen" ToRole="Nhanvien" />
           <NavigationProperty Name="Tinhthanh" Relationship="Self.FK_Quanhuyen_Tinhthanh" FromRole="Quanhuyen" ToRole="Tinhthanh" />
         </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="Thuchi">
           <Key>
             <PropertyRef Name="ThuchiId" />
@@ -3829,30 +3819,6 @@
           <NavigationProperty Name="Nhanvien" Relationship="Self.FK_TinhtrangPhieuxuat_Nhanvien" FromRole="TinhtrangPhieuxuat" ToRole="Nhanvien" />
           <NavigationProperty Name="Phieuxuat" Relationship="Self.FK_TinhtrangPhieuxuat_Phieuxuat" FromRole="TinhtrangPhieuxuat" ToRole="Phieuxuat" />
           <NavigationProperty Name="Tinhtrang" Relationship="Self.FK_TinhtrangPhieuxuat_Tinhtrang" FromRole="TinhtrangPhieuxuat" ToRole="Tinhtrang" />
-        </EntityType>
-        <EntityType Name="Tonkho">
-          <Key>
-            <PropertyRef Name="TonkhoId" />
-          </Key>
-          <Property Name="TonkhoId" Type="Guid" Nullable="false" />
-          <Property Name="HanghoaId" Type="Guid" />
-          <Property Name="KhoId" Type="Guid" />
-          <Property Name="Ngay" Type="Int32" />
-          <Property Name="Thang" Type="Int32" />
-          <Property Name="Nam" Type="Int32" />
-          <Property Name="NgayCapnhat" Type="DateTime" Precision="3" />
-          <Property Name="GioCapnhat" Type="DateTime" Precision="3" />
-          <Property Name="SoduDauky" Type="Int32" />
-          <Property Name="SoluongNhap" Type="Int32" />
-          <Property Name="SoluongXuat" Type="Int32" />
-          <Property Name="SoluongTon" Type="Int32" />
-          <Property Name="NhanvienCapnhat" Type="Guid" />
-          <Property Name="Step" Type="Int32" />
-          <Property Name="Version" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="Active" Type="Boolean" />
-          <Property Name="SoluongTonDukien" Type="Int32" />
-          <Property Name="ThanhtienNhap" Type="Double" />
-          <Property Name="ThanhtienXuat" Type="Double" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -4637,7 +4603,6 @@
           <EntitySet Name="Phieuxuats" EntityType="Self.Phieuxuat" />
           <EntitySet Name="Phongbans" EntityType="Self.Phongban" />
           <EntitySet Name="Quanhuyens" EntityType="Self.Quanhuyen" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Thuchis" EntityType="Self.Thuchi" />
           <EntitySet Name="ThuoctinhHanghoas" EntityType="Self.ThuoctinhHanghoa" />
           <EntitySet Name="Tinhthanhs" EntityType="Self.Tinhthanh" />
@@ -4645,7 +4610,6 @@
           <EntitySet Name="TinhtrangDonhangs" EntityType="Self.TinhtrangDonhang" />
           <EntitySet Name="TinhtrangPhieunhaps" EntityType="Self.TinhtrangPhieunhap" />
           <EntitySet Name="TinhtrangPhieuxuats" EntityType="Self.TinhtrangPhieuxuat" />
-          <EntitySet Name="Tonkhoes" EntityType="Self.Tonkho" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK_Khachhang_Account" Association="Self.FK_Khachhang_Account">
             <End Role="Account" EntitySet="Accounts" />
@@ -6463,6 +6427,7 @@
             <Parameter Name="accountname" Mode="In" Type="String" />
             <Parameter Name="accountpassword" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Tonkhoes" EntityType="B2BSystemModel.Tonkho" />
         </EntityContainer>
         <ComplexType Name="Khuyen_GetBaogiaTheoNhomKhachhang_Result">
           <Property Type="Guid" Name="HanghoaId" Nullable="false" />
@@ -7878,6 +7843,30 @@
           <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="AccountPassword" Nullable="true" MaxLength="250" />
         </ComplexType>
+        <EntityType Name="Tonkho">
+          <Key>
+            <PropertyRef Name="TonkhoId" />
+          </Key>
+          <Property Name="TonkhoId" Type="Guid" Nullable="false" />
+          <Property Name="HanghoaId" Type="Guid" />
+          <Property Name="KhoId" Type="Guid" />
+          <Property Name="Ngay" Type="Int32" />
+          <Property Name="Thang" Type="Int32" />
+          <Property Name="Nam" Type="Int32" />
+          <Property Name="NgayCapnhat" Type="DateTime" Precision="3" />
+          <Property Name="GioCapnhat" Type="DateTime" Precision="3" />
+          <Property Name="SoduDauky" Type="Int32" />
+          <Property Name="SoluongNhap" Type="Int32" />
+          <Property Name="SoluongXuat" Type="Int32" />
+          <Property Name="SoluongTon" Type="Int32" />
+          <Property Name="NhanvienCapnhat" Type="Guid" />
+          <Property Name="Step" Type="Int32" />
+          <Property Name="Version" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="SoluongTonDukien" Type="Int32" />
+          <Property Name="ThanhtienNhap" Type="Double" />
+          <Property Name="ThanhtienXuat" Type="Double" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8450,31 +8439,6 @@
                 <ScalarProperty Name="NhanvienCapnhatId" ColumnName="NhanvienCapnhatId" />
                 <ScalarProperty Name="GhichuLydo" ColumnName="GhichuLydo" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tonkhoes">
-            <EntityTypeMapping TypeName="B2BSystemModel.Tonkho">
-              <MappingFragment StoreEntitySet="Tonkho">
-                <ScalarProperty Name="TonkhoId" ColumnName="TonkhoId" />
-                <ScalarProperty Name="HanghoaId" ColumnName="HanghoaId" />
-                <ScalarProperty Name="KhoId" ColumnName="KhoId" />
-                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
-                <ScalarProperty Name="Thang" ColumnName="Thang" />
-                <ScalarProperty Name="Nam" ColumnName="Nam" />
-                <ScalarProperty Name="NgayCapnhat" ColumnName="NgayCapnhat" />
-                <ScalarProperty Name="GioCapnhat" ColumnName="GioCapnhat" />
-                <ScalarProperty Name="SoduDauky" ColumnName="SoduDauky" />
-                <ScalarProperty Name="SoluongNhap" ColumnName="SoluongNhap" />
-                <ScalarProperty Name="SoluongXuat" ColumnName="SoluongXuat" />
-                <ScalarProperty Name="SoluongTon" ColumnName="SoluongTon" />
-                <ScalarProperty Name="NhanvienCapnhat" ColumnName="NhanvienCapnhat" />
-                <ScalarProperty Name="Step" ColumnName="Step" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="SoluongTonDukien" ColumnName="SoluongTonDukien" />
-                <ScalarProperty Name="ThanhtienNhap" ColumnName="ThanhtienNhap" />
-                <ScalarProperty Name="ThanhtienXuat" ColumnName="ThanhtienXuat" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -10352,6 +10316,31 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Tonkhoes">
+            <EntityTypeMapping TypeName="B2BSystemModel.Tonkho">
+              <MappingFragment StoreEntitySet="Tonkho">
+                <ScalarProperty Name="ThanhtienXuat" ColumnName="ThanhtienXuat" />
+                <ScalarProperty Name="ThanhtienNhap" ColumnName="ThanhtienNhap" />
+                <ScalarProperty Name="SoluongTonDukien" ColumnName="SoluongTonDukien" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Step" ColumnName="Step" />
+                <ScalarProperty Name="NhanvienCapnhat" ColumnName="NhanvienCapnhat" />
+                <ScalarProperty Name="SoluongTon" ColumnName="SoluongTon" />
+                <ScalarProperty Name="SoluongXuat" ColumnName="SoluongXuat" />
+                <ScalarProperty Name="SoluongNhap" ColumnName="SoluongNhap" />
+                <ScalarProperty Name="SoduDauky" ColumnName="SoduDauky" />
+                <ScalarProperty Name="GioCapnhat" ColumnName="GioCapnhat" />
+                <ScalarProperty Name="NgayCapnhat" ColumnName="NgayCapnhat" />
+                <ScalarProperty Name="Nam" ColumnName="Nam" />
+                <ScalarProperty Name="Thang" ColumnName="Thang" />
+                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+                <ScalarProperty Name="KhoId" ColumnName="KhoId" />
+                <ScalarProperty Name="HanghoaId" ColumnName="HanghoaId" />
+                <ScalarProperty Name="TonkhoId" ColumnName="TonkhoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

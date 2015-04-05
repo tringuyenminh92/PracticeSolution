@@ -33,5 +33,11 @@ namespace B2B.BL.Service
             return responsitory.UpdatePassword(account);
 
         }
+        public IEnumerable<AccountModel> GetUser()
+        {
+            Mapper.CreateMap<Account, AccountModel>();
+            var rs = responsitory.GetUser();
+            return Mapper.Map<IQueryable<Account>, IEnumerable<AccountModel>>(rs);
+        }
     }
 }
