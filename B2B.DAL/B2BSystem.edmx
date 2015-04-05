@@ -446,16 +446,6 @@
           <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" />
           <Property Name="NgayCapnhat" Type="datetime" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Thuchi">
           <Key>
             <PropertyRef Name="ThuchiId" />
@@ -1336,7 +1326,6 @@
           <Parameter Name="username" Type="varchar(max)" Mode="In" />
           <Parameter Name="pass" Type="varchar(max)" Mode="In" />
         </Function>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="Khuyen_GetBaogiaTheoNhomKhachhang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NhomKhachhangId" Type="uniqueidentifier" Mode="In" />
         </Function>
@@ -1354,36 +1343,6 @@
           <Parameter Name="DonhangId" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="Khuyen_GetThuchi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sys_ChitietDonhangDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ChitietDonhangId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="DonhangId" Type="uniqueidentifier" Mode="In" />
@@ -2791,6 +2750,10 @@
           <Parameter Name="p_Password" Type="nvarchar" Mode="In" />
           <Parameter Name="Version" Type="timestamp" Mode="InOut" />
         </Function>
+        <Function Name="Tin_CheckLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="accountname" Type="nvarchar" Mode="In" />
+          <Parameter Name="accountpassword" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="Tin_DeletePhieunhap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PhieunhapId" Type="uniqueidentifier" Mode="In" />
         </Function>
@@ -2935,7 +2898,6 @@
           <EntitySet Name="Phieuxuat" EntityType="Self.Phieuxuat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Phongban" EntityType="Self.Phongban" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Quanhuyen" EntityType="Self.Quanhuyen" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Thuchi" EntityType="Self.Thuchi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThuoctinhHanghoa" EntityType="Self.ThuoctinhHanghoa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tinhthanh" EntityType="Self.Tinhthanh" Schema="dbo" store:Type="Tables" />
@@ -6497,6 +6459,10 @@
           <FunctionImport Name="Vinh_GetTinhtrangPhieuxuatTheoPhieuxuat" ReturnType="Collection(B2BSystemModel.Vinh_GetTinhtrangPhieuxuatTheoPhieuxuat_Result)">
           <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
           </FunctionImport>
+          <FunctionImport Name="Tin_CheckLogin" ReturnType="Collection(B2BSystemModel.Tin_CheckLogin_Result)">
+            <Parameter Name="accountname" Mode="In" Type="String" />
+            <Parameter Name="accountpassword" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Khuyen_GetBaogiaTheoNhomKhachhang_Result">
           <Property Type="Guid" Name="HanghoaId" Nullable="false" />
@@ -7907,6 +7873,11 @@
           <Property Type="String" Name="GhichuLydo" Nullable="true" MaxLength="50" />
           <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
         </ComplexType>
+        <ComplexType Name="Tin_CheckLogin_Result">
+          <Property Type="Guid" Name="AccountId" Nullable="false" />
+          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="AccountPassword" Nullable="true" MaxLength="250" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8379,17 +8350,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="B2BSystemModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Thuchis">
             <EntityTypeMapping TypeName="B2BSystemModel.Thuchi">
               <MappingFragment StoreEntitySet="Thuchi">
@@ -8751,30 +8711,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="B2BSystemModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="B2BSystemModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="B2BSystemModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="B2BSystemModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="B2BSystemModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="B2BSystemModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="B2BSystemModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="B2BSystemModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="B2BSystemModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="sys_ChitietDonhangDelete" FunctionName="B2BSystemModel.Store.sys_ChitietDonhangDelete" />
           <FunctionImportMapping FunctionImportName="sys_ChitietDonhangInsert" FunctionName="B2BSystemModel.Store.sys_ChitietDonhangInsert" />
           <FunctionImportMapping FunctionImportName="sys_ChitietDonhangSelect" FunctionName="B2BSystemModel.Store.sys_ChitietDonhangSelect">
@@ -10404,6 +10340,15 @@
                 <ScalarProperty Name="NhanvienCapnhatId" ColumnName="NhanvienCapnhatId" />
                 <ScalarProperty Name="GhichuLydo" ColumnName="GhichuLydo" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Tin_CheckLogin" FunctionName="B2BSystemModel.Store.Tin_CheckLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="B2BSystemModel.Tin_CheckLogin_Result">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="AccountPassword" ColumnName="AccountPassword" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

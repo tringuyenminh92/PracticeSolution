@@ -37,15 +37,15 @@ namespace B2B.BL.Service
             _loginRepository = new LoginReponsitory();
         }
 
-        public IEnumerable<Model.UserModel> CheckLogin(string username, string password)
+        public Model.AccountModel CheckLogin(string accountname, string accountpassword)
         {
             //try
             //{
             //Automapper for converting the source entity to destination entity
-            Mapper.CreateMap<Tin_CheckLogin_Result, UserModel>();
+            Mapper.CreateMap<Tin_CheckLogin_Result, AccountModel>();
 
-            var userList = _loginRepository.CheckLogin(username, password);
-            return Mapper.Map<IQueryable<Tin_CheckLogin_Result>, IEnumerable<UserModel>>(userList);
+            var userList = _loginRepository.CheckLogin(accountname, accountpassword);
+            return Mapper.Map<Tin_CheckLogin_Result, AccountModel>(userList);
             //}
             //catch (Exception)
             //{

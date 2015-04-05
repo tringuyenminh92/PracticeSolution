@@ -3,138 +3,55 @@
 }
 <script src="~/Scripts/Custom/LoginController.js"></script>
 @*<h2>Index</h2>*@
-@*<div ng-app="myApp">
-    <div ng-controller="loginController">
-        <h3>Login</h3>
-        <div class="input-group">
-            <span class="input-group-addon" id="txtuser"></span>
-            <input type="text" class="form-control" placeholder="Username" ng-required="myAccount.password" ng-model="myAccount.username" aria-describedby="basic-addon1">
-        </div>
-        <div>
-            <span style="color:red" ng-show="myAccount.username.$dirty && myAccount.username.$invalid">
-                <span ng-show="myAccount.username.$error.required">Không để trống.</span>
-            </span>
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon" id="txtpassword"></span>
-            <input type="password" class="form-control" placeholder="Password" ng-required="myAccount.password" ng-model="myAccount.password" aria-describedby="basic-addon1">
-        </div>
-        <div>
-            <button type="button" id="btnLogin" class="btn btn-primary btn-lg btn-block" ng-click="CheckLogin()">Login</button>
-        </div>
-        <div id="divAlert" role="alert">
-        </div>
-    </div>
-</div>*@
-@* _______________________________ *@
 
- @*<div class="container" style="margin-top:40px">
+@* _______________________________ *@
+<div ng-app="MyApp">
+    <div class="container" ng-controller="loginController">
         <div class="row">
-            <div class="col-sm-5 col-md-5 col-md-offset-2">
+            <div class="col-sm-4 col-sm-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <strong>Đăng nhập</strong>
                     </div>
                     <div class="panel-body">
-                        <form role="form" action="#" method="POST" title="Login">
-                            <fieldset>
-                                <div class="row" ng-controller="loginController">
-                                    <div class="col-sm-12 col-md-10  col-md-offset-1 ">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="glyphicon glyphicon-user"></i>
-                                                </span>
-                                                <input class="form-control" placeholder="Tài khoản" name="username" type="text" autofocus ng-model="myAccount.username" required>
-                                                <div>
-                                                    <span style="color:red" ng-show="username.$dirty && username.$invalid">
-                                                        <span ng-show="username.$error.required">Không để trống.</span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            
+                        <form role="form" action="#" method="POST" title="Login" name="myForm">
 
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="glyphicon glyphicon-lock"></i>
-                                                </span>
-                                                <input class="form-control" placeholder="Mật khẩu" name="password" type="password" ng-model="myAccount.password" required>
-                                            </div>
-                                            <div>
-                                                <span style="color:red" ng-show="myAccount.password.$dirty && myAccount.password.$invalid">
-                                                    <span ng-show="myAccount.password.$error.required">Không để trống.</span>
-                                                </span>
-                                            </div>
-
-                                        </div>
-                                        <div class="form-group">
-
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="checkboxRemember"> Ghi nhớ mật khẩu
-                                                </label>
-                                            </div>
-                                            <input type="button" class="btn btn-lg btn-primary btn-block" value="Đăng nhập" ng-click="checkLogin()">
-                                        </div>
+                            <div class="col-sm-12 col-md-10  col-md-offset-1 ">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user"></i>
+                                        </span>
+                                        <input class="form-control" placeholder="Tài khoản" name="username" type="text" autofocus ng-model="accountname" required>
                                     </div>
+                                    <span ng-show="myForm.username.$dirty && myForm.username.$invalid">
+                                        <span ng-show="myForm.username.$error.required">Không để trống.</span>
+                                    </span>
                                 </div>
-                            </fieldset>
-                            <a href=@Html.ActionLink("Tạo mới","Login","SignUp")> Tạo mới </a>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span>
+                                        <input class="form-control" placeholder="Mật khẩu" name="password" type="password" ng-model="accountpassword" required>
+                                    </div>
+                                    <span ng-show="myForm.password.$dirty && myForm.password.$invalid">
+                                        <span ng-show="myForm.password.$error.required">Không để trống.</span>
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" value="checkboxRemember"> Ghi nhớ mật khẩu
+                                        </label>
+                                    </div>
+                                    <input type="button" class="btn btn-lg btn-primary btn-block" value="Đăng nhập" ng-click="checkLogin()" ng-disabled="myForm.username.$dirty && myForm.username.$invalid ||myForm.password.$dirty && myForm.password.$invalid">
+
+                                </div>
+                            </div>
+
                         </form>
                     </div>
-
-                </div>
-            </div>
-        </div>
-</div>*@
-@* _______________________________ *@
-<div class="container" ng-controller="loginController">
-    <div class="row">
-        <div class="col-sm-4 col-sm-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <strong>Đăng nhập</strong>
-                </div>
-                <div class="panel-body">
-                    <form role="form" action="#" method="POST" title="Login" name="myForm">
-
-                        <div class="col-sm-12 col-md-10  col-md-offset-1 ">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-user"></i>
-                                    </span>
-                                    <input class="form-control" placeholder="Tài khoản" name="username" type="text" autofocus ng-model="myAccount.username" required>
-                                </div>
-                                <span ng-show="myForm.username.$dirty && myForm.username.$invalid">
-                                    <span ng-show="myForm.username.$error.required">Không để trống.</span>
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-lock"></i>
-                                    </span>
-                                    <input class="form-control" placeholder="Mật khẩu" name="password" type="password" ng-model="myAccount.password" required>
-
-                                </div>
-                                <span ng-show="myForm.password.$dirty && myForm.password.$invalid">
-                                    <span ng-show="myForm.password.$error.required">Không để trống.</span>
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="checkboxRemember"> Ghi nhớ mật khẩu
-                                    </label>
-                                </div>
-                                <input type="button" class="btn btn-lg btn-primary btn-block" value="Đăng nhập" ng-click="checkLogin()" ng-disabled="myForm.username.$dirty && myForm.username.$invalid ||myForm.password.$dirty && myForm.password.$invalid">
-
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>

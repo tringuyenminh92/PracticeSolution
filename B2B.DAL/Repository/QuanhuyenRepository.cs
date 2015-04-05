@@ -13,9 +13,14 @@ namespace B2B.DAL.Repository
         {
             dbContext = new B2BSystemEntities();
         }
-        public IQueryable<Tri_GetQuanhuyenActive_Result> GetQuanhuyen()
+        public IQueryable<Tri_GetQuanhuyenActive_Result> GetQuanhuyenActive()
         {
             return dbContext.Tri_GetQuanhuyenActive().AsQueryable();
+        }
+
+        public IQueryable<Tri_GetQuanhuyenActiveTheoTinhthanh_Result> GetQuanhuyenActiveTheoTinhthanh(string tinhthanhId)
+        {
+            return dbContext.Tri_GetQuanhuyenActiveTheoTinhthanh(new Guid(tinhthanhId)).AsQueryable();
         }
     }
 }

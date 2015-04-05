@@ -17,11 +17,21 @@ namespace B2B.BL.Service
         {
             repository = new QuanhuyenRepository();
         }
-        public List<QuanhuyenModel> GetQuanhuyen()
+        public List<QuanhuyenModel> GetQuanhuyenActive()
         {
             Mapper.CreateMap<Tri_GetQuanhuyenActive_Result, QuanhuyenModel>();
-            var listQuanhuyen = repository.GetQuanhuyen();
+            var listQuanhuyen = repository.GetQuanhuyenActive();
             return Mapper.Map<IQueryable<Tri_GetQuanhuyenActive_Result>, List<QuanhuyenModel>>(listQuanhuyen);
+        }
+
+        public List<QuanhuyenModel> GetQuanhuyenActiveTheoTinhthanh(string tinhthanhId)
+        {
+            //Mapper.CreateMap<TinhthanhModel, Tinhthanh>();
+            //var tt = Mapper.Map<TinhthanhModel, Tinhthanh>(tinhthanh);
+            var lstQuanhuyen = repository.GetQuanhuyenActiveTheoTinhthanh(tinhthanhId);
+
+            Mapper.CreateMap<Tri_GetQuanhuyenActiveTheoTinhthanh_Result, QuanhuyenModel>();
+            return Mapper.Map<IQueryable<Tri_GetQuanhuyenActiveTheoTinhthanh_Result>, List<QuanhuyenModel>>(lstQuanhuyen);
         }
     }
 }

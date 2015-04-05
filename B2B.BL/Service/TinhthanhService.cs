@@ -17,10 +17,10 @@ namespace B2B.BL.Service
         {
             repository = new TinhthanhRepository();
         }
-        public List<TinhthanhModel> GetTinhthanh()
+        public List<TinhthanhModel> GetTinhthanhActive()
         {
             Mapper.CreateMap<Tri_GetTinhthanhActive_Result, TinhthanhModel>();
-            var listTinhthanh = repository.GetTinhthanh();
+            var listTinhthanh = repository.GetTinhthanhActive();
             return Mapper.Map<IQueryable<Tri_GetTinhthanhActive_Result>, List<TinhthanhModel>>(listTinhthanh);
         }
     }

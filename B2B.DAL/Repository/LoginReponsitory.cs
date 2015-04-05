@@ -28,13 +28,13 @@ namespace B2B.DAL.Repository
         /// <param name="loggedUser">The logged user.</param>
         /// <param name="showAll">if set to <c>true</c> [show all].</param>
         /// <returns>List{Tin_CheckLogin_Result}.</returns>
-        public IQueryable<Tin_CheckLogin_Result> CheckLogin(string username, string password)
+        public Tin_CheckLogin_Result CheckLogin(string accountname, string accountpassword)
         {
             //try
             //{
             //if (showAll) loggedUser = "%%";
             //return _BSE.SP_SelectQuotes(" ").AsQueryable();
-            return _BSE.Tin_CheckLogin(username, password).AsQueryable();
+            return _BSE.Tin_CheckLogin(accountname, accountpassword).AsQueryable().FirstOrDefault();
             //}
             //catch (Exception)
             //{

@@ -30,19 +30,18 @@ namespace B2B.PresentationLayer.Controllers
         //    }
         //    return Json(new { result = kq });
         //}
-        public JsonResult CheckLogin(string user, string password)
+        public JsonResult CheckLoginUser(string account, string password)
         {
             bool kq = false;
-            //var u=new UserModel{_Username="user", _Password="password"};
-            UserModel rs = new UserModel();
-            rs = loguser.CheckLogin(user, password).FirstOrDefault();
+            AccountModel rs = new AccountModel();
+            rs = loguser.CheckLogin(account, password);
             if (rs != null)
             {
                 kq = true;
-                Session["UserId"] = rs.UserId;
+                Session["accountId"] = rs.AccountId;
             }
             return Json(new { result = kq });
-        }
 
+        }
     }
 }

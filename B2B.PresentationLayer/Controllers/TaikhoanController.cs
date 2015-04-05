@@ -84,13 +84,13 @@ namespace B2B.PresentationLayer.Controllers
             }
             return Json(new { thongbao = "Đăng ký không thành công", kq = false }, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult DisplayTinhthanh()
+        public JsonResult HienthiTinhthanh()
         {
-            return Json(_tinhthanhService.GetTinhthanh(), JsonRequestBehavior.AllowGet);
+            return Json(_tinhthanhService.GetTinhthanhActive(), JsonRequestBehavior.AllowGet);
         }
-        public JsonResult DisplayQuanhuyen()
+        public JsonResult HienthiQuanhuyen(string tinhthanhId)
         {
-            return Json(_quanhuyenService.GetQuanhuyen(), JsonRequestBehavior.AllowGet);
+            return Json(_quanhuyenService.GetQuanhuyenActiveTheoTinhthanh(tinhthanhId), JsonRequestBehavior.AllowGet);
         }
         public JsonResult ThaydoiThongtinDangnhap(AccountModel account)
         {
