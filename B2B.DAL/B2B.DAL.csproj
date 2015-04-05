@@ -190,6 +190,7 @@
     <Compile Include="Repository\DSHanghoaReponsitory.cs" />
     <Compile Include="Repository\HanghoaRepository.cs" />
     <Compile Include="Repository\KhachhangRepository.cs" />
+    <Compile Include="Repository\LoginReponsitory.cs" />
     <Compile Include="Repository\NhomHanghoaRepository.cs" />
     <Compile Include="Repository\QuanhuyenRepository.cs" />
     <Compile Include="Repository\QuoteRepository.cs" />
@@ -390,6 +391,9 @@
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="TinhtrangPhieuxuat.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tin_CheckLogin_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Tin_GetChitietPhieunhapTheoPhieunhap_Result.cs">
@@ -797,6 +801,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\DB_20150401.sql" />
+    <Content Include="Database\Tin_CheckLogin.sql" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="QuoteSystem.edmx">

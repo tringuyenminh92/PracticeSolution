@@ -54,6 +54,7 @@
     <Compile Include="Service\DSHanghoaService.cs" />
     <Compile Include="Service\HanghoaService.cs" />
     <Compile Include="Service\KhachhangService.cs" />
+    <Compile Include="Service\LoginService.cs" />
     <Compile Include="Service\NhomHanghoaService.cs" />
     <Compile Include="Service\QuanhuyenService.cs" />
     <Compile Include="Service\QuoteService.cs" />
