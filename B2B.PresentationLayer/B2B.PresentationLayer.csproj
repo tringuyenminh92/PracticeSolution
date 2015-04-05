@@ -210,7 +210,6 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\QuanlyHanghoaController.cs" />
     <Compile Include="Controllers\QuoteController.cs" />
-    <Compile Include="Controllers\TaikhoanController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
