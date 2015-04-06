@@ -402,8 +402,6 @@
     <Content Include="Views\Quote\Index.cshtml" />
     <Content Include="Views\Home\SignUp.cshtml" />
     <Content Include="Views\Taikhoan\Dangky.cshtml" />
-    <Content Include="Views\Taikhoan\SuaTaikhoan1.cshtml" />
-    <Content Include="Views\Taikhoan\Suataikhoan2.cshtml" />
     <Content Include="Views\Taikhoan\SuaTaikhoan.cshtml" />
     <Content Include="Views\DSHanghoa\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
@@ -413,6 +411,7 @@
     <Content Include="Views\MuaHang\DatHang.cshtml" />
     <Content Include="Views\MuaHang\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Taikhoan\Dangnhap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -2,6 +2,30 @@
 
 TaikhoanController.$inject = ['$scope', '$http'];
 function TaikhoanController($scope, $http) {
+    //Dang nhap
+    $scope.$scope = $scope;
+    $scope.accountname = "";
+    $scope.accountpassword = "";
+    $scope.abc = "abc";
+    $scope.checkLogin = function () {
+        $http.post("/Taikhoan/CheckLoginUser", { account: $scope.accountname, password: $scope.accountpassword }).success(function (data, status, headers, config) {
+            if (data) {
+                if (data.result) {
+                    alert("Success");
+                    window.location.href = '/Quote';
+                }
+                else {
+                    alert("Fail");
+                    window.location.href = '/Login';
+                }
+            }
+        }).error(function (data, status, headers, config) {
+            alert("Error");
+        });
+    }
+
+
+
     $scope.Loi = { tenLoi: "", hienthi: "" };
     $scope.passnhaplai = "";
 

@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Dangnhap";
+}
+<script src="~/Scripts/Custom/TaikhoanController.js"></script>
+@*<h2>Index</h2>*@
+@* _______________________________ *@
+<div ng-app="MyApp">
+    <div class="container" ng-controller="TaikhoanController">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>Đăng nhập</strong>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" action="#" method="POST" title="Login" name="myForm">
+                            <div class="col-sm-12 col-md-10  col-md-offset-1 ">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user"></i>
+                                        </span>
+                                        <input class="form-control" placeholder="Tài khoản" name="username" type="text" autofocus ng-model="accountname" required>
+                                    </div>
+                                    <span ng-show="myForm.username.$dirty && myForm.username.$invalid">
+                                        <span ng-show="myForm.username.$error.required">Không để trống.</span>
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span>
+                                        <input class="form-control" placeholder="Mật khẩu" name="password" type="password" ng-model="accountpassword" required>
+                                    </div>
+                                    <span ng-show="myForm.password.$dirty && myForm.password.$invalid">
+                                        <span ng-show="myForm.password.$error.required">Không để trống.</span>
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" value="checkboxRemember"> Ghi nhớ mật khẩu
+                                        </label>
+                                    </div>
+                                    <input type="button" class="btn btn-lg btn-primary btn-block" value="Đăng nhập" ng-click="checkLogin()" ng-disabled="myForm.username.$dirty && myForm.username.$invalid ||myForm.password.$dirty && myForm.password.$invalid">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

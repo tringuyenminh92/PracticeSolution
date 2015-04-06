@@ -29,7 +29,24 @@ namespace B2B.PresentationLayer.Controllers
         {
             return View();
         }
+        LoginService loguser = new LoginService();
+        public ActionResult Dangnhap()
+        {
+            return View();
+        }
+        public JsonResult CheckLoginUser(string account, string password)
+        {
+            bool kq = false;
+            AccountModel rs = new AccountModel();
+            rs = loguser.CheckLogin(account, password);
+            if (rs != null)
+            {
+                kq = true;
+                Session["accountId"] = rs.AccountId;
+            }
+            return Json(new { result = kq });
 
+        }
         public ActionResult Dangky()
         {
             return View();
