@@ -30,3 +30,4 @@ function UserController($scope, $http) {
     $scope.gridOptions.paginationPageSize = 25;
     $scope.gridOptions.data = "myData";
     $scope.gridOptions.enableFiltering = true;
+}
