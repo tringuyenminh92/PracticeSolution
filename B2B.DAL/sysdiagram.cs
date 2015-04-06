@@ -12,19 +12,12 @@ namespace B2B.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Account
+    public partial class sysdiagram
     {
-        public Account()
-        {
-            this.Khachhangs = new HashSet<Khachhang>();
-            this.Nhanviens = new HashSet<Nhanvien>();
-        }
-    
-        public System.Guid AccountId { get; set; }
-        public string AccountName { get; set; }
-        public string AccountPassword { get; set; }
-    
-        public virtual ICollection<Khachhang> Khachhangs { get; set; }
-        public virtual ICollection<Nhanvien> Nhanviens { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

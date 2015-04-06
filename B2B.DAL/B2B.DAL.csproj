@@ -243,7 +243,13 @@
     <Compile Include="SP_GetUserDetails_Result.cs">
       <DependentUpon>QuoteSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_helpdiagramdefinition1_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams1_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagrams_Result.cs">
@@ -801,6 +807,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\DB_20150401.sql" />
+    <Content Include="Database\DB_20150406.sql" />
     <Content Include="Database\Tin_CheckLogin.sql" />
   </ItemGroup>
   <ItemGroup>
