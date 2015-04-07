@@ -24,12 +24,23 @@ namespace B2B.PresentationLayer.Controllers
             return View();
         }
 
-        public JsonResult LoadHanghoaTheoNhomHanghoa ()
+        public JsonResult LoadHanghoaTheoNhomHanghoa(string nhomHanghoaId)
         {
-            NhomHanghoaModel nhomHanghoa = new NhomHanghoaModel();
-            nhomHanghoa.NhomHanghoaId = new Guid("00000000-0000-0000-0000-000000000000");
-            List<HanghoaModel> lst = _hanghoaService.GetHanghoaTheoNhomHanghoa(nhomHanghoa);
-            return Json(_hanghoaService.GetHanghoaTheoNhomHanghoa(nhomHanghoa), JsonRequestBehavior.AllowGet);
+            List<HanghoaModel> lstHanghoa = new List<HanghoaModel>();
+            if (nhomHanghoaId != null)
+            {
+                lstHanghoa = _hanghoaService.GetHanghoaTheoNhomHanghoa(nhomHanghoaId);
+            }
+            else
+            {
+                lstHanghoa = _hanghoaService.GetHanghoa();
+            }
+            return Json(lstHanghoa, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult LoadNhomHanghoa()
+        {
+            return Json(_nhomHanghoaService.GetNhomHanghoa(), JsonRequestBehavior.AllowGet);
         }
     }
 }

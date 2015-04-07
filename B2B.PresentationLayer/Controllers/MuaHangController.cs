@@ -33,7 +33,7 @@ namespace B2B.PresentationLayer.Controllers
         //Nhom hang hoa
         public JsonResult LoadNhomHanghoa()
         {
-            var rs = nhomHangHoaService.GetNhomHanghoa();
+            var rs = nhomHangHoaService.GetNhomHanghoaActive();
             return Json(rs);
         }
         //___________________________

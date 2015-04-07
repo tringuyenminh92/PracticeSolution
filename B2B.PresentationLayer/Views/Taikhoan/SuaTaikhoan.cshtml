@@ -46,11 +46,6 @@
     <div class="container-fluid" style="background-color:white; padding-top:20px; padding-bottom:20px" ng-show="isActive==2">
         <div ng-controller="taikhoanController" ng-init="">
             <div id="thongtincoban" class="form-horizontal">
-                <div id="saithongtincoban" ng-show="isShowWhenError" class="alert alert-danger">
-                    <p>
-                        Lỗi: <span></span>
-                    </p>
-                </div>
                 <div class="col-md-6" style="padding-right:30px;">
                     <div class="form-group">
                         <label for="hoten">Họ tên</label>&nbsp<span class="glyphicon glyphicon-remove" style="color:#FF0004;" ng-show="Loi.tenLoi == 'Null' && khachhang.HotenKhachhang == ''"></span>
@@ -207,7 +202,7 @@
 
             </div>
             <div class="col-md-6 form-group">
-                <input type="button" id="btn-signup" ng-disabled="khachhang.HotenKhachhang == ''" class="btn btn-info" value="Đồng ý" ng-click="ThaydoiThongtinKhachhang()">
+                <input type="button" ng-disabled="khachhang.HotenKhachhang == ''" class="btn btn-info" value="Đồng ý" ng-click="ThaydoiThongtinKhachhang()">
             </div>
         </div>
     </div>
