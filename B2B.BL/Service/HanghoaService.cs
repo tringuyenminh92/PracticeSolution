@@ -41,6 +41,22 @@ namespace B2B.BL.Service
             Mapper.CreateMap<Hanghoa, HanghoaModel>();
             return Mapper.Map<IQueryable<Hanghoa>, List<HanghoaModel>>(lstHanghoa);
         }
+        public bool Delete(string hanghoaId)
+        {
+            return repository.Delete(hanghoaId);
+        }
+        public bool Insert(HanghoaModel hanghoa)
+        {
+            Mapper.CreateMap<HanghoaModel, Hanghoa>();
+            Hanghoa hh = Mapper.Map<HanghoaModel, Hanghoa>(hanghoa);
+            return repository.Insert(hh);
+        }
+        public bool Update(HanghoaModel hanghoa)
+        {
+            Mapper.CreateMap<HanghoaModel, Hanghoa>();
+            Hanghoa hh = Mapper.Map<HanghoaModel, Hanghoa>(hanghoa);
+            return repository.Update(hh);
 
+        }
     }
 }

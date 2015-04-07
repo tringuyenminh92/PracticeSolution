@@ -24,7 +24,55 @@ namespace B2B.DAL.Repository
         public IQueryable<Hanghoa> GetHanghoaActiveTheoNhomHanghoa(NhomHanghoa nhomHanghoa)
         {
             return dbContext.Hanghoas.AsQueryable<Hanghoa>().Where(h => h.NhomHanghoaId == nhomHanghoa.NhomHanghoaId ).Where(h=>h.Active == true);
-         
+        }
+        public bool Delete(string hanghoaId)
+        {
+            try
+            {
+                Hanghoa hh = dbContext.Hanghoas.Find(new Guid(hanghoaId));
+                if (hh != null)
+                {
+                    dbContext.Hanghoas.Remove(hh);
+                    dbContext.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (System.Exception ex)
+            {
+                return false;
+            }
+        }
+        public bool Insert(Hanghoa hanghoa)
+        {
+            try
+            {
+                dbContext.Hanghoas.Add(hanghoa);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                return false;
+            }
+        }
+        public bool Update(Hanghoa hanghoa)
+        {
+            try
+            {
+                Hanghoa hh = dbContext.Hanghoas.Find(hanghoa.HanghoaId);
+                if (hh != null)
+                {
+                    dbContext.Entry(hh).CurrentValues.SetValues(hanghoa);
+                    dbContext.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (System.Exception ex)
+            {
+                return false;
+            }
         }
     }
 }
