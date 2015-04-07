@@ -15,7 +15,13 @@ namespace B2B.Model
         public Nullable<Int32> ThoigianCongno { get; set; }
         public Nullable<Int32> ToahangCongno { get; set; }
         public Nullable<Int32> Step { get; set; }
+
         public Nullable<DateTime> Ngaysinh { get; set; }
+        public string NgaysinhString
+        {
+            get { return Ngaysinh.HasValue ? Ngaysinh.Value.ToShortDateString() : ""; }
+            set { Ngaysinh = DateTime.Parse(value); }
+        }
         public Nullable<DateTime> NgayCapnhat { get; set; }
         public Nullable<Double> HanmucCongno { get; set; }
         public Nullable<Boolean> Gioitinh { get; set; }
