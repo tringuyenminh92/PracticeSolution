@@ -24,7 +24,7 @@ namespace B2B.PresentationLayer
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                                                            "~/Content/site.css", "~/Content/bootstrap/css/bootstrap.css",
+                                                             "~/Content/bootstrap/css/bootstrap.css",
                                                             "~/Content/ui-grid-unstable.css",
                                                             "~/Content/font-awesome.css",
                                                             "~/Content/myStyle.css"));

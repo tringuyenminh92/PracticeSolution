@@ -43,9 +43,16 @@ namespace B2B.PresentationLayer.Controllers
             {
                 kq = true;
                 Session["accountId"] = rs.AccountId;
+                Session["accountName"] = rs.AccountName;
             }
             return Json(new { result = kq });
 
+        }
+
+        public JsonResult LayAccountId()
+        {
+            string accountId = Session["accountId"] + "";
+            return Json(new { accountId = accountId }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Dangky()
         {
