@@ -10,12 +10,12 @@ namespace B2B.PresentationLayer.Controllers
 {
     public class MuaHangController : Controller
     {
-        HanghoaService hangHoaService;
-        NhomHanghoaService nhomHangHoaService;
+        HanghoaService _hanghoaService;
+        NhomHanghoaService _nhomHanghoaService;
         public MuaHangController()
         {
-            hangHoaService = new HanghoaService();
-            nhomHangHoaService = new NhomHanghoaService();
+            _hanghoaService = new HanghoaService();
+            _nhomHanghoaService = new NhomHanghoaService();
         }
         //
         // GET: /DSHanghoa/
@@ -33,14 +33,22 @@ namespace B2B.PresentationLayer.Controllers
         //Nhom hang hoa
         public JsonResult LoadNhomHanghoa()
         {
-            var rs = nhomHangHoaService.GetNhomHanghoaActive();
-            return Json(rs);
+            List<NhomHanghoaModel> lst = _nhomHanghoaService.GetNhomHanghoaActive();
+            return Json(_nhomHanghoaService.GetNhomHanghoaActive(), JsonRequestBehavior.AllowGet);
         }
         //___________________________
-        public JsonResult LoadHanghoaTheoNhomHanghoa(NhomHanghoaModel nhomHanghoaModel)
+        public JsonResult LoadHanghoaTheoNhomHanghoa(string nhomHanghoaId)
         {
-            var rs = hangHoaService.GetHanghoaAcTtiveheoNhomHanghoa(nhomHanghoaModel);
-            return Json(rs,JsonRequestBehavior.AllowGet);
+            List<HanghoaModel> lstHanghoa = new List<HanghoaModel>();
+            if (nhomHanghoaId != null)
+            {
+                lstHanghoa = _hanghoaService.GetHanghoaActiveTheoNhomHanghoa(nhomHanghoaId);
+            }
+            else
+            {
+                lstHanghoa = _hanghoaService.GetHanghoaActive();
+            }
+            return Json(lstHanghoa, JsonRequestBehavior.AllowGet);
         }
     }
 }

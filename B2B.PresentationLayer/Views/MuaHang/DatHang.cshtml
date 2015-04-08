@@ -1,19 +1,20 @@
 ﻿@{
     ViewBag.Title = "DatHang";
 }
+
+<h2>Đặt hàng</h2>
 <script src="~/Scripts/Custom/MuaHangController.js"></script>
-<div ng-app="myApp" class="row">
-    <div class="pull-left">
-        <div ng-controller="muaHangController">
-            <div class="pull-left">
-                
-                Nhomn Hang hoa:
-                <select ng-model="currentSelect"
-                        ng-options="obj as obj.TenNhomHanghoa for obj in nhomHanghoaDropdownlist"
-                        ng-init="LoadNhomHanghoa()"
-                        ng-change="LoadHanghoaTheoNhomHanghoa()"></select>
-                <br />
-                <div class="gridStyle" external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
+<div class="container-fluid" ng-controller="muaHangController" ng-init="LoadNhomHanghoa();LoadHanghoaTheoNhomHanghoa()">
+    <div class="col-md-7">
+        <div class="form-group">
+            <div class="col-md-12">
+                <select class="form-control" ng-model="nhomHanghoaId" ng-options="obj.NhomHanghoaId as obj.TenNhomHanghoa for obj in nhomhanghoas" ng-change="LoadHanghoaTheoNhomHanghoa()">
+                    <option value="">--Nhóm hàng hóa--</option>
+                </select>
+            </div>
+
+            <div class="col-md-12" style="margin-top:20px">
+                <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
                 </div>
             </div>
         </div>

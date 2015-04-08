@@ -16,7 +16,7 @@ namespace B2B.DAL.Repository
 
         public IQueryable<Vinh_GetNhomHanghoaActive_Result> GetNhomHanghoaActive()
         {
-            return dbContext.Vinh_GetNhomHanghoaActive().AsQueryable<Vinh_GetNhomHanghoaActive_Result>();
+            return dbContext.Vinh_GetNhomHanghoaActive().AsQueryable<Vinh_GetNhomHanghoaActive_Result>().OrderBy(nhh => nhh.TenNhomHanghoa);
             //return dbContext.NhomHanghoas.AsQueryable<NhomHanghoa>();
         }
 

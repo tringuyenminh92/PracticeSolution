@@ -17,13 +17,17 @@ namespace B2B.DAL.Repository
         {
             return dbContext.Hanghoas.AsQueryable<Hanghoa>();
         }
+        public IQueryable<Hanghoa> GetHanghoaActive()
+        {
+            return dbContext.Hanghoas.AsQueryable<Hanghoa>().Where(h => h.Active == true).OrderBy(h => h.TenHanghoa);
+        }
         public IQueryable<Hanghoa> GetHanghoaTheoNhomHanghoa(string nhomHanghoaId)
         {
             return dbContext.Hanghoas.AsQueryable<Hanghoa>().Where(h => h.NhomHanghoaId == new Guid(nhomHanghoaId));
         }
-        public IQueryable<Hanghoa> GetHanghoaActiveTheoNhomHanghoa(NhomHanghoa nhomHanghoa)
+        public IQueryable<Hanghoa> GetHanghoaActiveTheoNhomHanghoa(string nhomHanghoaId)
         {
-            return dbContext.Hanghoas.AsQueryable<Hanghoa>().Where(h => h.NhomHanghoaId == nhomHanghoa.NhomHanghoaId ).Where(h=>h.Active == true);
+            return dbContext.Hanghoas.AsQueryable<Hanghoa>().Where(h => (h.NhomHanghoaId == new Guid(nhomHanghoaId)) && (h.Active == true)).OrderBy(h => h.TenHanghoa);
         }
         public Hanghoa GetHanghoaTheoHanghoaId(string hanghoaId)
         {

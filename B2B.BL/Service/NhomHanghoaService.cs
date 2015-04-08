@@ -21,9 +21,8 @@ namespace B2B.BL.Service
         public List<NhomHanghoaModel> GetNhomHanghoaActive()
         {
             Mapper.CreateMap<Vinh_GetNhomHanghoaActive_Result, NhomHanghoaModel>();
-            var a = repository.GetNhomHanghoaActive();
-            var modelList = Mapper.Map<IQueryable<Vinh_GetNhomHanghoaActive_Result>, List<NhomHanghoaModel>>(a);
-            return modelList;
+            var lstNhomHanghoa = repository.GetNhomHanghoaActive();
+            return Mapper.Map<IQueryable<Vinh_GetNhomHanghoaActive_Result>, List<NhomHanghoaModel>>(lstNhomHanghoa);
         }
 
         public List<NhomHanghoaModel> GetNhomHanghoa()
