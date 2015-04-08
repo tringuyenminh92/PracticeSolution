@@ -25,6 +25,10 @@ namespace B2B.DAL.Repository
         {
             return dbContext.Hanghoas.AsQueryable<Hanghoa>().Where(h => h.NhomHanghoaId == nhomHanghoa.NhomHanghoaId ).Where(h=>h.Active == true);
         }
+        public Hanghoa GetHanghoaTheoHanghoaId(string hanghoaId)
+        {
+            return dbContext.Hanghoas.AsQueryable<Hanghoa>().Where(h => h.HanghoaId == new Guid(hanghoaId)).FirstOrDefault();
+        }
         public bool Delete(string hanghoaId)
         {
             try

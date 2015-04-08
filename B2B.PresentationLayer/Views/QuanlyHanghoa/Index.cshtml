@@ -4,11 +4,11 @@
 <script src="~/Scripts/Custom/QuanlyHanghoaController.js"></script>
 <h2>Quản lý hàng hóa</h2>
 <div class="container-fluid" ng-controller="quanlyHanghoaController" ng-init="LoadNhomHanghoa();LoadDonvi();LoadHanghoaTheoNhomHanghoa()">
-    <div class="col-md-6">
+    <div class="col-md-7">
         <div class="form-group">
             <div class="col-md-10">
                 <select class="form-control" ng-model="nhomHanghoaId" ng-options="obj.NhomHanghoaId as obj.TenNhomHanghoa for obj in nhomhanghoas" ng-change="LoadHanghoaTheoNhomHanghoa()">
-                    <option value="">--Nhóm hàng hóa--</option>
+                    <option value="">--Nhóm hàng--</option>
                 </select>
             </div>
             <div class="col-md-2">
@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
         <form name="thongtinhanghoa">
             <div class="panel panel-info">
                 <div class="panel-heading">
@@ -50,7 +50,7 @@
                         </div>
                         <div class="form-group">
                             <select class="form-control" ng-model="hanghoa.NhomHanghoaId" ng-options="obj.NhomHanghoaId as obj.TenNhomHanghoa for obj in nhomhanghoas">
-                                <option value="">--Nhóm hàng hóa--</option>
+                                <option value="">--Nhóm--</option>
                             </select>
                         </div>
                         <div class="form-group" ng-class="{error: thongtinhanghoa.giagoc.$invalid}">

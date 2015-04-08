@@ -26,7 +26,10 @@ namespace B2B.PresentationLayer.Controllers
         {
             return View();
         }
-
+        public JsonResult GetHanghoaTheoHanghoaId(string hanghoaId)
+        {
+            return Json(_hanghoaService.GetHanghoaTheoHanghoaId(hanghoaId), JsonRequestBehavior.AllowGet);
+        }
         public JsonResult LoadHanghoaTheoNhomHanghoa(string nhomHanghoaId)
         {
             List<HanghoaModel> lstHanghoa = new List<HanghoaModel>();

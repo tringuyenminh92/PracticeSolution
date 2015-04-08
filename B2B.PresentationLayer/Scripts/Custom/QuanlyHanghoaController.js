@@ -36,13 +36,23 @@ function QuanlyHanghoaController($scope, $http) {
         });
     }
 
+    $scope.editIndex;
     $scope.editRow = function (team) {
         $scope.hanghoa = team;
         $scope.isEdit = true;
+        $scope.editIndex = $scope.hanghoas.indexOf(team);
     };
 
     $scope.ResetValue = function () {
-        $scope.isEdit = false;
+        if ($scope.isEdit == true) {
+            $scope.isEdit = false;
+        }
+        $http.post("/QuanlyHanghoa/LoadHanghoaTheoNhomHanghoa", { nhomHanghoaId: $scope.nhomHanghoaId }).success(function (data, status, headers, config) {
+            $scope.hanghoas = data;
+        }).error(function (data, status, headers, config) {
+            // log 
+            alert('Error');
+        });
         $scope.hanghoa = {};
     };
 
@@ -100,10 +110,10 @@ function QuanlyHanghoaController($scope, $http) {
     $scope.gridOptions.columnDefs = [
   	      { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 150 },
           { name: 'Giagoc', displayName: 'Giá gốc', width: 70 },
-          { name: 'Active', displayName: 'Active', cellTemplate: $scope.activeCellTemplate, width: 60 },
-          { name: 'NgayCapnhat', displayName: 'Cập nhật', width: 100 },
-          { name: '_delete', displayName: "", cellTemplate: $scope.deleteCellTemplate, width: 25, enableFiltering: false, enableCellEdit: false },
-          { name: '_edit', displayName: "", cellTemplate: $scope.editCellTemplate, width: 25, enableFiltering: false, enableCellEdit: false },
+          { name: 'Active', displayName: 'Active', cellTemplate: $scope.activeCellTemplate, width: 60, enableFiltering: false },
+          { name: 'NgayCapnhat', displayName: 'Cập nhật', width: 115 },
+          { name: '_delete', displayName: "", cellTemplate: $scope.deleteCellTemplate, width: 15, enableFiltering: false, enableCellEdit: false },
+          { name: '_edit', displayName: "", cellTemplate: $scope.editCellTemplate, width: 15, enableFiltering: false, enableCellEdit: false },
     ];
     $scope.gridOptions.paginationPageSizes = [25, 50, 75];
     $scope.gridOptions.paginationPageSize = 25;
