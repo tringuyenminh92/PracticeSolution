@@ -154,7 +154,7 @@ function TaikhoanController($scope, $http) {
     //Hàm lưu thông tin khách hàng thay đổi
     $scope.ThaydoiThongtinKhachhang = function () {
         $http.post("/Taikhoan/ThaydoiThongtinKhachhang", { khachhang: $scope.khachhang }).success(function (data, status, headers, config) {
-            
+            alert(data.thongbao);
         });
     }
 

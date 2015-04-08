@@ -13,6 +13,11 @@ namespace B2B.Model
         public Nullable<Guid> DonviId { get; set; }
         public Nullable<Int32> Step { get; set; }
         public Nullable<DateTime> NgayCapnhat { get; set; }
+        public string NgayCapnhatString
+        {
+            get { return NgayCapnhat.HasValue ? NgayCapnhat.Value.ToShortDateString() : ""; }
+            set { NgayCapnhat = DateTime.Parse(value); }
+        }
         public Nullable<Double> Giagoc { get; set; }
         public Nullable<Boolean> Active { get; set; }
         public Byte[] Version { get; set; }

@@ -61,6 +61,7 @@ namespace B2B.PresentationLayer.Controllers
 
         public JsonResult InsertHanghoa(HanghoaModel hanghoa)
         {
+            hanghoa.NgayCapnhat = DateTime.Now;
             var kq = _hanghoaService.Insert(hanghoa);
             string thongbao;
             if (kq)
