@@ -187,6 +187,7 @@
       <DependentUpon>QuoteSystem.edmx</DependentUpon>
     </Compile>
     <Compile Include="Repository\AccountRepository.cs" />
+    <Compile Include="Repository\DonhangRepository.cs" />
     <Compile Include="Repository\DonviRepository.cs">
       <SubType>Code</SubType>
     </Compile>

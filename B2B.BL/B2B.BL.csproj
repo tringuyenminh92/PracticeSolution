@@ -51,6 +51,7 @@
     <Compile Include="IService\IQuoteService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AccountService.cs" />
+    <Compile Include="Service\DonhangService.cs" />
     <Compile Include="Service\DonviService.cs" />
     <Compile Include="Service\DSHanghoaService.cs" />
     <Compile Include="Service\HanghoaService.cs" />
