@@ -42,10 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountModel.cs" />
+    <Compile Include="DonhangModel.cs" />
     <Compile Include="DonviModel.cs" />
     <Compile Include="HanghoaModel.cs" />
     <Compile Include="HanghoaModel_Tin.cs" />
     <Compile Include="KhachhangModel.cs" />
+    <Compile Include="LoaiDonhangModel.cs" />
     <Compile Include="NhomHanghoaModel.cs" />
     <Compile Include="NhomHanghoaModel_Tin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -6,25 +6,23 @@ function TaikhoanController($scope, $http) {
     $scope.$scope = $scope;
     $scope.accountname = "";
     $scope.accountpassword = "";
-    $scope.abc = "abc";
+
     $scope.checkLogin = function () {
         $http.post("/Taikhoan/CheckLoginUser", { account: $scope.accountname, password: $scope.accountpassword }).success(function (data, status, headers, config) {
             if (data) {
                 if (data.result) {
-                    alert("Success");
+                    alert("Đăng nhập thành công.");
                     window.location.href = '/Quote';
                 }
                 else {
-                    alert("Fail");
-                    window.location.href = '/Login';
+                    alert("Đăng nhập không thành công.");
+                    window.location.href = '/Taikhoan/Dangnhap';
                 }
             }
         }).error(function (data, status, headers, config) {
             alert("Error");
         });
     }
-
-
 
     $scope.Loi = { tenLoi: "", hienthi: "" };
     $scope.passnhaplai = "";
@@ -123,15 +121,26 @@ function TaikhoanController($scope, $http) {
     }
     //$scope.khachhang = {}
     $scope.accountNameTmp = "";
+    $scope.LayAccountId = function () {
+        $http.post("/Taikhoan/LayAccountId").success(function (data, status, headers, config) {
+            $scope.accountIdTmp = data.accountId;
+        }).error(function (data, status, headers, config) {
+            // log 
+            alert("I am an alert box bug!");
+        });
+    }
     //Hàm hiển thị các thông tin của account đang được sử dụng
     $scope.HienthiThongtinTaikhoan = function () {
-        $http.post("/Taikhoan/HienthiThongtinTaikhoan", { accountId: "34b4f9ab-7d28-49f4-9bc4-27d70c6eba85" }).success(function (data, status, headers, config) {
+        $http.post("/Taikhoan/HienthiThongtinTaikhoan", { accountId: $scope.accountIdTmp }).success(function (data, status, headers, config) {
             $scope.account = data.acc;
             $scope.khachhang = data.kh;
             $scope.accountNameTmp = data.acc.AccountName;
             if ($scope.khachhang.Gioitinh == null) {
                 $scope.khachhang.Gioitinh = true;
             }
+        }).error(function (data, status, headers, config) {
+            // log 
+            alert("I am an alert box bug!");
         });
     }
 
@@ -140,7 +149,10 @@ function TaikhoanController($scope, $http) {
 
         $http.post("/Taikhoan/ThaydoiThongtinDangnhap", { account: $scope.account }).success(function (data, status, headers, config) {
             alert(data.thongbao);
-        })
+        }).error(function (data, status, headers, config) {
+            // log 
+            alert("I am an alert box bug!");
+        });
     }
 
     $scope.KiemtraHotenKhachhang = function () {

@@ -9,7 +9,7 @@
         <div class="form-group">
             <div class="col-md-12">
                 <select class="form-control" ng-model="nhomHanghoaId" ng-options="obj.NhomHanghoaId as obj.TenNhomHanghoa for obj in nhomhanghoas" ng-change="LoadHanghoaTheoNhomHanghoa()">
-                    <option value="">--Nhóm hàng hóa--</option>
+                    <option value="">--Tất cả--</option>
                 </select>
             </div>
 
@@ -19,6 +19,18 @@
             </div>
         </div>
     </div>
-</div>
+    <div class="col-md-5">
+        <div class="col-md-12">
+            Nhóm khách hàng: 
+        </div>
+        <form name="chitietHoadon">
+            <div class="col-md-12" style="margin-top:20px">
+                <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions1">
+                </div>
+            </div>
 
+
+        </form>
+    </div>
+</div>
 

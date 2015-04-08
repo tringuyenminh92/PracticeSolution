@@ -7,17 +7,16 @@ function LoginController($scope, $http, $modalInstance) {
     $scope.$scope = $scope;
     $scope.accountname = "";
     $scope.accountpassword = "";
-    $scope.abc = "abc";
     $scope.checkLogin = function () {
-        $http.post("CheckLoginUser", { account: $scope.accountname, password: $scope.accountpassword }).success(function (data, status, headers, config) {
+        $http.post("/Login/CheckLoginUser", { account: $scope.accountname, password: $scope.accountpassword }).success(function (data, status, headers, config) {
             if (data) {
                 if (data.result) {
-                    alert("Success");
+                    alert("Đăng nhập thành công.");
                     window.location.href = '/Quote';
                 }
                 else {
-                    alert("Fail");
-                    window.location.href = '/Login';
+                    alert("Đăng nhập không thành công.");
+                    window.location.href = '/Taikhoan/Dangnhap';
                 }
             }
         }).error(function (data, status, headers, config) {
