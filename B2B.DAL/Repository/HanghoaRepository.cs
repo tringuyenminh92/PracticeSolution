@@ -15,7 +15,7 @@ namespace B2B.DAL.Repository
         }
         public IQueryable<Hanghoa> GetHanghoa()
         {
-            return dbContext.Hanghoas.AsQueryable<Hanghoa>();
+            return dbContext.Hanghoas.AsQueryable<Hanghoa>().OrderBy(h => h.TenHanghoa);
         }
         public IQueryable<Hanghoa> GetHanghoaActive()
         {

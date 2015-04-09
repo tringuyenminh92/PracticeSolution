@@ -34,6 +34,12 @@ namespace B2B.PresentationLayer.Controllers
         {
             return View();
         }
+        public ActionResult Dangxuat()
+        {
+            Session["accountId"] = null;
+            Session["accountName"] = null;
+            return View("dangnhap");
+        }
         public JsonResult CheckLoginUser(string account, string password)
         {
             bool kq = false;

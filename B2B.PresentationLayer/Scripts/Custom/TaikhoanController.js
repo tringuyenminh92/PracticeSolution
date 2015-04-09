@@ -1,7 +1,7 @@
 ﻿angular.module("GlobalModule").controller("taikhoanController", TaikhoanController);
 
-TaikhoanController.$inject = ['$scope', '$http'];
-function TaikhoanController($scope, $http) {
+TaikhoanController.$inject = ['$scope', '$http','$q'];
+function TaikhoanController($scope, $http,$q) {
     //Dang nhap
     $scope.$scope = $scope;
     $scope.accountname = "";
@@ -18,6 +18,16 @@ function TaikhoanController($scope, $http) {
                     alert("Đăng nhập không thành công.");
                     window.location.href = '/Taikhoan/Dangnhap';
                 }
+            }
+        }).error(function (data, status, headers, config) {
+            alert("Error");
+        });
+    }
+
+    $scope.Dangxuat = function () {
+        $http.post("/Taikhoan/Dangxuat").success(function (data, status, headers, config) {
+            if (data) {
+                window.location.href = '/Quote';
             }
         }).error(function (data, status, headers, config) {
             alert("Error");
@@ -122,15 +132,20 @@ function TaikhoanController($scope, $http) {
     //$scope.khachhang = {}
     $scope.accountNameTmp = "";
     $scope.LayAccountId = function () {
+        var defer = $q.defer();
         $http.post("/Taikhoan/LayAccountId").success(function (data, status, headers, config) {
             $scope.accountIdTmp = data.accountId;
-        }).error(function (data, status, headers, config) {
-            // log 
-            alert("I am an alert box bug!");
-        });
+            defer.resolve(data);
+        }).error(defer.reject);
+        return defer.promise;
+    }
+
+    $scope.LoadThongtintaikhoan=function(){
+        $scope.LayAccountId().then($scope.HienthiThongtinTaikhoan).then($scope.HienthiTinhthanh).then($scope.HienthiQuanhuyen);
     }
     //Hàm hiển thị các thông tin của account đang được sử dụng
     $scope.HienthiThongtinTaikhoan = function () {
+        var defer = $q.defer();
         $http.post("/Taikhoan/HienthiThongtinTaikhoan", { accountId: $scope.accountIdTmp }).success(function (data, status, headers, config) {
             $scope.account = data.acc;
             $scope.khachhang = data.kh;
@@ -138,10 +153,9 @@ function TaikhoanController($scope, $http) {
             if ($scope.khachhang.Gioitinh == null) {
                 $scope.khachhang.Gioitinh = true;
             }
-        }).error(function (data, status, headers, config) {
-            // log 
-            alert("I am an alert box bug!");
-        });
+            defer.resolve(data);
+        }).error(defer.reject);
+        return defer.promise;
     }
 
     //Hàm lưu thông tin account thay đổi
@@ -186,21 +200,19 @@ function TaikhoanController($scope, $http) {
 
     //Load tinh thanh
     $scope.HienthiTinhthanh = function () {
+        var defer = $q.defer();
         $http.post("/Taikhoan/HienthiTinhthanh").success(function (data, status, headers, config) {
             if (data) {
                 $scope.tinhthanhs = data;
-                
+                defer.resolve(data);
             }
-
-        }).error(function (data, status, headers, config) {
-            // log 
-            alert("I am an alert box bug!");
-        });
-
+        }).error(defer.reject);
+        return defer.promise;
     }
 
     //Load quan huyen theo tinh thanh
     $scope.HienthiQuanhuyen = function () {
+        var defer = $q.defer();
         if ($scope.khachhang.TinhthanhId == null) {
             $scope.quanhuyens = [];
             $scope.khachhang.QuanhuyenId = null;
@@ -210,11 +222,9 @@ function TaikhoanController($scope, $http) {
                 if (data) {
                     $scope.quanhuyens = data;
                 }
-            }).error(function (data, status, headers, config) {
-                // log 
-                alert("I am an alert box bug!");
-            });
+            }).error(defer.reject);
         }
+        return defer.promise;
     }
 
     //Load quan huyen full (khi load lan dau)

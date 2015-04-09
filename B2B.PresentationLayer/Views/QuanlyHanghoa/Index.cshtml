@@ -2,34 +2,51 @@
     ViewBag.Title = "QuanlyHanghoa";
 }
 <script src="~/Scripts/Custom/QuanlyHanghoaController.js"></script>
-<h2>Quản lý hàng hóa</h2>
 <div class="container-fluid" ng-controller="quanlyHanghoaController" ng-init="LoadNhomHanghoa();LoadDonvi();LoadHanghoaTheoNhomHanghoa()">
-    <div class="col-md-7">
-        <div class="form-group">
-            <div class="col-md-10">
-                <select class="form-control" ng-model="nhomHanghoaId" ng-options="obj.NhomHanghoaId as obj.TenNhomHanghoa for obj in nhomhanghoas" ng-change="LoadHanghoaTheoNhomHanghoa()">
-                    <option value="">--Nhóm hàng--</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                @*<button ng-click="" class="btn btn-default btn-xs"><i class="fa fa-pencil" /></button>*@
-                <button type="button" class="btn btn-default" ng-click=""><i class="glyphicon glyphicon-plus"></i></button>
+    <div class="col-md-12">
+        <h2 style="margin-left:15px">Quản lý hàng hóa</h2>
+        <div class="col-md-7">
+            <div class="form-group">
+                <div class="col-md-10" style="margin-left:-15px">
+                    <select class="form-control" ng-model="nhomHanghoaId" ng-options="obj.NhomHanghoaId as obj.TenNhomHanghoa for obj in nhomhanghoas" ng-change="LoadHanghoaTheoNhomHanghoa()">
+                        <option value="">--Nhóm hàng hóa--</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    @*<button ng-click="" class="btn btn-default btn-xs"><i class="fa fa-pencil" /></button>*@
+                    <button type="button" class="btn btn-primary" ng-click=""><i class="glyphicon glyphicon-plus"></i></button>
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-12" style="margin-top:20px">
+    <div class="col-md-7" style="margin-top:20px">
+
+        <div class="col-md-12">
             <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
             </div>
         </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-5" style="margin-top:20px">
         <form name="thongtinhanghoa">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="panel-title">Thông tin hàng hóa</div>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group">Image</div>
+                    <div class="col-md-12" style="margin-bottom:20px">
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-6">
+                                <img src="/Images/Hinhhanghoa/cocacola1.5L.jpg" class="img-thumbnail" width="200" height="300">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12" style="margin-bottom:20px">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Hình ảnh">
+                        </div>
+                    </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
@@ -50,7 +67,7 @@
                         </div>
                         <div class="form-group">
                             <select class="form-control" ng-model="hanghoa.NhomHanghoaId" ng-options="obj.NhomHanghoaId as obj.TenNhomHanghoa for obj in nhomhanghoas">
-                                <option value="">--Nhóm--</option>
+                                <option value="">--Nhóm hàng hóa--</option>
                             </select>
                         </div>
                         <div class="form-group" ng-class="{error: thongtinhanghoa.giagoc.$invalid}">
@@ -73,22 +90,12 @@
                         </div>
                     </div>
                     <div class="col-md-12 form-group">
-                        <input type="button" ng-disabled="thongtinhanghoa.giagoc.$error.number" class="btn btn-info" value="Thêm" ng-show="!isEdit" ng-click="InsertHanghoa()">
-                        <input type="button" ng-disabled="thongtinhanghoa.giagoc.$error.number" ng-show="isEdit" class="btn btn-info" value="Lưu thay đổi" ng-click="UpdateHanghoa()">
-                        <input type="button" ng-disabled="" ng-show=" true" class="btn btn-info" value="Hủy" ng-click="ResetValue()">
+                        <input type="button" ng-disabled="thongtinhanghoa.giagoc.$error.number" class="btn btn-primary" value="Thêm" ng-show="!isEdit" ng-click="InsertHanghoa()">
+                        <input type="button" ng-disabled="thongtinhanghoa.giagoc.$error.number" ng-show="isEdit" class="btn btn-primary" value="Lưu thay đổi" ng-click="UpdateHanghoa()">
+                        <input type="button" ng-disabled="" ng-show=" true" class="btn btn-primary" value="Hủy" ng-click="ResetValue()">
                     </div>
                 </div>
             </div>
-         </form>
+        </form>
     </div>
 </div>
-
-@*<form name="test">
-    <div class="control-group" ng-class="{error: test.name.$invalid}">
-        <label>Name</label>
-        <input type="text" name="name" ng-model="project.name" required>
-        <span ng-show="test.name.$error.required" class="help-inline">
-            Required
-        </span>
-    </div>
-</form>*@

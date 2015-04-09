@@ -292,6 +292,14 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\ui-grid.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Hinhhanghoa\cocacola1.5L.jpg" />
+    <Content Include="Images\Hinhhanghoa\cocacola300ml.jpg" />
+    <Content Include="Images\Hinhhanghoa\CPCanhGiua2kg.jpg" />
+    <Content Include="Images\Hinhhanghoa\CPCanhNguyen1kg.jpg" />
+    <Content Include="Images\Hinhhanghoa\CPCoGaKhongDau1kg.jpg" />
+    <Content Include="Images\Hinhhanghoa\CPDuiCanh1kg.jpg" />
+    <Content Include="Images\Hinhhanghoa\CPMeGa500r.jpg" />
+    <Content Include="Images\Hinhhanghoa\CPTimGa500r.jpg" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />

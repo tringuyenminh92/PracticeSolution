@@ -1,4 +1,4 @@
-﻿@if (Request.IsAuthenticated)
+﻿@*@if (Request.IsAuthenticated)
 {
     <text>
         Hello, @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
@@ -10,19 +10,20 @@
     </text>
 }
 else
-{
-    <div class=" pull-right" >
-        <ul class="nav navbar-nav">
-           @if (!string.IsNullOrWhiteSpace((string)Session["accountName"]))
-           {
-               <li>@Html.ActionLink((string)Session["accountName"], "SuaTaikhoan", "Taikhoan")</li>
-           }
-           else
-           {
-               <li>@Html.ActionLink("Đăng ký", "Dangky", "Taikhoan")</li>
+{*@
+<div class=" pull-right">
+    <ul class="nav navbar-nav">
+        @if (!string.IsNullOrWhiteSpace(Session["accountId"] + ""))
+        {
+            <li>@Html.ActionLink((string)Session["accountName"], "SuaTaikhoan", "Taikhoan")</li>
+            <li>@Html.ActionLink("Đăng xuất", "Dangxuat", "Taikhoan")</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("Đăng ký", "Dangky", "Taikhoan")</li>
             @*<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
             <li>@Html.ActionLink("Đăng nhập", "Dangnhap", "Taikhoan")</li>
-           }
-        </ul>
-    </div>
-}
+        }
+    </ul>
+</div>
+@*}*@

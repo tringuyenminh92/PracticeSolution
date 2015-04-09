@@ -2,8 +2,9 @@
     ViewBag.Title = "SuaTaikhoan";
 }
 <script src="~/Scripts/Custom/TaikhoanController.js"></script>
-<h2>Thay đổi thông tin tài khoản</h2>
-<div ng-controller="taikhoanController" ng-init="LayAccountId();HienthiTinhthanh();HienthiThongtinTaikhoan();HienthiQuanhuyenFull()">
+
+<div ng-controller="taikhoanController" ng-init="LoadThongtintaikhoan()" class="col-md-offset-1 col-md-10">
+    <h2>Thay đổi thông tin tài khoản</h2>
     <ul class="nav nav-tabs nav-justified">
         <li ng-class="{active: isActive==1}" ng-click="Hientab(1)"><a>Thông tin đăng nhập</a></li>
         <li ng-class="{active: isActive==2}" ng-click="Hientab(2)"><a>Thông tin cơ bản</a></li>
@@ -90,7 +91,7 @@
                     </div>
                     <div class="form-group">
                         <label for="gioitinh">Giới tính</label>
-                        <div class="row" style="margin-bottom:3px">
+                        <div class="row" style="margin-bottom:7px">
                             <div class="col-md-6">
                                 <label class=" radio-inline col-sm-3">
                                     <input class="col-sm-3" type="radio" ng-checked="khachhang.Gioitinh==true" name="gioitinh" ng-model="khachhang.Gioitinh">

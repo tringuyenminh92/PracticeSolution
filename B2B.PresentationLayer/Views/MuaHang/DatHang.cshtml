@@ -5,7 +5,7 @@
 <h2>Đặt hàng</h2>
 <script src="~/Scripts/Custom/MuaHangController.js"></script>
 <div class="container-fluid" ng-controller="muaHangController" ng-init="LoadNhomHanghoa();LoadHanghoaTheoNhomHanghoa()">
-    <div class="col-md-7">
+    <div class="col-md-5">
         <div class="form-group">
             <div class="col-md-12">
                 <select class="form-control" ng-model="nhomHanghoaId" ng-options="obj.NhomHanghoaId as obj.TenNhomHanghoa for obj in nhomhanghoas" ng-change="LoadHanghoaTheoNhomHanghoa()">
@@ -19,8 +19,8 @@
             </div>
         </div>
     </div>
-    <div class="col-md-5">
-        <div class="col-md-12">
+    <div class="col-md-7">
+        <div class="col-md-12" style="margin-bottom:15px">
             Nhóm khách hàng: 
         </div>
         <form name="chitietHoadon">
@@ -28,9 +28,63 @@
                 <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions1">
                 </div>
             </div>
-
-
         </form>
+
+        
+    </div>
+    <div class="col-md-offset-5 col-md-7">
+        <form name="hoadon">
+            <div class="col-md-6" style=" margin-top:80px">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">Thông tin đơn hàng</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6 control-label">Tiền giảm:</div>
+                            <div class="col-md-6">
+                                <span ng-model="hoadon.Tiengiam">
+                                    
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 control-label">Phần trăm giảm:</div>
+                            <div class="col-md-6">
+                                <span ng-model="hoadon.PhantramGiam">
+                                    
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 control-label">Tổng tiền:</div>
+                            <div class="col-md-6">
+                                <span ng-model="hoadon.Tongtien">
+                                    
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6" style=" margin-top:80px">
+                <div class="form-group">
+                    <textarea class="form-control" row="5" placeholder="Ghi chú" ng-model="hanghoa.Ghichu"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-offset-5 col-md-7">
+        <div class="col-md-12 form-group" style=" margin-top:10px">
+            <input type="button" ng-disabled="" class="btn btn-primary" value="Thanh toán" ng-click="">
+            &nbsp;
+            <input type="button" ng-disabled="" class="btn btn-primary" value="Lưu tạm" ng-click="">
+            &nbsp;
+            <input type="button" ng-disabled="" class="btn btn-primary" value="Hủy" ng-click="">
+            &nbsp;
+        </div>
     </div>
 </div>
 

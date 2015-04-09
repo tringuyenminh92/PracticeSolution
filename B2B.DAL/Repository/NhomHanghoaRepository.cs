@@ -22,7 +22,7 @@ namespace B2B.DAL.Repository
 
         public IQueryable<NhomHanghoa> GetNhomHanghoa()
         {
-            return dbContext.NhomHanghoas.AsQueryable<NhomHanghoa>();
+            return dbContext.NhomHanghoas.AsQueryable<NhomHanghoa>().OrderBy(nhh => nhh.TenNhomHanghoa);
             //return dbContext.NhomHanghoas.AsQueryable<NhomHanghoa>();
         } 
     }
