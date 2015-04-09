@@ -27,7 +27,7 @@ function QuoteController($scope, $http, $location, $modalInstance) {
             $scope.myData = data;
             //var wait = new WaitDialog();
             //wait.Show();
-            $scope.showMessageError("abc", "cds", "OK", "Cancel");
+            //$scope.ShowModal("abc", "cds", "nut a nut dong", "bo bo bo");
         }).error(function (data, status, headers, config) {
         });
     };

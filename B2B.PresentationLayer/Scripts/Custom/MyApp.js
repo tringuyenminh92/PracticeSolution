@@ -24,7 +24,7 @@
     RootModal.$inject = ['$rootScope', '$modal'];
     function RootModal($rootScope, $modal) {
 
-        $rootScope.showMessageError = function (title, content, okButton, cancelButton, size, template, messController) {
+        $rootScope.ShowModal = function (title, content, okButton, cancelButton, size, template, messController) {
 
             template = template || 'messageModal.html';
             messController = messController || 'messageModalController';
@@ -40,9 +40,9 @@
             });
           
             modalInstance.result.then(function (OKData) {
-                $rootScope.okSelected = OKData;
+                $rootScope.ModalResult = OKData;
             }, function (cancelData) {
-                $rootScope.okSelected = null;
+                $rootScope.ModalResult = null;
             });
         };
     }
