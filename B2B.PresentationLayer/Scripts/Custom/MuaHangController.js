@@ -12,6 +12,7 @@ function MuaHangController($scope, $http) {
         //Thanhtien: "2000"
         //}
     ];
+    $scope.tongtien = 0;
 
     $scope.LoadHanghoaTheoNhomHanghoa = function () {
         $http.post("/MuaHang/LoadHanghoaTheoNhomHanghoa", { nhomHanghoaId: $scope.nhomHanghoaId }).success(function (data, status, headers, config) {
@@ -39,7 +40,7 @@ function MuaHangController($scope, $http) {
             Thanhtien: team.Giagoc
         };
         $scope.chitiethoadons.push(cthd);
-
+        $scope.tongtien += cthd.Thanhtien;
     };
 
     var img = $("<img />").attr('src', 'http://somedomain.com/image.jpg')
@@ -64,6 +65,7 @@ function MuaHangController($scope, $http) {
         //Push to server, delete and delete GUI
         var index = $scope.chitiethoadons.indexOf(team);
         $scope.chitiethoadons.splice(index, 1);
+        $scope.tongtien -= team.Thanhtien;
         for (i = index; i < $scope.chitiethoadons.length; i++) {
             $scope.chitiethoadons[i]._STT = $scope.chitiethoadons[i]._STT - 1;
         }
@@ -99,6 +101,8 @@ function MuaHangController($scope, $http) {
             if (colDef.name == 'Soluong') {
                 rowEntity.Thanhtien = newValue * rowEntity.Giaban;
             }
+            $scope.tongtien -= oldValue * rowEntity.Giaban;
+            $scope.tongtien += rowEntity.Thanhtien
             $scope.$apply();
         });
     };
