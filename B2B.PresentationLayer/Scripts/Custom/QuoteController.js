@@ -25,11 +25,10 @@ function QuoteController($scope, $http, $location, $modalInstance) {
     $scope.loadData = function () {
         $http.get("Quote/GetQuotes").success(function (data, status, headers, config) {
             $scope.myData = data;
-            // $location.url('http://www.google.com')
+            //var wait = new WaitDialog();
+            //wait.Show();
+            $scope.showMessageError("abc", "cds", "OK", "Cancel");
         }).error(function (data, status, headers, config) {
-            // log 
-            //var alertInstance = new Alert("alertId", "Load Failed", "danger");
-            //alertInstance.ShowAlert();
         });
     };
 
@@ -39,7 +38,7 @@ function QuoteController($scope, $http, $location, $modalInstance) {
     $scope.gridOptions.columnDefs = [
           { name: '_delete', displayName: "", cellTemplate: $scope.deleteCellTemplate, width: 25, enableFiltering: false, enableCellEdit: false },
   	      { name: 'name', displayName: 'Name', headerCellTemplate: '<div title="Tooltip Content">Name</div>', width: 150 },
-  	      { name: 'tuoi', displayName: 'tuoi', width: 50 },
+  	      { name: 'tuoi', displayName: 'tuoi', width: 50, type: 'number' },
           { name: 'Details', displayName: 'Details', width: 50, cellTemplate: $scope.detailsCellTemplate }
     ];
     $scope.gridOptions.paginationPageSizes = [25, 50, 75];

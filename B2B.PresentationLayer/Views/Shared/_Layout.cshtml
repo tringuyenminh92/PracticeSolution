@@ -2,7 +2,7 @@
 <html lang="en" ng-app="GlobalModule">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <title>@ViewBag.Title - B2B System</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
@@ -18,12 +18,12 @@
     <nav class="navbar navbar-inverse navbar-static-top ">
         <div class="container">
             <div class="pull-left">
-                    <a class="navbar-brand" href="#">B2B System</a>
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Quote")</li>
-                        <li>@Html.ActionLink("Mua hàng", "DatHang", "MuaHang")</li>
-                        <li>@Html.ActionLink("Hàng hóa", "Index", "QuanlyHanghoa")</li>
-                    </ul>
+                <a class="navbar-brand" href="#">B2B System</a>
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Quote")</li>
+                    <li>@Html.ActionLink("Mua hàng", "DatHang", "MuaHang")</li>
+                    <li>@Html.ActionLink("Hàng hóa", "Index", "QuanlyHanghoa")</li>
+                </ul>
             </div>
             @Html.Partial("_LoginPartial")
         </div>
@@ -34,19 +34,44 @@
         </section>
     </div>
 
-    @*<footer class="navbar navbar-inverse navbar-fixed-bottom">
-
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand">&copy; @DateTime.Now.Year - B2B System</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-right">
-                    <li class="navbar-brand"><img src="~/Images/accent.png" /></li>
-                </ul>
+    <div class="modal fade" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="basicModal" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"><h4>' + ModalContent + '</h4></div><div class="modal-body">
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar" style="width: 100%;" />
+                    </div>
+                </div>
             </div>
         </div>
-    </footer>*@
+    </div>
 
+    <div class="modal fade" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="basicModal" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"><h4>' + ModalContent + '</h4></div><div class="modal-body">
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar" style="width: 100%;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* Modal Template Definition  *@
+    <script type="text/ng-template" id="messageModal.html">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h4 class="modal-title">{{data.Title}}</h4>
+            </div>
+            <div class="modal-body">
+                {{data.Content}}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" ng-click="ok()" ng-show="data.ButtonOk">{{data.ButtonOk}}</button>
+                <button class="btn btn-danger" ng-click="cancel()" ng-show="data.ButtonCancel">{{data.ButtonCancel}}</button>
+            </div>
+        </div>
+    </script>
 </body>
 </html>

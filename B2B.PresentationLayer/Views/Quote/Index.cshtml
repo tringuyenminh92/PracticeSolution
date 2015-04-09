@@ -2,18 +2,6 @@
 
 <script src="~/Scripts/Custom/QuoteController.js"></script>
 
-@* Modal Template Definition  *@
-<script type="text/ng-template" id="messageModal.html">
-    <div class="modal-header">
-        <h3 class="modal-title">{{data.Title}}</h3>
-    </div>
-    <div class="modal-body">
-        {{ data.Content }}
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="ok()">OK</button>
-    </div>
-</script>
 
 <div class="row">
     <button id="alertButton" type="button" class="btn btn-primary btn-group-sm">Message</button>
@@ -26,9 +14,9 @@
         </div>
         <br />
         <br /><br />
-        
 
-    {{Giatri |  date:'yyyy-MM-dd HH:mm:ss Z'}}
+
+        {{Giatri |  date:'yyyy-MM-dd HH:mm:ss Z'}}
     </div>
 </div>
 
@@ -37,24 +25,6 @@
 <br />
 
 <br />
-
-<br />
-<div class="row">
-
-    <div ng-controller="callingModalController">
-        <button class="btn btn-default" ng-click="showMessageError('','messageModal.html')">Open me!</button>
-        @*<button class="btn btn-default" ng-click="open('lg','messageModal.html')">Large modal</button>
-            <button class="btn btn-default" ng-click="open('sm','messageModal.html')">Small modal</button>*@
-        @* <div ng-show="selected">Selection from a modal: {{ selected }}</div>*@
-
-        <input type="text" name="pass1" ng-model="pass1" >
-        <br />
-        <input type="text" name="pass2" ng-model="pass2">
-        <span ng-show="pass2!=pass1">Invalid email address.</span>
-        <button> abc</button>
-    </div>
-</div>
-
 
 
 

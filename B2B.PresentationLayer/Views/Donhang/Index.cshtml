@@ -1,17 +1,18 @@
 ﻿@{
     ViewBag.Title = "";
 }
+<div class="container-fluid">
+    <div class="row">
+        <div ng-controller="donhangController">
+            <button id="btnLoadData" type="button" class="btn btn-primary btn-group-sm" ng-click="LoadDonhang()" ng-init="LoadDonhang()">Load Data</button>
+            <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
+            </div>
+            <br />
+            <br /><br />
 
-<div class="row">
-    <div ng-controller="donhangController">
-        <button id="btnLoadData" type="button" class="btn btn-primary btn-group-sm" ng-click="LoadDonhang()" ng-init="LoadDonhang()">Load Data</button>
-        <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
+
+            {{Giatri |  date:'yyyy-MM-dd HH:mm:ss Z'}}
         </div>
-        <br />
-        <br /><br />
-
-
-        {{Giatri |  date:'yyyy-MM-dd HH:mm:ss Z'}}
     </div>
-</div>
 
+</div>
