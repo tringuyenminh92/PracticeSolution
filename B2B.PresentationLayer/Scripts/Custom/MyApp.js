@@ -24,7 +24,7 @@
     RootModal.$inject = ['$rootScope', '$modal'];
     function RootModal($rootScope, $modal) {
 
-        $rootScope.ShowModal = function (title, content, okButton, cancelButton, size, template, messController) {
+        $rootScope.ShowModal = function (funcOk,funcCancel, title, content, okButton, cancelButton, size, template, messController) {
 
             template = template || 'messageModal.html';
             messController = messController || 'messageModalController';
@@ -39,11 +39,7 @@
                 }
             });
           
-            modalInstance.result.then(function (OKData) {
-                $rootScope.ModalResult = OKData;
-            }, function (cancelData) {
-                $rootScope.ModalResult = null;
-            });
+            modalInstance.result.then(funcOk, funcCancel);
         };
     }
     angular.module("GlobalModule").run(RootModal);

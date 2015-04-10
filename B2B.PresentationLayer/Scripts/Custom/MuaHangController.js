@@ -52,7 +52,7 @@ function MuaHangController($scope, $http) {
   	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 150 },
         { name: 'Giagoc', displayName: 'Giá gốc', width: 80 },
         { name: '_hinhanh', displayName: '', enableFiltering: false, width: 80 },
-        { name: '_addHanghoa', displayName: "", cellTemplate: $scope.addCellTemplate, width: 15, enableFiltering: false, enableCellEdit: false },
+        { name: '_addHanghoa', displayName: "", cellTemplate: $scope.addCellTemplate, width: 15, enableFiltering: false },
     ];
 
     $scope.gridOptions.paginationPageSizes = [25, 50, 75];
@@ -91,7 +91,7 @@ function MuaHangController($scope, $http) {
     $scope.gridOptions1.paginationPageSizes = [25, 50, 75];
     $scope.gridOptions1.paginationPageSize = 25;
     $scope.gridOptions1.data = "chitiethoadons";
-    $scope.gridOptions1.enableFiltering = true;
+    $scope.gridOptions1.enableFiltering = false;
 
     $scope.gridOptions1.onRegisterApi = function (gridApi) {
         //set gridApi on scope
@@ -99,6 +99,7 @@ function MuaHangController($scope, $http) {
         gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
             //$scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
             if (colDef.name == 'Soluong') {
+                if (newValue <= 0) { newValue = 1; rowEntity.Soluong = 1; }
                 rowEntity.Thanhtien = newValue * rowEntity.Giaban;
             }
             $scope.tongtien -= oldValue * rowEntity.Giaban;

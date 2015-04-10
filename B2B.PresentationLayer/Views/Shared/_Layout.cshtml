@@ -46,21 +46,10 @@
         </div>
     </div>
 
-    <div class="modal fade" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="basicModal" aria-hidden="true" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header"><h4>' + ModalContent + '</h4></div><div class="modal-body">
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar" style="width: 100%;" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     @* Modal Template Definition  *@
     <script type="text/ng-template" id="messageModal.html">
-        <div class="modal-dialog">
+    
             <div class="modal-header">
                 <h4 class="modal-title">{{data.Title}}</h4>
             </div>
@@ -71,7 +60,7 @@
                 <button class="btn btn-success" ng-click="ok()" ng-show="data.ButtonOk">{{data.ButtonOk}}</button>
                 <button class="btn btn-danger" ng-click="cancel()" ng-show="data.ButtonCancel">{{data.ButtonCancel}}</button>
             </div>
-        </div>
+        
     </script>
 
 </body>

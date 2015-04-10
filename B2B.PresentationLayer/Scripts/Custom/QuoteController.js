@@ -7,8 +7,8 @@ $(function () {
 })
 
 angular.module("GlobalModule").controller("quoteController", QuoteController);
-QuoteController.$inject = ['$scope', '$http', '$location'];
-function QuoteController($scope, $http, $location, $modalInstance) {
+QuoteController.$inject = ['$scope', '$http', '$location','$q'];
+function QuoteController($scope, $http, $location, $q,$modalInstance) {
 
     $scope.$scope = $scope;
     $scope.myData = [];
@@ -22,12 +22,14 @@ function QuoteController($scope, $http, $location, $modalInstance) {
         alert(rowData.name);
     }
 
+
+
     $scope.loadData = function () {
         $http.get("Quote/GetQuotes").success(function (data, status, headers, config) {
             $scope.myData = data;
             //var wait = new WaitDialog();
             //wait.Show();
-            //$scope.ShowModal("abc", "cds", "nut a nut dong", "bo bo bo");
+            $scope.ShowModal(function () { alert(1); }, function () { alert(2); }, "abc", "cds", "nut a nut dong", "bo bo bo");
         }).error(function (data, status, headers, config) {
         });
     };
