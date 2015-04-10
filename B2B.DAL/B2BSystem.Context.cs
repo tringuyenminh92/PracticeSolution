@@ -62,7 +62,6 @@ namespace B2B.DAL
         public DbSet<TinhtrangPhieuxuat> TinhtrangPhieuxuats { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Tonkho> Tonkhoes { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
     
         public virtual ObjectResult<Khuyen_GetBaogiaTheoNhomKhachhang_Result> Khuyen_GetBaogiaTheoNhomKhachhang(Nullable<System.Guid> nhomKhachhangId)
         {
@@ -5699,6 +5698,11 @@ namespace B2B.DAL
         public virtual int sp_upgraddiagrams1()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams1");
+        }
+    
+        public virtual ObjectResult<Tin_GetAllAccount_Result> Tin_GetAllAccount()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetAllAccount_Result>("Tin_GetAllAccount");
         }
     }
 }

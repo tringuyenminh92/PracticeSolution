@@ -10,14 +10,15 @@
 namespace B2B.DAL
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class Tin_GetAllAccount_Result
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public System.Guid AcountId { get; set; }
+        public string AccountName { get; set; }
+        public string AccountPassword { get; set; }
+        public System.Guid UserId { get; set; }
+        public string Ten { get; set; }
+        public string Email { get; set; }
+        public string Mobile { get; set; }
     }
 }

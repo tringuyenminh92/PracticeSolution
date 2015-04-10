@@ -30,7 +30,6 @@
         <EntityTypeShape EntityType="B2BSystemModel.Phieuxuat" Width="1.5" PointX="21" PointY="45.5" IsExpanded="true" />
         <EntityTypeShape EntityType="B2BSystemModel.Phongban" Width="1.5" PointX="11.25" PointY="43.625" IsExpanded="true" />
         <EntityTypeShape EntityType="B2BSystemModel.Quanhuyen" Width="1.5" PointX="5.25" PointY="65.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="B2BSystemModel.Thuchi" Width="1.5" PointX="26.25" PointY="50.25" IsExpanded="true" />
         <EntityTypeShape EntityType="B2BSystemModel.ThuoctinhHanghoa" Width="1.5" PointX="18" PointY="32.5" IsExpanded="true" />
         <EntityTypeShape EntityType="B2BSystemModel.Tinhthanh" Width="1.5" PointX="3" PointY="34.75" IsExpanded="true" />

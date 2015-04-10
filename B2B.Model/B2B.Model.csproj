@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountModel.cs" />
+    <Compile Include="AccountModel.Designer.cs">
+      <DependentUpon>AccountModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="DonhangModel.cs" />
     <Compile Include="DonviModel.cs" />
     <Compile Include="HanghoaModel.cs" />

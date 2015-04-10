@@ -34,5 +34,20 @@ namespace B2B.DAL.Repository
         {
             return dbContext.Accounts.AsQueryable();
         }
+        public bool DeleteAccount(string accountName)
+        {
+            if (accountName != null)
+            {
+                var item = dbContext.Accounts.Where(p => p.AccountName == accountName).FirstOrDefault();
+                dbContext.Accounts.Remove(item);
+                dbContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        public IQueryable<Tin_GetAllAccount_Result> GetAllAccount()
+        {
+            return dbContext.Tin_GetAllAccount().AsQueryable();
+        }
     }
 }

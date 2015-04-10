@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace B2B.Model
 {
-    public class AccountModel
+    public partial class AccountModel
     {
         public Guid AccountId { get; set; }
         public String AccountName { get; set; }

@@ -12,17 +12,17 @@ namespace B2B.BL.Service
 {
     public class UserService
     {
-        UserResponsitory responsitory;
+        UserResponsitory respository;
 
         public UserService()
         {
-            responsitory = new UserResponsitory();
+            respository = new UserResponsitory();
         }
 
         public AccountModel getUser(string username)
         {
             Mapper.CreateMap<Account, AccountModel>();
-            var a = responsitory.GetUser(username);
+            var a = respository.GetUser(username);
             return Mapper.Map<Account, AccountModel>(a);
         }
 
@@ -30,14 +30,27 @@ namespace B2B.BL.Service
         {
             Mapper.CreateMap<AccountModel, Account>();
             Account account = Mapper.Map<AccountModel, Account>(model);
-            return responsitory.UpdatePassword(account);
+            return respository.UpdatePassword(account);
 
         }
         public IEnumerable<AccountModel> GetUser()
         {
             Mapper.CreateMap<Account, AccountModel>();
-            var rs = responsitory.GetUser();
+            var rs = respository.GetUser();
             return Mapper.Map<IQueryable<Account>, IEnumerable<AccountModel>>(rs);
+        }
+
+        //Delete Account
+        public bool DeleteAccount(string accountName)
+        {
+            return respository.DeleteAccount(accountName);
+        }
+        //GetAllAccount
+        public IEnumerable<AccountModel> GetAllAccount()
+        {
+            Mapper.CreateMap<Tin_GetAllAccount_Result, AccountModel>();
+            var rs = respository.GetAllAccount();
+            return Mapper.Map<IQueryable<Tin_GetAllAccount_Result>, IEnumerable<AccountModel>>(rs);
         }
     }
 }

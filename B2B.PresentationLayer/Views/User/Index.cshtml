@@ -1,14 +1,16 @@
-﻿@model IEnumerable<B2B.Model.UserModel>
-
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 <script src="~/Scripts/Custom/UserController.js"></script>
-<h2>Index</h2>
+<h2>Danh sách Account</h2>
 <div class="row">
     <div ng-controller="userController" ng-init="loadData()">
+        <div>
+            <button id="btnCreate" class="btn btn-success" type="button" ng-click="Addnew()">Add New</button>
+        </div>
+        <br />
         @*<button id="btnLoadData" type="button" class="btn btn-primary btn-group-sm" ng-click="loadData()" ng-init="loadData()">Load Data</button>*@
-        <div class="gridStyle" external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
+        <div style="width:960px;" class="gridStyle" external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
         </div>
         <br />
         <br />

@@ -215,6 +215,7 @@
     <Compile Include="Controllers\QuanlyHanghoaController.cs" />
     <Compile Include="Controllers\QuoteController.cs" />
     <Compile Include="Controllers\TaikhoanController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -420,9 +421,9 @@
     <Content Include="Views\Hoadon\Index.cshtml" />
     <Content Include="Views\MuaHang\DatHang.cshtml" />
     <Content Include="Views\MuaHang\Index.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Taikhoan\Dangnhap.cshtml" />
     <Content Include="Views\Donhang\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
