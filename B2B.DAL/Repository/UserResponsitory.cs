@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,8 +39,9 @@ namespace B2B.DAL.Repository
         {
             if (accountName != null)
             {
-                var item = dbContext.Accounts.Where(p => p.AccountName == accountName).FirstOrDefault();
-                dbContext.Accounts.Remove(item);
+                var item= dbContext.Accounts.Where(p => p.AccountName == accountName).FirstOrDefault();
+                item.Active=false;
+                dbContext.Entry(item).State = EntityState.Modified;
                 dbContext.SaveChanges();
                 return true;
             }
