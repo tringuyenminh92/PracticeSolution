@@ -251,10 +251,16 @@
     <Compile Include="sp_helpdiagramdefinition1_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_helpdiagramdefinition2_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagrams1_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams2_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagrams_Result.cs">
@@ -280,6 +286,9 @@
     </Compile>
     <Compile Include="State.cs">
       <DependentUpon>QuoteSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="sys_ChitietDonhangSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
@@ -402,6 +411,9 @@
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Tin_CheckLogin_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tin_GetAllAccount1_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Tin_GetAllAccount_Result.cs">
@@ -813,7 +825,9 @@
   <ItemGroup>
     <Content Include="Database\DB_20150401.sql" />
     <Content Include="Database\DB_20150406.sql" />
+    <Content Include="Database\DB_20150410.sql" />
     <Content Include="Database\Tin_CheckLogin.sql" />
+    <Content Include="Database\Tin_GetAllAccount.sql" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="QuoteSystem.edmx">
