@@ -23,6 +23,7 @@ namespace B2B.DAL
         public System.Guid AccountId { get; set; }
         public string AccountName { get; set; }
         public string AccountPassword { get; set; }
+        public Nullable<bool> Active { get; set; }
     
         public virtual ICollection<Khachhang> Khachhangs { get; set; }
         public virtual ICollection<Nhanvien> Nhanviens { get; set; }

@@ -6,7 +6,7 @@ function UserController($scope, $http) {
     $scope.deleteRow = function (team) {
         //Push to server, delete and delete GUI        
         var index = $scope.myData.indexOf(team);
-        alert(team);
+        //alert(team);
         $http.post("User/DeleteAccount", { accountId: $scope.myData[index] });
         $scope.myData.splice(index, 1);
         //$scope.myData.
@@ -23,13 +23,13 @@ function UserController($scope, $http) {
     };
     $scope.gridOptions = {};
     $scope.deleteCellTemplate = '<button ng-click="getExternalScopes().deleteRow(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-trash"/></button> ';
-    $scope.gridOptions.columnDefs = [
-          { name: '_delete', displayName: "", cellTemplate: $scope.deleteCellTemplate, width: 25, enableFiltering: false, enableCellEdit: false },
-  	      { name: 'AccountName', displayName: 'AccountName', headerCellTemplate: '<div title="Tooltip Content">Account Name</div>', width: 190, enableCellEdit: true },
-          { name: 'AccountPassword', displayName: 'AccountPassword', enableCellEdit: true, width: 190 },
-          { name: 'Ten', displayName: 'Ten', width: 190, enableCellEdit: true },
-          { name: 'Email', displayName: 'Email', width: 185, enableCellEdit: true },
-          { name: 'Mobile', displayName: 'Mobile', width: 170, enableCellEdit: true }
+    $scope.gridOptions.columnDefs = [          
+  	      { name: 'AccountName', displayName: 'Account Name', enableFiltering: false, headerCellTemplate: '<div title="Tooltip Content">Account Name</div>', width: 190, enableCellEdit: true },
+          { name: 'AccountPassword', displayName: 'Password', enableFiltering: false, enableCellEdit: true, width: 190 },
+          { name: 'Ten', displayName: 'Tên', width: 200, enableFiltering: false, enableCellEdit: true },
+          { name: 'Email', displayName: 'Email', width: 190, enableFiltering: false, enableCellEdit: true },
+          { name: 'Mobile', displayName: 'Mobile', width: 150, enableFiltering: false, enableCellEdit: true },
+          { name: '_delete', displayName: "", cellTemplate: $scope.deleteCellTemplate, width: 25, enableFiltering: false, enableCellEdit: false }
 
     ];
     $scope.gridOptions.paginationPageSizes = [25, 50, 75];

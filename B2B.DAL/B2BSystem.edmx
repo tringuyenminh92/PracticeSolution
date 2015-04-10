@@ -12,6 +12,7 @@
           <Property Name="AccountId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="AccountName" Type="nvarchar" MaxLength="250" />
           <Property Name="AccountPassword" Type="nvarchar" MaxLength="250" />
+          <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="ChitietDonhang">
           <Key>
@@ -3171,6 +3172,7 @@
           <NavigationProperty Name="Khachhangs" Relationship="Self.FK_Khachhang_Account" FromRole="Account" ToRole="Khachhang" />
           <Property Name="AccountPassword" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Nhanviens" Relationship="B2BSystemModel.FK_Nhanvien_Account" FromRole="Account" ToRole="Nhanvien" />
+          <Property Name="Active" Type="Boolean" />
         </EntityType>
         <EntityType Name="ChitietDonhang">
           <Key>
@@ -7948,6 +7950,7 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="B2BSystemModel.Account">
               <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="AccountPassword" ColumnName="AccountPassword" />
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="AccountName" ColumnName="AccountName" />
