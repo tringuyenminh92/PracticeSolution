@@ -76,7 +76,7 @@ function MuaHangController($scope, $http) {
     //}
 
     $scope.gridOptions1 = {};
-    $scope.removeCellTemplate = '<button ng-click="getExternalScopes().removeHanghoa(row.entity)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"/></button> ';
+    $scope.removeCellTemplate = '<button ng-click="getExternalScopes().removeHanghoa(row.entity)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"/></button> ';
     //$scope.soluongCellTemplate = '<input type="number" ng-change=$scope.Test()>';
     $scope.gridOptions1.columnDefs = [
         { name: '_STT', displayName: 'STT', width: 60, enableFiltering: false, enableCellEdit: false },

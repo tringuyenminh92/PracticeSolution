@@ -108,12 +108,12 @@ function QuanlyHanghoaController($scope, $http) {
     $scope.editCellTemplate = '<button ng-click="getExternalScopes().editRow(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-pencil"/></button> ';
     $scope.activeCellTemplate = '<input type="checkbox" ng-checked="row.entity.Active" ng-click="getExternalScopes().ChangeActive(row.entity)"> ';
     $scope.gridOptions.columnDefs = [
-        { name: 'Code', displayName: 'Code', width: 80 },
-  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 170 },
-        { name: 'Barcode', displayName: 'Barcode', width: 90 },
-        { name: 'Giagoc', displayName: 'Giá gốc', width: 80 },
+        { name: 'Code', displayName: 'Code', width: 80, enableCellEdit: false },
+  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 170, enableCellEdit: false },
+        { name: 'Barcode', displayName: 'Barcode', width: 90, enableCellEdit: false },
+        { name: 'Giagoc', displayName: 'Giá gốc', width: 80, enableCellEdit: false },
         { name: 'Active', displayName: 'Active', cellTemplate: $scope.activeCellTemplate, width: 60, enableFiltering: false },
-        { name: 'NgayCapnhatString', displayName: 'Cập nhật', width: 85 },
+        { name: 'NgayCapnhatString', displayName: 'Cập nhật', width: 85, enableCellEdit: false },
         { name: '_delete', displayName: "", cellTemplate: $scope.deleteCellTemplate, width: 15, enableFiltering: false, enableCellEdit: false },
         { name: '_edit', displayName: "", cellTemplate: $scope.editCellTemplate, width: 15, enableFiltering: false, enableCellEdit: false },
     ];
