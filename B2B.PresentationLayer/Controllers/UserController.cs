@@ -23,6 +23,7 @@ namespace B2B.PresentationLayer.Controllers
         }
         public bool DeleteAccount(Model.AccountModel accountId)
         {
+            var id = accountId.AccountId;
             return us.DeleteAccount(accountId.AccountName);
         }
         //Get All Account
@@ -30,6 +31,10 @@ namespace B2B.PresentationLayer.Controllers
         {
             var rs = us.GetAllAccount().ToList();
             return Json(rs, JsonRequestBehavior.AllowGet);
+        }
+        public bool SaveAllAccount(List<Model.AccountModel> listAccount)
+        {
+            return true;
         }
     }
 }
