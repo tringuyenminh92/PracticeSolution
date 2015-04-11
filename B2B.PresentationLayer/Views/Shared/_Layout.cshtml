@@ -46,19 +46,18 @@
         </div>
     </div>
 
-
     @* Modal Template Definition  *@
     <script type="text/ng-template" id="messageModal.html">
     
-            <div class="modal-header">
+            <div class="modal-header" >
                 <h4 class="modal-title">{{data.Title}}</h4>
             </div>
             <div class="modal-body">
                 {{data.Content}}
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" ng-click="ok()" ng-show="data.ButtonOk">{{data.ButtonOk}}</button>
-                <button class="btn btn-danger" ng-click="cancel()" ng-show="data.ButtonCancel">{{data.ButtonCancel}}</button>
+                <button class="btn btn-default" ng-click="cancel()" ng-show="data.ButtonCancel">{{data.ButtonCancel}}</button>
+                <button class="btn btn-primary" ng-click="ok()" ng-show="data.ButtonOk">{{data.ButtonOk}}</button>
             </div>
         
     </script>
