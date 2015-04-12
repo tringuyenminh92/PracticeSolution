@@ -12,6 +12,10 @@ function QuoteController($scope, $http, $location, $q,$modalInstance) {
 
     $scope.$scope = $scope;
 
+    $scope.colors = [];
+    $scope.availableColors = ['Red', 'Green', 'Blue', 'Yellow', 'Magenta', 'Maroon', 'Umbra', 'Turquoise'];
+
+
     //display-property="name" << when using array object
     $scope.tags = ['tkh','sasac'];
     $scope.loadTags=function(query)

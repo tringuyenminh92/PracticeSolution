@@ -89,7 +89,7 @@
     -moz-background-clip: padding-box;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
-    width:98.9%;
+    width:100.1%;
     /*End*/
 }
 
@@ -1033,7 +1033,7 @@ div.ui-grid-cell input {
     border-bottom-left-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
     -webkit-border-bottom-left-radius: 5px;
-    width: 100.25%;
+    width: 100.16%;
         /*End*/
     padding-top: 3px;
     padding-bottom: 3px;

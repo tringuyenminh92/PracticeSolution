@@ -13,7 +13,7 @@
         <button id="alertButton" type="button" class="btn btn-primary btn-group-sm">Message</button>
         <div id="alertDiv" role="alert" />
     </div>
-    <div class="row col-lg-6">
+    <div class="row col-xs-12">
         <div ng-controller="quoteController">
             <button id="btnLoadData" type="button" class="btn btn-primary btn-group-sm" ng-click="loadData()" ng-init="loadData()">Load Data</button>
             <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
@@ -27,6 +27,16 @@
 
             </tags-input>
             {{Giatri |  date:'yyyy-MM-dd HH:mm:ss Z'}}
+
+            <ui-select multiple ng-model="colors" theme="bootstrap">
+                <ui-select-match placeholder="Select colors..."><i class="fa fa-tags">{{$item}}</i></ui-select-match>
+                <ui-select-choices repeat="color in availableColors | filter: $select.search">
+                    {{color}}
+                </ui-select-choices>
+            </ui-select>
+            @* filter: $select.search >> to filter when type input *@
+
+            <p>Selected: {{colors}}</p>
         </div>
     </div>
 
