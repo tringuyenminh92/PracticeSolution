@@ -1,13 +1,19 @@
 ﻿
 
 <script src="~/Scripts/Custom/QuoteController.js"></script>
-
+<script type="text/ng-template" id="CustomTemplateWithIcon">
+    <div class="tag-template">
+        <div>
+            <span><i class="fa fa-tags"></i> {{$getDisplayText()}}<a class="fa fa-times" ng-click="$removeTag()"></a></span>
+        </div>
+    </div>
+</script>
 <div class="col-lg-offset-2">
     <div class="row">
         <button id="alertButton" type="button" class="btn btn-primary btn-group-sm">Message</button>
         <div id="alertDiv" role="alert" />
     </div>
-    <div class="row">
+    <div class="row col-lg-6">
         <div ng-controller="quoteController">
             <button id="btnLoadData" type="button" class="btn btn-primary btn-group-sm" ng-click="loadData()" ng-init="loadData()">Load Data</button>
             <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
@@ -15,7 +21,11 @@
             <br />
             <br /><br />
 
-            <tags-input ng-model="tags"></tags-input>
+            <tags-input ng-model="tags" min-length="4" replace-spaces-with-dashes="false" placeholder="Enter some things" template="CustomTemplateWithIcon">
+                <auto-complete source=""></auto-complete>
+                @*loadTags($query)*@
+
+            </tags-input>
             {{Giatri |  date:'yyyy-MM-dd HH:mm:ss Z'}}
         </div>
     </div>

@@ -12,7 +12,12 @@ function QuoteController($scope, $http, $location, $q,$modalInstance) {
 
     $scope.$scope = $scope;
 
-    $scope.tags = [];
+    //display-property="name" << when using array object
+    $scope.tags = ['tkh','sasac'];
+    $scope.loadTags=function(query)
+    {
+        alert(query);
+    }
 
     $scope.myData = [];
     $scope.deleteRow = function (team) {

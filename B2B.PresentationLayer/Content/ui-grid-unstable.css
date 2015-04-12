@@ -1,21 +1,23 @@
 
 .ui-grid {
+    border: 1px solid #d4d4d4;
     box-sizing: content-box;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
     -webkit-transform: translateZ(0);
     -moz-transform: translateZ(0);
     -o-transform: translateZ(0);
     -ms-transform: translateZ(0);
     transform: translateZ(0);
-    /*Nguyen Minh Tri- Border Header Radius- 01-02-2015*/
-    margin-left:inherit;
-    border: 1px solid rgba(73,155,234,1);
-    -moz-border-radius-topleft: 15px;
-    -moz-border-radius-topright: 15px;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    -webkit-border-top-left-radius: 15px;
-    -webkit-border-top-right-radius: 15px;
-    /*End*/
+    /*Nguyen Minh Tri */
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-topleft: 5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -moz-background-clip: padding-box;
 }
 
 .ui-grid-vertical-bar {
@@ -75,39 +77,20 @@
     position: relative;
     overflow: hidden;
     font-weight: bold;
-    background-color:#337ab7;
-    /*background: #f3f3f3;
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(1, #ffffff));
-    background: -ms-linear-gradient(bottom, #eeeeee, #ffffff);
-    background: -moz-linear-gradient(center bottom, #eeeeee 0%, #ffffff 100%);
-    background: -o-linear-gradient(#ffffff, #eeeeee);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);*/
-    /*Nguyen Minh Tri -01-02-2015- Border Radius*/
-    /*background: rgba(82,153,235,1);
-    background: -moz-linear-gradient(top, rgba(82,153,235,1) 0%, rgba(132,188,241,1) 35%, rgba(196,223,248,1) 52%, rgba(196,223,248,1) 100%);
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(82,153,235,1)), color-stop(35%, rgba(132,188,241,1)), color-stop(52%, rgba(196,223,248,1)), color-stop(100%, rgba(196,223,248,1)));
-    background: -webkit-linear-gradient(top, rgba(82,153,235,1) 0%, rgba(132,188,241,1) 35%, rgba(196,223,248,1) 52%, rgba(196,223,248,1) 100%);
-    background: -o-linear-gradient(top, rgba(82,153,235,1) 0%, rgba(132,188,241,1) 35%, rgba(196,223,248,1) 52%, rgba(196,223,248,1) 100%);
-    background: -ms-linear-gradient(top, rgba(82,153,235,1) 0%, rgba(132,188,241,1) 35%, rgba(196,223,248,1) 52%, rgba(196,223,248,1) 100%);
-    background: linear-gradient(to bottom, rgba(82,153,235,1) 0%, rgba(132,188,241,1) 35%, rgba(196,223,248,1) 52%, rgba(196,223,248,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5299eb', endColorstr='#c4dff8', GradientType=0 );*/
+    /*Nguyen Minh Tri - Background and color*/
+    background-color: #337abb;
     color: #fff;
-    -moz-border-radius-topleft: 15px;
-    -moz-border-radius-topright: 15px;
-    -moz-border-radius-bottomright: 0;
-    -moz-border-radius-bottomleft: 0;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-    -webkit-border-top-left-radius: 15px;
-    -webkit-border-top-right-radius: 15px;
-    -webkit-border-bottom-right-radius: 0;
-    -webkit-border-bottom-left-radius: 0;
-    /*End*/
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-topleft: 5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
     -moz-background-clip: padding-box;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
+    width:98.9%;
+    /*End*/
 }
 
 .ui-grid-header-viewport {
@@ -1050,8 +1033,8 @@ div.ui-grid-cell input {
     border-bottom-left-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
     -webkit-border-bottom-left-radius: 5px;
-    /*End*/
-    /*width: 100%;*/
+    width: 100.25%;
+        /*End*/
     padding-top: 3px;
     padding-bottom: 3px;
 }
