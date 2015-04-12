@@ -2,31 +2,30 @@
 
 <script src="~/Scripts/Custom/QuoteController.js"></script>
 
-
-<div class="row">
-    <button id="alertButton" type="button" class="btn btn-primary btn-group-sm">Message</button>
-    <div id="alertDiv" role="alert" />
-</div>
-<div class="row">
-    <div ng-controller="quoteController">
-        <button id="btnLoadData" type="button" class="btn btn-primary btn-group-sm" ng-click="loadData()" ng-init="loadData()">Load Data</button>
-        <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
-        </div>
-        <br />
-        <br /><br />
-
-
-        {{Giatri |  date:'yyyy-MM-dd HH:mm:ss Z'}}
+<div class="col-lg-offset-2">
+    <div class="row">
+        <button id="alertButton" type="button" class="btn btn-primary btn-group-sm">Message</button>
+        <div id="alertDiv" role="alert" />
     </div>
+    <div class="row">
+        <div ng-controller="quoteController">
+            <button id="btnLoadData" type="button" class="btn btn-primary btn-group-sm" ng-click="loadData()" ng-init="loadData()">Load Data</button>
+            <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
+            </div>
+            <br />
+            <br /><br />
+
+            <tags-input ng-model="tags"></tags-input>
+            {{Giatri |  date:'yyyy-MM-dd HH:mm:ss Z'}}
+        </div>
+    </div>
+
+    <br />
+
+    <br />
+
+    <br />
+
+
+
 </div>
-
-<br />
-
-<br />
-
-<br />
-
-
-
-
-

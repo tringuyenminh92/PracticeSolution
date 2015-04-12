@@ -27,7 +27,9 @@ namespace B2B.PresentationLayer
                                                              "~/Content/bootstrap/css/bootstrap.css",
                                                             "~/Content/ui-grid-unstable.css",
                                                             "~/Content/font-awesome.css",
-                                                            "~/Content/myStyle.css"));
+                                                            "~/Content/myStyle.css",
+                                                            "~/Content/ng-tags-input.css",
+                                                            "~/Content/ng-tags-input.bootstrap.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
@@ -50,7 +52,8 @@ namespace B2B.PresentationLayer
                                                                 "~/Scripts/Angular/ui-grid-unstable.js",
                                                                 "~/Scripts/Angular/ng-grid-1.3.2.js",
                                                                 "~/Scripts/Angular/angular-touch.js",
-                                                                "~/Scripts/Angular/angular-route.js"));
+                                                                "~/Scripts/Angular/angular-route.js",
+                                                                "~/Scripts/Angular/ng-tags-input.js"));
             bundles.Add(new ScriptBundle("~/bundles/Custom").Include("~/Scripts/Custom/MyApp.js"));
 
         }

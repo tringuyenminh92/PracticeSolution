@@ -11,6 +11,9 @@ QuoteController.$inject = ['$scope', '$http', '$location','$q'];
 function QuoteController($scope, $http, $location, $q,$modalInstance) {
 
     $scope.$scope = $scope;
+
+    $scope.tags = [];
+
     $scope.myData = [];
     $scope.deleteRow = function (team) {
         //Push to server, delete and delete GUI
@@ -25,11 +28,11 @@ function QuoteController($scope, $http, $location, $q,$modalInstance) {
 
 
     $scope.loadData = function () {
-        $http.get("Quote/GetQuotes").success(function (data, status, headers, config) {
+        $http.get("GetQuotes").success(function (data, status, headers, config) {
             $scope.myData = data;
             //var wait = new WaitDialog();
             //wait.Show();
-            //$scope.ShowModal(function () { alert(1); }, function () { alert(2); }, "abc", "cds", "nut a nut dong", "bo bo bo");
+            $scope.ShowModal(null,null, "abc", "cds", "Cancel", "Submit");
         }).error(function (data, status, headers, config) {
         });
     };

@@ -12,6 +12,22 @@ function UserController($scope, $http) {
         //$scope.myData.
         //$scope.nhomHanghoaId = "55d8d06f-1d8b-4411-aa84-bfa4b398ffe9";
     };
+    $scope.saveGrid = function () {
+        $scope.dataSave = $scope.gridOptions.data;
+        $http.post("User/SaveAllAccount", { listAccount: $scope.dataSave }).success(function (data, status, headers, config) {
+            if (data) {
+                alert("Success!");
+            }
+            else {
+                alert("Fail!");
+            }
+        }).error(function (data, status, headers, config) {
+            // log 
+            //var alertInstance = new Alert("alertId", "Load Failed", "danger");
+            //alertInstance.ShowAlert();
+            alert("Error!");
+        });
+    }
     $scope.loadData = function () {
         $http.get("User/GetAllAccount").success(function (data, status, headers, config) {
             $scope.myData = data;
@@ -23,12 +39,12 @@ function UserController($scope, $http) {
     };
     $scope.gridOptions = {};
     $scope.deleteCellTemplate = '<button ng-click="getExternalScopes().deleteRow(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-trash"/></button> ';
-    $scope.gridOptions.columnDefs = [          
+    $scope.gridOptions.columnDefs = [
   	      { name: 'AccountName', displayName: 'Account Name', enableFiltering: false, headerCellTemplate: '<div title="Tooltip Content">Account Name</div>', width: 190, enableCellEdit: true },
           { name: 'AccountPassword', displayName: 'Password', enableFiltering: false, enableCellEdit: true, width: 190 },
           { name: 'Ten', displayName: 'Tên', width: 200, enableFiltering: false, enableCellEdit: true },
           { name: 'Email', displayName: 'Email', width: 190, enableFiltering: false, enableCellEdit: true },
-          { name: 'Mobile', displayName: 'Mobile', width: 150, enableFiltering: false, enableCellEdit: true },
+          { name: 'Mobile', displayName: 'Mobile', width: 145, enableFiltering: false, enableCellEdit: true },
           { name: '_delete', displayName: "", cellTemplate: $scope.deleteCellTemplate, width: 25, enableFiltering: false, enableCellEdit: false }
 
     ];
