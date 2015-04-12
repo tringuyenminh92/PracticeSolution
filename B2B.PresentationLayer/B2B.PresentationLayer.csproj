@@ -302,6 +302,7 @@
     <Content Include="Images\Hinhhanghoa\CPDuiCanh1kg.jpg" />
     <Content Include="Images\Hinhhanghoa\CPMeGa500r.jpg" />
     <Content Include="Images\Hinhhanghoa\CPTimGa500r.jpg" />
+    <Content Include="Images\Hinhhanghoa\noPhoto-icon.png" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />

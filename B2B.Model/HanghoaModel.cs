@@ -26,6 +26,7 @@ namespace B2B.Model
         public String Barcode { get; set; }
         public String LinkHinhanh { get; set; }
         public String Ghichu { get; set; }
+        public String LinkHinhanh_Web { get; set; }
         public HanghoaModel() { HanghoaId = Guid.NewGuid(); }
     }
 }
