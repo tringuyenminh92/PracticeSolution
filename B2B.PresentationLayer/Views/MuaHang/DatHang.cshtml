@@ -2,10 +2,11 @@
     ViewBag.Title = "DatHang";
 }
 
-<h2>Đặt hàng</h2>
+
 <script src="~/Scripts/Custom/MuaHangController.js"></script>
 <div class="container-fluid" ng-controller="muaHangController" ng-init="LoadNhomHanghoa();LoadHanghoaTheoNhomHanghoa()">
     <div class="col-md-5">
+        <h2 style="margin-left:15px">Đặt hàng</h2>
         <div class="form-group">
             <div class="col-md-12">
                 <select class="form-control" ng-model="nhomHanghoaId" ng-options="obj.NhomHanghoaId as obj.TenNhomHanghoa for obj in nhomhanghoas" ng-change="LoadHanghoaTheoNhomHanghoa()">
@@ -38,12 +39,12 @@
 
         </div>
     </div>
-    <div class="col-md-7">
-        <div class="col-md-12" style="margin-bottom:15px">
+    <div class="col-md-7" style="margin-top:70px">
+        <div class="col-md-12">
             Nhóm khách hàng: 
         </div>
         <form name="chitietHoadon">
-            <div class="col-md-12" style="margin-top:20px">
+            <div class="col-md-12" style="margin-top:27px">
                 <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions1">
                 </div>
             </div>

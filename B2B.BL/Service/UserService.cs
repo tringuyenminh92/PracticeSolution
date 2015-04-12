@@ -46,11 +46,35 @@ namespace B2B.BL.Service
             return respository.DeleteAccount(accountName);
         }
         //GetAllAccount
-        public IEnumerable<AccountModel> GetAllAccount()
+        //public List<AccountModel> GetAllAccount()
+        //{
+        //    Mapper.CreateMap<Tin_GetAllAccount_Result, AccountModel>();
+        //    var rs = respository.GetAllAccount();
+        //    return Mapper.Map<List<Tin_GetAllAccount_Result>, List<AccountModel>>(rs);
+        //}
+        //GetAllAcccount Mapper thuoc tinh
+        public List<AccountModel> GetAllAccount()
         {
-            Mapper.CreateMap<Tin_GetAllAccount_Result, AccountModel>();
-            var rs = respository.GetAllAccount();
-            return Mapper.Map<IQueryable<Tin_GetAllAccount_Result>, IEnumerable<AccountModel>>(rs);
+            try
+            {
+                //Get all the Piping Material
+                Mapper.CreateMap<Tin_GetAllAccount_Result, AccountModel>()
+                .ForMember(dest => dest.AccountId, opt => opt.MapFrom(src => src.AcountId))
+                .ForMember(dest => dest.AccountName, opt => opt.MapFrom(src => src.AccountName))
+                .ForMember(dest => dest.AccountPassword, opt => opt.MapFrom(src => src.AccountPassword))
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
+                .ForMember(dest => dest.Ten, opt => opt.MapFrom(src => src.Ten))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+                .ForMember(dest => dest.Mobile, opt => opt.MapFrom(src => src.Mobile));
+
+                var rs = respository.GetAllAccount();
+                return Mapper.Map<List<Tin_GetAllAccount_Result>, List<AccountModel>>(rs);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

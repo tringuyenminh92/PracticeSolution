@@ -39,17 +39,18 @@ namespace B2B.DAL.Repository
         {
             if (accountName != null)
             {
-                var item= dbContext.Accounts.Where(p => p.AccountName == accountName).FirstOrDefault();
-                item.Active=false;
+                var item = dbContext.Accounts.Where(p => p.AccountName == accountName).FirstOrDefault();
+                item.Active = false;
                 dbContext.Entry(item).State = EntityState.Modified;
                 dbContext.SaveChanges();
                 return true;
             }
             return false;
         }
-        public IQueryable<Tin_GetAllAccount_Result> GetAllAccount()
+        public List<Tin_GetAllAccount_Result> GetAllAccount()
         {
-            return dbContext.Tin_GetAllAccount().AsQueryable();
+            //var tam = dbContext.Tin_GetAllAccount().ToList();
+            return dbContext.Tin_GetAllAccount().ToList();
         }
     }
 }

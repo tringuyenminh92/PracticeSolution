@@ -17,6 +17,12 @@ function MuaHangController($scope, $http) {
     $scope.LoadHanghoaTheoNhomHanghoa = function () {
         $http.post("/MuaHang/LoadHanghoaTheoNhomHanghoa", { nhomHanghoaId: $scope.nhomHanghoaId }).success(function (data, status, headers, config) {
             $scope.hanghoas = data;
+            for(i = 0; i<$scope.hanghoas.length; i++){
+                if ($scope.hanghoas[i].LinkHinhanh_Web == null)
+                {
+                    $scope.hanghoas[i].LinkHinhanh_Web = "/Images/Hinhhanghoa/noPhoto-icon.png";
+                }
+            }
         }).error(function (data, status, headers, config) {
             // log 
             alert('Error');
@@ -46,19 +52,20 @@ function MuaHangController($scope, $http) {
     var img = $("<img />").attr('src', 'http://somedomain.com/image.jpg')
     $scope.gridOptions = {};
     $scope.addCellTemplate = '<button ng-click="getExternalScopes().addHanghoa(row.entity)" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-shopping-cart"/></button> ';
-    $scope.imageCellTemplate = '<img src="~/Content/images/image1.jpg" />';
+    $scope.imageCellTemplate = '<img ng-src={{row.entity.LinkHinhanh_Web}} class="img-thumbnail" width="200" height="300">';
     $scope.gridOptions.columnDefs = [
         { name: 'Code', displayName: 'Code', width: 80 },
   	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 150 },
         { name: 'Giagoc', displayName: 'Giá gốc', width: 80 },
-        { name: '_hinhanh', displayName: '', enableFiltering: false, width: 80 },
+        { name: '_hinhanh', displayName: '', cellTemplate: $scope.imageCellTemplate, enableFiltering: false, width: 80 },
         { name: '_addHanghoa', displayName: "", cellTemplate: $scope.addCellTemplate, width: 15, enableFiltering: false },
     ];
 
-    $scope.gridOptions.paginationPageSizes = [25, 50, 75];
-    $scope.gridOptions.paginationPageSize = 25;
+    $scope.gridOptions.paginationPageSizes = [5, 10, 15];
+    $scope.gridOptions.paginationPageSize = 5;
     $scope.gridOptions.data = "hanghoas";
     $scope.gridOptions.enableFiltering = true;
+    $scope.gridOptions.rowHeight = 80;
 
 
     $scope.removeHanghoa = function (team) {

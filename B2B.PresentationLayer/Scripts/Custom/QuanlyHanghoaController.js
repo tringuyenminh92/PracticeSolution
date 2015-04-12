@@ -7,6 +7,8 @@ function QuanlyHanghoaController($scope, $http) {
     $scope.nhomhanghoas = [];
     $scope.donvis = [];
 
+    $scope.img = "/Images/Hinhhanghoa/noPhoto-icon.png";
+
     $scope.isEdit = false;
 
     $scope.deleteRow = function (team) {
@@ -39,6 +41,14 @@ function QuanlyHanghoaController($scope, $http) {
     $scope.editIndex;
     $scope.editRow = function (team) {
         $scope.hanghoa = team;
+        if ($scope.hanghoa.LinkHinhanh_Web != null) {
+            $scope.img = $scope.hanghoa.LinkHinhanh_Web;
+        }
+        else {
+            $scope.img = "/Images/Hinhhanghoa/noPhoto-icon.png";
+        }
+        
+        //if ($scope.hanghoa.LinkHinhanh_Web == null) { $scope.hanghoa.LinkHinhanh_Web = "/Images/Hinhhanghoa/noPhoto-icon.jpg"; }
         $scope.isEdit = true;
         $scope.editIndex = $scope.hanghoas.indexOf(team);
     };
@@ -55,6 +65,10 @@ function QuanlyHanghoaController($scope, $http) {
         });
         $scope.hanghoa = {};
     };
+
+    //$scope.LoadHinh = function () {
+    //    $scope.hanghoa.LinkHinhanh_Web = "/Images/Hinhhanghoa/noPhoto-icon.jpg";
+    //}
 
     $scope.LoadHanghoaTheoNhomHanghoa = function () {
         $http.post("/QuanlyHanghoa/LoadHanghoaTheoNhomHanghoa", { nhomHanghoaId: $scope.nhomHanghoaId }).success(function (data, status, headers, config) {
