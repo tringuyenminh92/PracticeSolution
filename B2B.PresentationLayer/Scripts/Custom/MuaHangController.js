@@ -13,6 +13,8 @@ function MuaHangController($scope, $http) {
         //}
     ];
     $scope.tongtien = 0;
+    $scope.tiengiam = 0;
+    $scope.phantramgiam = "0%";
 
     $scope.LoadHanghoaTheoNhomHanghoa = function () {
         $http.post("/MuaHang/LoadHanghoaTheoNhomHanghoa", { nhomHanghoaId: $scope.nhomHanghoaId }).success(function (data, status, headers, config) {
@@ -37,6 +39,13 @@ function MuaHangController($scope, $http) {
             alert('Error');
         });
     };
+
+    $scope.Reset = function () {
+        $scope.chitiethoadons = [];
+        $scope.tongtien = 0;
+        $scope.tiengiam = 0;
+        $scope.phantramgiam = "0%";
+    }
 
     $scope.addHanghoa = function (team) {
         var cthd = {

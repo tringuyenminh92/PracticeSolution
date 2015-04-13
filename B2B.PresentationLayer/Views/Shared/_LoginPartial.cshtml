@@ -13,6 +13,7 @@ else
 {*@
 <div class=" pull-right">
     <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Đơn hàng", "Index", "Donhang")</li>
         @if (!string.IsNullOrWhiteSpace(Session["accountId"] + ""))
         {
             <li>@Html.ActionLink((string)Session["accountName"], "SuaTaikhoan", "Taikhoan")</li>

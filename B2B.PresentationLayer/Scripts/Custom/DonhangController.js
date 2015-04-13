@@ -16,18 +16,19 @@ function DonhangController($scope, $http) {
         });
     }
 
-    $scope.gridOptions = {};
+    $scope.gridHoadon = {};
     $scope.deleteCellTemplate = '<button ng-click="getExternalScopes().deleteRow(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-trash"/></button> ';
     $scope.detailsCellTemplate = '<button ng-click="getExternalScopes().getDetails(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-camera"/></button> ';
-    $scope.gridOptions.columnDefs = [
-          { name: '_delete', displayName: "", cellTemplate: $scope.deleteCellTemplate, width: 25, enableFiltering: false, enableCellEdit: false },
-  	      { name: 'name', displayName: 'Name', headerCellTemplate: '<div title="Tooltip Content">Name</div>', width: 150 },
-  	      { name: 'tuoi', displayName: 'tuoi', width: 50 },
-          { name: 'Details', displayName: 'Details', width: 50, cellTemplate: $scope.detailsCellTemplate }
+    $scope.gridHoadon.columnDefs = [
+        { name: 'Code', displayName: 'Code', width: 80, enableCellEdit: false },
+  	    { name: 'Ngaylap', displayName: 'Ngày lập', width: 170, enableCellEdit: false },
+        { name: 'Soluong', displayName: 'Số lượng', width: 80, enableCellEdit: true },
+        { name: 'Giaban', displayName: 'Đơn giá', width: 100, enableCellEdit: false },
+        { name: 'TenTinhtrangDonhang', displayName: 'Tình trạng ', width: 100, enableCellEdit: false }
     ];
-    $scope.gridOptions.paginationPageSizes = [25, 50, 75];
-    $scope.gridOptions.paginationPageSize = 25;
-    $scope.gridOptions.data = "myData";
-    $scope.gridOptions.enableFiltering = false;
+    $scope.gridHoadon.paginationPageSizes = [25, 50, 75];
+    $scope.gridHoadon.paginationPageSize = 25;
+    $scope.gridHoadon.data = "myData";
+    $scope.gridHoadon.enableFiltering = false;
 }
 

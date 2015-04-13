@@ -2,7 +2,7 @@
     ViewBag.Title = "";
 }
 <div class="container-fluid">
-    <div class="row">
+    @*<div class="row">
         <div ng-controller="donhangController">
             <button id="btnLoadData" type="button" class="btn btn-primary btn-group-sm" ng-click="LoadDonhang()" ng-init="LoadDonhang()">Load Data</button>
             <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
@@ -12,6 +12,24 @@
 
 
             {{Giatri |  date:'yyyy-MM-dd HH:mm:ss Z'}}
+        </div>
+    </div>*@
+
+    <div class="col-md-5">
+        <h2 style="margin-left:15px">Đơn hàng</h2>
+        <div class="form-group">
+
+            <div class="col-md-12" style="margin-top:20px">
+                <div external-scopes="$scope" ui-grid-pagination ui-grid-resize-columns ui-grid="gridHoadon">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-7" style="margin-top:70px">
+        <div class="col-md-12" style="margin-top:27px">
+            <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions1">
+            </div>
         </div>
     </div>
 

@@ -15,7 +15,7 @@
             </div>
 
             <div class="col-md-12" style="margin-top:20px">
-                <div external-scopes="$scope" ui-grid-pagination ui-grid-resize-columns ui-grid="gridOptions">
+                <div external-scopes="$scope" style="height:350px" ui-grid-pagination ui-grid-resize-columns ui-grid="gridOptions">
                 </div>
             </div>
 
@@ -62,7 +62,7 @@
                                 <div class="col-md-6 control-label">Tiền giảm:</div>
                                 <div class="col-md-6">
                                     <span ng-model="hoadon.Tiengiam">
-                                        0%
+                                        {{tiengiam}}
                                     </span>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                 <div class="col-md-6 control-label">Phần trăm giảm:</div>
                                 <div class="col-md-6">
                                     <span ng-model="hoadon.PhantramGiam">
-                                        0
+                                        {{phantramgiam}}
                                     </span>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
                 &nbsp;
                 <input type="button" ng-disabled="" class="btn btn-primary" value="Lưu tạm" ng-click="">
                 &nbsp;
-                <input type="button" ng-disabled="" class="btn btn-primary" value="Hủy" ng-click="">
+                <input type="button" ng-disabled="" class="btn btn-primary" value="Hủy" ng-click="Reset()">
                 &nbsp;
             </div>
         @*</div>*@
