@@ -22,22 +22,28 @@
             <br /><br />
 
             <tags-input ng-model="tags" min-length="4" replace-spaces-with-dashes="false" placeholder="Enter some things" template="CustomTemplateWithIcon">
-                <auto-complete source=""></auto-complete>
+               @* <auto-complete source=""></auto-complete>*@
                 @*loadTags($query)*@
 
             </tags-input>
             {{Giatri |  date:'yyyy-MM-dd HH:mm:ss Z'}}
+            <button type="button" class="btn btn-primary" ng-click="Edit()">Edit</button>
+            <button type="button" class="btn btn-danger" ng-click="Reset()">Clear</button>
 
-            <ui-select multiple ng-model="colors" theme="bootstrap">
+            @*<ui-select multiple ng-model="colors" theme="bootstrap">
                 <ui-select-match placeholder="Select colors..."><i class="fa fa-tags">{{$item}}</i></ui-select-match>
                 <ui-select-choices repeat="color in availableColors | filter: $select.search">
                     {{color}}
                 </ui-select-choices>
-            </ui-select>
+            </ui-select>*@
             @* filter: $select.search >> to filter when type input *@
 
-            <p>Selected: {{colors}}</p>
-        </div>
+
+            <tags-input ng-model="colors" min-length="4" replace-spaces-with-dashes="false" placeholder="Enter some things" template="CustomTemplateWithIcon">
+
+                {{AppPath}}
+                <p>Selected: {{colors}}</p>
+</div>
     </div>
 
     <br />
