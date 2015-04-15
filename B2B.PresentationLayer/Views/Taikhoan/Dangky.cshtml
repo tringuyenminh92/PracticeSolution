@@ -2,11 +2,11 @@
     ViewBag.Title = "Dangky";
 }
 <script src="~/Scripts/Custom/TaikhoanController.js"></script>
-<div id="signupbox" style="margin-top:50px" class="mainbox col-md-10 col-md-offset-1" ng-controller="taikhoanController" ng-init="Dangky()">
-    <div class="panel panel-info">
+<div style="margin-top:50px" class="mainbox col-md-8 col-md-offset-2" ng-controller="taikhoanController" ng-init="Dangky()">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <div class="panel-title">Đăng ký</div>
-            <div style="float:right; font-size: 85%; position: relative; top:-10px"><a href="#">Đăng nhập</a></div>
+            @*<div style="float:right; font-size: 85%; position: relative; top:-10px; color:#000000"><a href="/Taikhoan/Dangnhap">Đăng nhập</a></div>*@
         </div>
         <div class="panel-body">
             <div id="signupform" class="form-horizontal">
@@ -63,7 +63,7 @@
                 </div>
 
                 <div style="border-top: 1px solid #999; padding-top: 20px;margin-left:30px; margin-right: 30px" class="form-group">
-                    <input type="button" ng-disabled="account.AccountPassword != passnhaplai || (account.AccountPassword + '').length < 8 || Loi.tenLoi == 'TrungAccountName'" class="btn btn-info btn-block" value="Đăng ký" ng-click="XulyDangky()">
+                    <input type="button" ng-disabled="account.AccountPassword != passnhaplai || (account.AccountPassword + '').length < 8 || Loi.tenLoi == 'TrungAccountName'" class="btn btn-primary btn-block" value="Đăng ký" ng-click="XulyDangky()">
                 </div>
             </div>
         </div>

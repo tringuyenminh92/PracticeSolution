@@ -3,10 +3,11 @@
 }
 
 @*<h2>Index</h2>*@
+<script src="~/Scripts/Custom/TaikhoanController.js"></script>
 <script src="~/Scripts/Custom/LoginController.js"></script>
 @* _______________________________ *@
 <div ng-app="MyApp">
-    <div class="container" ng-controller="loginController">
+    <div class="container" ng-controller="taikhoanController">
         @*<div class="row">*@
         <div class="col-md-4 col-md-offset-4">
             <div class="panel panel-default">
@@ -45,6 +46,7 @@
                                     </label>
                                 </div>
                                 <input type="button" class="btn btn-lg btn-primary btn-block" value="Đăng nhập" ng-click="checkLogin()" ng-disabled="myForm.username.$dirty && myForm.username.$invalid ||myForm.password.$dirty && myForm.password.$invalid">
+                                <a href="/Taikhoan/Dangky">Chưa có tài khoản</a>
                             </div>
                         </div>
                     </form>

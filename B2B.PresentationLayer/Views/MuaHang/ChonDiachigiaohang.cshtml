@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "ChonDiachiGiaohang";
+}
+<script src="~/Scripts/Custom/MuaHangController.js"></script>
+<div class="col-md-offset-1 col-md-10" ng-controller="muaHangController" ng-init="InitChonDiachiGiaohang()">
+    <form name="bosungthongtin">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div>Địa chỉ giao</div>
+            </div>
+            <div class="panel-body">
+                <div ng-show="ChuacoDiachi">
+                    <div style="margin-bottom:20px">
+                        Chưa có địa chỉ giao hàng hoặc chưa đầy đủ. Xin vui lòng bổ sung địa chỉ giao hàng.
+                    </div>
+                    @*<ul>
+                <li ng-repeat="dc in dcgiaohangs">
+                    <div class="radio">
+                        <label><input type="radio" name="diachigiaohang" ng-click="getDiachiGiaohang()">{{dc.DiachiGiaohang}}</label>
+                    </div>
+                </li>
+            </ul>*@
+                    <div class="form-group">
+                        <label for="diachigiao">Địa chỉ giao hàng</label>
+                        <input type="text" class="form-control" name="diachigiaohang" placeholder="Địa chỉ giao hàng" ng-model="khachhang.DiachiGiaohang">
+                    </div>
+                    <div class="form-group">
+                        <label for="tinhthanh">Tỉnh thành</label>
+                        <select class="form-control" name="tinhthanh" ng-model="khachhang.TinhthanhId" ng-options="obj.TinhthanhId as obj.TenTinhthanh for obj in tinhthanhs" ng-change="HienthiQuanhuyen()">
+                            <option value="">--Tỉnh thành--</option>
+                        </select>
+                    </div>
+                    @*<div> object is {{khachhang.Tinhthanh}}</div>*@
+                    <div class="form-group">
+                        <label for="quanhuyen">Quận huyện</label>
+                        <select class="form-control" name="quanhuyen" ng-model="khachhang.QuanhuyenId" ng-options="obj.QuanhuyenId as obj.TenQuanhuyen for obj in quanhuyens">
+                            <option value="">--Quận huyện--</option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+
+
+</div>
