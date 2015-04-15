@@ -62,7 +62,6 @@ namespace B2B.DAL
         public DbSet<TinhtrangPhieuxuat> TinhtrangPhieuxuats { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Tonkho> Tonkhoes { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
     
         public virtual ObjectResult<Khuyen_GetBaogiaTheoNhomKhachhang_Result> Khuyen_GetBaogiaTheoNhomKhachhang(Nullable<System.Guid> nhomKhachhangId)
         {

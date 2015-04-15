@@ -102,7 +102,6 @@
         <AssociationConnector Association="B2BSystemModel.FK_TinhtrangPhieunhap_Tinhtrang" ManuallyRouted="false" />
         <AssociationConnector Association="B2BSystemModel.FK_TinhtrangPhieuxuat_Tinhtrang" ManuallyRouted="false" />
         <AssociationConnector Association="B2BSystemModel.FK_Nhanvien_Account" />
-        <EntityTypeShape EntityType="B2BSystemModel.sysdiagram" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
