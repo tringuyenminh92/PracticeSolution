@@ -44,7 +44,7 @@ namespace B2B.DAL.Repository
                 }
                 return false;
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 return false;
             }
