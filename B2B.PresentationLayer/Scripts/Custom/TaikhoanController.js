@@ -7,16 +7,23 @@ function TaikhoanController($scope, $http,$q) {
     $scope.accountname = "";
     $scope.accountpassword = "";
 
+    $scope.ChonGioiTinh = function (team) {
+        $scope.khachhang.Gioitinh = team;
+    }
+
     $scope.checkLogin = function () {
         $http.post("/Taikhoan/CheckLoginUser", { account: $scope.accountname, password: $scope.accountpassword }).success(function (data, status, headers, config) {
             if (data) {
                 if (data.result) {
                     alert("Đăng nhập thành công.");
+                    //window.location.reload();
                     window.location.href = '/Quote';
+                    //window.history.go(-1);
                 }
                 else {
                     alert("Đăng nhập không thành công.");
                     window.location.href = '/Taikhoan/Dangnhap';
+                    //window.history.go(-1);
                 }
             }
         }).error(function (data, status, headers, config) {
@@ -146,6 +153,9 @@ function TaikhoanController($scope, $http,$q) {
     //Hàm hiển thị các thông tin của account đang được sử dụng
     $scope.HienthiThongtinTaikhoan = function () {
         var defer = $q.defer();
+        if ($scope.accountIdTmp == null) {
+            window.location.href = "/Home";
+        }
         $http.post("/Taikhoan/HienthiThongtinTaikhoan", { accountId: $scope.accountIdTmp }).success(function (data, status, headers, config) {
             $scope.account = data.acc;
             $scope.khachhang = data.kh;

@@ -1,17 +1,17 @@
 ﻿angular.module("GlobalModule").controller("muaHangController", MuaHangController);
 
-MuaHangController.$inject = ['$scope', '$http'];
-function MuaHangController($scope, $http) {
+MuaHangController.$inject = ['$scope', '$http', '$q'];
+function MuaHangController($scope, $http, $q) {
     $scope.$scope = $scope;
     $scope.hanghoas = [];
     $scope.nhomhanghoas = [];
-    $scope.chitiethoadons = [
-        //{
-        //_STT: "1",
-        //Code: "Test", TenHanghoa: "TestABC", Soluong: "2", Giaban: "1000",
-        //Thanhtien: "2000"
-        //}
-    ];
+    //$scope.chitietdonhangs = [
+    //    //{
+    //    //_STT: "1",
+    //    //Code: "Test", TenHanghoa: "TestABC", Soluong: "2", Giaban: "1000",
+    //    //Thanhtien: "2000"
+    //    //}
+    //];
     $scope.tongtien = 0;
     $scope.tiengiam = 0;
     $scope.phantramgiam = "0%";
@@ -27,7 +27,7 @@ function MuaHangController($scope, $http) {
             }
         }).error(function (data, status, headers, config) {
             // log 
-            alert('Error');
+            alert('Load hàng hóa không thành công');
         });
     };
 
@@ -36,42 +36,162 @@ function MuaHangController($scope, $http) {
             $scope.nhomhanghoas = data;
         }).error(function (data, status, headers, config) {
             // log 
-            alert('Error');
+            alert('Load nhóm hàng không thành công');
         });
     };
 
+    $scope.LoadChitietDonhang = function () {
+        $http.post("/MuaHang/LayDSChitietDonhangTam").success(function (data, status, headers, config) {
+            //$scope.chitietdonhangs = [];
+            $scope.chitietdonhangs = [
+                //{
+                //_STT: "1",
+                //Code: "Test", TenHanghoa: "TestABC", Soluong: "2", Giaban: "1000",
+                //Thanhtien: "2000"
+                //}
+            ];
+            if (data.lst != null) {
+                //alert('test');
+                $scope.chitietdonhangs = data.lst;
+            }
+        }).error(function (data, status, headers, config) {
+            // log 
+            alert('Load chi tiết đơn hàng tạm không thành công');
+        });
+    }
+
+    $scope.Dathang = function () {
+
+    }
+
     $scope.Reset = function () {
-        $scope.chitiethoadons = [];
+        $scope.chitietdonhangs = [];
         $scope.tongtien = 0;
         $scope.tiengiam = 0;
         $scope.phantramgiam = "0%";
     }
 
+    //Lấy Account để kiểm tra đã đăng nhập chưa và có đầy đủ thông tin chưa
+    $scope.LayAccountId = function () {
+        var defer = $q.defer();
+        $http.post("/Taikhoan/LayAccountId").success(function (data, status, headers, config) {
+            $scope.accountIdTmp = data.accountId;
+            defer.resolve(data);
+        }).error(defer.reject);
+        return defer.promise;
+    }
+    
+    $scope.XulyDathang = function () {
+        if ($scope.chitietdonhangs.length == 0) {
+            alert('Đơn hàng rỗng.');
+        }
+        else {
+            if ($scope.accountIdTmp == "") {
+                alert('Bạn cần đăng nhập để sử dụng chức năng này.');
+            }
+            else {
+                window.location.href = "/MuaHang/ChonDiachigiaohang";
+            }
+        }
+    }
+
+    $scope.Dathang = function () {
+        $scope.LayAccountId().then($scope.XulyDathang);
+    }
+
+    $scope.KiemtraDiachiGiaohang = function () {
+        if ($scope.khachhang.DiachiGiaohang == null || $scope.khachhang.QuanhuyenId == null || $scope.khachhang.TinhthanhId == null) {
+            $scope.ChuacoDiachi = true;
+        }
+        else $scope.ChuacoDiachi = false;
+    }
+
+    //Hàm lấy các thông tin của account đang được sử dụng
+    $scope.LayThongtinTaikhoan = function () {
+        var defer = $q.defer();
+        $http.post("/Taikhoan/HienthiThongtinTaikhoan", { accountId: $scope.accountIdTmp }).success(function (data, status, headers, config) {
+            $scope.account = data.acc;
+            $scope.khachhang = data.kh;
+            $scope.accountNameTmp = data.acc.AccountName;
+            if ($scope.khachhang.Gioitinh == null) {
+                $scope.khachhang.Gioitinh = true;
+            }
+            defer.resolve(data);
+        }).error(defer.reject);
+        return defer.promise;
+    }
+
+    //Load tinh thanh
+    $scope.HienthiTinhthanh = function () {
+        var defer = $q.defer();
+        $http.post("/Taikhoan/HienthiTinhthanh").success(function (data, status, headers, config) {
+            if (data) {
+                $scope.tinhthanhs = data;
+                defer.resolve(data);
+            }
+        }).error(defer.reject);
+        return defer.promise;
+    }
+
+    //Load quan huyen theo tinh thanh
+    $scope.HienthiQuanhuyen = function () {
+        var defer = $q.defer();
+        if ($scope.khachhang.TinhthanhId == null) {
+            $scope.quanhuyens = [];
+            $scope.khachhang.QuanhuyenId = null;
+        }
+        else {
+            $http.post("/Taikhoan/HienthiQuanhuyen", { tinhthanhId: $scope.khachhang.TinhthanhId }).success(function (data, status, headers, config) {
+                if (data) {
+                    $scope.quanhuyens = data;
+                }
+            }).error(defer.reject);
+        }
+        return defer.promise;
+    }
+
+    $scope.InitChonDiachiGiaohang = function () {
+        $scope.LayAccountId().then($scope.LayThongtinTaikhoan).then($scope.KiemtraDiachiGiaohang).then($scope.HienthiTinhthanh).then($scope.HienthiQuanhuyen);
+    }
+
     $scope.addHanghoa = function (team) {
-        var cthd = {
-            _STT: $scope.chitiethoadons.length + 1,
-            Code: team.Code, TenHanghoa: team.TenHanghoa,
-            Soluong: 1, Giaban: team.Giagoc,
-            Thanhtien: team.Giagoc
+        var ctdh = {
+            STT: $scope.chitietdonhangs.length + 1,
+            Code: team.Code,
+            HanghoaId : team.HanghoaId,
+            TenHanghoa: team.TenHanghoa,
+            Giaban: team.Giagoc,
+            VAT: 0,
+            Soluong: 1,
+            Tiengiam: 0,
+            PhantramGiam: 0,
+            Thanhtien: team.Giagoc,
+            SoluongGiao: 0,
+            SoluongConlai : 1
         };
-        $scope.chitiethoadons.push(cthd);
-        $scope.tongtien += cthd.Thanhtien;
+        $scope.chitietdonhangs.push(ctdh);
+        $scope.tongtien += ctdh.Thanhtien;
+        $http.post("/MuaHang/CapnhatDSChitietDonhangTam", { lstChitietDonhangTam: $scope.chitietdonhangs }).success(function (data, status, headers, config) {
+        }).error(function (data, status, headers, config) {
+            // log 
+            alert('Cập nhật chi tiết đơn hàng tạm không thành công');
+        });
     };
 
     var img = $("<img />").attr('src', 'http://somedomain.com/image.jpg')
     $scope.gridOptions = {};
     $scope.addCellTemplate = '<button ng-click="getExternalScopes().addHanghoa(row.entity)" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-shopping-cart"/></button> ';
-    $scope.imageCellTemplate = '<img ng-src={{row.entity.LinkHinhanh_Web}} class="img-thumbnail" width="200" height="300">';
+    $scope.imageCellTemplate = '<img ng-src={{row.entity.LinkHinhanh_Web}} class="img-responsive" width="200" height="300">';
     $scope.gridOptions.columnDefs = [
+        { name: '_hinhanh', displayName: '', cellTemplate: $scope.imageCellTemplate, enableFiltering: false, width: 80 },
         { name: 'Code', displayName: 'Code', width: 80 },
   	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 150 },
         { name: 'Giagoc', displayName: 'Giá gốc', width: 80 },
-        { name: '_hinhanh', displayName: '', cellTemplate: $scope.imageCellTemplate, enableFiltering: false, width: 80 },
         { name: '_addHanghoa', displayName: "", cellTemplate: $scope.addCellTemplate, width: 15, enableFiltering: false },
     ];
 
-    $scope.gridOptions.paginationPageSizes = [5, 10, 15];
-    $scope.gridOptions.paginationPageSize = 5;
+    $scope.gridOptions.paginationPageSizes = [10, 25, 50];
+    $scope.gridOptions.paginationPageSize = 10;
     $scope.gridOptions.data = "hanghoas";
     $scope.gridOptions.enableFiltering = true;
     $scope.gridOptions.rowHeight = 80;
@@ -79,12 +199,17 @@ function MuaHangController($scope, $http) {
 
     $scope.removeHanghoa = function (team) {
         //Push to server, delete and delete GUI
-        var index = $scope.chitiethoadons.indexOf(team);
-        $scope.chitiethoadons.splice(index, 1);
+        var index = $scope.chitietdonhangs.indexOf(team);
+        $scope.chitietdonhangs.splice(index, 1);
         $scope.tongtien -= team.Thanhtien;
-        for (i = index; i < $scope.chitiethoadons.length; i++) {
-            $scope.chitiethoadons[i]._STT = $scope.chitiethoadons[i]._STT - 1;
+        for (i = index; i < $scope.chitietdonhangs.length; i++) {
+            $scope.chitietdonhangs[i].STT = $scope.chitietdonhangs[i].STT - 1;
         }
+        $http.post("/MuaHang/CapnhatDSChitietDonhangTam", { lstChitietDonhangTam: $scope.chitietdonhangs }).success(function (data, status, headers, config) {
+        }).error(function (data, status, headers, config) {
+            // log 
+            alert('Cập nhật chi tiết đơn hàng tạm không thành công');
+        });
     };
 
     //$scope.Test() = function () {
@@ -95,7 +220,7 @@ function MuaHangController($scope, $http) {
     $scope.removeCellTemplate = '<button ng-click="getExternalScopes().removeHanghoa(row.entity)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"/></button> ';
     //$scope.soluongCellTemplate = '<input type="number" ng-change=$scope.Test()>';
     $scope.gridOptions1.columnDefs = [
-        { name: '_STT', displayName: 'STT', width: 60, enableFiltering: false, enableCellEdit: false },
+        { name: 'STT', displayName: 'STT', width: 60, enableFiltering: false, enableCellEdit: false },
         { name: 'Code', displayName: 'Code', width: 80, enableCellEdit: false },
   	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 170, enableCellEdit: false },
         { name: 'Soluong', displayName: 'Số lượng', width: 80, enableCellEdit: true },
@@ -106,7 +231,7 @@ function MuaHangController($scope, $http) {
 
     $scope.gridOptions1.paginationPageSizes = [25, 50, 75];
     $scope.gridOptions1.paginationPageSize = 25;
-    $scope.gridOptions1.data = "chitiethoadons";
+    $scope.gridOptions1.data = "chitietdonhangs";
     $scope.gridOptions1.enableFiltering = false;
 
     $scope.gridOptions1.onRegisterApi = function (gridApi) {
@@ -117,10 +242,17 @@ function MuaHangController($scope, $http) {
             if (colDef.name == 'Soluong') {
                 if (newValue <= 0) { newValue = 1; rowEntity.Soluong = 1; }
                 rowEntity.Thanhtien = newValue * rowEntity.Giaban;
+                rowEntity.SoluongConlai = newValue;
             }
+            
             $scope.tongtien -= oldValue * rowEntity.Giaban;
-            $scope.tongtien += rowEntity.Thanhtien
+            $scope.tongtien += rowEntity.Thanhtien;
             $scope.$apply();
+            $http.post("/MuaHang/CapnhatDSChitietDonhangTam", { lstChitietDonhangTam: $scope.chitietdonhangs }).success(function (data, status, headers, config) {
+            }).error(function (data, status, headers, config) {
+                // log 
+                alert('Cập nhật chi tiết đơn hàng tạm không thành công');
+            });
         });
     };
 }

@@ -154,5 +154,6 @@ namespace B2B.PresentationLayer.Controllers
             }
             return Json(new { thongbao = thongbao, kq = kq }, JsonRequestBehavior.AllowGet);
         }
+        
     }
 }
