@@ -16,6 +16,7 @@ namespace B2B.DAL
         public System.Guid AcountId { get; set; }
         public string AccountName { get; set; }
         public string AccountPassword { get; set; }
+        public Nullable<bool> Active { get; set; }
         public System.Guid UserId { get; set; }
         public string Ten { get; set; }
         public string Email { get; set; }

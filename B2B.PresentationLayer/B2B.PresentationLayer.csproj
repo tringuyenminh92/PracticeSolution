@@ -430,10 +430,11 @@
     <Content Include="Views\Taikhoan\DoiPassword.cshtml" />
     <Content Include="Views\Hoadon\Index.cshtml" />
     <Content Include="Views\MuaHang\DatHang.cshtml" />
-    <Content Include="Views\MuaHang\Index.cshtml" />
     <Content Include="Views\Taikhoan\Dangnhap.cshtml" />
     <Content Include="Views\Donhang\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\MuaHang\ChonHinhThucMuaHang.cshtml" />
+    <Content Include="Views\MuaHang\ChonDiachigiaohang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

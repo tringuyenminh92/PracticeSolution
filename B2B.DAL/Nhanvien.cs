@@ -58,6 +58,7 @@ namespace B2B.DAL
         public string Linkanh { get; set; }
         public Nullable<System.Guid> AccountId { get; set; }
     
+        public virtual Account Account { get; set; }
         public virtual ICollection<CongnoNhap> CongnoNhaps { get; set; }
         public virtual ICollection<CongnoXuat> CongnoXuats { get; set; }
         public virtual ICollection<Donhang> Donhangs { get; set; }
@@ -76,6 +77,5 @@ namespace B2B.DAL
         public virtual ICollection<TinhtrangPhieunhap> TinhtrangPhieunhaps { get; set; }
         public virtual ICollection<TinhtrangPhieuxuat> TinhtrangPhieuxuats { get; set; }
         public virtual ICollection<User> Users { get; set; }
-        public virtual Account Account { get; set; }
     }
 }

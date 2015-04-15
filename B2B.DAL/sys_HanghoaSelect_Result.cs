@@ -26,5 +26,6 @@ namespace B2B.DAL
         public Nullable<int> Step { get; set; }
         public byte[] Version { get; set; }
         public Nullable<System.DateTime> NgayCapnhat { get; set; }
+        public string LinkHinhanh_Web { get; set; }
     }
 }

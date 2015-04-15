@@ -20,12 +20,12 @@ namespace B2B.PresentationLayer.Controllers
         //
         // GET: /DSHanghoa/
 
-        public ActionResult Index()
+        public ActionResult DatHang()
         {
             return View();
         }
 
-        public ActionResult DatHang()
+        public ActionResult ChonDiachigiaohang()
         {
             return View();
         }
@@ -49,6 +49,15 @@ namespace B2B.PresentationLayer.Controllers
                 lstHanghoa = _hanghoaService.GetHanghoaActive();
             }
             return Json(lstHanghoa, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult LayDSChitietDonhangTam()
+        {
+            List<ChitietDonhangModel> lstChitietDonhangTam = (List<ChitietDonhangModel>)Session["chitietDonhangTams"];
+            return Json(new { lst = lstChitietDonhangTam }, JsonRequestBehavior.AllowGet);
+        }
+        public void CapnhatDSChitietDonhangTam(List<ChitietDonhangModel> lstChitietDonhangTam)
+        {
+            Session["chitietDonhangTams"] = lstChitietDonhangTam;
         }
     }
 }

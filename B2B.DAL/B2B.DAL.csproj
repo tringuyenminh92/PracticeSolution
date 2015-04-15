@@ -287,9 +287,6 @@
     <Compile Include="State.cs">
       <DependentUpon>QuoteSystem.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
     <Compile Include="sys_ChitietDonhangSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
