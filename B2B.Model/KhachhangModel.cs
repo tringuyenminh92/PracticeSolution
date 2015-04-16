@@ -46,6 +46,8 @@ namespace B2B.Model
         public String DiachiCongty { get; set; }
         public String PhoneCongty { get; set; }
         public String Tel { get; set; }
+        public String TenTinhthanh { get; set; }
+        public String TenQuanhuyen { get; set; }
         public KhachhangModel() { KhachhangId = Guid.NewGuid(); }
     }
 }

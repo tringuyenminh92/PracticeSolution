@@ -40,19 +40,13 @@ function MuaHangController($scope, $http, $q) {
         });
     };
 
-    $scope.LoadChitietDonhang = function () {
-        $http.post("/MuaHang/LayDSChitietDonhangTam").success(function (data, status, headers, config) {
-            //$scope.chitietdonhangs = [];
-            $scope.chitietdonhangs = [
-                //{
-                //_STT: "1",
-                //Code: "Test", TenHanghoa: "TestABC", Soluong: "2", Giaban: "1000",
-                //Thanhtien: "2000"
-                //}
-            ];
+    $scope.LayDonhangTam = function () {
+        $http.post("/MuaHang/LayDonhangTam").success(function (data, status, headers, config) {
+            $scope.chitietdonhangs = [];
+            $scope.donhang = { Tiengiam: 0, PhantramGiam : 0,Tongtien: 0, TongLoaiDonhang: 0, Active: 1 };
             if (data.lst != null) {
-                //alert('test');
                 $scope.chitietdonhangs = data.lst;
+                $scope.donhang = data.dh;
             }
         }).error(function (data, status, headers, config) {
             // log 
@@ -255,4 +249,19 @@ function MuaHangController($scope, $http, $q) {
             });
         });
     };
+
+    $scope.ThaydoiThongtinKhachhang = function () {
+        $http.post("/Taikhoan/ThaydoiThongtinKhachhang", { khachhang: $scope.khachhang }).success(function (data, status, headers, config) {
+            alert(data.thongbao);
+            window.location.reload();
+        }).error(function (data, status, headers, config) {
+            // log 
+            alert("Lỗi thay đổi thông tin khách hàng.");
+        });
+    }
+
+    $scope.ThemDcGh = false;
+    $scope.MuonthemDiachiGiaohang = function () {
+        $scope.ThemDcGh = true;
+    }
 }

@@ -45,6 +45,7 @@ namespace B2B.DAL
         public Nullable<bool> Active { get; set; }
         public Nullable<int> Step { get; set; }
         public byte[] Version { get; set; }
+        public Nullable<System.Guid> AccountId { get; set; }
         public string TenQuanhuyen { get; set; }
         public string TenTinhthanh { get; set; }
         public string TenNhomKhachhang { get; set; }

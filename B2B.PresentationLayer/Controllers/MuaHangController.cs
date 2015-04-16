@@ -50,14 +50,16 @@ namespace B2B.PresentationLayer.Controllers
             }
             return Json(lstHanghoa, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult LayDSChitietDonhangTam()
+        public JsonResult LayDonhangTam()
         {
             List<ChitietDonhangModel> lstChitietDonhangTam = (List<ChitietDonhangModel>)Session["chitietDonhangTams"];
-            return Json(new { lst = lstChitietDonhangTam }, JsonRequestBehavior.AllowGet);
+            DonhangModel donhangTam = (DonhangModel)Session["donhangTam"];
+            return Json(new { lst = lstChitietDonhangTam, dh = donhangTam }, JsonRequestBehavior.AllowGet);
         }
-        public void CapnhatDSChitietDonhangTam(List<ChitietDonhangModel> lstChitietDonhangTam)
+        public void CapnhatDonhangTam(List<ChitietDonhangModel> lstChitietDonhangTam, DonhangModel donhang)
         {
             Session["chitietDonhangTams"] = lstChitietDonhangTam;
+            Session["donhangTam"] = donhang;
         }
     }
 }

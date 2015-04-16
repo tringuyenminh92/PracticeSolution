@@ -826,6 +826,7 @@
     <Content Include="Database\DB_20150401.sql" />
     <Content Include="Database\DB_20150406.sql" />
     <Content Include="Database\DB_20150410.sql" />
+    <Content Include="Database\DB_20150415.sql" />
     <Content Include="Database\Tin_CheckLogin.sql" />
     <Content Include="Database\Tin_GetAllAccount.sql" />
   </ItemGroup>

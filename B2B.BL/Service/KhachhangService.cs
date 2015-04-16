@@ -16,9 +16,9 @@ namespace B2B.BL.Service
         public KhachhangService() { repository = new KhachhangRepository(); }
         public KhachhangModel GetKhachhangFromAccountId(string accountId)
         {
-            Mapper.CreateMap<Khachhang, KhachhangModel>();
+            Mapper.CreateMap<Tri_GetKhachhangDemo_Result, KhachhangModel>();
             var kh = repository.GetKhachhangFromAccountId(accountId);
-            return Mapper.Map<Khachhang, KhachhangModel>(kh);
+            return Mapper.Map<Tri_GetKhachhangDemo_Result, KhachhangModel>(kh);
         }
         public bool Insert(KhachhangModel khachhang)
         {

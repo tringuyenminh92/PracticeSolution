@@ -5365,20 +5365,6 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tri_GetHanghoaTheoNhomKhachhang_Result>("Tri_GetHanghoaTheoNhomKhachhang", nhomKhachhangIdParameter);
         }
     
-        public virtual ObjectResult<Tri_GetKhachhangDemo_Result> Tri_GetKhachhangDemo()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tri_GetKhachhangDemo_Result>("Tri_GetKhachhangDemo");
-        }
-    
-        public virtual ObjectResult<Tri_GetKhachhangTheoNhomKhachhang_Result> Tri_GetKhachhangTheoNhomKhachhang(Nullable<System.Guid> nhomKhachhangId)
-        {
-            var nhomKhachhangIdParameter = nhomKhachhangId.HasValue ?
-                new ObjectParameter("NhomKhachhangId", nhomKhachhangId) :
-                new ObjectParameter("NhomKhachhangId", typeof(System.Guid));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tri_GetKhachhangTheoNhomKhachhang_Result>("Tri_GetKhachhangTheoNhomKhachhang", nhomKhachhangIdParameter);
-        }
-    
         public virtual ObjectResult<Tri_GetKho_Result> Tri_GetKho()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tri_GetKho_Result>("Tri_GetKho");
@@ -5812,6 +5798,20 @@ namespace B2B.DAL
         public virtual ObjectResult<Tin_GetAllAccount1_Result> Tin_GetAllAccount1()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetAllAccount1_Result>("Tin_GetAllAccount1");
+        }
+    
+        public virtual ObjectResult<Tri_GetKhachhangDemo_Result> Tri_GetKhachhangDemo()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tri_GetKhachhangDemo_Result>("Tri_GetKhachhangDemo");
+        }
+    
+        public virtual ObjectResult<Tri_GetKhachhangTheoNhomKhachhang_Result> Tri_GetKhachhangTheoNhomKhachhang(Nullable<System.Guid> nhomKhachhangId)
+        {
+            var nhomKhachhangIdParameter = nhomKhachhangId.HasValue ?
+                new ObjectParameter("NhomKhachhangId", nhomKhachhangId) :
+                new ObjectParameter("NhomKhachhangId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tri_GetKhachhangTheoNhomKhachhang_Result>("Tri_GetKhachhangTheoNhomKhachhang", nhomKhachhangIdParameter);
         }
     }
 }

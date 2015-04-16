@@ -6428,10 +6428,6 @@
           <FunctionImport Name="Tri_GetHanghoaTheoNhomKhachhang" ReturnType="Collection(B2BSystemModel.Tri_GetHanghoaTheoNhomKhachhang_Result)">
           <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
           </FunctionImport>
-          <FunctionImport Name="Tri_GetKhachhangDemo" ReturnType="Collection(B2BSystemModel.Tri_GetKhachhangDemo_Result)" />
-          <FunctionImport Name="Tri_GetKhachhangTheoNhomKhachhang" ReturnType="Collection(B2BSystemModel.Tri_GetKhachhangTheoNhomKhachhang_Result)">
-          <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
-          </FunctionImport>
           <FunctionImport Name="Tri_GetKho" ReturnType="Collection(B2BSystemModel.Tri_GetKho_Result)" />
           <FunctionImport Name="Tri_GetKhuvucActive" ReturnType="Collection(B2BSystemModel.Tri_GetKhuvucActive_Result)" />
           <FunctionImport Name="Tri_GetNhaCungcap" ReturnType="Collection(B2BSystemModel.Tri_GetNhaCungcap_Result)" />
@@ -6562,6 +6558,10 @@
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams2" />
           <FunctionImport Name="Tin_GetAllAccount1" ReturnType="Collection(B2BSystemModel.Tin_GetAllAccount1_Result)" />
+          <FunctionImport Name="Tri_GetKhachhangDemo" ReturnType="Collection(B2BSystemModel.Tri_GetKhachhangDemo_Result)" />
+          <FunctionImport Name="Tri_GetKhachhangTheoNhomKhachhang" ReturnType="Collection(B2BSystemModel.Tri_GetKhachhangTheoNhomKhachhang_Result)">
+            <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Khuyen_GetBaogiaTheoNhomKhachhang_Result">
           <Property Type="Guid" Name="HanghoaId" Nullable="false" />
@@ -7453,80 +7453,6 @@
           <Property Type="String" Name="TenNhomHanghoa" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="TenDonvi" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="Tri_GetKhachhangDemo_Result">
-          <Property Type="Guid" Name="KhachhangId" Nullable="false" />
-          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="HotenKhachhang" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="CMND" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="Ngaysinh" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="Gioitinh" Nullable="true" />
-          <Property Type="String" Name="Diachi" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="DiachiGiaohang" Nullable="true" MaxLength="100" />
-          <Property Type="Guid" Name="QuanhuyenId" Nullable="true" />
-          <Property Type="Guid" Name="TinhthanhId" Nullable="true" />
-          <Property Type="Guid" Name="NhomKhachhangId" Nullable="true" />
-          <Property Type="String" Name="Linkanh" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="Congty" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Chucvu" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="DiachiCongty" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="PhoneCongty" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Tel" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Fax" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="MasoThue" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TenTaikhoan" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="SoTaikhoan" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Nganhang" Nullable="true" MaxLength="50" />
-          <Property Type="Double" Name="HanmucCongno" Nullable="true" />
-          <Property Type="Int32" Name="ThoigianCongno" Nullable="true" />
-          <Property Type="Int32" Name="ToahangCongno" Nullable="true" />
-          <Property Type="String" Name="Ghichu" Nullable="true" MaxLength="500" />
-          <Property Type="DateTime" Name="NgayCapnhat" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="Active" Nullable="true" />
-          <Property Type="Int32" Name="Step" Nullable="true" />
-          <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
-          <Property Type="String" Name="TenQuanhuyen" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TenTinhthanh" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TenNhomKhachhang" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="Tri_GetKhachhangTheoNhomKhachhang_Result">
-          <Property Type="Guid" Name="KhachhangId" Nullable="false" />
-          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="HotenKhachhang" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="CMND" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="Ngaysinh" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="Gioitinh" Nullable="true" />
-          <Property Type="String" Name="Diachi" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="DiachiGiaohang" Nullable="true" MaxLength="100" />
-          <Property Type="Guid" Name="QuanhuyenId" Nullable="true" />
-          <Property Type="Guid" Name="TinhthanhId" Nullable="true" />
-          <Property Type="Guid" Name="NhomKhachhangId" Nullable="true" />
-          <Property Type="String" Name="Linkanh" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="Congty" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Chucvu" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="DiachiCongty" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="PhoneCongty" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Tel" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Fax" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="MasoThue" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TenTaikhoan" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="SoTaikhoan" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Nganhang" Nullable="true" MaxLength="50" />
-          <Property Type="Double" Name="HanmucCongno" Nullable="true" />
-          <Property Type="Int32" Name="ThoigianCongno" Nullable="true" />
-          <Property Type="Int32" Name="ToahangCongno" Nullable="true" />
-          <Property Type="String" Name="Ghichu" Nullable="true" MaxLength="500" />
-          <Property Type="DateTime" Name="NgayCapnhat" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="Active" Nullable="true" />
-          <Property Type="Int32" Name="Step" Nullable="true" />
-          <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
-          <Property Type="String" Name="TenQuanhuyen" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TenTinhthanh" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TenNhomKhachhang" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="Tri_GetKho_Result">
           <Property Type="Guid" Name="KhoId" Nullable="false" />
           <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
@@ -8062,6 +7988,82 @@
           <Property Type="String" Name="Ten" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="Tri_GetKhachhangDemo_Result">
+          <Property Type="Guid" Name="KhachhangId" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="HotenKhachhang" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CMND" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Ngaysinh" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Gioitinh" Nullable="true" />
+          <Property Type="String" Name="Diachi" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="DiachiGiaohang" Nullable="true" MaxLength="100" />
+          <Property Type="Guid" Name="QuanhuyenId" Nullable="true" />
+          <Property Type="Guid" Name="TinhthanhId" Nullable="true" />
+          <Property Type="Guid" Name="NhomKhachhangId" Nullable="true" />
+          <Property Type="String" Name="Linkanh" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Congty" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Chucvu" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DiachiCongty" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="PhoneCongty" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Tel" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Fax" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="MasoThue" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TenTaikhoan" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="SoTaikhoan" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Nganhang" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="HanmucCongno" Nullable="true" />
+          <Property Type="Int32" Name="ThoigianCongno" Nullable="true" />
+          <Property Type="Int32" Name="ToahangCongno" Nullable="true" />
+          <Property Type="String" Name="Ghichu" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="NgayCapnhat" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="Int32" Name="Step" Nullable="true" />
+          <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
+          <Property Type="Guid" Name="AccountId" Nullable="true" />
+          <Property Type="String" Name="TenQuanhuyen" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TenTinhthanh" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TenNhomKhachhang" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Tri_GetKhachhangTheoNhomKhachhang_Result">
+          <Property Type="Guid" Name="KhachhangId" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="HotenKhachhang" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CMND" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Ngaysinh" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Gioitinh" Nullable="true" />
+          <Property Type="String" Name="Diachi" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="DiachiGiaohang" Nullable="true" MaxLength="100" />
+          <Property Type="Guid" Name="QuanhuyenId" Nullable="true" />
+          <Property Type="Guid" Name="TinhthanhId" Nullable="true" />
+          <Property Type="Guid" Name="NhomKhachhangId" Nullable="true" />
+          <Property Type="String" Name="Linkanh" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Congty" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Chucvu" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DiachiCongty" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="PhoneCongty" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Tel" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Fax" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="MasoThue" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TenTaikhoan" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="SoTaikhoan" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Nganhang" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="HanmucCongno" Nullable="true" />
+          <Property Type="Int32" Name="ThoigianCongno" Nullable="true" />
+          <Property Type="Int32" Name="ToahangCongno" Nullable="true" />
+          <Property Type="String" Name="Ghichu" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="NgayCapnhat" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="Int32" Name="Step" Nullable="true" />
+          <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
+          <Property Type="Guid" Name="AccountId" Nullable="true" />
+          <Property Type="String" Name="TenQuanhuyen" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TenTinhthanh" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TenNhomKhachhang" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -9859,88 +9861,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Tri_GetKhachhangDemo" FunctionName="B2BSystemModel.Store.Tri_GetKhachhangDemo">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="B2BSystemModel.Tri_GetKhachhangDemo_Result">
-                <ScalarProperty Name="KhachhangId" ColumnName="KhachhangId" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="HotenKhachhang" ColumnName="HotenKhachhang" />
-                <ScalarProperty Name="CMND" ColumnName="CMND" />
-                <ScalarProperty Name="Ngaysinh" ColumnName="Ngaysinh" />
-                <ScalarProperty Name="Gioitinh" ColumnName="Gioitinh" />
-                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
-                <ScalarProperty Name="DiachiGiaohang" ColumnName="DiachiGiaohang" />
-                <ScalarProperty Name="QuanhuyenId" ColumnName="QuanhuyenId" />
-                <ScalarProperty Name="TinhthanhId" ColumnName="TinhthanhId" />
-                <ScalarProperty Name="NhomKhachhangId" ColumnName="NhomKhachhangId" />
-                <ScalarProperty Name="Linkanh" ColumnName="Linkanh" />
-                <ScalarProperty Name="Congty" ColumnName="Congty" />
-                <ScalarProperty Name="Chucvu" ColumnName="Chucvu" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="DiachiCongty" ColumnName="DiachiCongty" />
-                <ScalarProperty Name="PhoneCongty" ColumnName="PhoneCongty" />
-                <ScalarProperty Name="Tel" ColumnName="Tel" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="MasoThue" ColumnName="MasoThue" />
-                <ScalarProperty Name="TenTaikhoan" ColumnName="TenTaikhoan" />
-                <ScalarProperty Name="SoTaikhoan" ColumnName="SoTaikhoan" />
-                <ScalarProperty Name="Nganhang" ColumnName="Nganhang" />
-                <ScalarProperty Name="HanmucCongno" ColumnName="HanmucCongno" />
-                <ScalarProperty Name="ThoigianCongno" ColumnName="ThoigianCongno" />
-                <ScalarProperty Name="ToahangCongno" ColumnName="ToahangCongno" />
-                <ScalarProperty Name="Ghichu" ColumnName="Ghichu" />
-                <ScalarProperty Name="NgayCapnhat" ColumnName="NgayCapnhat" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Step" ColumnName="Step" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-                <ScalarProperty Name="TenQuanhuyen" ColumnName="TenQuanhuyen" />
-                <ScalarProperty Name="TenTinhthanh" ColumnName="TenTinhthanh" />
-                <ScalarProperty Name="TenNhomKhachhang" ColumnName="TenNhomKhachhang" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Tri_GetKhachhangTheoNhomKhachhang" FunctionName="B2BSystemModel.Store.Tri_GetKhachhangTheoNhomKhachhang">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="B2BSystemModel.Tri_GetKhachhangTheoNhomKhachhang_Result">
-                <ScalarProperty Name="KhachhangId" ColumnName="KhachhangId" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="HotenKhachhang" ColumnName="HotenKhachhang" />
-                <ScalarProperty Name="CMND" ColumnName="CMND" />
-                <ScalarProperty Name="Ngaysinh" ColumnName="Ngaysinh" />
-                <ScalarProperty Name="Gioitinh" ColumnName="Gioitinh" />
-                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
-                <ScalarProperty Name="DiachiGiaohang" ColumnName="DiachiGiaohang" />
-                <ScalarProperty Name="QuanhuyenId" ColumnName="QuanhuyenId" />
-                <ScalarProperty Name="TinhthanhId" ColumnName="TinhthanhId" />
-                <ScalarProperty Name="NhomKhachhangId" ColumnName="NhomKhachhangId" />
-                <ScalarProperty Name="Linkanh" ColumnName="Linkanh" />
-                <ScalarProperty Name="Congty" ColumnName="Congty" />
-                <ScalarProperty Name="Chucvu" ColumnName="Chucvu" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="DiachiCongty" ColumnName="DiachiCongty" />
-                <ScalarProperty Name="PhoneCongty" ColumnName="PhoneCongty" />
-                <ScalarProperty Name="Tel" ColumnName="Tel" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="MasoThue" ColumnName="MasoThue" />
-                <ScalarProperty Name="TenTaikhoan" ColumnName="TenTaikhoan" />
-                <ScalarProperty Name="SoTaikhoan" ColumnName="SoTaikhoan" />
-                <ScalarProperty Name="Nganhang" ColumnName="Nganhang" />
-                <ScalarProperty Name="HanmucCongno" ColumnName="HanmucCongno" />
-                <ScalarProperty Name="ThoigianCongno" ColumnName="ThoigianCongno" />
-                <ScalarProperty Name="ToahangCongno" ColumnName="ToahangCongno" />
-                <ScalarProperty Name="Ghichu" ColumnName="Ghichu" />
-                <ScalarProperty Name="NgayCapnhat" ColumnName="NgayCapnhat" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Step" ColumnName="Step" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-                <ScalarProperty Name="TenQuanhuyen" ColumnName="TenQuanhuyen" />
-                <ScalarProperty Name="TenTinhthanh" ColumnName="TenTinhthanh" />
-                <ScalarProperty Name="TenNhomKhachhang" ColumnName="TenNhomKhachhang" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Tri_GetKho" FunctionName="B2BSystemModel.Store.Tri_GetKho">
             <ResultMapping>
               <ComplexTypeMapping TypeName="B2BSystemModel.Tri_GetKho_Result">
@@ -10585,6 +10505,90 @@
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Tri_GetKhachhangDemo" FunctionName="B2BSystemModel.Store.Tri_GetKhachhangDemo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="B2BSystemModel.Tri_GetKhachhangDemo_Result">
+                <ScalarProperty Name="KhachhangId" ColumnName="KhachhangId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="HotenKhachhang" ColumnName="HotenKhachhang" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="Ngaysinh" ColumnName="Ngaysinh" />
+                <ScalarProperty Name="Gioitinh" ColumnName="Gioitinh" />
+                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
+                <ScalarProperty Name="DiachiGiaohang" ColumnName="DiachiGiaohang" />
+                <ScalarProperty Name="QuanhuyenId" ColumnName="QuanhuyenId" />
+                <ScalarProperty Name="TinhthanhId" ColumnName="TinhthanhId" />
+                <ScalarProperty Name="NhomKhachhangId" ColumnName="NhomKhachhangId" />
+                <ScalarProperty Name="Linkanh" ColumnName="Linkanh" />
+                <ScalarProperty Name="Congty" ColumnName="Congty" />
+                <ScalarProperty Name="Chucvu" ColumnName="Chucvu" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DiachiCongty" ColumnName="DiachiCongty" />
+                <ScalarProperty Name="PhoneCongty" ColumnName="PhoneCongty" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="MasoThue" ColumnName="MasoThue" />
+                <ScalarProperty Name="TenTaikhoan" ColumnName="TenTaikhoan" />
+                <ScalarProperty Name="SoTaikhoan" ColumnName="SoTaikhoan" />
+                <ScalarProperty Name="Nganhang" ColumnName="Nganhang" />
+                <ScalarProperty Name="HanmucCongno" ColumnName="HanmucCongno" />
+                <ScalarProperty Name="ThoigianCongno" ColumnName="ThoigianCongno" />
+                <ScalarProperty Name="ToahangCongno" ColumnName="ToahangCongno" />
+                <ScalarProperty Name="Ghichu" ColumnName="Ghichu" />
+                <ScalarProperty Name="NgayCapnhat" ColumnName="NgayCapnhat" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Step" ColumnName="Step" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="TenQuanhuyen" ColumnName="TenQuanhuyen" />
+                <ScalarProperty Name="TenTinhthanh" ColumnName="TenTinhthanh" />
+                <ScalarProperty Name="TenNhomKhachhang" ColumnName="TenNhomKhachhang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Tri_GetKhachhangTheoNhomKhachhang" FunctionName="B2BSystemModel.Store.Tri_GetKhachhangTheoNhomKhachhang">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="B2BSystemModel.Tri_GetKhachhangTheoNhomKhachhang_Result">
+                <ScalarProperty Name="KhachhangId" ColumnName="KhachhangId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="HotenKhachhang" ColumnName="HotenKhachhang" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="Ngaysinh" ColumnName="Ngaysinh" />
+                <ScalarProperty Name="Gioitinh" ColumnName="Gioitinh" />
+                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
+                <ScalarProperty Name="DiachiGiaohang" ColumnName="DiachiGiaohang" />
+                <ScalarProperty Name="QuanhuyenId" ColumnName="QuanhuyenId" />
+                <ScalarProperty Name="TinhthanhId" ColumnName="TinhthanhId" />
+                <ScalarProperty Name="NhomKhachhangId" ColumnName="NhomKhachhangId" />
+                <ScalarProperty Name="Linkanh" ColumnName="Linkanh" />
+                <ScalarProperty Name="Congty" ColumnName="Congty" />
+                <ScalarProperty Name="Chucvu" ColumnName="Chucvu" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DiachiCongty" ColumnName="DiachiCongty" />
+                <ScalarProperty Name="PhoneCongty" ColumnName="PhoneCongty" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="MasoThue" ColumnName="MasoThue" />
+                <ScalarProperty Name="TenTaikhoan" ColumnName="TenTaikhoan" />
+                <ScalarProperty Name="SoTaikhoan" ColumnName="SoTaikhoan" />
+                <ScalarProperty Name="Nganhang" ColumnName="Nganhang" />
+                <ScalarProperty Name="HanmucCongno" ColumnName="HanmucCongno" />
+                <ScalarProperty Name="ThoigianCongno" ColumnName="ThoigianCongno" />
+                <ScalarProperty Name="ToahangCongno" ColumnName="ToahangCongno" />
+                <ScalarProperty Name="Ghichu" ColumnName="Ghichu" />
+                <ScalarProperty Name="NgayCapnhat" ColumnName="NgayCapnhat" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Step" ColumnName="Step" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="TenQuanhuyen" ColumnName="TenQuanhuyen" />
+                <ScalarProperty Name="TenTinhthanh" ColumnName="TenTinhthanh" />
+                <ScalarProperty Name="TenNhomKhachhang" ColumnName="TenNhomKhachhang" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -100,7 +100,7 @@ function TaikhoanController($scope, $http,$q) {
             }).error(function (data, status, headers, config) {
                 // log 
                 //var al = new Alert("alertId", "Load Failed", "danger");
-                //al.ShowAlert();
+                alert('Lỗi xử lý đăng ký');
             });
         }
     }
@@ -127,7 +127,7 @@ function TaikhoanController($scope, $http,$q) {
                 }
             }).error(function (data, status, headers, config) {
                 // log 
-                alert("Error.");
+                alert("Lỗi đổi password");
             });
             $scope.Loi = {};
         }
@@ -175,7 +175,7 @@ function TaikhoanController($scope, $http,$q) {
             alert(data.thongbao);
         }).error(function (data, status, headers, config) {
             // log 
-            alert("I am an alert box bug!");
+            alert("Lỗi thay đổi thông tin đăng nhập");
         });
     }
 
@@ -191,6 +191,9 @@ function TaikhoanController($scope, $http,$q) {
     $scope.ThaydoiThongtinKhachhang = function () {
         $http.post("/Taikhoan/ThaydoiThongtinKhachhang", { khachhang: $scope.khachhang }).success(function (data, status, headers, config) {
             alert(data.thongbao);
+        }).error(function (data, status, headers, config) {
+            // log 
+            alert("Lỗi thay đổi thông tin khách hàng.");
         });
     }
 

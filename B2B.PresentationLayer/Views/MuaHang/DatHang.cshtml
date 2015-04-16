@@ -4,7 +4,7 @@
 
 
 <script src="~/Scripts/Custom/MuaHangController.js"></script>
-<div class="container-fluid" ng-controller="muaHangController" ng-init="LoadNhomHanghoa();LoadHanghoaTheoNhomHanghoa();LoadChitietDonhang()">
+<div class="container-fluid" ng-controller="muaHangController" ng-init="LoadNhomHanghoa();LoadHanghoaTheoNhomHanghoa();LayDonhangTam()">
     <div class="col-md-5">
         <h2 style="margin-left:15px">Đặt hàng</h2>
         <div class="form-group">
@@ -99,8 +99,6 @@
         @*<div class="col-md-offset-5 col-md-7">*@
         <div class="col-md-12 form-group" style=" margin-top:10px">
             <input type="button" ng-disabled="" class="btn btn-primary" value="Đặt hàng" ng-click="Dathang()">
-            &nbsp;
-            <input type="button" ng-disabled="" class="btn btn-primary" value="Lưu tạm" ng-click="">
             &nbsp;
             <input type="button" ng-disabled="" class="btn btn-primary" value="Hủy" ng-click="Reset()">
             &nbsp;
