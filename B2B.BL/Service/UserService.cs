@@ -61,7 +61,7 @@ namespace B2B.BL.Service
                 Mapper.CreateMap<Tin_GetAllAccount_Result, AccountModel>()
                 .ForMember(dest => dest.AccountId, opt => opt.MapFrom(src => src.AcountId))
                 .ForMember(dest => dest.AccountName, opt => opt.MapFrom(src => src.AccountName))
-                .ForMember(dest => dest.AccountPassword, opt => opt.MapFrom(src => src.AccountPassword))
+                //.ForMember(dest => dest.Active, opt => opt.MapFrom(src => src.Active))
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.Ten, opt => opt.MapFrom(src => src.Ten))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))

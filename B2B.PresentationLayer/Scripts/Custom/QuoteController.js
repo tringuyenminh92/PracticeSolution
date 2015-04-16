@@ -7,19 +7,25 @@ $(function () {
 })
 
 angular.module("GlobalModule").controller("quoteController", QuoteController);
-QuoteController.$inject = ['$scope', '$http', '$location','$q'];
-function QuoteController($scope, $http, $location, $q,$modalInstance) {
+QuoteController.$inject = ['$scope', '$http', '$location', '$q'];
+function QuoteController($scope, $http, $location, $q, $modalInstance) {
 
     $scope.$scope = $scope;
 
-    $scope.colors = [];
-    $scope.availableColors = ['Red', 'Green', 'Blue', 'Yellow', 'Magenta', 'Maroon', 'Umbra', 'Turquoise'];
+    $scope.colors = ['Red', 'Green'];
+    $scope.availableColors = ['Blue', 'Yellow', 'Magenta', 'Maroon', 'Umbra', 'Turquoise'];
 
+    $scope.Array = [];
+    $scope.Edit = function () {
+        $scope.Array = JSON.parse(JSON.stringify($scope.colors));
+    }
+    $scope.Reset = function () {
+        $scope.colors = JSON.parse(JSON.stringify($scope.Array));
+    }
 
     //display-property="name" << when using array object
-    $scope.tags = ['tkh','sasac'];
-    $scope.loadTags=function(query)
-    {
+    $scope.tags = ['tkh', 'sasac'];
+    $scope.loadTags = function (query) {
         alert(query);
     }
 
@@ -37,11 +43,13 @@ function QuoteController($scope, $http, $location, $q,$modalInstance) {
 
 
     $scope.loadData = function () {
-        $http.get("GetQuotes").success(function (data, status, headers, config) {
+
+        $http.get("/Quote/GetQuotes").success(function (data, status, headers, config) {
             $scope.myData = data;
             //var wait = new WaitDialog();
             //wait.Show();
-            $scope.ShowModal(null,null, "abc", "cds", "Cancel", "Submit");
+            //$scope.ShowModal(null, null, "abc", "cds", "Cancel", "Submit");
+
         }).error(function (data, status, headers, config) {
         });
     };

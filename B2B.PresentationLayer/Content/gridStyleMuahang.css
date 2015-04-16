@@ -1,0 +1,67 @@
+﻿.gridStyleHanghoa {
+}
+
+    .gridStyleHanghoa .ui-grid-top-panel {
+        position: relative;
+        overflow: hidden;
+        font-weight: bold;
+        /*Nguyen Minh Tri - Background and color*/
+        background-color: #337abb;
+        color: #fff;
+        -moz-border-radius-topright: 5px;
+        -moz-border-radius-topleft: 5px;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        -webkit-border-top-left-radius: 5px;
+        -moz-background-clip: padding-box;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        width: 100%;
+        /*End*/
+    }
+
+    .gridStyleHanghoa .ui-grid-pager-panel {
+        position: absolute;
+        left: 0;
+        /*Nguyen Minh Tri - 01-02-2015*/
+        bottom: -32.5px;
+        left: -1px;
+        background: #337ab7;
+        -moz-border-radius-bottomright: 5px;
+        -moz-border-radius-bottomleft: 5px;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        -webkit-border-bottom-right-radius: 5px;
+        -webkit-border-bottom-left-radius: 5px;
+        width: 100.2%;
+        /*End*/
+        padding-top: 3px;
+        padding-bottom: 3px;
+        overflow: hidden;
+    }
+
+    .gridStyleHanghoa .ui-grid-cell-contents {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        white-space: nowrap;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+    }
+
+        .gridStyleHanghoa .ui-grid-cell-contents span {
+            display: table;
+            margin:  auto;
+        }
+
+
+    .gridStyleHanghoa .ui-grid-header-cell {
+        height: 70px !important;
+    }
+
+    .grid-align {
+    text-align: center;
+}
+ 

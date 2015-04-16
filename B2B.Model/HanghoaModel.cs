@@ -28,5 +28,18 @@ namespace B2B.Model
         public String Ghichu { get; set; }
         public String LinkHinhanh_Web { get; set; }
         public HanghoaModel() { HanghoaId = Guid.NewGuid(); }
+
+        public string[] ArrayTag
+        {
+
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(Tags))
+                    return Tags.Split(',');
+                return null;
+            }
+            set { if (ArrayTag != null && ArrayTag.Length > 0) Tags = string.Join(",", value); }
+        }
+        public string Tags { get; set; }
     }
 }

@@ -28,6 +28,7 @@ namespace B2B.PresentationLayer
                                                             "~/Content/ui-grid-unstable.css",
                                                             "~/Content/font-awesome.css",
                                                             "~/Content/myStyle.css",
+                                                             "~/Content/gridStyleMuaHang.css",
                                                             "~/Content/ng-tags-input.css",
                                                             "~/Content/ng-tags-input.bootstrap.css",
                                                              "~/Content/select.css"));

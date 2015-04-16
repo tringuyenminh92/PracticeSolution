@@ -4,42 +4,43 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0d807991cd0e4bf1b4059a34565602e8" Name="Diagram1" ZoomLevel="90">
-        <EntityTypeShape EntityType="B2BSystemModel.Account" Width="1.5" PointX="8.25" PointY="46.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.ChitietDonhang" Width="1.5" PointX="18" PointY="40.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.ChitietPhieunhap" Width="1.5" PointX="21" PointY="57.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.ChitietPhieuxuat" Width="1.5" PointX="23.25" PointY="43.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.CongnoNhap" Width="1.5" PointX="21.75" PointY="52.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.CongnoXuat" Width="1.5" PointX="18.75" PointY="50" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.Dongia" Width="1.5" PointX="21" PointY="38.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.Donhang" Width="1.5" PointX="15.75" PointY="42.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.Donvi" Width="1.5" PointX="13.5" PointY="34.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.Hanghoa" Width="1.5" PointX="15.75" PointY="35.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.HanghoaNhaCungcap" Width="1.5" PointX="9.75" PointY="57.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.Khachhang" Width="1.5" PointX="10.5" PointY="47.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.Kho" Width="1.5" PointX="7.5" PointY="49.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.Khuvuc" Width="1.5" PointX="0.75" PointY="35.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.LoHanghoa" Width="1.5" PointX="15.75" PointY="54.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.NguyennhanLydo" Width="1.5" PointX="18.75" PointY="37.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.NhaCungcap" Width="1.5" PointX="7.5" PointY="55.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.Nhanvien" Width="1.5" PointX="13.5" PointY="47.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.NhanvienKho" Width="1.5" PointX="18.75" PointY="46.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.NhomHanghoa" Width="1.5" PointX="13.5" PointY="38.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.NhomKhachhang" Width="1.5" PointX="8.25" PointY="41.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.Phieunhap" Width="1.5" PointX="18.75" PointY="55.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.Phieuxuat" Width="1.5" PointX="21" PointY="45.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.Phongban" Width="1.5" PointX="11.25" PointY="43.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.Quanhuyen" Width="1.5" PointX="5.25" PointY="65.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.Thuchi" Width="1.5" PointX="26.25" PointY="50.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.ThuoctinhHanghoa" Width="1.5" PointX="18" PointY="32.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.Tinhthanh" Width="1.5" PointX="3" PointY="34.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.Tinhtrang" Width="1.5" PointX="24" PointY="39.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.TinhtrangDonhang" Width="1.5" PointX="24" PointY="48" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.TinhtrangPhieunhap" Width="1.5" PointX="24" PointY="52.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.TinhtrangPhieuxuat" Width="1.5" PointX="26.25" PointY="46.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.Tonkho" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="B2BSystemModel.User" Width="1.5" PointX="15.75" PointY="50.75" IsExpanded="true" />
+      <Diagram DiagramId="b32c0434f28940c69b949d5b672f4d77" Name="Diagram1">
+        <EntityTypeShape EntityType="B2BSystemModel.Account" Width="1.5" PointX="0.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.ChitietDonhang" Width="1.5" PointX="16.5" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.ChitietPhieunhap" Width="1.5" PointX="19.5" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.ChitietPhieuxuat" Width="1.5" PointX="15.75" PointY="32.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.CongnoNhap" Width="1.5" PointX="8.25" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.CongnoXuat" Width="1.5" PointX="8.25" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Dongia" Width="1.5" PointX="16.5" PointY="37" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Donhang" Width="1.5" PointX="11.25" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Donvi" Width="1.5" PointX="12" PointY="37.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Hanghoa" Width="1.5" PointX="14.25" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.HanghoaNhaCungcap" Width="1.5" PointX="22.5" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Khachhang" Width="1.5" PointX="3" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Kho" Width="1.5" PointX="9" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Khuvuc" Width="1.5" PointX="1.5" PointY="41.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.LoHanghoa" Width="1.5" PointX="8.25" PointY="32.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.NguyennhanLydo" Width="1.5" PointX="11.25" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.NhaCungcap" Width="1.5" PointX="12" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Nhanvien" Width="1.5" PointX="6" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.NhanvienKho" Width="1.5" PointX="14.25" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.NhomHanghoa" Width="1.5" PointX="12" PointY="41.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.NhomKhachhang" Width="1.5" PointX="0.75" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Phieunhap" Width="1.5" PointX="14.25" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Phieuxuat" Width="1.5" PointX="13.5" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Phongban" Width="1.5" PointX="3.75" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Quanhuyen" Width="1.5" PointX="0.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Thuchi" Width="1.5" PointX="19.5" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.ThuoctinhHanghoa" Width="1.5" PointX="16.5" PointY="41.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Tinhthanh" Width="1.5" PointX="1.5" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Tinhtrang" Width="1.5" PointX="14.25" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.TinhtrangDonhang" Width="1.5" PointX="16.5" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.TinhtrangPhieunhap" Width="1.5" PointX="19.5" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.TinhtrangPhieuxuat" Width="1.5" PointX="21.75" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Tonkho" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.User" Width="1.5" PointX="8.25" PointY="46.375" IsExpanded="true" />
         <AssociationConnector Association="B2BSystemModel.FK_Khachhang_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Nhanvien_Account" ManuallyRouted="false" />
         <AssociationConnector Association="B2BSystemModel.FK_ChitietDonhang_Donhang" ManuallyRouted="false" />
         <AssociationConnector Association="B2BSystemModel.FK_ChitietDonhang_Hanghoa" ManuallyRouted="false" />
         <AssociationConnector Association="B2BSystemModel.FK_ChitietPhieunhap_Hanghoa" ManuallyRouted="false" />
@@ -101,8 +102,6 @@
         <AssociationConnector Association="B2BSystemModel.FK_TinhtrangDonhang_Tinhtrang" ManuallyRouted="false" />
         <AssociationConnector Association="B2BSystemModel.FK_TinhtrangPhieunhap_Tinhtrang" ManuallyRouted="false" />
         <AssociationConnector Association="B2BSystemModel.FK_TinhtrangPhieuxuat_Tinhtrang" ManuallyRouted="false" />
-        <AssociationConnector Association="B2BSystemModel.FK_Nhanvien_Account" />
-        <EntityTypeShape EntityType="B2BSystemModel.sysdiagram" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
