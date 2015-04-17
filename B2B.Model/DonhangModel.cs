@@ -63,6 +63,7 @@ namespace B2B.Model
         }
         public bool Active { get; set; }
         public Guid? TinhtrangDonhangCurrentId{get;set;}
+        public DonhangModel() { DonhangId = Guid.NewGuid(); }
     }
 
 }

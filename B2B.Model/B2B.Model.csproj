@@ -49,11 +49,9 @@
     <Compile Include="DonhangModel.cs" />
     <Compile Include="DonviModel.cs" />
     <Compile Include="HanghoaModel.cs" />
-    <Compile Include="HanghoaModel_Tin.cs" />
     <Compile Include="KhachhangModel.cs" />
     <Compile Include="LoaiDonhangModel.cs" />
     <Compile Include="NhomHanghoaModel.cs" />
-    <Compile Include="NhomHanghoaModel_Tin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuanhuyenModel.cs" />
     <Compile Include="QuoteModel.cs" />
@@ -62,6 +60,8 @@
     <Compile Include="SalesGroupModel.cs" />
     <Compile Include="SalesOfficeModel.cs" />
     <Compile Include="TinhthanhModel.cs" />
+    <Compile Include="TinhtrangDonhangModel.cs" />
+    <Compile Include="TinhtrangModel.cs" />
     <Compile Include="UserModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
