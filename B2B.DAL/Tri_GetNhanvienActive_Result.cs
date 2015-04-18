@@ -36,6 +36,5 @@ namespace B2B.DAL
         public Nullable<int> Step { get; set; }
         public byte[] Version { get; set; }
         public string Linkanh { get; set; }
-        public Nullable<System.Guid> AccountId { get; set; }
     }
 }
