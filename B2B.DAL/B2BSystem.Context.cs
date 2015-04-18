@@ -65,7 +65,11 @@ namespace B2B.DAL
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         public DbSet<User> Users { get; set; }
+=======
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
+>>>>>>> parent of 63e54bf... Đơn hàng, Bán hàng Updated
 =======
         public DbSet<sysdiagram> sysdiagrams { get; set; }
 >>>>>>> parent of 63e54bf... Đơn hàng, Bán hàng Updated
