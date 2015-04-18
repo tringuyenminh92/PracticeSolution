@@ -12,11 +12,10 @@ function MuaHangController($scope, $http, $q) {
     //    //Thanhtien: "2000"
     //    //}
     //];
-    //$scope.tongtien = 0;
-    //$scope.tiengiam = 0;
-    //$scope.phantramgiam = "0%";
+    $scope.tongtien = 0;
+    $scope.tiengiam = 0;
+    $scope.phantramgiam = "0%";
 
-    //Load hàng hóa
     $scope.LoadHanghoaTheoNhomHanghoa = function () {
         $http.post("/MuaHang/LoadHanghoaTheoNhomHanghoa", { nhomHanghoaId: $scope.nhomHanghoaId }).success(function (data, status, headers, config) {
             $scope.hanghoas = data;
@@ -32,7 +31,6 @@ function MuaHangController($scope, $http, $q) {
         });
     };
 
-    //Load nhóm hàng hóa
     $scope.LoadNhomHanghoa = function () {
         $http.post("/MuaHang/LoadNhomHanghoa").success(function (data, status, headers, config) {
             $scope.nhomhanghoas = data;
@@ -42,26 +40,29 @@ function MuaHangController($scope, $http, $q) {
         });
     };
 
-    //Load session đơn hàng
     $scope.LayDonhangTam = function () {
-        var defer = $q.defer();
         $http.post("/MuaHang/LayDonhangTam").success(function (data, status, headers, config) {
             $scope.chitietdonhangs = [];
-            $scope.donhang = { Tiengiam: 0, PhantramGiam: 0, Tongtien: 0, LoaiDonhang: 0, Active: 1 };
+            $scope.donhang = { Tiengiam: 0, PhantramGiam : 0,Tongtien: 0, TongLoaiDonhang: 0, Active: 1 };
             if (data.lst != null) {
                 $scope.chitietdonhangs = data.lst;
                 $scope.donhang = data.dh;
             }
-        }).error(defer.reject);
-        return defer.promise;
+        }).error(function (data, status, headers, config) {
+            // log 
+            alert('Load chi tiết đơn hàng tạm không thành công');
+        });
     }
 
-    //Reset khi khách hàng bấm hủy ở form mua hàng
+    $scope.Dathang = function () {
+
+    }
+
     $scope.Reset = function () {
         $scope.chitietdonhangs = [];
-        $scope.donhang.Tongtien = 0;
-        $scope.donhang.Tiengiam = 0;
-        $scope.donhang.PhantramGiam = 0;
+        $scope.tongtien = 0;
+        $scope.tiengiam = 0;
+        $scope.phantramgiam = "0%";
     }
 
     //Lấy Account để kiểm tra đã đăng nhập chưa và có đầy đủ thông tin chưa
@@ -88,12 +89,10 @@ function MuaHangController($scope, $http, $q) {
         }
     }
 
-    //Xử lý nút đặt hàng
     $scope.Dathang = function () {
         $scope.LayAccountId().then($scope.XulyDathang);
     }
 
-    //Kiểm tra khách hàng đã điền địa chỉ giao hàng/quận/huyện trong account của mình chưa
     $scope.KiemtraDiachiGiaohang = function () {
         if ($scope.khachhang.DiachiGiaohang == null || $scope.khachhang.QuanhuyenId == null || $scope.khachhang.TinhthanhId == null) {
             $scope.ChuacoDiachi = true;
@@ -111,22 +110,12 @@ function MuaHangController($scope, $http, $q) {
             if ($scope.khachhang.Gioitinh == null) {
                 $scope.khachhang.Gioitinh = true;
             }
-
-            //Hiển thị số điện thoại của khách hàng
-            $scope.dienthoai = "Chưa có";
-            if ($scope.khachhang.Tel == null && $scope.khachhang.Mobile != null) {
-                $scope.dienthoai = $scope.khachhang.Mobile;
-            } else if ($scope.khachhang.Tel != null && $scope.khachhang.Mobile == null) {
-                $scope.dienthoai = $scope.khachhang.Tel;
-            } else if ($scope.khachhang.Tel != null && $scope.khachhang.Mobile != null) {
-                $scope.dienthoai = $scope.khachhang.Tel + " - " + $scope.khachhang.Mobile;
-            }
             defer.resolve(data);
         }).error(defer.reject);
         return defer.promise;
     }
 
-    //Load tinh thanh - bổ sung địa chỉ giao hàng
+    //Load tinh thanh
     $scope.HienthiTinhthanh = function () {
         var defer = $q.defer();
         $http.post("/Taikhoan/HienthiTinhthanh").success(function (data, status, headers, config) {
@@ -138,7 +127,7 @@ function MuaHangController($scope, $http, $q) {
         return defer.promise;
     }
 
-    //Load quan huyen theo tinh thanh - bổ sung địa chỉ giao hàng
+    //Load quan huyen theo tinh thanh
     $scope.HienthiQuanhuyen = function () {
         var defer = $q.defer();
         if ($scope.khachhang.TinhthanhId == null) {
@@ -155,7 +144,10 @@ function MuaHangController($scope, $http, $q) {
         return defer.promise;
     }
 
-    //Hàm add hàng hóa vào chi tiết hàng hóa
+    $scope.InitChonDiachiGiaohang = function () {
+        $scope.LayAccountId().then($scope.LayThongtinTaikhoan).then($scope.KiemtraDiachiGiaohang).then($scope.HienthiTinhthanh).then($scope.HienthiQuanhuyen);
+    }
+
     $scope.addHanghoa = function (team) {
         var ctdh = {
             STT: $scope.chitietdonhangs.length + 1,
@@ -172,14 +164,15 @@ function MuaHangController($scope, $http, $q) {
             SoluongConlai : 1
         };
         $scope.chitietdonhangs.push(ctdh);
-        $scope.donhang.Tongtien += ctdh.Thanhtien;
-        //Cập nhật lại session hóa đơn và chi tiết hóa đơn
-        $http.post("/MuaHang/CapnhatDonhangTam", { lstChitietDonhangTam: $scope.chitietdonhangs, donhang: $scope.donhang }).success(function (data, status, headers, config) {
+        $scope.tongtien += ctdh.Thanhtien;
+        $http.post("/MuaHang/CapnhatDSChitietDonhangTam", { lstChitietDonhangTam: $scope.chitietdonhangs }).success(function (data, status, headers, config) {
         }).error(function (data, status, headers, config) {
-            alert('Cập nhật đơn hàng tạm không thành công');
+            // log 
+            alert('Cập nhật chi tiết đơn hàng tạm không thành công');
         });
     };
 
+    var img = $("<img />").attr('src', 'http://somedomain.com/image.jpg')
     $scope.gridOptions = {};
     $scope.addCellTemplate = '<button ng-click="getExternalScopes().addHanghoa(row.entity)" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-shopping-cart"/></button> ';
     $scope.imageCellTemplate = '<img ng-src={{row.entity.LinkHinhanh_Web}} class="img-responsive" width="200" height="300">';
@@ -197,22 +190,25 @@ function MuaHangController($scope, $http, $q) {
     $scope.gridOptions.enableFiltering = true;
     $scope.gridOptions.rowHeight = 80;
 
-    //Hàm remove hàng hóa khỏi chi tiết hàng hóa
+
     $scope.removeHanghoa = function (team) {
         //Push to server, delete and delete GUI
         var index = $scope.chitietdonhangs.indexOf(team);
         $scope.chitietdonhangs.splice(index, 1);
-        $scope.donhang.Tongtien -= team.Thanhtien;
+        $scope.tongtien -= team.Thanhtien;
         for (i = index; i < $scope.chitietdonhangs.length; i++) {
             $scope.chitietdonhangs[i].STT = $scope.chitietdonhangs[i].STT - 1;
         }
-        //Cập nhật lại session hóa đơn và chi tiết hóa đơn
-        $http.post("/MuaHang/CapnhatDonhangTam", { lstChitietDonhangTam: $scope.chitietdonhangs, donhang: $scope.donhang }).success(function (data, status, headers, config) {
+        $http.post("/MuaHang/CapnhatDSChitietDonhangTam", { lstChitietDonhangTam: $scope.chitietdonhangs }).success(function (data, status, headers, config) {
         }).error(function (data, status, headers, config) {
             // log 
-            alert('Cập nhật đơn hàng tạm không thành công');
+            alert('Cập nhật chi tiết đơn hàng tạm không thành công');
         });
     };
+
+    //$scope.Test() = function () {
+    //    alert('test');
+    //}
 
     $scope.gridOptions1 = {};
     $scope.removeCellTemplate = '<button ng-click="getExternalScopes().removeHanghoa(row.entity)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"/></button> ';
@@ -243,41 +239,16 @@ function MuaHangController($scope, $http, $q) {
                 rowEntity.SoluongConlai = newValue;
             }
             
-            $scope.donhang.Tongtien -= oldValue * rowEntity.Giaban;
-            $scope.donhang.Tongtien += rowEntity.Thanhtien;
+            $scope.tongtien -= oldValue * rowEntity.Giaban;
+            $scope.tongtien += rowEntity.Thanhtien;
             $scope.$apply();
-            $http.post("/MuaHang/CapnhatDonhangTam", { lstChitietDonhangTam: $scope.chitietdonhangs, donhang: $scope.donhang }).success(function (data, status, headers, config) {
+            $http.post("/MuaHang/CapnhatDSChitietDonhangTam", { lstChitietDonhangTam: $scope.chitietdonhangs }).success(function (data, status, headers, config) {
             }).error(function (data, status, headers, config) {
                 // log 
-                alert('Cập nhật đơn hàng tạm không thành công');
+                alert('Cập nhật chi tiết đơn hàng tạm không thành công');
             });
         });
     };
-
-    //Các hàm xử lý riêng trong trang chọn địa chỉ giao hàng
-
-    //Load quan huyen theo tinh thanh - chọn địa chỉ giao hàng khác
-    $scope.HienthiQuanhuyen1 = function () {
-        var defer = $q.defer();
-        if ($scope.tinhthanhGiao == null) {
-            $scope.quanhuyens = [];
-            $scope.quanhuyenGiao = null;
-        }
-        else {
-            $http.post("/Taikhoan/HienthiQuanhuyen", { tinhthanhId: $scope.tinhthanhGiao.TinhthanhId }).success(function (data, status, headers, config) {
-                if (data) {
-                    $scope.quanhuyens = data;
-                }
-            }).error(defer.reject);
-        }
-        return defer.promise;
-    }
-
-
-    //Hàm khi load trang chọn địa chỉ giao hàng
-    $scope.InitChonDiachiGiaohang = function () {
-        $scope.LayAccountId().then($scope.LayThongtinTaikhoan).then($scope.KiemtraDiachiGiaohang).then($scope.HienthiTinhthanh).then($scope.HienthiQuanhuyen);
-    }
 
     $scope.ThaydoiThongtinKhachhang = function () {
         $http.post("/Taikhoan/ThaydoiThongtinKhachhang", { khachhang: $scope.khachhang }).success(function (data, status, headers, config) {
@@ -289,94 +260,8 @@ function MuaHangController($scope, $http, $q) {
         });
     }
 
-    //Hàm xử lý khi khách hàng muốn thêm địa chỉ giao hàng
     $scope.ThemDcGh = false;
     $scope.MuonthemDiachiGiaohang = function () {
-        var defer = $q.defer();
         $scope.ThemDcGh = true;
-        $scope.quanhuyens = [];
-        $scope.diachiGiao = null;
-        $scope.tinhthanhGiao = null;
-        $scope.quanhuyenGiao = null;
-        $scope.soDienthoai = null;
-        return defer.promise;
-    }
-
-    $scope.XulyThemDiachiGiaohang = function () {
-        $scope.MuonthemDiachiGiaohang().then($scope.HienthiQuanhuyen1);
-    }
-
-    //Hàm xử lý khi khách hàng không muốn thêm địa chỉ giao hàng nữa
-    $scope.HuyThemDiachiGiaohang = function () {
-        $scope.ThemDcGh = false;
-        $scope.diachiGiao = null;
-        $scope.tinhthanhGiao = null;
-        $scope.quanhuyenGiao = null;
-        $scope.soDienthoai = null;
-    }
-
-    $scope.isLuuthanhMacdinh = false;
-    //Hàm xử lý khi khách hàng hoàn tất thông tin và lưu đơn hàng
-    $scope.TienhanhLuuDonhang = function () {
-        $scope.donhang.KhachhangId = $scope.khachhang.KhachhangId;
-        //alert($scope.donhang.Tongtien);
-        //Trường hợp khách không chọn địa chỉ giao hàng khác
-        if ($scope.diachiGiao == null) {
-            //alert("Trường hợp khách không chọn địa chỉ giao hàng khác");
-            $scope.donhang.DiachiGiao = $scope.khachhang.DiachiGiaohang;
-            $scope.donhang.TenTinhthanhGiao = $scope.khachhang.TenTinhthanh;
-            $scope.donhang.TenQuanhuyenGiao = $scope.khachhang.TenQuanhuyen;
-            if ($scope.khachhang.Mobile != null) {
-                $scope.donhang.SoDienthoai = $scope.khachhang.Mobile;
-            }
-            else {
-                $scope.donhang.SoDienthoai = $scope.khachhang.Tel;
-            }
-
-            //alert($scope.donhang.KhachhangId + " " + $scope.donhang.DiachiGiao + " " + $scope.donhang.TenTinhthanhGiao + " " + $scope.donhang.TenQuanhuyenGiao + " " + $scope.donhang.SoDienthoai + " " + $scope.donhang.Tongtien);
-            //Lưu vào bảng đơn hàng
-            $scope.truonghop = 0;
-        }
-            //Trường hợp khách chọn giao hàng nơi khác, nhưng không dùng làm địa chỉ mặc định
-        else if ($scope.isLuuthanhMacdinh == false) {
-            //alert("Trường hợp khách chọn giao hàng nơi khác, nhưng không dùng làm địa chỉ mặc định");
-            $scope.donhang.DiachiGiao = $scope.diachiGiao;
-            $scope.donhang.TenTinhthanhGiao = $scope.tinhthanhGiao.TenTinhthanh;
-            $scope.donhang.TenQuanhuyenGiao = $scope.quanhuyenGiao.TenQuanhuyen;
-            $scope.donhang.SoDienthoai = $scope.soDienthoai;
-
-            //alert($scope.donhang.KhachhangId + " " + $scope.donhang.DiachiGiao + " " + $scope.donhang.TenTinhthanhGiao + " " + $scope.donhang.TenQuanhuyenGiao + " " + $scope.donhang.SoDienthoai + " " + $scope.donhang.Tongtien);
-            //Lưu vào bảng đơn hàng
-            $scope.truonghop = 0;
-        }
-            //Trường hợp khách chọn giao hàng nơi khác, nhưng dùng làm địa chỉ mặc định
-        else if ($scope.isLuuthanhMacdinh == true) {
-            //alert("Trường hợp khách chọn giao hàng nơi khác, nhưng dùng làm địa chỉ mặc định");
-            $scope.khachhang.DiachiGiaohang = $scope.diachiGiao;
-            $scope.khachhang.TenTinhthanh = $scope.tinhthanhGiao.TenTinhthanh;
-            $scope.khachhang.TinhthanhId = $scope.tinhthanhGiao.TinhthanhId;
-            $scope.khachhang.TenQuanhuyen = $scope.quanhuyenGiao.TenQuanhuyen;
-            $scope.khachhang.QuanhuyenId = $scope.quanhuyenGiao.QuanhuyenId;
-            $scope.khachhang.Mobile = $scope.soDienthoai;
-
-            $scope.donhang.DiachiGiao = $scope.khachhang.DiachiGiaohang;
-            $scope.donhang.TenTinhthanhGiao = $scope.khachhang.TenTinhthanh;
-            $scope.donhang.TenQuanhuyenGiao = $scope.khachhang.TenQuanhuyen;
-            $scope.donhang.SoDienthoai = $scope.khachhang.Mobile;
-
-            //alert($scope.donhang.KhachhangId + " " + $scope.donhang.DiachiGiao + " " + $scope.donhang.TenTinhthanhGiao + " " + $scope.donhang.TenQuanhuyenGiao + " " + $scope.donhang.SoDienthoai + " " + $scope.donhang.Tongtien);
-            //Lưu vào bảng Khachhang và bảng Donhang
-            $scope.truonghop = 1;
-        }
-
-        $http.post("/MuaHang/InsertDonhang", { donhang: $scope.donhang, lstChitietDonhang: $scope.chitietdonhangs, khachhang: $scope.khachhang, truonghop: $scope.truonghop }).success(function (data, status, headers, config) {
-            alert(data.thongbao);
-            if (data.kq == true) {
-                window.location.href = '/Quote';
-            }
-        }).error(function (data, status, headers, config) {
-            // log 
-            alert('Lỗi insert Đơn hàng');
-        });
     }
 }

@@ -22,7 +22,8 @@ function TaikhoanController($scope, $http,$q) {
                 }
                 else {
                     alert("Đăng nhập không thành công.");
-                    $scope.accountpassword = "";
+                    window.location.href = '/Taikhoan/Dangnhap';
+                    //window.history.go(-1);
                 }
             }
         }).error(function (data, status, headers, config) {

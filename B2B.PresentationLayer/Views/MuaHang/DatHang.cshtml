@@ -43,7 +43,7 @@
         <div class="col-md-12">
             Nhóm khách hàng:
         </div>
-        <form name="chitietDonhang">
+        <form name="chitietHoadon">
             <div class="col-md-12" style="margin-top:27px">
                 <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions1">
                 </div>
@@ -51,7 +51,7 @@
         </form>
 
         @*<div class="col-md-offset-5 col-md-7">*@
-        <form name="donhang">
+        <form name="hoadon">
             <div class="col-md-6" style=" margin-top:80px">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -61,16 +61,16 @@
                         <div class="row">
                             <div class="col-md-6 control-label">Tiền giảm:</div>
                             <div class="col-md-6">
-                                <span>
-                                    {{donhang.Tiengiam}}
+                                <span ng-model="hoadon.Tiengiam">
+                                    {{tiengiam}}
                                 </span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 control-label">Phần trăm giảm:</div>
                             <div class="col-md-6">
-                                <span>
-                                    {{donhang.PhantramGiam}}%
+                                <span ng-model="hoadon.PhantramGiam">
+                                    {{phantramgiam}}
                                 </span>
                             </div>
                         </div>
@@ -78,8 +78,8 @@
                             <font size="4">
                                 <div class="col-md-6 control-label">Tổng tiền:</div>
                                 <div class="col-md-6">
-                                    <span>
-                                        <b>{{donhang.Tongtien}}</b>
+                                    <span ng-model="hoadon.Tongtien">
+                                        <b>{{tongtien}}</b>
                                     </span>
                                 </div>
                             </font>
@@ -90,7 +90,7 @@
 
             <div class="col-md-6" style=" margin-top:80px">
                 <div class="form-group">
-                    <textarea class="form-control" rows="6" style="resize:none" placeholder="Ghi chú" ng-model="donhang.Ghichu"></textarea>
+                    <textarea class="form-control" rows="6" style="resize:none" placeholder="Ghi chú" ng-model="hanghoa.Ghichu"></textarea>
                 </div>
             </div>
         </form>
