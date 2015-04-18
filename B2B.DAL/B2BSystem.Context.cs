@@ -62,7 +62,11 @@ namespace B2B.DAL
         public DbSet<TinhtrangPhieuxuat> TinhtrangPhieuxuats { get; set; }
         public DbSet<Tonkho> Tonkhoes { get; set; }
 <<<<<<< HEAD
+<<<<<<< HEAD
         public DbSet<User> Users { get; set; }
+=======
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
+>>>>>>> parent of 63e54bf... Đơn hàng, Bán hàng Updated
 =======
         public DbSet<sysdiagram> sysdiagrams { get; set; }
 >>>>>>> parent of 63e54bf... Đơn hàng, Bán hàng Updated
