@@ -2,6 +2,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿@{
     ViewBag.Title = "ChonDiachiGiaohang";
 }
@@ -73,6 +74,79 @@
 
         </div>
     </div>
+=======
+﻿@{
+    ViewBag.Title = "ChonDiachiGiaohang";
+}
+<script src="~/Scripts/Custom/MuaHangController.js"></script>
+<div class="col-md-offset-1 col-md-10" ng-controller="muaHangController" ng-init="InitChonDiachiGiaohang()">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <b>Địa chỉ giao</b>
+        </div>
+        <div class="panel-body">
+            <div ng-show="ChuacoDiachi">
+                <div style="margin-bottom:20px">
+                    Chưa có địa chỉ giao hàng hoặc chưa đầy đủ. Xin vui lòng bổ sung địa chỉ giao hàng.
+                </div>
+                @*<ul>
+            <li ng-repeat="dc in dcgiaohangs">
+                <div class="radio">
+                    <label><input type="radio" name="diachigiaohang" ng-click="getDiachiGiaohang()">{{dc.DiachiGiaohang}}</label>
+                </div>
+            </li>
+        </ul>*@
+                <form name="diachigiaohang_khachhang">
+                    <div class="form-group" ng-class="{error: diachigiaohang_khachhang.diachigiaohang.$invalid}">
+                        <label for="diachigiao">Địa chỉ giao hàng</label>
+                        <input type="text" class="form-control" name="diachigiaohang" placeholder="Địa chỉ giao hàng" ng-model="khachhang.DiachiGiaohang" required>
+                        <span ng-show="diachigiaohang_khachhang.diachigiaohang.$error.required" class="help-inline">
+                            Xin vui lòng nhập địa chỉ giao hàng
+                        </span>
+                    </div>
+                    <div class="form-group" ng-class="{error: diachigiaohang_khachhang.tinhthanh.$invalid}">
+                        <label for="tinhthanh">Tỉnh thành</label>
+                        <select class="form-control" name="tinhthanh" ng-model="khachhang.TinhthanhId" ng-options="obj.TinhthanhId as obj.TenTinhthanh for obj in tinhthanhs" ng-change="HienthiQuanhuyen()" required>
+                            <option value="">--Tỉnh thành--</option>
+                        </select>
+                        <span ng-show="diachigiaohang_khachhang.tinhthanh.$error.required" class="help-inline">
+                            Xin vui lòng chọn tỉnh thành
+                        </span>
+                    </div>
+                    @*<div> object is {{khachhang.Tinhthanh}}</div>*@
+                    <div class="form-group" ng-class="{error: diachigiaohang_khachhang.quanhuyen.$invalid}">
+                        <label for="quanhuyen">Quận huyện</label>
+                        <select class="form-control" name="quanhuyen" ng-model="khachhang.QuanhuyenId" ng-options="obj.QuanhuyenId as obj.TenQuanhuyen for obj in quanhuyens" required>
+                            <option value="">--Quận huyện--</option>
+                        </select>
+                        <span ng-show="diachigiaohang_khachhang.quanhuyen.$error.required" class="help-inline">
+                            Xin vui lòng chọn quận huyện
+                        </span>
+                    </div>
+
+                    <input type="button" ng-disabled="diachigiaohang_khachhang.diachigiaohang.$error.required||diachigiaohang_khachhang.quanhuyen.$error.required||diachigiaohang_khachhang.tinhthanh.$error.required"
+                           class="btn btn-primary" value="Lưu thành địa chỉ giao hàng mặc định" ng-click="ThaydoiThongtinKhachhang()">
+                </form>
+
+            </div>
+
+            <div ng-show="!ChuacoDiachi">
+                <div>
+                    <b>{{khachhang.DiachiGiaohang}},&nbsp;{{khachhang.TenQuanhuyen}},&nbsp;{{khachhang.TenTinhthanh}}</b>
+                </div>
+                <div style="padding-top: 20px" class="form-group">
+                    <input type="button" class="btn btn-primary" value="Giao tới địa chỉ này" ng-click="">
+                </div>
+                Bạn muốn giao hàng đến địa chỉ khác?&nbsp;<a ng-click="MuonthemDiachiGiaohang()">Thêm địa chỉ giao hàng mới</a>
+            </div>
+
+            <div ng-show="ThemDcGh">
+                test
+            </div>
+
+        </div>
+    </div>
+>>>>>>> parent of 63e54bf... Đơn hàng, Bán hàng Updated
 =======
 ﻿@{
     ViewBag.Title = "ChonDiachiGiaohang";
