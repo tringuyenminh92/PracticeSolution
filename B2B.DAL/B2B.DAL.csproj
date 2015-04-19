@@ -248,24 +248,6 @@
     <Compile Include="SP_GetUserDetails_Result.cs">
       <DependentUpon>QuoteSystem.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagramdefinition1_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition2_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams1_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams2_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
     <Compile Include="SP_PipingSchem_Result.cs">
       <DependentUpon>QuoteSystem.tt</DependentUpon>
     </Compile>
@@ -287,9 +269,7 @@
     <Compile Include="State.cs">
       <DependentUpon>QuoteSystem.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Repository\TinhtrangDonhangRepository.cs" />
     <Compile Include="sys_ChitietDonhangSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
@@ -362,9 +342,6 @@
     <Compile Include="sys_QuanhuyenSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
-    <Compile Include="sys_sysdiagramsSelect_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
     <Compile Include="sys_ThuchiSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
@@ -404,18 +381,13 @@
     <Compile Include="TinhtrangDonhang.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repository\TinhtrangDonhangRepository.cs" />
     <Compile Include="TinhtrangPhieunhap.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="TinhtrangPhieuxuat.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repository\TinhtrangRepository.cs" />
     <Compile Include="Tin_CheckLogin_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Tin_GetAllAccount1_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Tin_GetAllAccount_Result.cs">
