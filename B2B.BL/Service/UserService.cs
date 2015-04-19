@@ -80,24 +80,24 @@ namespace B2B.BL.Service
         //SaveAllAccount
         public bool SaveAllAccount(List<AccountModel> listAccount)
         {
-            try
+            //try
+            //{
+            if (listAccount != null)
             {
-                if (listAccount != null)
-                {
-                    Mapper.CreateMap<AccountModel, Account>()
-                    .ForMember(dest => dest.AccountId, opt => opt.MapFrom(src => src.AccountId))
-                    .ForMember(dest => dest.AccountName, opt => opt.MapFrom(src => src.AccountName))
-                    .ForMember(dest => dest.Active, opt => opt.MapFrom(src => src.Active))
-                    .ForMember(dest => dest.AccountPassword, opt => opt.MapFrom(src => src.AccountPassword));
-                    var rs = Mapper.Map<List<AccountModel>, List<Account>>(listAccount);
-                    return respository.SaveAllAccount(rs);
-                }
-                return false;
+                Mapper.CreateMap<AccountModel, Account>()
+                .ForMember(dest => dest.AccountId, opt => opt.MapFrom(src => src.AccountId))
+                .ForMember(dest => dest.AccountName, opt => opt.MapFrom(src => src.AccountName))
+                .ForMember(dest => dest.Active, opt => opt.MapFrom(src => src.Active))
+                .ForMember(dest => dest.AccountPassword, opt => opt.MapFrom(src => src.AccountPassword));
+                var rs = Mapper.Map<List<AccountModel>, List<Account>>(listAccount);
+                return respository.SaveAllAccount(rs);
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            return false;
+            //}
+            //catch (Exception)
+            //{
+            //    throw;
+            //}
         }
     }
 }

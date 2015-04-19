@@ -32,13 +32,16 @@ namespace B2B.PresentationLayer.Controllers
             var rs = us.GetAllAccount().ToList();
             return Json(rs, JsonRequestBehavior.AllowGet);
         }
-        public bool SaveAllAccount(Model.AccountModel listAccount)
+        public bool SaveAllAccount(List<Model.AccountModel> listAccount)
         {
-            var listAccount1 = new List<Model.AccountModel>();
-            listAccount1.Add(listAccount);
-            if (listAccount1.Count < 1)
-                return us.SaveAllAccount(listAccount1);
-            return false;
+            //var listAccount1 = new List<Model.AccountModel>();
+            //listAccount1.Add(listAccount);
+            if (listAccount.Count < 1)
+            {
+                return false;
+            }
+            return us.SaveAllAccount(listAccount);
+
         }
     }
 }

@@ -56,9 +56,13 @@ namespace B2B.DAL.Repository
         {
             if (listAccount != null)
             {
-                dbContext.Entry(listAccount).State = EntityState.Modified;
-                dbContext.SaveChanges();
-                return true;
+                foreach (var item in listAccount)
+                {
+                    dbContext.Entry(item).State = EntityState.Modified;
+                    dbContext.SaveChanges();
+                    return true;
+                }
+
             }
             return false;
         }
