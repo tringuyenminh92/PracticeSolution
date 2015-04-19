@@ -214,6 +214,7 @@
     <Compile Include="Controllers\MuaHangController.cs" />
     <Compile Include="Controllers\QuanlyHanghoaController.cs" />
     <Compile Include="Controllers\QuoteController.cs" />
+    <Compile Include="Controllers\TaikhoanController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -305,12 +306,6 @@
     <Content Include="Images\Hinhhanghoa\CPDuiCanh1kg.jpg" />
     <Content Include="Images\Hinhhanghoa\CPMeGa500r.jpg" />
     <Content Include="Images\Hinhhanghoa\CPTimGa500r.jpg" />
-    <Content Include="Scripts\angular-file-upload-all.js" />
-    <Content Include="Scripts\angular-file-upload-all.min.js" />
-    <Content Include="Scripts\angular-file-upload-shim.js" />
-    <Content Include="Scripts\angular-file-upload-shim.min.js" />
-    <Content Include="Scripts\angular-file-upload.js" />
-    <Content Include="Scripts\angular-file-upload.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
@@ -324,7 +319,6 @@
     <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\Angular\angular-file-upload.js" />
     <Content Include="Scripts\Angular\angular-route.js" />
     <Content Include="Scripts\Angular\angular-sanitize.js" />
     <Content Include="Scripts\Angular\angular-touch.js" />
@@ -369,9 +363,6 @@
     <Content Include="Scripts\Custom\TaikhoanController.js" />
     <Content Include="Scripts\Custom\ui-bootstrap-tpls-0.12.0.min.js" />
     <Content Include="Scripts\Custom\UserController.js" />
-    <Content Include="Scripts\FileAPI.flash.swf" />
-    <Content Include="Scripts\FileAPI.js" />
-    <Content Include="Scripts\FileAPI.min.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
@@ -387,8 +378,6 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\ng-file-upload-all.js" />
-    <Content Include="Scripts\ng-file-upload-all.min.js" />
     <Content Include="Scripts\ng-grid-1.3.2.js" />
     <Content Include="Scripts\ui-grid-unstable.js" />
     <Content Include="Scripts\ui-grid-unstable.min.js" />

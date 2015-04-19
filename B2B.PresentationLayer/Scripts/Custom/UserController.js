@@ -6,14 +6,14 @@ function UserController($scope, $http) {
     $scope.deleteRow = function (team) {
         //Push to server, delete and delete GUI        
         var index = $scope.myData.indexOf(team);
+        //alert(team);
         $http.post("User/DeleteAccount", { accountId: $scope.myData[index] });
         $scope.myData.splice(index, 1);
         //$scope.myData.
         //$scope.nhomHanghoaId = "55d8d06f-1d8b-4411-aa84-bfa4b398ffe9";
     };
     $scope.saveGrid = function () {
-        $scope.dataSave = [];
-        $scope.dataSave = $scope.myData;
+        $scope.dataSave = $scope.gridOptions.data;
         $http.post("User/SaveAllAccount", { listAccount: $scope.dataSave }).success(function (data, status, headers, config) {
             if (data) {
                 alert("Success!");
@@ -27,10 +27,7 @@ function UserController($scope, $http) {
             //alertInstance.ShowAlert();
             alert("Error!");
         });
-    };
-    $scope.createNew = function () {
-        window.location.href = '/Taikhoan/Dangky';
-    };
+    }
     $scope.loadData = function () {
         $http.get("User/GetAllAccount").success(function (data, status, headers, config) {
             $scope.myData = data;
@@ -38,7 +35,6 @@ function UserController($scope, $http) {
             // log 
             //var alertInstance = new Alert("alertId", "Load Failed", "danger");
             //alertInstance.ShowAlert();
-            alert("Error");
         });
     };
     $scope.gridOptions = {};

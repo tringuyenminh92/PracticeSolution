@@ -7,8 +7,8 @@ $(function () {
 })
 
 angular.module("GlobalModule").controller("quoteController", QuoteController);
-QuoteController.$inject = ['$scope', '$http', '$upload', '$location', '$q'];
-function QuoteController($scope, $http, $upload, $location, $q, $modalInstance) {
+QuoteController.$inject = ['$scope', '$http', '$location', '$q'];
+function QuoteController($scope, $http, $location, $q, $modalInstance) {
 
     $scope.$scope = $scope;
 
@@ -70,23 +70,5 @@ function QuoteController($scope, $http, $upload, $location, $q, $modalInstance) 
 
     //Demo show datetime formart
     $scope.Giatri = Date.now();
-
-
-    $scope.upload = function (file) {
-        if (file && file.length) {
-            $upload.upload({
-                url: 'Quote/UploadFile',
-                method: 'POST',
-                file: file
-            }).progress(function (evt) {
-                //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            }).success(function (data, status, headers, config) {
-                //console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-                if (data) {
-                    alert(data.FileName);
-                }
-            });
-        }
-    };
 }
 

@@ -60,8 +60,8 @@ namespace B2B.DAL
         public DbSet<TinhtrangDonhang> TinhtrangDonhangs { get; set; }
         public DbSet<TinhtrangPhieunhap> TinhtrangPhieunhaps { get; set; }
         public DbSet<TinhtrangPhieuxuat> TinhtrangPhieuxuats { get; set; }
-        public DbSet<Tonkho> Tonkhoes { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Tonkho> Tonkhoes { get; set; }
     
         public virtual ObjectResult<Khuyen_GetBaogiaTheoNhomKhachhang_Result> Khuyen_GetBaogiaTheoNhomKhachhang(Nullable<System.Guid> nhomKhachhangId)
         {
@@ -122,6 +122,83 @@ namespace B2B.DAL
         public virtual ObjectResult<Khuyen_GetThuchi_Result> Khuyen_GetThuchi()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Khuyen_GetThuchi_Result>("Khuyen_GetThuchi");
+        }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
         public virtual int sys_ChitietDonhangDelete(Nullable<System.Guid> chitietDonhangId, Nullable<System.Guid> donhangId, Nullable<System.Guid> hanghoaId, Nullable<int> soluong, Nullable<int> soluongGiao, Nullable<int> soluongConlai, Nullable<int> step, Nullable<System.DateTime> ngayCapnhat, Nullable<double> giaban, Nullable<double> vAT, Nullable<double> tiengiam, Nullable<double> phantramGiam, Nullable<double> thanhtien, string tenHanghoa, string ghichuTrahang, ObjectParameter version)
@@ -324,7 +401,7 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietDonhangUpdate", chitietDonhangIdParameter, donhangIdParameter, hanghoaIdParameter, soluongParameter, soluongGiaoParameter, soluongConlaiParameter, stepParameter, ngayCapnhatParameter, giabanParameter, vATParameter, tiengiamParameter, phantramGiamParameter, thanhtienParameter, tenHanghoaParameter, ghichuTrahangParameter, version);
         }
     
-        public virtual int sys_ChitietPhieunhapDelete(Nullable<System.Guid> chitietPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> hanghoaId, Nullable<int> soluong, Nullable<int> step, Nullable<System.DateTime> nSX, Nullable<System.DateTime> hSD, Nullable<double> gianhap, Nullable<double> thanhtien, string barcode, string ghichu, string tenHanghoa, ObjectParameter version)
+        public virtual int sys_ChitietPhieunhapDelete(Nullable<System.Guid> chitietPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> hanghoaId, Nullable<int> soluong, Nullable<int> step, Nullable<System.DateTime> nSX, Nullable<System.DateTime> hSD, string barcode, string ghichu, ObjectParameter version)
         {
             var chitietPhieunhapIdParameter = chitietPhieunhapId.HasValue ?
                 new ObjectParameter("ChitietPhieunhapId", chitietPhieunhapId) :
@@ -354,14 +431,6 @@ namespace B2B.DAL
                 new ObjectParameter("HSD", hSD) :
                 new ObjectParameter("HSD", typeof(System.DateTime));
     
-            var gianhapParameter = gianhap.HasValue ?
-                new ObjectParameter("Gianhap", gianhap) :
-                new ObjectParameter("Gianhap", typeof(double));
-    
-            var thanhtienParameter = thanhtien.HasValue ?
-                new ObjectParameter("Thanhtien", thanhtien) :
-                new ObjectParameter("Thanhtien", typeof(double));
-    
             var barcodeParameter = barcode != null ?
                 new ObjectParameter("Barcode", barcode) :
                 new ObjectParameter("Barcode", typeof(string));
@@ -370,14 +439,10 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            var tenHanghoaParameter = tenHanghoa != null ?
-                new ObjectParameter("TenHanghoa", tenHanghoa) :
-                new ObjectParameter("TenHanghoa", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietPhieunhapDelete", chitietPhieunhapIdParameter, phieunhapIdParameter, hanghoaIdParameter, soluongParameter, stepParameter, nSXParameter, hSDParameter, gianhapParameter, thanhtienParameter, barcodeParameter, ghichuParameter, tenHanghoaParameter, version);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietPhieunhapDelete", chitietPhieunhapIdParameter, phieunhapIdParameter, hanghoaIdParameter, soluongParameter, stepParameter, nSXParameter, hSDParameter, barcodeParameter, ghichuParameter, version);
         }
     
-        public virtual int sys_ChitietPhieunhapInsert(Nullable<System.Guid> chitietPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> hanghoaId, Nullable<int> soluong, Nullable<int> step, Nullable<System.DateTime> nSX, Nullable<System.DateTime> hSD, Nullable<double> gianhap, Nullable<double> thanhtien, string barcode, string ghichu, string tenHanghoa, ObjectParameter version)
+        public virtual int sys_ChitietPhieunhapInsert(Nullable<System.Guid> chitietPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> hanghoaId, Nullable<int> soluong, Nullable<int> step, Nullable<System.DateTime> nSX, Nullable<System.DateTime> hSD, string barcode, string ghichu, ObjectParameter version)
         {
             var chitietPhieunhapIdParameter = chitietPhieunhapId.HasValue ?
                 new ObjectParameter("ChitietPhieunhapId", chitietPhieunhapId) :
@@ -407,14 +472,6 @@ namespace B2B.DAL
                 new ObjectParameter("HSD", hSD) :
                 new ObjectParameter("HSD", typeof(System.DateTime));
     
-            var gianhapParameter = gianhap.HasValue ?
-                new ObjectParameter("Gianhap", gianhap) :
-                new ObjectParameter("Gianhap", typeof(double));
-    
-            var thanhtienParameter = thanhtien.HasValue ?
-                new ObjectParameter("Thanhtien", thanhtien) :
-                new ObjectParameter("Thanhtien", typeof(double));
-    
             var barcodeParameter = barcode != null ?
                 new ObjectParameter("Barcode", barcode) :
                 new ObjectParameter("Barcode", typeof(string));
@@ -423,11 +480,7 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            var tenHanghoaParameter = tenHanghoa != null ?
-                new ObjectParameter("TenHanghoa", tenHanghoa) :
-                new ObjectParameter("TenHanghoa", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietPhieunhapInsert", chitietPhieunhapIdParameter, phieunhapIdParameter, hanghoaIdParameter, soluongParameter, stepParameter, nSXParameter, hSDParameter, gianhapParameter, thanhtienParameter, barcodeParameter, ghichuParameter, tenHanghoaParameter, version);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietPhieunhapInsert", chitietPhieunhapIdParameter, phieunhapIdParameter, hanghoaIdParameter, soluongParameter, stepParameter, nSXParameter, hSDParameter, barcodeParameter, ghichuParameter, version);
         }
     
         public virtual ObjectResult<sys_ChitietPhieunhapSelect_Result> sys_ChitietPhieunhapSelect()
@@ -435,7 +488,7 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sys_ChitietPhieunhapSelect_Result>("sys_ChitietPhieunhapSelect");
         }
     
-        public virtual int sys_ChitietPhieunhapUpdate(Nullable<System.Guid> chitietPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> hanghoaId, Nullable<int> soluong, Nullable<int> step, Nullable<System.DateTime> nSX, Nullable<System.DateTime> hSD, Nullable<double> gianhap, Nullable<double> thanhtien, string barcode, string ghichu, string tenHanghoa, ObjectParameter version)
+        public virtual int sys_ChitietPhieunhapUpdate(Nullable<System.Guid> chitietPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> hanghoaId, Nullable<int> soluong, Nullable<int> step, Nullable<System.DateTime> nSX, Nullable<System.DateTime> hSD, string barcode, string ghichu, ObjectParameter version)
         {
             var chitietPhieunhapIdParameter = chitietPhieunhapId.HasValue ?
                 new ObjectParameter("ChitietPhieunhapId", chitietPhieunhapId) :
@@ -465,14 +518,6 @@ namespace B2B.DAL
                 new ObjectParameter("HSD", hSD) :
                 new ObjectParameter("HSD", typeof(System.DateTime));
     
-            var gianhapParameter = gianhap.HasValue ?
-                new ObjectParameter("Gianhap", gianhap) :
-                new ObjectParameter("Gianhap", typeof(double));
-    
-            var thanhtienParameter = thanhtien.HasValue ?
-                new ObjectParameter("Thanhtien", thanhtien) :
-                new ObjectParameter("Thanhtien", typeof(double));
-    
             var barcodeParameter = barcode != null ?
                 new ObjectParameter("Barcode", barcode) :
                 new ObjectParameter("Barcode", typeof(string));
@@ -481,11 +526,7 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            var tenHanghoaParameter = tenHanghoa != null ?
-                new ObjectParameter("TenHanghoa", tenHanghoa) :
-                new ObjectParameter("TenHanghoa", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietPhieunhapUpdate", chitietPhieunhapIdParameter, phieunhapIdParameter, hanghoaIdParameter, soluongParameter, stepParameter, nSXParameter, hSDParameter, gianhapParameter, thanhtienParameter, barcodeParameter, ghichuParameter, tenHanghoaParameter, version);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietPhieunhapUpdate", chitietPhieunhapIdParameter, phieunhapIdParameter, hanghoaIdParameter, soluongParameter, stepParameter, nSXParameter, hSDParameter, barcodeParameter, ghichuParameter, version);
         }
     
         public virtual int sys_ChitietPhieuxuatDelete(Nullable<System.Guid> chitietPhieuxuatId, Nullable<System.Guid> phieuxuatId, Nullable<System.Guid> hanghoaId, Nullable<System.Guid> chitietDonhangId, Nullable<int> soluong, Nullable<int> step, Nullable<double> thanhtien, Nullable<bool> active, string ghichu, ObjectParameter version)
@@ -3488,7 +3529,7 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_NhomKhachhangUpdate", nhomKhachhangIdParameter, stepParameter, ngayCapnhatParameter, activeParameter, codeParameter, tenNhomKhachhangParameter, ghichuParameter, version);
         }
     
-        public virtual int sys_PhieunhapDelete(Nullable<System.Guid> phieunhapId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> nhacungcapId, Nullable<System.Guid> nguyennhanLydo, Nullable<System.Guid> tinhtrangPhieunhapCurrentId, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<double> tongtien, string code, string ghichu, ObjectParameter version)
+        public virtual int sys_PhieunhapDelete(Nullable<System.Guid> phieunhapId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> nhacungcapId, Nullable<int> step, Nullable<System.DateTime> ngaylap, string code, string ghichu, ObjectParameter version)
         {
             var phieunhapIdParameter = phieunhapId.HasValue ?
                 new ObjectParameter("PhieunhapId", phieunhapId) :
@@ -3506,14 +3547,6 @@ namespace B2B.DAL
                 new ObjectParameter("NhacungcapId", nhacungcapId) :
                 new ObjectParameter("NhacungcapId", typeof(System.Guid));
     
-            var nguyennhanLydoParameter = nguyennhanLydo.HasValue ?
-                new ObjectParameter("NguyennhanLydo", nguyennhanLydo) :
-                new ObjectParameter("NguyennhanLydo", typeof(System.Guid));
-    
-            var tinhtrangPhieunhapCurrentIdParameter = tinhtrangPhieunhapCurrentId.HasValue ?
-                new ObjectParameter("TinhtrangPhieunhapCurrentId", tinhtrangPhieunhapCurrentId) :
-                new ObjectParameter("TinhtrangPhieunhapCurrentId", typeof(System.Guid));
-    
             var stepParameter = step.HasValue ?
                 new ObjectParameter("Step", step) :
                 new ObjectParameter("Step", typeof(int));
@@ -3521,10 +3554,6 @@ namespace B2B.DAL
             var ngaylapParameter = ngaylap.HasValue ?
                 new ObjectParameter("Ngaylap", ngaylap) :
                 new ObjectParameter("Ngaylap", typeof(System.DateTime));
-    
-            var tongtienParameter = tongtien.HasValue ?
-                new ObjectParameter("Tongtien", tongtien) :
-                new ObjectParameter("Tongtien", typeof(double));
     
             var codeParameter = code != null ?
                 new ObjectParameter("Code", code) :
@@ -3534,10 +3563,10 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_PhieunhapDelete", phieunhapIdParameter, nhanvienIdParameter, khoIdParameter, nhacungcapIdParameter, nguyennhanLydoParameter, tinhtrangPhieunhapCurrentIdParameter, stepParameter, ngaylapParameter, tongtienParameter, codeParameter, ghichuParameter, version);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_PhieunhapDelete", phieunhapIdParameter, nhanvienIdParameter, khoIdParameter, nhacungcapIdParameter, stepParameter, ngaylapParameter, codeParameter, ghichuParameter, version);
         }
     
-        public virtual int sys_PhieunhapInsert(Nullable<System.Guid> phieunhapId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> nhacungcapId, Nullable<System.Guid> nguyennhanLydo, Nullable<System.Guid> tinhtrangPhieunhapCurrentId, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<double> tongtien, string code, string ghichu, ObjectParameter version)
+        public virtual int sys_PhieunhapInsert(Nullable<System.Guid> phieunhapId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> nhacungcapId, Nullable<int> step, Nullable<System.DateTime> ngaylap, string code, string ghichu, ObjectParameter version)
         {
             var phieunhapIdParameter = phieunhapId.HasValue ?
                 new ObjectParameter("PhieunhapId", phieunhapId) :
@@ -3555,14 +3584,6 @@ namespace B2B.DAL
                 new ObjectParameter("NhacungcapId", nhacungcapId) :
                 new ObjectParameter("NhacungcapId", typeof(System.Guid));
     
-            var nguyennhanLydoParameter = nguyennhanLydo.HasValue ?
-                new ObjectParameter("NguyennhanLydo", nguyennhanLydo) :
-                new ObjectParameter("NguyennhanLydo", typeof(System.Guid));
-    
-            var tinhtrangPhieunhapCurrentIdParameter = tinhtrangPhieunhapCurrentId.HasValue ?
-                new ObjectParameter("TinhtrangPhieunhapCurrentId", tinhtrangPhieunhapCurrentId) :
-                new ObjectParameter("TinhtrangPhieunhapCurrentId", typeof(System.Guid));
-    
             var stepParameter = step.HasValue ?
                 new ObjectParameter("Step", step) :
                 new ObjectParameter("Step", typeof(int));
@@ -3570,10 +3591,6 @@ namespace B2B.DAL
             var ngaylapParameter = ngaylap.HasValue ?
                 new ObjectParameter("Ngaylap", ngaylap) :
                 new ObjectParameter("Ngaylap", typeof(System.DateTime));
-    
-            var tongtienParameter = tongtien.HasValue ?
-                new ObjectParameter("Tongtien", tongtien) :
-                new ObjectParameter("Tongtien", typeof(double));
     
             var codeParameter = code != null ?
                 new ObjectParameter("Code", code) :
@@ -3583,7 +3600,7 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_PhieunhapInsert", phieunhapIdParameter, nhanvienIdParameter, khoIdParameter, nhacungcapIdParameter, nguyennhanLydoParameter, tinhtrangPhieunhapCurrentIdParameter, stepParameter, ngaylapParameter, tongtienParameter, codeParameter, ghichuParameter, version);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_PhieunhapInsert", phieunhapIdParameter, nhanvienIdParameter, khoIdParameter, nhacungcapIdParameter, stepParameter, ngaylapParameter, codeParameter, ghichuParameter, version);
         }
     
         public virtual ObjectResult<sys_PhieunhapSelect_Result> sys_PhieunhapSelect()
@@ -3591,7 +3608,7 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sys_PhieunhapSelect_Result>("sys_PhieunhapSelect");
         }
     
-        public virtual int sys_PhieunhapUpdate(Nullable<System.Guid> phieunhapId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> nhacungcapId, Nullable<System.Guid> nguyennhanLydo, Nullable<System.Guid> tinhtrangPhieunhapCurrentId, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<double> tongtien, string code, string ghichu, ObjectParameter version)
+        public virtual int sys_PhieunhapUpdate(Nullable<System.Guid> phieunhapId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> nhacungcapId, Nullable<int> step, Nullable<System.DateTime> ngaylap, string code, string ghichu, ObjectParameter version)
         {
             var phieunhapIdParameter = phieunhapId.HasValue ?
                 new ObjectParameter("PhieunhapId", phieunhapId) :
@@ -3609,14 +3626,6 @@ namespace B2B.DAL
                 new ObjectParameter("NhacungcapId", nhacungcapId) :
                 new ObjectParameter("NhacungcapId", typeof(System.Guid));
     
-            var nguyennhanLydoParameter = nguyennhanLydo.HasValue ?
-                new ObjectParameter("NguyennhanLydo", nguyennhanLydo) :
-                new ObjectParameter("NguyennhanLydo", typeof(System.Guid));
-    
-            var tinhtrangPhieunhapCurrentIdParameter = tinhtrangPhieunhapCurrentId.HasValue ?
-                new ObjectParameter("TinhtrangPhieunhapCurrentId", tinhtrangPhieunhapCurrentId) :
-                new ObjectParameter("TinhtrangPhieunhapCurrentId", typeof(System.Guid));
-    
             var stepParameter = step.HasValue ?
                 new ObjectParameter("Step", step) :
                 new ObjectParameter("Step", typeof(int));
@@ -3624,10 +3633,6 @@ namespace B2B.DAL
             var ngaylapParameter = ngaylap.HasValue ?
                 new ObjectParameter("Ngaylap", ngaylap) :
                 new ObjectParameter("Ngaylap", typeof(System.DateTime));
-    
-            var tongtienParameter = tongtien.HasValue ?
-                new ObjectParameter("Tongtien", tongtien) :
-                new ObjectParameter("Tongtien", typeof(double));
     
             var codeParameter = code != null ?
                 new ObjectParameter("Code", code) :
@@ -3637,7 +3642,7 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_PhieunhapUpdate", phieunhapIdParameter, nhanvienIdParameter, khoIdParameter, nhacungcapIdParameter, nguyennhanLydoParameter, tinhtrangPhieunhapCurrentIdParameter, stepParameter, ngaylapParameter, tongtienParameter, codeParameter, ghichuParameter, version);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_PhieunhapUpdate", phieunhapIdParameter, nhanvienIdParameter, khoIdParameter, nhacungcapIdParameter, stepParameter, ngaylapParameter, codeParameter, ghichuParameter, version);
         }
     
         public virtual int sys_PhieuxuatDelete(Nullable<System.Guid> phieuxuatId, Nullable<System.Guid> nhanvienLapId, Nullable<System.Guid> khoId, Nullable<System.Guid> donhangId, Nullable<System.Guid> nhanvienGiaohangId, Nullable<System.Guid> nguyennhanLydo, Nullable<System.Guid> tinhtrangPhieuxuatCurrentId, Nullable<System.Guid> nhanvienDonhang, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<System.DateTime> ngayCapnhat, Nullable<double> tongtien, string code, string tenTinhtrangPhieuxuat, string ghichu, ObjectParameter version)
@@ -4109,55 +4114,24 @@ namespace B2B.DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_sysdiagramsInsert", principal_idParameter, diagram_idParameter, versionParameter, definitionParameter, nameParameter);
         }
-    
-        public virtual int sys_sysdiagramsSelect()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_sysdiagramsSelect");
-        }
-    
-        public virtual int sys_sysdiagramsUpdate(Nullable<int> principal_id, Nullable<int> diagram_id, Nullable<int> version, byte[] definition, string name)
-        {
-            var principal_idParameter = principal_id.HasValue ?
-                new ObjectParameter("principal_id", principal_id) :
-                new ObjectParameter("principal_id", typeof(int));
-    
-            var diagram_idParameter = diagram_id.HasValue ?
-                new ObjectParameter("diagram_id", diagram_id) :
-                new ObjectParameter("diagram_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            var nameParameter = name != null ?
-                new ObjectParameter("name", name) :
-                new ObjectParameter("name", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_sysdiagramsUpdate", principal_idParameter, diagram_idParameter, versionParameter, definitionParameter, nameParameter);
-        }
-    
         public virtual int sys_ThuchiDelete(Nullable<System.Guid> thuchiId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> phieuxuatId, Nullable<System.Guid> nhannopTienId, Nullable<int> ngay, Nullable<int> thang, Nullable<int> nam, Nullable<int> step, Nullable<System.DateTime> vaoluc, Nullable<double> tongtien, string ghichu, string tenNhannopTien, ObjectParameter version)
         {
             var thuchiIdParameter = thuchiId.HasValue ?
                 new ObjectParameter("ThuchiId", thuchiId) :
                 new ObjectParameter("ThuchiId", typeof(System.Guid));
-    
+
             var nhanvienIdParameter = nhanvienId.HasValue ?
                 new ObjectParameter("NhanvienId", nhanvienId) :
                 new ObjectParameter("NhanvienId", typeof(System.Guid));
-    
+
             var phieunhapIdParameter = phieunhapId.HasValue ?
                 new ObjectParameter("PhieunhapId", phieunhapId) :
                 new ObjectParameter("PhieunhapId", typeof(System.Guid));
-    
+
             var phieuxuatIdParameter = phieuxuatId.HasValue ?
                 new ObjectParameter("PhieuxuatId", phieuxuatId) :
                 new ObjectParameter("PhieuxuatId", typeof(System.Guid));
-    
+
             var nhannopTienIdParameter = nhannopTienId.HasValue ?
                 new ObjectParameter("NhannopTienId", nhannopTienId) :
                 new ObjectParameter("NhannopTienId", typeof(System.Guid));
@@ -4714,86 +4688,6 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_TinhtrangInsert", tinhtrangIdParameter, stepParameter, ngayCapnhatParameter, activeParameter, canDeleteParameter, codeParameter, tenTinhtrangParameter, ghichuParameter, version);
         }
     
-        public virtual int sys_TinhtrangPhieunhapDelete(Nullable<System.Guid> tinhtrangPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> tinhtrangId, Nullable<System.Guid> nhanvienCapnhat, Nullable<System.DateTime> ngayCapnhat, ObjectParameter version)
-        {
-            var tinhtrangPhieunhapIdParameter = tinhtrangPhieunhapId.HasValue ?
-                new ObjectParameter("TinhtrangPhieunhapId", tinhtrangPhieunhapId) :
-                new ObjectParameter("TinhtrangPhieunhapId", typeof(System.Guid));
-    
-            var phieunhapIdParameter = phieunhapId.HasValue ?
-                new ObjectParameter("PhieunhapId", phieunhapId) :
-                new ObjectParameter("PhieunhapId", typeof(System.Guid));
-    
-            var tinhtrangIdParameter = tinhtrangId.HasValue ?
-                new ObjectParameter("TinhtrangId", tinhtrangId) :
-                new ObjectParameter("TinhtrangId", typeof(System.Guid));
-    
-            var nhanvienCapnhatParameter = nhanvienCapnhat.HasValue ?
-                new ObjectParameter("NhanvienCapnhat", nhanvienCapnhat) :
-                new ObjectParameter("NhanvienCapnhat", typeof(System.Guid));
-    
-            var ngayCapnhatParameter = ngayCapnhat.HasValue ?
-                new ObjectParameter("NgayCapnhat", ngayCapnhat) :
-                new ObjectParameter("NgayCapnhat", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_TinhtrangPhieunhapDelete", tinhtrangPhieunhapIdParameter, phieunhapIdParameter, tinhtrangIdParameter, nhanvienCapnhatParameter, ngayCapnhatParameter, version);
-        }
-    
-        public virtual int sys_TinhtrangPhieunhapInsert(Nullable<System.Guid> tinhtrangPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> tinhtrangId, Nullable<System.Guid> nhanvienCapnhat, Nullable<System.DateTime> ngayCapnhat, ObjectParameter version)
-        {
-            var tinhtrangPhieunhapIdParameter = tinhtrangPhieunhapId.HasValue ?
-                new ObjectParameter("TinhtrangPhieunhapId", tinhtrangPhieunhapId) :
-                new ObjectParameter("TinhtrangPhieunhapId", typeof(System.Guid));
-    
-            var phieunhapIdParameter = phieunhapId.HasValue ?
-                new ObjectParameter("PhieunhapId", phieunhapId) :
-                new ObjectParameter("PhieunhapId", typeof(System.Guid));
-    
-            var tinhtrangIdParameter = tinhtrangId.HasValue ?
-                new ObjectParameter("TinhtrangId", tinhtrangId) :
-                new ObjectParameter("TinhtrangId", typeof(System.Guid));
-    
-            var nhanvienCapnhatParameter = nhanvienCapnhat.HasValue ?
-                new ObjectParameter("NhanvienCapnhat", nhanvienCapnhat) :
-                new ObjectParameter("NhanvienCapnhat", typeof(System.Guid));
-    
-            var ngayCapnhatParameter = ngayCapnhat.HasValue ?
-                new ObjectParameter("NgayCapnhat", ngayCapnhat) :
-                new ObjectParameter("NgayCapnhat", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_TinhtrangPhieunhapInsert", tinhtrangPhieunhapIdParameter, phieunhapIdParameter, tinhtrangIdParameter, nhanvienCapnhatParameter, ngayCapnhatParameter, version);
-        }
-    
-        public virtual ObjectResult<sys_TinhtrangPhieunhapSelect_Result> sys_TinhtrangPhieunhapSelect()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sys_TinhtrangPhieunhapSelect_Result>("sys_TinhtrangPhieunhapSelect");
-        }
-    
-        public virtual int sys_TinhtrangPhieunhapUpdate(Nullable<System.Guid> tinhtrangPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> tinhtrangId, Nullable<System.Guid> nhanvienCapnhat, Nullable<System.DateTime> ngayCapnhat, ObjectParameter version)
-        {
-            var tinhtrangPhieunhapIdParameter = tinhtrangPhieunhapId.HasValue ?
-                new ObjectParameter("TinhtrangPhieunhapId", tinhtrangPhieunhapId) :
-                new ObjectParameter("TinhtrangPhieunhapId", typeof(System.Guid));
-    
-            var phieunhapIdParameter = phieunhapId.HasValue ?
-                new ObjectParameter("PhieunhapId", phieunhapId) :
-                new ObjectParameter("PhieunhapId", typeof(System.Guid));
-    
-            var tinhtrangIdParameter = tinhtrangId.HasValue ?
-                new ObjectParameter("TinhtrangId", tinhtrangId) :
-                new ObjectParameter("TinhtrangId", typeof(System.Guid));
-    
-            var nhanvienCapnhatParameter = nhanvienCapnhat.HasValue ?
-                new ObjectParameter("NhanvienCapnhat", nhanvienCapnhat) :
-                new ObjectParameter("NhanvienCapnhat", typeof(System.Guid));
-    
-            var ngayCapnhatParameter = ngayCapnhat.HasValue ?
-                new ObjectParameter("NgayCapnhat", ngayCapnhat) :
-                new ObjectParameter("NgayCapnhat", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_TinhtrangPhieunhapUpdate", tinhtrangPhieunhapIdParameter, phieunhapIdParameter, tinhtrangIdParameter, nhanvienCapnhatParameter, ngayCapnhatParameter, version);
-        }
-    
         public virtual int sys_TinhtrangPhieuxuatDelete(Nullable<System.Guid> tinhtrangPhieuxuatId, Nullable<System.Guid> phieuxuatId, Nullable<System.Guid> tinhtrangId, Nullable<System.Guid> nhanvienCapnhatId, Nullable<System.DateTime> ngayCapnhat, string ghichuLydo, ObjectParameter version)
         {
             var tinhtrangPhieuxuatIdParameter = tinhtrangPhieuxuatId.HasValue ?
@@ -5256,19 +5150,6 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_UserUpdate", userIdParameter, nhanvienIdParameter, stepParameter, activeParameter, p_UsernameParameter, p_PasswordParameter, version);
         }
     
-        public virtual ObjectResult<Tin_CheckLogin_Result> Tin_CheckLogin(string accountname, string accountpassword)
-        {
-            var accountnameParameter = accountname != null ?
-                new ObjectParameter("accountname", accountname) :
-                new ObjectParameter("accountname", typeof(string));
-    
-            var accountpasswordParameter = accountpassword != null ?
-                new ObjectParameter("accountpassword", accountpassword) :
-                new ObjectParameter("accountpassword", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_CheckLogin_Result>("Tin_CheckLogin", accountnameParameter, accountpasswordParameter);
-        }
-    
         public virtual int Tin_DeletePhieunhap(Nullable<System.Guid> phieunhapId)
         {
             var phieunhapIdParameter = phieunhapId.HasValue ?
@@ -5278,11 +5159,6 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Tin_DeletePhieunhap", phieunhapIdParameter);
         }
     
-        public virtual ObjectResult<Tin_GetAllAccount_Result> Tin_GetAllAccount()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetAllAccount_Result>("Tin_GetAllAccount");
-        }
-    
         public virtual ObjectResult<Tin_GetChitietPhieunhapTheoPhieunhap_Result> Tin_GetChitietPhieunhapTheoPhieunhap(Nullable<System.Guid> phieunhapId)
         {
             var phieunhapIdParameter = phieunhapId.HasValue ?
@@ -5290,15 +5166,6 @@ namespace B2B.DAL
                 new ObjectParameter("PhieunhapId", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetChitietPhieunhapTheoPhieunhap_Result>("Tin_GetChitietPhieunhapTheoPhieunhap", phieunhapIdParameter);
-        }
-    
-        public virtual ObjectResult<Tin_GetCongnoNhapMoinhatTheoNhacungcap_Result> Tin_GetCongnoNhapMoinhatTheoNhacungcap(Nullable<System.Guid> nhacungcapId)
-        {
-            var nhacungcapIdParameter = nhacungcapId.HasValue ?
-                new ObjectParameter("NhacungcapId", nhacungcapId) :
-                new ObjectParameter("NhacungcapId", typeof(System.Guid));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetCongnoNhapMoinhatTheoNhacungcap_Result>("Tin_GetCongnoNhapMoinhatTheoNhacungcap", nhacungcapIdParameter);
         }
     
         public virtual ObjectResult<Tin_GetHanghoaActive_Result> Tin_GetHanghoaActive()
@@ -5318,15 +5185,6 @@ namespace B2B.DAL
         public virtual ObjectResult<Tin_GetNhomKhachhangActive_Result> Tin_GetNhomKhachhangActive()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetNhomKhachhangActive_Result>("Tin_GetNhomKhachhangActive");
-        }
-    
-        public virtual ObjectResult<Tin_GetPhieunhapTheoThang_Result> Tin_GetPhieunhapTheoThang(Nullable<System.DateTime> ngaylap)
-        {
-            var ngaylapParameter = ngaylap.HasValue ?
-                new ObjectParameter("Ngaylap", ngaylap) :
-                new ObjectParameter("Ngaylap", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetPhieunhapTheoThang_Result>("Tin_GetPhieunhapTheoThang", ngaylapParameter);
         }
     
         public virtual ObjectResult<Tin_GetPhieunhapTheoThang_Kho_Result> Tin_GetPhieunhapTheoThang_Kho(Nullable<System.DateTime> ngaylap, Nullable<System.Guid> khoId)
@@ -5447,20 +5305,6 @@ namespace B2B.DAL
                 new ObjectParameter("NhomKhachhangId", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tri_GetHanghoaTheoNhomKhachhang_Result>("Tri_GetHanghoaTheoNhomKhachhang", nhomKhachhangIdParameter);
-        }
-    
-        public virtual ObjectResult<Tri_GetKhachhangDemo_Result> Tri_GetKhachhangDemo()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tri_GetKhachhangDemo_Result>("Tri_GetKhachhangDemo");
-        }
-    
-        public virtual ObjectResult<Tri_GetKhachhangTheoNhomKhachhang_Result> Tri_GetKhachhangTheoNhomKhachhang(Nullable<System.Guid> nhomKhachhangId)
-        {
-            var nhomKhachhangIdParameter = nhomKhachhangId.HasValue ?
-                new ObjectParameter("NhomKhachhangId", nhomKhachhangId) :
-                new ObjectParameter("NhomKhachhangId", typeof(System.Guid));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tri_GetKhachhangTheoNhomKhachhang_Result>("Tri_GetKhachhangTheoNhomKhachhang", nhomKhachhangIdParameter);
         }
     
         public virtual ObjectResult<Tri_GetKho_Result> Tri_GetKho()
@@ -5667,6 +5511,193 @@ namespace B2B.DAL
                 new ObjectParameter("PhieuxuatId", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Vinh_GetTinhtrangPhieuxuatTheoPhieuxuat_Result>("Vinh_GetTinhtrangPhieuxuatTheoPhieuxuat", phieuxuatIdParameter);
+        }
+    
+        public virtual ObjectResult<Tin_CheckLogin_Result> Tin_CheckLogin(string accountname, string accountpassword)
+        {
+            var accountnameParameter = accountname != null ?
+                new ObjectParameter("accountname", accountname) :
+                new ObjectParameter("accountname", typeof(string));
+    
+            var accountpasswordParameter = accountpassword != null ?
+                new ObjectParameter("accountpassword", accountpassword) :
+                new ObjectParameter("accountpassword", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_CheckLogin_Result>("Tin_CheckLogin", accountnameParameter, accountpasswordParameter);
+        }
+    
+        public virtual int sp_alterdiagram1(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram1", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram1(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram1", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram1(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram1", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram1(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram1", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams1");
+        }
+    
+        public virtual ObjectResult<Tin_GetAllAccount_Result> Tin_GetAllAccount()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetAllAccount_Result>("Tin_GetAllAccount");
+        }
+    
+        public virtual int sp_alterdiagram2(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram2", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram2(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram2", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram2(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram2", diagramnameParameter, owner_idParameter);
+        }
+    
+    
+        public virtual int sp_renamediagram2(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram2", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams2()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams2");
+        }
+    
+        public virtual ObjectResult<Tri_GetKhachhangDemo_Result> Tri_GetKhachhangDemo()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tri_GetKhachhangDemo_Result>("Tri_GetKhachhangDemo");
+        }
+    
+        public virtual ObjectResult<Tri_GetKhachhangTheoNhomKhachhang_Result> Tri_GetKhachhangTheoNhomKhachhang(Nullable<System.Guid> nhomKhachhangId)
+        {
+            var nhomKhachhangIdParameter = nhomKhachhangId.HasValue ?
+                new ObjectParameter("NhomKhachhangId", nhomKhachhangId) :
+                new ObjectParameter("NhomKhachhangId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tri_GetKhachhangTheoNhomKhachhang_Result>("Tri_GetKhachhangTheoNhomKhachhang", nhomKhachhangIdParameter);
         }
     }
 }

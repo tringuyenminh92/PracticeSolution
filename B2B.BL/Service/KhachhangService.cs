@@ -31,7 +31,6 @@ namespace B2B.BL.Service
             Mapper.CreateMap<KhachhangModel, Khachhang>();
             Khachhang kh = Mapper.Map<KhachhangModel, Khachhang>(khachhang);
             return repository.Update(kh);
-
         }
     }
 }

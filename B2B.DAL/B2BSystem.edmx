@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="B2BSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="B2BSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountId" />
@@ -400,8 +400,6 @@
           <Property Name="Step" Type="int" />
           <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" />
           <Property Name="NguyennhanLydo" Type="uniqueidentifier" />
-          <Property Name="Tongtien" Type="float" />
-          <Property Name="TinhtrangPhieunhapCurrentId" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="Phieuxuat">
           <Key>
@@ -450,6 +448,16 @@
           <Property Name="Step" Type="int" />
           <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" />
           <Property Name="NgayCapnhat" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Thuchi">
           <Key>
@@ -1343,6 +1351,7 @@
           <Parameter Name="username" Type="varchar(max)" Mode="In" />
           <Parameter Name="pass" Type="varchar(max)" Mode="In" />
         </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="Khuyen_GetBaogiaTheoNhomKhachhang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NhomKhachhangId" Type="uniqueidentifier" Mode="In" />
         </Function>
@@ -1360,6 +1369,36 @@
           <Parameter Name="DonhangId" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="Khuyen_GetThuchi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sys_ChitietDonhangDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ChitietDonhangId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="DonhangId" Type="uniqueidentifier" Mode="In" />
@@ -1423,11 +1462,8 @@
           <Parameter Name="Step" Type="int" Mode="In" />
           <Parameter Name="NSX" Type="datetime" Mode="In" />
           <Parameter Name="HSD" Type="datetime" Mode="In" />
-          <Parameter Name="Gianhap" Type="float" Mode="In" />
-          <Parameter Name="Thanhtien" Type="float" Mode="In" />
           <Parameter Name="Barcode" Type="nvarchar" Mode="In" />
           <Parameter Name="Ghichu" Type="nvarchar" Mode="In" />
-          <Parameter Name="TenHanghoa" Type="nvarchar" Mode="In" />
           <Parameter Name="Version" Type="timestamp" Mode="InOut" />
         </Function>
         <Function Name="sys_ChitietPhieunhapInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1438,11 +1474,8 @@
           <Parameter Name="Step" Type="int" Mode="In" />
           <Parameter Name="NSX" Type="datetime" Mode="In" />
           <Parameter Name="HSD" Type="datetime" Mode="In" />
-          <Parameter Name="Gianhap" Type="float" Mode="In" />
-          <Parameter Name="Thanhtien" Type="float" Mode="In" />
           <Parameter Name="Barcode" Type="nvarchar" Mode="In" />
           <Parameter Name="Ghichu" Type="nvarchar" Mode="In" />
-          <Parameter Name="TenHanghoa" Type="nvarchar" Mode="In" />
           <Parameter Name="Version" Type="timestamp" Mode="InOut" />
         </Function>
         <Function Name="sys_ChitietPhieunhapSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -1454,11 +1487,8 @@
           <Parameter Name="Step" Type="int" Mode="In" />
           <Parameter Name="NSX" Type="datetime" Mode="In" />
           <Parameter Name="HSD" Type="datetime" Mode="In" />
-          <Parameter Name="Gianhap" Type="float" Mode="In" />
-          <Parameter Name="Thanhtien" Type="float" Mode="In" />
           <Parameter Name="Barcode" Type="nvarchar" Mode="In" />
           <Parameter Name="Ghichu" Type="nvarchar" Mode="In" />
-          <Parameter Name="TenHanghoa" Type="nvarchar" Mode="In" />
           <Parameter Name="Version" Type="timestamp" Mode="InOut" />
         </Function>
         <Function Name="sys_ChitietPhieuxuatDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -2306,11 +2336,8 @@
           <Parameter Name="NhanvienId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="KhoId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="NhacungcapId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="NguyennhanLydo" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="TinhtrangPhieunhapCurrentId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="Step" Type="int" Mode="In" />
           <Parameter Name="Ngaylap" Type="datetime" Mode="In" />
-          <Parameter Name="Tongtien" Type="float" Mode="In" />
           <Parameter Name="Code" Type="nvarchar" Mode="In" />
           <Parameter Name="Ghichu" Type="nvarchar" Mode="In" />
           <Parameter Name="Version" Type="timestamp" Mode="InOut" />
@@ -2320,11 +2347,8 @@
           <Parameter Name="NhanvienId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="KhoId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="NhacungcapId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="NguyennhanLydo" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="TinhtrangPhieunhapCurrentId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="Step" Type="int" Mode="In" />
           <Parameter Name="Ngaylap" Type="datetime" Mode="In" />
-          <Parameter Name="Tongtien" Type="float" Mode="In" />
           <Parameter Name="Code" Type="nvarchar" Mode="In" />
           <Parameter Name="Ghichu" Type="nvarchar" Mode="In" />
           <Parameter Name="Version" Type="timestamp" Mode="InOut" />
@@ -2335,11 +2359,8 @@
           <Parameter Name="NhanvienId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="KhoId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="NhacungcapId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="NguyennhanLydo" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="TinhtrangPhieunhapCurrentId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="Step" Type="int" Mode="In" />
           <Parameter Name="Ngaylap" Type="datetime" Mode="In" />
-          <Parameter Name="Tongtien" Type="float" Mode="In" />
           <Parameter Name="Code" Type="nvarchar" Mode="In" />
           <Parameter Name="Ghichu" Type="nvarchar" Mode="In" />
           <Parameter Name="Version" Type="timestamp" Mode="InOut" />
@@ -2653,31 +2674,6 @@
           <Parameter Name="Ghichu" Type="nvarchar" Mode="In" />
           <Parameter Name="Version" Type="timestamp" Mode="InOut" />
         </Function>
-        <Function Name="sys_TinhtrangPhieunhapDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="TinhtrangPhieunhapId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="PhieunhapId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="TinhtrangId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="NhanvienCapnhat" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="NgayCapnhat" Type="datetime" Mode="In" />
-          <Parameter Name="Version" Type="timestamp" Mode="InOut" />
-        </Function>
-        <Function Name="sys_TinhtrangPhieunhapInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="TinhtrangPhieunhapId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="PhieunhapId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="TinhtrangId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="NhanvienCapnhat" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="NgayCapnhat" Type="datetime" Mode="In" />
-          <Parameter Name="Version" Type="timestamp" Mode="InOut" />
-        </Function>
-        <Function Name="sys_TinhtrangPhieunhapSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="sys_TinhtrangPhieunhapUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="TinhtrangPhieunhapId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="PhieunhapId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="TinhtrangId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="NhanvienCapnhat" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="NgayCapnhat" Type="datetime" Mode="In" />
-          <Parameter Name="Version" Type="timestamp" Mode="InOut" />
-        </Function>
         <Function Name="sys_TinhtrangPhieuxuatDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TinhtrangPhieuxuatId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="PhieuxuatId" Type="uniqueidentifier" Mode="In" />
@@ -2821,17 +2817,11 @@
         <Function Name="Tin_GetChitietPhieunhapTheoPhieunhap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PhieunhapId" Type="uniqueidentifier" Mode="In" />
         </Function>
-        <Function Name="Tin_GetCongnoNhapMoinhatTheoNhacungcap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="NhacungcapId" Type="uniqueidentifier" Mode="In" />
-        </Function>
         <Function Name="Tin_GetHanghoaActive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Tin_GetHanghoaTheoKho" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="KhoId" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="Tin_GetNhomKhachhangActive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="Tin_GetPhieunhapTheoThang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Ngaylap" Type="datetime" Mode="In" />
-        </Function>
         <Function Name="Tin_GetPhieunhapTheoThang_Kho" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Ngaylap" Type="datetime" Mode="In" />
           <Parameter Name="KhoId" Type="uniqueidentifier" Mode="In" />
@@ -2965,6 +2955,7 @@
           <EntitySet Name="Phieuxuat" EntityType="Self.Phieuxuat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Phongban" EntityType="Self.Phongban" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Quanhuyen" EntityType="Self.Quanhuyen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Thuchi" EntityType="Self.Thuchi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThuoctinhHanghoa" EntityType="Self.ThuoctinhHanghoa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tinhthanh" EntityType="Self.Tinhthanh" Schema="dbo" store:Type="Tables" />
@@ -3227,8 +3218,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="B2BSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -3238,10 +3228,10 @@
           </Key>
           <Property Name="AccountId" Type="Guid" Nullable="false" />
           <Property Name="AccountName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="AccountPassword" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Active" Type="Boolean" />
           <NavigationProperty Name="Khachhangs" Relationship="Self.FK_Khachhang_Account" FromRole="Account" ToRole="Khachhang" />
-          <NavigationProperty Name="Nhanviens" Relationship="Self.FK_Nhanvien_Account" FromRole="Account" ToRole="Nhanvien" />
+          <Property Name="AccountPassword" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Nhanviens" Relationship="B2BSystemModel.FK_Nhanvien_Account" FromRole="Account" ToRole="Nhanvien" />
+          <Property Name="Active" Type="Boolean" />
         </EntityType>
         <EntityType Name="ChitietDonhang">
           <Key>
@@ -3426,7 +3416,6 @@
           <Property Name="Step" Type="Int32" />
           <Property Name="Version" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="NgayCapnhat" Type="DateTime" Precision="3" />
-          <Property Name="LinkHinhanh_Web" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ChitietDonhangs" Relationship="Self.FK_ChitietDonhang_Hanghoa" FromRole="Hanghoa" ToRole="ChitietDonhang" />
           <NavigationProperty Name="ChitietPhieunhaps" Relationship="Self.FK_ChitietPhieunhap_Hanghoa" FromRole="Hanghoa" ToRole="ChitietPhieunhap" />
           <NavigationProperty Name="ChitietPhieuxuats" Relationship="Self.FK_ChitietPhieuxuat_Hanghoa" FromRole="Hanghoa" ToRole="ChitietPhieuxuat" />
@@ -3436,6 +3425,7 @@
           <NavigationProperty Name="HanghoaNhaCungcaps" Relationship="Self.FK_HanghoaNhaCungcap_Hanghoa" FromRole="Hanghoa" ToRole="HanghoaNhaCungcap" />
           <NavigationProperty Name="LoHanghoas" Relationship="Self.FK_LoHanghoa_Hanghoa" FromRole="Hanghoa" ToRole="LoHanghoa" />
           <NavigationProperty Name="ThuoctinhHanghoas" Relationship="Self.FK_ThuoctinhHanghoa_Hanghoa" FromRole="Hanghoa" ToRole="ThuoctinhHanghoa" />
+          <Property Name="LinkHinhanh_Web" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="HanghoaNhaCungcap">
           <Key>
@@ -3631,8 +3621,6 @@
           <Property Name="Step" Type="Int32" />
           <Property Name="Version" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="Linkanh" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="AccountId" Type="Guid" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_Nhanvien_Account" FromRole="Nhanvien" ToRole="Account" />
           <NavigationProperty Name="CongnoNhaps" Relationship="Self.FK_CongnoNhap_Nhanvien" FromRole="Nhanvien" ToRole="CongnoNhap" />
           <NavigationProperty Name="CongnoXuats" Relationship="Self.FK_CongnoXuat_Nhanvien" FromRole="Nhanvien" ToRole="CongnoXuat" />
           <NavigationProperty Name="Donhangs" Relationship="Self.FK_Donhang_Nhanvien" FromRole="Nhanvien" ToRole="Donhang" />
@@ -3651,6 +3639,8 @@
           <NavigationProperty Name="TinhtrangPhieunhaps" Relationship="Self.FK_TinhtrangPhieunhap_Nhanvien" FromRole="Nhanvien" ToRole="TinhtrangPhieunhap" />
           <NavigationProperty Name="TinhtrangPhieuxuats" Relationship="Self.FK_TinhtrangPhieuxuat_Nhanvien" FromRole="Nhanvien" ToRole="TinhtrangPhieuxuat" />
           <NavigationProperty Name="Users" Relationship="Self.FK_User_Nhanvien" FromRole="Nhanvien" ToRole="User" />
+          <Property Name="AccountId" Type="Guid" />
+          <NavigationProperty Name="Account" Relationship="B2BSystemModel.FK_Nhanvien_Account" FromRole="Nhanvien" ToRole="Account" />
         </EntityType>
         <EntityType Name="NhanvienKho">
           <Key>
@@ -3708,8 +3698,6 @@
           <Property Name="Step" Type="Int32" />
           <Property Name="Version" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="NguyennhanLydo" Type="Guid" />
-          <Property Name="Tongtien" Type="Double" />
-          <Property Name="TinhtrangPhieunhapCurrentId" Type="Guid" />
           <NavigationProperty Name="ChitietPhieunhaps" Relationship="Self.FK_ChitietPhieunhap_Phieunhap" FromRole="Phieunhap" ToRole="ChitietPhieunhap" />
           <NavigationProperty Name="Kho" Relationship="Self.FK_Phieunhap_Kho" FromRole="Phieunhap" ToRole="Kho" />
           <NavigationProperty Name="NguyennhanLydo1" Relationship="Self.FK_Phieunhap_NguyennhanLydo" FromRole="Phieunhap" ToRole="NguyennhanLydo" />
@@ -3899,30 +3887,6 @@
           <NavigationProperty Name="Phieuxuat" Relationship="Self.FK_TinhtrangPhieuxuat_Phieuxuat" FromRole="TinhtrangPhieuxuat" ToRole="Phieuxuat" />
           <NavigationProperty Name="Tinhtrang" Relationship="Self.FK_TinhtrangPhieuxuat_Tinhtrang" FromRole="TinhtrangPhieuxuat" ToRole="Tinhtrang" />
         </EntityType>
-        <EntityType Name="Tonkho">
-          <Key>
-            <PropertyRef Name="TonkhoId" />
-          </Key>
-          <Property Name="TonkhoId" Type="Guid" Nullable="false" />
-          <Property Name="HanghoaId" Type="Guid" />
-          <Property Name="KhoId" Type="Guid" />
-          <Property Name="Ngay" Type="Int32" />
-          <Property Name="Thang" Type="Int32" />
-          <Property Name="Nam" Type="Int32" />
-          <Property Name="NgayCapnhat" Type="DateTime" Precision="3" />
-          <Property Name="GioCapnhat" Type="DateTime" Precision="3" />
-          <Property Name="SoduDauky" Type="Int32" />
-          <Property Name="SoluongNhap" Type="Int32" />
-          <Property Name="SoluongXuat" Type="Int32" />
-          <Property Name="SoluongTon" Type="Int32" />
-          <Property Name="NhanvienCapnhat" Type="Guid" />
-          <Property Name="Step" Type="Int32" />
-          <Property Name="Version" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="Active" Type="Boolean" />
-          <Property Name="SoluongTonDukien" Type="Int32" />
-          <Property Name="ThanhtienNhap" Type="Double" />
-          <Property Name="ThanhtienXuat" Type="Double" />
-        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserId" />
@@ -3944,18 +3908,6 @@
               <PropertyRef Name="AccountId" />
             </Principal>
             <Dependent Role="Khachhang">
-              <PropertyRef Name="AccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Nhanvien_Account">
-          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
-          <End Role="Nhanvien" Type="Self.Nhanvien" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="AccountId" />
-            </Principal>
-            <Dependent Role="Nhanvien">
               <PropertyRef Name="AccountId" />
             </Dependent>
           </ReferentialConstraint>
@@ -4725,15 +4677,10 @@
           <EntitySet Name="TinhtrangDonhangs" EntityType="Self.TinhtrangDonhang" />
           <EntitySet Name="TinhtrangPhieunhaps" EntityType="Self.TinhtrangPhieunhap" />
           <EntitySet Name="TinhtrangPhieuxuats" EntityType="Self.TinhtrangPhieuxuat" />
-          <EntitySet Name="Tonkhoes" EntityType="Self.Tonkho" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK_Khachhang_Account" Association="Self.FK_Khachhang_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Khachhang" EntitySet="Khachhangs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Nhanvien_Account" Association="Self.FK_Nhanvien_Account">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="Nhanvien" EntitySet="Nhanviens" />
           </AssociationSet>
           <AssociationSet Name="FK_ChitietDonhang_Donhang" Association="Self.FK_ChitietDonhang_Donhang">
             <End Role="Donhang" EntitySet="Donhangs" />
@@ -4980,22 +4927,52 @@
             <End Role="TinhtrangPhieuxuat" EntitySet="TinhtrangPhieuxuats" />
           </AssociationSet>
           <FunctionImport Name="Khuyen_GetBaogiaTheoNhomKhachhang" ReturnType="Collection(B2BSystemModel.Khuyen_GetBaogiaTheoNhomKhachhang_Result)">
-            <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
+          <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Khuyen_GetCongnoXuat" ReturnType="Collection(B2BSystemModel.Khuyen_GetCongnoXuat_Result)" />
           <FunctionImport Name="Khuyen_GetCongnoXuatMoinhatTheoKhachhang" ReturnType="Collection(B2BSystemModel.Khuyen_GetCongnoXuatMoinhatTheoKhachhang_Result)">
-            <Parameter Name="KhachhangId" Mode="In" Type="Guid" />
+          <Parameter Name="KhachhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Khuyen_GetDonhang" ReturnType="Collection(B2BSystemModel.Khuyen_GetDonhang_Result)" />
           <FunctionImport Name="Khuyen_GetHanghoa" ReturnType="Collection(B2BSystemModel.Khuyen_GetHanghoa_Result)" />
           <FunctionImport Name="Khuyen_GetHanghoaTheoNhom" ReturnType="Collection(B2BSystemModel.Khuyen_GetHanghoaTheoNhom_Result)">
-            <Parameter Name="NhomHanghoaId" Mode="In" Type="Guid" />
+          <Parameter Name="NhomHanghoaId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Khuyen_GetKhachhang" ReturnType="Collection(B2BSystemModel.Khuyen_GetKhachhang_Result)" />
           <FunctionImport Name="Khuyen_GetPhieuxuatTheoDonhang" ReturnType="Collection(B2BSystemModel.Khuyen_GetPhieuxuatTheoDonhang_Result)">
-            <Parameter Name="DonhangId" Mode="In" Type="Guid" />
+          <Parameter Name="DonhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Khuyen_GetThuchi" ReturnType="Collection(B2BSystemModel.Khuyen_GetThuchi_Result)" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(B2BSystemModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(B2BSystemModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="sys_ChitietDonhangDelete">
             <Parameter Name="ChitietDonhangId" Mode="In" Type="Guid" />
             <Parameter Name="DonhangId" Mode="In" Type="Guid" />
@@ -5059,11 +5036,8 @@
             <Parameter Name="Step" Mode="In" Type="Int32" />
             <Parameter Name="NSX" Mode="In" Type="DateTime" />
             <Parameter Name="HSD" Mode="In" Type="DateTime" />
-            <Parameter Name="Gianhap" Mode="In" Type="Double" />
-            <Parameter Name="Thanhtien" Mode="In" Type="Double" />
             <Parameter Name="Barcode" Mode="In" Type="String" />
             <Parameter Name="Ghichu" Mode="In" Type="String" />
-            <Parameter Name="TenHanghoa" Mode="In" Type="String" />
             <Parameter Name="Version" Mode="InOut" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="sys_ChitietPhieunhapInsert">
@@ -5074,11 +5048,8 @@
             <Parameter Name="Step" Mode="In" Type="Int32" />
             <Parameter Name="NSX" Mode="In" Type="DateTime" />
             <Parameter Name="HSD" Mode="In" Type="DateTime" />
-            <Parameter Name="Gianhap" Mode="In" Type="Double" />
-            <Parameter Name="Thanhtien" Mode="In" Type="Double" />
             <Parameter Name="Barcode" Mode="In" Type="String" />
             <Parameter Name="Ghichu" Mode="In" Type="String" />
-            <Parameter Name="TenHanghoa" Mode="In" Type="String" />
             <Parameter Name="Version" Mode="InOut" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="sys_ChitietPhieunhapSelect" ReturnType="Collection(B2BSystemModel.sys_ChitietPhieunhapSelect_Result)" />
@@ -5090,11 +5061,8 @@
             <Parameter Name="Step" Mode="In" Type="Int32" />
             <Parameter Name="NSX" Mode="In" Type="DateTime" />
             <Parameter Name="HSD" Mode="In" Type="DateTime" />
-            <Parameter Name="Gianhap" Mode="In" Type="Double" />
-            <Parameter Name="Thanhtien" Mode="In" Type="Double" />
             <Parameter Name="Barcode" Mode="In" Type="String" />
             <Parameter Name="Ghichu" Mode="In" Type="String" />
-            <Parameter Name="TenHanghoa" Mode="In" Type="String" />
             <Parameter Name="Version" Mode="InOut" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="sys_ChitietPhieuxuatDelete">
@@ -5942,11 +5910,8 @@
             <Parameter Name="NhanvienId" Mode="In" Type="Guid" />
             <Parameter Name="KhoId" Mode="In" Type="Guid" />
             <Parameter Name="NhacungcapId" Mode="In" Type="Guid" />
-            <Parameter Name="NguyennhanLydo" Mode="In" Type="Guid" />
-            <Parameter Name="TinhtrangPhieunhapCurrentId" Mode="In" Type="Guid" />
             <Parameter Name="Step" Mode="In" Type="Int32" />
             <Parameter Name="Ngaylap" Mode="In" Type="DateTime" />
-            <Parameter Name="Tongtien" Mode="In" Type="Double" />
             <Parameter Name="Code" Mode="In" Type="String" />
             <Parameter Name="Ghichu" Mode="In" Type="String" />
             <Parameter Name="Version" Mode="InOut" Type="Binary" />
@@ -5956,11 +5921,8 @@
             <Parameter Name="NhanvienId" Mode="In" Type="Guid" />
             <Parameter Name="KhoId" Mode="In" Type="Guid" />
             <Parameter Name="NhacungcapId" Mode="In" Type="Guid" />
-            <Parameter Name="NguyennhanLydo" Mode="In" Type="Guid" />
-            <Parameter Name="TinhtrangPhieunhapCurrentId" Mode="In" Type="Guid" />
             <Parameter Name="Step" Mode="In" Type="Int32" />
             <Parameter Name="Ngaylap" Mode="In" Type="DateTime" />
-            <Parameter Name="Tongtien" Mode="In" Type="Double" />
             <Parameter Name="Code" Mode="In" Type="String" />
             <Parameter Name="Ghichu" Mode="In" Type="String" />
             <Parameter Name="Version" Mode="InOut" Type="Binary" />
@@ -5971,11 +5933,8 @@
             <Parameter Name="NhanvienId" Mode="In" Type="Guid" />
             <Parameter Name="KhoId" Mode="In" Type="Guid" />
             <Parameter Name="NhacungcapId" Mode="In" Type="Guid" />
-            <Parameter Name="NguyennhanLydo" Mode="In" Type="Guid" />
-            <Parameter Name="TinhtrangPhieunhapCurrentId" Mode="In" Type="Guid" />
             <Parameter Name="Step" Mode="In" Type="Int32" />
             <Parameter Name="Ngaylap" Mode="In" Type="DateTime" />
-            <Parameter Name="Tongtien" Mode="In" Type="Double" />
             <Parameter Name="Code" Mode="In" Type="String" />
             <Parameter Name="Ghichu" Mode="In" Type="String" />
             <Parameter Name="Version" Mode="InOut" Type="Binary" />
@@ -6114,7 +6073,7 @@
             <Parameter Name="definition" Mode="In" Type="Binary" />
             <Parameter Name="name" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="sys_sysdiagramsSelect" />
+          <FunctionImport Name="sys_sysdiagramsSelect" ReturnType="Collection(B2BSystemModel.sys_sysdiagramsSelect_Result)" />
           <FunctionImport Name="sys_sysdiagramsUpdate">
             <Parameter Name="principal_id" Mode="In" Type="Int32" />
             <Parameter Name="diagram_id" Mode="In" Type="Int32" />
@@ -6289,31 +6248,6 @@
             <Parameter Name="Ghichu" Mode="In" Type="String" />
             <Parameter Name="Version" Mode="InOut" Type="Binary" />
           </FunctionImport>
-          <FunctionImport Name="sys_TinhtrangPhieunhapDelete">
-            <Parameter Name="TinhtrangPhieunhapId" Mode="In" Type="Guid" />
-            <Parameter Name="PhieunhapId" Mode="In" Type="Guid" />
-            <Parameter Name="TinhtrangId" Mode="In" Type="Guid" />
-            <Parameter Name="NhanvienCapnhat" Mode="In" Type="Guid" />
-            <Parameter Name="NgayCapnhat" Mode="In" Type="DateTime" />
-            <Parameter Name="Version" Mode="InOut" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sys_TinhtrangPhieunhapInsert">
-            <Parameter Name="TinhtrangPhieunhapId" Mode="In" Type="Guid" />
-            <Parameter Name="PhieunhapId" Mode="In" Type="Guid" />
-            <Parameter Name="TinhtrangId" Mode="In" Type="Guid" />
-            <Parameter Name="NhanvienCapnhat" Mode="In" Type="Guid" />
-            <Parameter Name="NgayCapnhat" Mode="In" Type="DateTime" />
-            <Parameter Name="Version" Mode="InOut" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sys_TinhtrangPhieunhapSelect" ReturnType="Collection(B2BSystemModel.sys_TinhtrangPhieunhapSelect_Result)" />
-          <FunctionImport Name="sys_TinhtrangPhieunhapUpdate">
-            <Parameter Name="TinhtrangPhieunhapId" Mode="In" Type="Guid" />
-            <Parameter Name="PhieunhapId" Mode="In" Type="Guid" />
-            <Parameter Name="TinhtrangId" Mode="In" Type="Guid" />
-            <Parameter Name="NhanvienCapnhat" Mode="In" Type="Guid" />
-            <Parameter Name="NgayCapnhat" Mode="In" Type="DateTime" />
-            <Parameter Name="Version" Mode="InOut" Type="Binary" />
-          </FunctionImport>
           <FunctionImport Name="sys_TinhtrangPhieuxuatDelete">
             <Parameter Name="TinhtrangPhieuxuatId" Mode="In" Type="Guid" />
             <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
@@ -6446,28 +6380,17 @@
             <Parameter Name="p_Password" Mode="In" Type="String" />
             <Parameter Name="Version" Mode="InOut" Type="Binary" />
           </FunctionImport>
-          <FunctionImport Name="Tin_CheckLogin" ReturnType="Collection(B2BSystemModel.Tin_CheckLogin_Result)">
-            <Parameter Name="accountname" Mode="In" Type="String" />
-            <Parameter Name="accountpassword" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="Tin_DeletePhieunhap">
-            <Parameter Name="PhieunhapId" Mode="In" Type="Guid" />
+          <Parameter Name="PhieunhapId" Mode="In" Type="Guid" />
           </FunctionImport>
-          <FunctionImport Name="Tin_GetAllAccount" ReturnType="Collection(B2BSystemModel.Tin_GetAllAccount_Result)" />
           <FunctionImport Name="Tin_GetChitietPhieunhapTheoPhieunhap" ReturnType="Collection(B2BSystemModel.Tin_GetChitietPhieunhapTheoPhieunhap_Result)">
-            <Parameter Name="PhieunhapId" Mode="In" Type="Guid" />
-          </FunctionImport>
-          <FunctionImport Name="Tin_GetCongnoNhapMoinhatTheoNhacungcap" ReturnType="Collection(B2BSystemModel.Tin_GetCongnoNhapMoinhatTheoNhacungcap_Result)">
-            <Parameter Name="NhacungcapId" Mode="In" Type="Guid" />
+          <Parameter Name="PhieunhapId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tin_GetHanghoaActive" ReturnType="Collection(B2BSystemModel.Tin_GetHanghoaActive_Result)" />
           <FunctionImport Name="Tin_GetHanghoaTheoKho" ReturnType="Collection(B2BSystemModel.Tin_GetHanghoaTheoKho_Result)">
-            <Parameter Name="KhoId" Mode="In" Type="Guid" />
+          <Parameter Name="KhoId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tin_GetNhomKhachhangActive" ReturnType="Collection(B2BSystemModel.Tin_GetNhomKhachhangActive_Result)" />
-          <FunctionImport Name="Tin_GetPhieunhapTheoThang" ReturnType="Collection(B2BSystemModel.Tin_GetPhieunhapTheoThang_Result)">
-            <Parameter Name="Ngaylap" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="Tin_GetPhieunhapTheoThang_Kho" ReturnType="Collection(B2BSystemModel.Tin_GetPhieunhapTheoThang_Kho_Result)">
             <Parameter Name="Ngaylap" Mode="In" Type="DateTime" />
             <Parameter Name="KhoId" Mode="In" Type="Guid" />
@@ -6486,28 +6409,24 @@
             <Parameter Name="HanghoaId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tin_SelectChitietKiemkeTheoKiemke">
-            <Parameter Name="KiemkeId" Mode="In" Type="Guid" />
+          <Parameter Name="KiemkeId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tin_SelectCongnoNhap" ReturnType="Collection(B2BSystemModel.Tin_SelectCongnoNhap_Result)" />
           <FunctionImport Name="Tin_SelectKiemkeTheoKho">
-            <Parameter Name="KhoId" Mode="In" Type="Guid" />
+          <Parameter Name="KhoId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetChitietDonhangTheoDonhang" ReturnType="Collection(B2BSystemModel.Tri_GetChitietDonhangTheoDonhang_Result)">
-            <Parameter Name="DonhangId" Mode="In" Type="Guid" />
+          <Parameter Name="DonhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetDongiaTheoNhomKhachhang" ReturnType="Collection(B2BSystemModel.Tri_GetDongiaTheoNhomKhachhang_Result)">
-            <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
+          <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetDonhangTheoThang" ReturnType="Collection(B2BSystemModel.Tri_GetDonhangTheoThang_Result)">
             <Parameter Name="Ngaylap" Mode="In" Type="DateTime" />
             <Parameter Name="LoaiDonhangValue" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetHanghoaTheoNhomKhachhang" ReturnType="Collection(B2BSystemModel.Tri_GetHanghoaTheoNhomKhachhang_Result)">
-            <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
-          </FunctionImport>
-          <FunctionImport Name="Tri_GetKhachhangDemo" ReturnType="Collection(B2BSystemModel.Tri_GetKhachhangDemo_Result)" />
-          <FunctionImport Name="Tri_GetKhachhangTheoNhomKhachhang" ReturnType="Collection(B2BSystemModel.Tri_GetKhachhangTheoNhomKhachhang_Result)">
-            <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
+          <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetKho" ReturnType="Collection(B2BSystemModel.Tri_GetKho_Result)" />
           <FunctionImport Name="Tri_GetKhuvucActive" ReturnType="Collection(B2BSystemModel.Tri_GetKhuvucActive_Result)" />
@@ -6515,57 +6434,133 @@
           <FunctionImport Name="Tri_GetNhanvien" ReturnType="Collection(B2BSystemModel.Tri_GetNhanvien_Result)" />
           <FunctionImport Name="Tri_GetNhanvienActive" ReturnType="Collection(B2BSystemModel.Tri_GetNhanvienActive_Result)" />
           <FunctionImport Name="Tri_GetNhanvienTheoPhongban" ReturnType="Collection(B2BSystemModel.Tri_GetNhanvienTheoPhongban_Result)">
-            <Parameter Name="PhongbanId" Mode="In" Type="Guid" />
+          <Parameter Name="PhongbanId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetNhomKhachhangActive" ReturnType="Collection(B2BSystemModel.Tri_GetNhomKhachhangActive_Result)" />
           <FunctionImport Name="Tri_GetQuanhuyenActive" ReturnType="Collection(B2BSystemModel.Tri_GetQuanhuyenActive_Result)" />
           <FunctionImport Name="Tri_GetQuanhuyenActiveTheoTinhthanh" ReturnType="Collection(B2BSystemModel.Tri_GetQuanhuyenActiveTheoTinhthanh_Result)">
-            <Parameter Name="TinhthanhId" Mode="In" Type="Guid" />
+          <Parameter Name="TinhthanhId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetQuanhuyenTheoTinhthanh" ReturnType="Collection(B2BSystemModel.Tri_GetQuanhuyenTheoTinhthanh_Result)">
-            <Parameter Name="TinhthanhId" Mode="In" Type="Guid" />
+          <Parameter Name="TinhthanhId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetThangNamNhapXuat" ReturnType="Collection(B2BSystemModel.Tri_GetThangNamNhapXuat_Result)" />
           <FunctionImport Name="Tri_GetTinhthanhActive" ReturnType="Collection(B2BSystemModel.Tri_GetTinhthanhActive_Result)" />
           <FunctionImport Name="Tri_GetTinhthanhTheoKhuvuc" ReturnType="Collection(B2BSystemModel.Tri_GetTinhthanhTheoKhuvuc_Result)">
-            <Parameter Name="KhuvucId" Mode="In" Type="Guid" />
+          <Parameter Name="KhuvucId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetTinhthanhVoiTenKhuvuc" ReturnType="Collection(B2BSystemModel.Tri_GetTinhthanhVoiTenKhuvuc_Result)" />
           <FunctionImport Name="Tri_GetTinhthanhWithTenKhuvuc" ReturnType="Collection(B2BSystemModel.Tri_GetTinhthanhWithTenKhuvuc_Result)" />
           <FunctionImport Name="Tri_GetTinhtrangDalap" ReturnType="Collection(B2BSystemModel.Tri_GetTinhtrangDalap_Result)">
-            <Parameter Name="Code" Mode="In" Type="String" />
+          <Parameter Name="Code" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Tri_GetTonkhoTheoNgay" ReturnType="Collection(B2BSystemModel.Tri_GetTonkhoTheoNgay_Result)">
-            <Parameter Name="Ngay" Mode="In" Type="DateTime" />
+          <Parameter Name="Ngay" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="Vinh_GetChitietDonhangTheoDonHang" ReturnType="Collection(B2BSystemModel.Vinh_GetChitietDonhangTheoDonHang_Result)">
-            <Parameter Name="DonhangId" Mode="In" Type="Guid" />
+          <Parameter Name="DonhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Vinh_GetChitietPhieuxuatTheoPhieuxuat" ReturnType="Collection(B2BSystemModel.Vinh_GetChitietPhieuxuatTheoPhieuxuat_Result)">
-            <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
+          <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Vinh_GetDonhangTheoDonhangId" ReturnType="Collection(B2BSystemModel.Vinh_GetDonhangTheoDonhangId_Result)">
-            <Parameter Name="DonhangId" Mode="In" Type="Guid" />
+          <Parameter Name="DonhangId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Vinh_GetDonhangTheoThang_koloaidonhang" ReturnType="Collection(B2BSystemModel.Vinh_GetDonhangTheoThang_koloaidonhang_Result)">
-            <Parameter Name="Ngaylap" Mode="In" Type="DateTime" />
+          <Parameter Name="Ngaylap" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="Vinh_GetDonviActive" ReturnType="Collection(B2BSystemModel.Vinh_GetDonviActive_Result)" />
           <FunctionImport Name="Vinh_GetKhoActive" ReturnType="Collection(B2BSystemModel.Vinh_GetKhoActive_Result)" />
           <FunctionImport Name="Vinh_GetNguyennhanLydoActive" ReturnType="Collection(B2BSystemModel.Vinh_GetNguyennhanLydoActive_Result)" />
           <FunctionImport Name="Vinh_GetNhanvienTheoUserId" ReturnType="Collection(B2BSystemModel.Vinh_GetNhanvienTheoUserId_Result)">
-            <Parameter Name="UserId" Mode="In" Type="Guid" />
+          <Parameter Name="UserId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Vinh_GetNhomHanghoaActive" ReturnType="Collection(B2BSystemModel.Vinh_GetNhomHanghoaActive_Result)" />
           <FunctionImport Name="Vinh_GetPhieuxuatTheoMa" ReturnType="Collection(B2BSystemModel.Vinh_GetPhieuxuatTheoMa_Result)">
-            <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
+          <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Vinh_GetTinhtrangActive" ReturnType="Collection(B2BSystemModel.Vinh_GetTinhtrangActive_Result)" />
           <FunctionImport Name="Vinh_GetTinhtrangPhieuxuatMoiNhatTheoPhieuxuat" ReturnType="Collection(B2BSystemModel.Vinh_GetTinhtrangPhieuxuatMoiNhatTheoPhieuxuat_Result)">
-            <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
+          <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Vinh_GetTinhtrangPhieuxuatTheoPhieuxuat" ReturnType="Collection(B2BSystemModel.Vinh_GetTinhtrangPhieuxuatTheoPhieuxuat_Result)">
-            <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
+          <Parameter Name="PhieuxuatId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="Tin_CheckLogin" ReturnType="Collection(B2BSystemModel.Tin_CheckLogin_Result)">
+            <Parameter Name="accountname" Mode="In" Type="String" />
+            <Parameter Name="accountpassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Tonkhoes" EntityType="B2BSystemModel.Tonkho" />
+          <FunctionImport Name="sp_alterdiagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition1" ReturnType="Collection(B2BSystemModel.sp_helpdiagramdefinition1_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams1" ReturnType="Collection(B2BSystemModel.sp_helpdiagrams1_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams1" />
+          <AssociationSet Name="FK_Nhanvien_Account" Association="B2BSystemModel.FK_Nhanvien_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Nhanvien" EntitySet="Nhanviens" />
+          </AssociationSet>
+          <FunctionImport Name="Tin_GetAllAccount" ReturnType="Collection(B2BSystemModel.Tin_GetAllAccount_Result)" />
+          <EntitySet Name="sysdiagrams" EntityType="B2BSystemModel.sysdiagram" />
+          <FunctionImport Name="sp_alterdiagram2">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram2">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram2">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition2" ReturnType="Collection(B2BSystemModel.sp_helpdiagramdefinition2_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams2" ReturnType="Collection(B2BSystemModel.sp_helpdiagrams2_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram2">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams2" />
+          <FunctionImport Name="Tin_GetAllAccount1" ReturnType="Collection(B2BSystemModel.Tin_GetAllAccount1_Result)" />
+          <FunctionImport Name="Tri_GetKhachhangDemo" ReturnType="Collection(B2BSystemModel.Tri_GetKhachhangDemo_Result)" />
+          <FunctionImport Name="Tri_GetKhachhangTheoNhomKhachhang" ReturnType="Collection(B2BSystemModel.Tri_GetKhachhangTheoNhomKhachhang_Result)">
+            <Parameter Name="NhomKhachhangId" Mode="In" Type="Guid" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Khuyen_GetBaogiaTheoNhomKhachhang_Result">
@@ -6752,6 +6747,17 @@
           <Property Type="String" Name="TenNhannopTien" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="TenNhanvien" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="sys_ChitietDonhangSelect_Result">
           <Property Type="Guid" Name="ChitietDonhangId" Nullable="false" />
           <Property Type="Guid" Name="DonhangId" Nullable="true" />
@@ -6897,7 +6903,6 @@
           <Property Type="Int32" Name="Step" Nullable="true" />
           <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
           <Property Type="DateTime" Name="NgayCapnhat" Nullable="true" Precision="23" />
-          <Property Type="String" Name="LinkHinhanh_Web" Nullable="true" MaxLength="300" />
         </ComplexType>
         <ComplexType Name="sys_KhachhangSelect_Result">
           <Property Type="Guid" Name="KhachhangId" Nullable="false" />
@@ -7042,7 +7047,6 @@
           <Property Type="Int32" Name="Step" Nullable="true" />
           <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
           <Property Type="String" Name="Linkanh" Nullable="true" MaxLength="300" />
-          <Property Type="Guid" Name="AccountId" Nullable="true" />
         </ComplexType>
         <ComplexType Name="sys_NhomHanghoaSelect_Result">
           <Property Type="Guid" Name="NhomHanghoaId" Nullable="false" />
@@ -7075,8 +7079,6 @@
           <Property Type="Int32" Name="Step" Nullable="true" />
           <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
           <Property Type="Guid" Name="NguyennhanLydo" Nullable="true" />
-          <Property Type="Double" Name="Tongtien" Nullable="true" />
-          <Property Type="Guid" Name="TinhtrangPhieunhapCurrentId" Nullable="true" />
         </ComplexType>
         <ComplexType Name="sys_PhieuxuatSelect_Result">
           <Property Type="Guid" Name="PhieuxuatId" Nullable="false" />
@@ -7116,6 +7118,13 @@
           <Property Type="Int32" Name="Step" Nullable="true" />
           <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
           <Property Type="DateTime" Name="NgayCapnhat" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="sys_sysdiagramsSelect_Result">
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" />
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
         </ComplexType>
         <ComplexType Name="sys_ThuchiSelect_Result">
           <Property Type="Guid" Name="ThuchiId" Nullable="false" />
@@ -7162,14 +7171,6 @@
           <Property Type="DateTime" Name="NgayCapnhat" Nullable="true" Precision="23" />
           <Property Type="Guid" Name="NhanvienCapnhatId" Nullable="true" />
           <Property Type="String" Name="Ghichu" Nullable="true" MaxLength="100" />
-          <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
-        </ComplexType>
-        <ComplexType Name="sys_TinhtrangPhieunhapSelect_Result">
-          <Property Type="Guid" Name="TinhtrangPhieunhapId" Nullable="false" />
-          <Property Type="Guid" Name="PhieunhapId" Nullable="true" />
-          <Property Type="Guid" Name="TinhtrangId" Nullable="true" />
-          <Property Type="Guid" Name="NhanvienCapnhat" Nullable="true" />
-          <Property Type="DateTime" Name="NgayCapnhat" Nullable="true" Precision="23" />
           <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
         </ComplexType>
         <ComplexType Name="sys_TinhtrangPhieuxuatSelect_Result">
@@ -7222,21 +7223,6 @@
           <Property Type="Int32" Name="Step" Nullable="true" />
           <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
         </ComplexType>
-        <ComplexType Name="Tin_CheckLogin_Result">
-          <Property Type="Guid" Name="AccountId" Nullable="false" />
-          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="AccountPassword" Nullable="true" MaxLength="250" />
-        </ComplexType>
-        <ComplexType Name="Tin_GetAllAccount_Result">
-          <Property Type="Guid" Name="AcountId" Nullable="false" />
-          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="AccountPassword" Nullable="true" MaxLength="250" />
-          <Property Type="Boolean" Name="Active" Nullable="true" />
-          <Property Type="Guid" Name="UserId" Nullable="false" />
-          <Property Type="String" Name="Ten" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
-        </ComplexType>
         <ComplexType Name="Tin_GetChitietPhieunhapTheoPhieunhap_Result">
           <Property Type="Guid" Name="ChitietPhieunhapId" Nullable="false" />
           <Property Type="Guid" Name="PhieunhapId" Nullable="true" />
@@ -7249,19 +7235,6 @@
           <Property Type="Double" Name="Gianhap" Nullable="true" />
           <Property Type="Double" Name="Thanhtien" Nullable="true" />
           <Property Type="String" Name="Ghichu" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="Step" Nullable="true" />
-          <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
-        </ComplexType>
-        <ComplexType Name="Tin_GetCongnoNhapMoinhatTheoNhacungcap_Result">
-          <Property Type="Guid" Name="CongnoNhapId" Nullable="false" />
-          <Property Type="Guid" Name="NhaCungcapId" Nullable="true" />
-          <Property Type="DateTime" Name="NgayGiaodich" Nullable="true" Precision="23" />
-          <Property Type="Double" Name="SoduTruocGiaodich" Nullable="true" />
-          <Property Type="Double" Name="SotienGiaodich" Nullable="true" />
-          <Property Type="String" Name="Tongno" Nullable="true" MaxLength="10" />
-          <Property Type="DateTime" Name="NgayHentra" Nullable="true" Precision="23" />
-          <Property Type="Guid" Name="NhanvienId" Nullable="true" />
-          <Property Type="String" Name="Ghichu" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Step" Nullable="true" />
           <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
         </ComplexType>
@@ -7304,26 +7277,6 @@
           <Property Type="Int32" Name="Step" Nullable="true" />
           <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
           <Property Type="DateTime" Name="NgayCapnhat" Nullable="true" Precision="23" />
-        </ComplexType>
-        <ComplexType Name="Tin_GetPhieunhapTheoThang_Result">
-          <Property Type="Guid" Name="PhieunhapId" Nullable="false" />
-          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
-          <Property Type="Guid" Name="NhanvienId" Nullable="true" />
-          <Property Type="Guid" Name="KhoId" Nullable="true" />
-          <Property Type="Guid" Name="NhaCungcapId" Nullable="true" />
-          <Property Type="DateTime" Name="Ngaylap" Nullable="true" Precision="23" />
-          <Property Type="Guid" Name="NguyennhanLydo" Nullable="true" />
-          <Property Type="Double" Name="Tongtien" Nullable="true" />
-          <Property Type="String" Name="Ghichu" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Step" Nullable="true" />
-          <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
-          <Property Type="Guid" Name="TinhtrangPhieunhapCurrentId" Nullable="true" />
-          <Property Type="String" Name="TenNhanvien" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TenKho" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Noidung" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="TenNhaCungcap" Nullable="true" MaxLength="50" />
-          <Property Type="Guid" Name="TinhtrangPhieunhapCurrentId1" Nullable="true" />
-          <Property Type="String" Name="TenTinhtrang" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="Tin_GetPhieunhapTheoThang_Kho_Result">
           <Property Type="Guid" Name="PhieunhapId" Nullable="false" />
@@ -7500,80 +7453,6 @@
           <Property Type="String" Name="TenNhomHanghoa" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="TenDonvi" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="Tri_GetKhachhangDemo_Result">
-          <Property Type="Guid" Name="KhachhangId" Nullable="false" />
-          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="HotenKhachhang" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="CMND" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="Ngaysinh" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="Gioitinh" Nullable="true" />
-          <Property Type="String" Name="Diachi" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="DiachiGiaohang" Nullable="true" MaxLength="100" />
-          <Property Type="Guid" Name="QuanhuyenId" Nullable="true" />
-          <Property Type="Guid" Name="TinhthanhId" Nullable="true" />
-          <Property Type="Guid" Name="NhomKhachhangId" Nullable="true" />
-          <Property Type="String" Name="Linkanh" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="Congty" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Chucvu" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="DiachiCongty" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="PhoneCongty" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Tel" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Fax" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="MasoThue" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TenTaikhoan" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="SoTaikhoan" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Nganhang" Nullable="true" MaxLength="50" />
-          <Property Type="Double" Name="HanmucCongno" Nullable="true" />
-          <Property Type="Int32" Name="ThoigianCongno" Nullable="true" />
-          <Property Type="Int32" Name="ToahangCongno" Nullable="true" />
-          <Property Type="String" Name="Ghichu" Nullable="true" MaxLength="500" />
-          <Property Type="DateTime" Name="NgayCapnhat" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="Active" Nullable="true" />
-          <Property Type="Int32" Name="Step" Nullable="true" />
-          <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
-          <Property Type="String" Name="TenQuanhuyen" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TenTinhthanh" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TenNhomKhachhang" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="Tri_GetKhachhangTheoNhomKhachhang_Result">
-          <Property Type="Guid" Name="KhachhangId" Nullable="false" />
-          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="HotenKhachhang" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="CMND" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="Ngaysinh" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="Gioitinh" Nullable="true" />
-          <Property Type="String" Name="Diachi" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="DiachiGiaohang" Nullable="true" MaxLength="100" />
-          <Property Type="Guid" Name="QuanhuyenId" Nullable="true" />
-          <Property Type="Guid" Name="TinhthanhId" Nullable="true" />
-          <Property Type="Guid" Name="NhomKhachhangId" Nullable="true" />
-          <Property Type="String" Name="Linkanh" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="Congty" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Chucvu" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="DiachiCongty" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="PhoneCongty" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Tel" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Fax" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="MasoThue" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TenTaikhoan" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="SoTaikhoan" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Nganhang" Nullable="true" MaxLength="50" />
-          <Property Type="Double" Name="HanmucCongno" Nullable="true" />
-          <Property Type="Int32" Name="ThoigianCongno" Nullable="true" />
-          <Property Type="Int32" Name="ToahangCongno" Nullable="true" />
-          <Property Type="String" Name="Ghichu" Nullable="true" MaxLength="500" />
-          <Property Type="DateTime" Name="NgayCapnhat" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="Active" Nullable="true" />
-          <Property Type="Int32" Name="Step" Nullable="true" />
-          <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
-          <Property Type="String" Name="TenQuanhuyen" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TenTinhthanh" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TenNhomKhachhang" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="Tri_GetKho_Result">
           <Property Type="Guid" Name="KhoId" Nullable="false" />
           <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
@@ -7673,7 +7552,6 @@
           <Property Type="Int32" Name="Step" Nullable="true" />
           <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
           <Property Type="String" Name="Linkanh" Nullable="true" MaxLength="300" />
-          <Property Type="Guid" Name="AccountId" Nullable="true" />
         </ComplexType>
         <ComplexType Name="Tri_GetNhanvienTheoPhongban_Result">
           <Property Type="Guid" Name="NhanvienId" Nullable="false" />
@@ -8020,6 +7898,173 @@
           <Property Type="String" Name="GhichuLydo" Nullable="true" MaxLength="50" />
           <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
         </ComplexType>
+        <ComplexType Name="Tin_CheckLogin_Result">
+          <Property Type="Guid" Name="AccountId" Nullable="false" />
+          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="AccountPassword" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <EntityType Name="Tonkho">
+          <Key>
+            <PropertyRef Name="TonkhoId" />
+          </Key>
+          <Property Name="TonkhoId" Type="Guid" Nullable="false" />
+          <Property Name="HanghoaId" Type="Guid" />
+          <Property Name="KhoId" Type="Guid" />
+          <Property Name="Ngay" Type="Int32" />
+          <Property Name="Thang" Type="Int32" />
+          <Property Name="Nam" Type="Int32" />
+          <Property Name="NgayCapnhat" Type="DateTime" Precision="3" />
+          <Property Name="GioCapnhat" Type="DateTime" Precision="3" />
+          <Property Name="SoduDauky" Type="Int32" />
+          <Property Name="SoluongNhap" Type="Int32" />
+          <Property Name="SoluongXuat" Type="Int32" />
+          <Property Name="SoluongTon" Type="Int32" />
+          <Property Name="NhanvienCapnhat" Type="Guid" />
+          <Property Name="Step" Type="Int32" />
+          <Property Name="Version" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="SoluongTonDukien" Type="Int32" />
+          <Property Name="ThanhtienNhap" Type="Double" />
+          <Property Name="ThanhtienXuat" Type="Double" />
+        </EntityType>
+        <ComplexType Name="sp_helpdiagramdefinition1_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams1_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <Association Name="FK_Nhanvien_Account">
+          <End Type="B2BSystemModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="B2BSystemModel.Nhanvien" Role="Nhanvien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Nhanvien">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Tin_GetAllAccount_Result">
+          <Property Type="Guid" Name="AcountId" Nullable="false" />
+          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="AccountPassword" Nullable="true" MaxLength="250" />
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Ten" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <ComplexType Name="sp_helpdiagramdefinition2_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams2_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Tin_GetAllAccount1_Result">
+          <Property Type="Guid" Name="AcountId" Nullable="false" />
+          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="AccountPassword" Nullable="true" MaxLength="250" />
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Ten" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="Tri_GetKhachhangDemo_Result">
+          <Property Type="Guid" Name="KhachhangId" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="HotenKhachhang" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CMND" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Ngaysinh" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Gioitinh" Nullable="true" />
+          <Property Type="String" Name="Diachi" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="DiachiGiaohang" Nullable="true" MaxLength="100" />
+          <Property Type="Guid" Name="QuanhuyenId" Nullable="true" />
+          <Property Type="Guid" Name="TinhthanhId" Nullable="true" />
+          <Property Type="Guid" Name="NhomKhachhangId" Nullable="true" />
+          <Property Type="String" Name="Linkanh" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Congty" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Chucvu" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DiachiCongty" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="PhoneCongty" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Tel" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Fax" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="MasoThue" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TenTaikhoan" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="SoTaikhoan" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Nganhang" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="HanmucCongno" Nullable="true" />
+          <Property Type="Int32" Name="ThoigianCongno" Nullable="true" />
+          <Property Type="Int32" Name="ToahangCongno" Nullable="true" />
+          <Property Type="String" Name="Ghichu" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="NgayCapnhat" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="Int32" Name="Step" Nullable="true" />
+          <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
+          <Property Type="Guid" Name="AccountId" Nullable="true" />
+          <Property Type="String" Name="TenQuanhuyen" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TenTinhthanh" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TenNhomKhachhang" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Tri_GetKhachhangTheoNhomKhachhang_Result">
+          <Property Type="Guid" Name="KhachhangId" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="HotenKhachhang" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CMND" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Ngaysinh" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Gioitinh" Nullable="true" />
+          <Property Type="String" Name="Diachi" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="DiachiGiaohang" Nullable="true" MaxLength="100" />
+          <Property Type="Guid" Name="QuanhuyenId" Nullable="true" />
+          <Property Type="Guid" Name="TinhthanhId" Nullable="true" />
+          <Property Type="Guid" Name="NhomKhachhangId" Nullable="true" />
+          <Property Type="String" Name="Linkanh" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Congty" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Chucvu" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DiachiCongty" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="PhoneCongty" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Tel" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Fax" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="MasoThue" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TenTaikhoan" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="SoTaikhoan" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Nganhang" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="HanmucCongno" Nullable="true" />
+          <Property Type="Int32" Name="ThoigianCongno" Nullable="true" />
+          <Property Type="Int32" Name="ToahangCongno" Nullable="true" />
+          <Property Type="String" Name="Ghichu" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="NgayCapnhat" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="Int32" Name="Step" Nullable="true" />
+          <Property Type="Binary" Name="Version" Nullable="true" MaxLength="8" />
+          <Property Type="Guid" Name="AccountId" Nullable="true" />
+          <Property Type="String" Name="TenQuanhuyen" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TenTinhthanh" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TenNhomKhachhang" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8029,10 +8074,10 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="B2BSystemModel.Account">
               <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="AccountPassword" ColumnName="AccountPassword" />
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="AccountName" ColumnName="AccountName" />
-                <ScalarProperty Name="AccountPassword" ColumnName="AccountPassword" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8193,6 +8238,7 @@
           <EntitySetMapping Name="Hanghoas">
             <EntityTypeMapping TypeName="B2BSystemModel.Hanghoa">
               <MappingFragment StoreEntitySet="Hanghoa">
+                <ScalarProperty Name="LinkHinhanh_Web" ColumnName="LinkHinhanh_Web" />
                 <ScalarProperty Name="HanghoaId" ColumnName="HanghoaId" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="TenHanghoa" ColumnName="TenHanghoa" />
@@ -8206,7 +8252,6 @@
                 <ScalarProperty Name="Step" ColumnName="Step" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="NgayCapnhat" ColumnName="NgayCapnhat" />
-                <ScalarProperty Name="LinkHinhanh_Web" ColumnName="LinkHinhanh_Web" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8361,6 +8406,7 @@
           <EntitySetMapping Name="Nhanviens">
             <EntityTypeMapping TypeName="B2BSystemModel.Nhanvien">
               <MappingFragment StoreEntitySet="Nhanvien">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="NhanvienId" ColumnName="NhanvienId" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="TenNhanvien" ColumnName="TenNhanvien" />
@@ -8384,7 +8430,6 @@
                 <ScalarProperty Name="Step" ColumnName="Step" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="Linkanh" ColumnName="Linkanh" />
-                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8441,8 +8486,6 @@
                 <ScalarProperty Name="Step" ColumnName="Step" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="NguyennhanLydo" ColumnName="NguyennhanLydo" />
-                <ScalarProperty Name="Tongtien" ColumnName="Tongtien" />
-                <ScalarProperty Name="TinhtrangPhieunhapCurrentId" ColumnName="TinhtrangPhieunhapCurrentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8597,31 +8640,6 @@
                 <ScalarProperty Name="NhanvienCapnhatId" ColumnName="NhanvienCapnhatId" />
                 <ScalarProperty Name="GhichuLydo" ColumnName="GhichuLydo" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tonkhoes">
-            <EntityTypeMapping TypeName="B2BSystemModel.Tonkho">
-              <MappingFragment StoreEntitySet="Tonkho">
-                <ScalarProperty Name="TonkhoId" ColumnName="TonkhoId" />
-                <ScalarProperty Name="HanghoaId" ColumnName="HanghoaId" />
-                <ScalarProperty Name="KhoId" ColumnName="KhoId" />
-                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
-                <ScalarProperty Name="Thang" ColumnName="Thang" />
-                <ScalarProperty Name="Nam" ColumnName="Nam" />
-                <ScalarProperty Name="NgayCapnhat" ColumnName="NgayCapnhat" />
-                <ScalarProperty Name="GioCapnhat" ColumnName="GioCapnhat" />
-                <ScalarProperty Name="SoduDauky" ColumnName="SoduDauky" />
-                <ScalarProperty Name="SoluongNhap" ColumnName="SoluongNhap" />
-                <ScalarProperty Name="SoluongXuat" ColumnName="SoluongXuat" />
-                <ScalarProperty Name="SoluongTon" ColumnName="SoluongTon" />
-                <ScalarProperty Name="NhanvienCapnhat" ColumnName="NhanvienCapnhat" />
-                <ScalarProperty Name="Step" ColumnName="Step" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="SoluongTonDukien" ColumnName="SoluongTonDukien" />
-                <ScalarProperty Name="ThanhtienNhap" ColumnName="ThanhtienNhap" />
-                <ScalarProperty Name="ThanhtienXuat" ColumnName="ThanhtienXuat" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -9070,7 +9088,6 @@
                 <ScalarProperty Name="Step" ColumnName="Step" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="NgayCapnhat" ColumnName="NgayCapnhat" />
-                <ScalarProperty Name="LinkHinhanh_Web" ColumnName="LinkHinhanh_Web" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -9271,7 +9288,6 @@
                 <ScalarProperty Name="Step" ColumnName="Step" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="Linkanh" ColumnName="Linkanh" />
-                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -9325,8 +9341,6 @@
                 <ScalarProperty Name="Step" ColumnName="Step" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="NguyennhanLydo" ColumnName="NguyennhanLydo" />
-                <ScalarProperty Name="Tongtien" ColumnName="Tongtien" />
-                <ScalarProperty Name="TinhtrangPhieunhapCurrentId" ColumnName="TinhtrangPhieunhapCurrentId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -9393,7 +9407,17 @@
           <FunctionImportMapping FunctionImportName="sys_QuanhuyenUpdate" FunctionName="B2BSystemModel.Store.sys_QuanhuyenUpdate" />
           <FunctionImportMapping FunctionImportName="sys_sysdiagramsDelete" FunctionName="B2BSystemModel.Store.sys_sysdiagramsDelete" />
           <FunctionImportMapping FunctionImportName="sys_sysdiagramsInsert" FunctionName="B2BSystemModel.Store.sys_sysdiagramsInsert" />
-          <FunctionImportMapping FunctionImportName="sys_sysdiagramsSelect" FunctionName="B2BSystemModel.Store.sys_sysdiagramsSelect" />
+          <FunctionImportMapping FunctionImportName="sys_sysdiagramsSelect" FunctionName="B2BSystemModel.Store.sys_sysdiagramsSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="B2BSystemModel.sys_sysdiagramsSelect_Result">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sys_sysdiagramsUpdate" FunctionName="B2BSystemModel.Store.sys_sysdiagramsUpdate" />
           <FunctionImportMapping FunctionImportName="sys_ThuchiDelete" FunctionName="B2BSystemModel.Store.sys_ThuchiDelete" />
           <FunctionImportMapping FunctionImportName="sys_ThuchiInsert" FunctionName="B2BSystemModel.Store.sys_ThuchiInsert" />
@@ -9472,21 +9496,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sys_TinhtrangDonhangUpdate" FunctionName="B2BSystemModel.Store.sys_TinhtrangDonhangUpdate" />
           <FunctionImportMapping FunctionImportName="sys_TinhtrangInsert" FunctionName="B2BSystemModel.Store.sys_TinhtrangInsert" />
-          <FunctionImportMapping FunctionImportName="sys_TinhtrangPhieunhapDelete" FunctionName="B2BSystemModel.Store.sys_TinhtrangPhieunhapDelete" />
-          <FunctionImportMapping FunctionImportName="sys_TinhtrangPhieunhapInsert" FunctionName="B2BSystemModel.Store.sys_TinhtrangPhieunhapInsert" />
-          <FunctionImportMapping FunctionImportName="sys_TinhtrangPhieunhapSelect" FunctionName="B2BSystemModel.Store.sys_TinhtrangPhieunhapSelect">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="B2BSystemModel.sys_TinhtrangPhieunhapSelect_Result">
-                <ScalarProperty Name="TinhtrangPhieunhapId" ColumnName="TinhtrangPhieunhapId" />
-                <ScalarProperty Name="PhieunhapId" ColumnName="PhieunhapId" />
-                <ScalarProperty Name="TinhtrangId" ColumnName="TinhtrangId" />
-                <ScalarProperty Name="NhanvienCapnhat" ColumnName="NhanvienCapnhat" />
-                <ScalarProperty Name="NgayCapnhat" ColumnName="NgayCapnhat" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sys_TinhtrangPhieunhapUpdate" FunctionName="B2BSystemModel.Store.sys_TinhtrangPhieunhapUpdate" />
           <FunctionImportMapping FunctionImportName="sys_TinhtrangPhieuxuatDelete" FunctionName="B2BSystemModel.Store.sys_TinhtrangPhieuxuatDelete" />
           <FunctionImportMapping FunctionImportName="sys_TinhtrangPhieuxuatInsert" FunctionName="B2BSystemModel.Store.sys_TinhtrangPhieuxuatInsert" />
           <FunctionImportMapping FunctionImportName="sys_TinhtrangPhieuxuatSelect" FunctionName="B2BSystemModel.Store.sys_TinhtrangPhieuxuatSelect">
@@ -9563,30 +9572,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sys_UserUpdate" FunctionName="B2BSystemModel.Store.sys_UserUpdate" />
-          <FunctionImportMapping FunctionImportName="Tin_CheckLogin" FunctionName="B2BSystemModel.Store.Tin_CheckLogin">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="B2BSystemModel.Tin_CheckLogin_Result">
-                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
-                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
-                <ScalarProperty Name="AccountPassword" ColumnName="AccountPassword" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Tin_DeletePhieunhap" FunctionName="B2BSystemModel.Store.Tin_DeletePhieunhap" />
-          <FunctionImportMapping FunctionImportName="Tin_GetAllAccount" FunctionName="B2BSystemModel.Store.Tin_GetAllAccount">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="B2BSystemModel.Tin_GetAllAccount_Result">
-                <ScalarProperty Name="AcountId" ColumnName="AcountId" />
-                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
-                <ScalarProperty Name="AccountPassword" ColumnName="AccountPassword" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Ten" ColumnName="Ten" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Tin_GetChitietPhieunhapTheoPhieunhap" FunctionName="B2BSystemModel.Store.Tin_GetChitietPhieunhapTheoPhieunhap">
             <ResultMapping>
               <ComplexTypeMapping TypeName="B2BSystemModel.Tin_GetChitietPhieunhapTheoPhieunhap_Result">
@@ -9600,23 +9586,6 @@
                 <ScalarProperty Name="HSD" ColumnName="HSD" />
                 <ScalarProperty Name="Gianhap" ColumnName="Gianhap" />
                 <ScalarProperty Name="Thanhtien" ColumnName="Thanhtien" />
-                <ScalarProperty Name="Ghichu" ColumnName="Ghichu" />
-                <ScalarProperty Name="Step" ColumnName="Step" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Tin_GetCongnoNhapMoinhatTheoNhacungcap" FunctionName="B2BSystemModel.Store.Tin_GetCongnoNhapMoinhatTheoNhacungcap">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="B2BSystemModel.Tin_GetCongnoNhapMoinhatTheoNhacungcap_Result">
-                <ScalarProperty Name="CongnoNhapId" ColumnName="CongnoNhapId" />
-                <ScalarProperty Name="NhaCungcapId" ColumnName="NhaCungcapId" />
-                <ScalarProperty Name="NgayGiaodich" ColumnName="NgayGiaodich" />
-                <ScalarProperty Name="SoduTruocGiaodich" ColumnName="SoduTruocGiaodich" />
-                <ScalarProperty Name="SotienGiaodich" ColumnName="SotienGiaodich" />
-                <ScalarProperty Name="Tongno" ColumnName="Tongno" />
-                <ScalarProperty Name="NgayHentra" ColumnName="NgayHentra" />
-                <ScalarProperty Name="NhanvienId" ColumnName="NhanvienId" />
                 <ScalarProperty Name="Ghichu" ColumnName="Ghichu" />
                 <ScalarProperty Name="Step" ColumnName="Step" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
@@ -9672,30 +9641,6 @@
                 <ScalarProperty Name="Step" ColumnName="Step" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="NgayCapnhat" ColumnName="NgayCapnhat" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Tin_GetPhieunhapTheoThang" FunctionName="B2BSystemModel.Store.Tin_GetPhieunhapTheoThang">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="B2BSystemModel.Tin_GetPhieunhapTheoThang_Result">
-                <ScalarProperty Name="PhieunhapId" ColumnName="PhieunhapId" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="NhanvienId" ColumnName="NhanvienId" />
-                <ScalarProperty Name="KhoId" ColumnName="KhoId" />
-                <ScalarProperty Name="NhaCungcapId" ColumnName="NhaCungcapId" />
-                <ScalarProperty Name="Ngaylap" ColumnName="Ngaylap" />
-                <ScalarProperty Name="NguyennhanLydo" ColumnName="NguyennhanLydo" />
-                <ScalarProperty Name="Tongtien" ColumnName="Tongtien" />
-                <ScalarProperty Name="Ghichu" ColumnName="Ghichu" />
-                <ScalarProperty Name="Step" ColumnName="Step" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-                <ScalarProperty Name="TinhtrangPhieunhapCurrentId" ColumnName="TinhtrangPhieunhapCurrentId" />
-                <ScalarProperty Name="TenNhanvien" ColumnName="TenNhanvien" />
-                <ScalarProperty Name="TenKho" ColumnName="TenKho" />
-                <ScalarProperty Name="Noidung" ColumnName="Noidung" />
-                <ScalarProperty Name="TenNhaCungcap" ColumnName="TenNhaCungcap" />
-                <ScalarProperty Name="TinhtrangPhieunhapCurrentId1" ColumnName="TinhtrangPhieunhapCurrentId1" />
-                <ScalarProperty Name="TenTinhtrang" ColumnName="TenTinhtrang" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -9916,88 +9861,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Tri_GetKhachhangDemo" FunctionName="B2BSystemModel.Store.Tri_GetKhachhangDemo">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="B2BSystemModel.Tri_GetKhachhangDemo_Result">
-                <ScalarProperty Name="KhachhangId" ColumnName="KhachhangId" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="HotenKhachhang" ColumnName="HotenKhachhang" />
-                <ScalarProperty Name="CMND" ColumnName="CMND" />
-                <ScalarProperty Name="Ngaysinh" ColumnName="Ngaysinh" />
-                <ScalarProperty Name="Gioitinh" ColumnName="Gioitinh" />
-                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
-                <ScalarProperty Name="DiachiGiaohang" ColumnName="DiachiGiaohang" />
-                <ScalarProperty Name="QuanhuyenId" ColumnName="QuanhuyenId" />
-                <ScalarProperty Name="TinhthanhId" ColumnName="TinhthanhId" />
-                <ScalarProperty Name="NhomKhachhangId" ColumnName="NhomKhachhangId" />
-                <ScalarProperty Name="Linkanh" ColumnName="Linkanh" />
-                <ScalarProperty Name="Congty" ColumnName="Congty" />
-                <ScalarProperty Name="Chucvu" ColumnName="Chucvu" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="DiachiCongty" ColumnName="DiachiCongty" />
-                <ScalarProperty Name="PhoneCongty" ColumnName="PhoneCongty" />
-                <ScalarProperty Name="Tel" ColumnName="Tel" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="MasoThue" ColumnName="MasoThue" />
-                <ScalarProperty Name="TenTaikhoan" ColumnName="TenTaikhoan" />
-                <ScalarProperty Name="SoTaikhoan" ColumnName="SoTaikhoan" />
-                <ScalarProperty Name="Nganhang" ColumnName="Nganhang" />
-                <ScalarProperty Name="HanmucCongno" ColumnName="HanmucCongno" />
-                <ScalarProperty Name="ThoigianCongno" ColumnName="ThoigianCongno" />
-                <ScalarProperty Name="ToahangCongno" ColumnName="ToahangCongno" />
-                <ScalarProperty Name="Ghichu" ColumnName="Ghichu" />
-                <ScalarProperty Name="NgayCapnhat" ColumnName="NgayCapnhat" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Step" ColumnName="Step" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-                <ScalarProperty Name="TenQuanhuyen" ColumnName="TenQuanhuyen" />
-                <ScalarProperty Name="TenTinhthanh" ColumnName="TenTinhthanh" />
-                <ScalarProperty Name="TenNhomKhachhang" ColumnName="TenNhomKhachhang" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Tri_GetKhachhangTheoNhomKhachhang" FunctionName="B2BSystemModel.Store.Tri_GetKhachhangTheoNhomKhachhang">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="B2BSystemModel.Tri_GetKhachhangTheoNhomKhachhang_Result">
-                <ScalarProperty Name="KhachhangId" ColumnName="KhachhangId" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="HotenKhachhang" ColumnName="HotenKhachhang" />
-                <ScalarProperty Name="CMND" ColumnName="CMND" />
-                <ScalarProperty Name="Ngaysinh" ColumnName="Ngaysinh" />
-                <ScalarProperty Name="Gioitinh" ColumnName="Gioitinh" />
-                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
-                <ScalarProperty Name="DiachiGiaohang" ColumnName="DiachiGiaohang" />
-                <ScalarProperty Name="QuanhuyenId" ColumnName="QuanhuyenId" />
-                <ScalarProperty Name="TinhthanhId" ColumnName="TinhthanhId" />
-                <ScalarProperty Name="NhomKhachhangId" ColumnName="NhomKhachhangId" />
-                <ScalarProperty Name="Linkanh" ColumnName="Linkanh" />
-                <ScalarProperty Name="Congty" ColumnName="Congty" />
-                <ScalarProperty Name="Chucvu" ColumnName="Chucvu" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="DiachiCongty" ColumnName="DiachiCongty" />
-                <ScalarProperty Name="PhoneCongty" ColumnName="PhoneCongty" />
-                <ScalarProperty Name="Tel" ColumnName="Tel" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="MasoThue" ColumnName="MasoThue" />
-                <ScalarProperty Name="TenTaikhoan" ColumnName="TenTaikhoan" />
-                <ScalarProperty Name="SoTaikhoan" ColumnName="SoTaikhoan" />
-                <ScalarProperty Name="Nganhang" ColumnName="Nganhang" />
-                <ScalarProperty Name="HanmucCongno" ColumnName="HanmucCongno" />
-                <ScalarProperty Name="ThoigianCongno" ColumnName="ThoigianCongno" />
-                <ScalarProperty Name="ToahangCongno" ColumnName="ToahangCongno" />
-                <ScalarProperty Name="Ghichu" ColumnName="Ghichu" />
-                <ScalarProperty Name="NgayCapnhat" ColumnName="NgayCapnhat" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Step" ColumnName="Step" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-                <ScalarProperty Name="TenQuanhuyen" ColumnName="TenQuanhuyen" />
-                <ScalarProperty Name="TenTinhthanh" ColumnName="TenTinhthanh" />
-                <ScalarProperty Name="TenNhomKhachhang" ColumnName="TenNhomKhachhang" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Tri_GetKho" FunctionName="B2BSystemModel.Store.Tri_GetKho">
             <ResultMapping>
               <ComplexTypeMapping TypeName="B2BSystemModel.Tri_GetKho_Result">
@@ -10115,7 +9978,6 @@
                 <ScalarProperty Name="Step" ColumnName="Step" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="Linkanh" ColumnName="Linkanh" />
-                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -10564,7 +10426,173 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-        </EntityContainerMapping>
+          <FunctionImportMapping FunctionImportName="Tin_CheckLogin" FunctionName="B2BSystemModel.Store.Tin_CheckLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="B2BSystemModel.Tin_CheckLogin_Result">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="AccountPassword" ColumnName="AccountPassword" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Tonkhoes">
+            <EntityTypeMapping TypeName="B2BSystemModel.Tonkho">
+              <MappingFragment StoreEntitySet="Tonkho">
+                <ScalarProperty Name="ThanhtienXuat" ColumnName="ThanhtienXuat" />
+                <ScalarProperty Name="ThanhtienNhap" ColumnName="ThanhtienNhap" />
+                <ScalarProperty Name="SoluongTonDukien" ColumnName="SoluongTonDukien" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Step" ColumnName="Step" />
+                <ScalarProperty Name="NhanvienCapnhat" ColumnName="NhanvienCapnhat" />
+                <ScalarProperty Name="SoluongTon" ColumnName="SoluongTon" />
+                <ScalarProperty Name="SoluongXuat" ColumnName="SoluongXuat" />
+                <ScalarProperty Name="SoluongNhap" ColumnName="SoluongNhap" />
+                <ScalarProperty Name="SoduDauky" ColumnName="SoduDauky" />
+                <ScalarProperty Name="GioCapnhat" ColumnName="GioCapnhat" />
+                <ScalarProperty Name="NgayCapnhat" ColumnName="NgayCapnhat" />
+                <ScalarProperty Name="Nam" ColumnName="Nam" />
+                <ScalarProperty Name="Thang" ColumnName="Thang" />
+                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+                <ScalarProperty Name="KhoId" ColumnName="KhoId" />
+                <ScalarProperty Name="HanghoaId" ColumnName="HanghoaId" />
+                <ScalarProperty Name="TonkhoId" ColumnName="TonkhoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="B2BSystemModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram2" FunctionName="B2BSystemModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram2" FunctionName="B2BSystemModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram2" FunctionName="B2BSystemModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition2" FunctionName="B2BSystemModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="B2BSystemModel.sp_helpdiagramdefinition2_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams2" FunctionName="B2BSystemModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="B2BSystemModel.sp_helpdiagrams2_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram2" FunctionName="B2BSystemModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams2" FunctionName="B2BSystemModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="Tin_GetAllAccount1" FunctionName="B2BSystemModel.Store.Tin_GetAllAccount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="B2BSystemModel.Tin_GetAllAccount1_Result">
+                <ScalarProperty Name="AcountId" ColumnName="AcountId" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="AccountPassword" ColumnName="AccountPassword" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Tri_GetKhachhangDemo" FunctionName="B2BSystemModel.Store.Tri_GetKhachhangDemo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="B2BSystemModel.Tri_GetKhachhangDemo_Result">
+                <ScalarProperty Name="KhachhangId" ColumnName="KhachhangId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="HotenKhachhang" ColumnName="HotenKhachhang" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="Ngaysinh" ColumnName="Ngaysinh" />
+                <ScalarProperty Name="Gioitinh" ColumnName="Gioitinh" />
+                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
+                <ScalarProperty Name="DiachiGiaohang" ColumnName="DiachiGiaohang" />
+                <ScalarProperty Name="QuanhuyenId" ColumnName="QuanhuyenId" />
+                <ScalarProperty Name="TinhthanhId" ColumnName="TinhthanhId" />
+                <ScalarProperty Name="NhomKhachhangId" ColumnName="NhomKhachhangId" />
+                <ScalarProperty Name="Linkanh" ColumnName="Linkanh" />
+                <ScalarProperty Name="Congty" ColumnName="Congty" />
+                <ScalarProperty Name="Chucvu" ColumnName="Chucvu" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DiachiCongty" ColumnName="DiachiCongty" />
+                <ScalarProperty Name="PhoneCongty" ColumnName="PhoneCongty" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="MasoThue" ColumnName="MasoThue" />
+                <ScalarProperty Name="TenTaikhoan" ColumnName="TenTaikhoan" />
+                <ScalarProperty Name="SoTaikhoan" ColumnName="SoTaikhoan" />
+                <ScalarProperty Name="Nganhang" ColumnName="Nganhang" />
+                <ScalarProperty Name="HanmucCongno" ColumnName="HanmucCongno" />
+                <ScalarProperty Name="ThoigianCongno" ColumnName="ThoigianCongno" />
+                <ScalarProperty Name="ToahangCongno" ColumnName="ToahangCongno" />
+                <ScalarProperty Name="Ghichu" ColumnName="Ghichu" />
+                <ScalarProperty Name="NgayCapnhat" ColumnName="NgayCapnhat" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Step" ColumnName="Step" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="TenQuanhuyen" ColumnName="TenQuanhuyen" />
+                <ScalarProperty Name="TenTinhthanh" ColumnName="TenTinhthanh" />
+                <ScalarProperty Name="TenNhomKhachhang" ColumnName="TenNhomKhachhang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Tri_GetKhachhangTheoNhomKhachhang" FunctionName="B2BSystemModel.Store.Tri_GetKhachhangTheoNhomKhachhang">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="B2BSystemModel.Tri_GetKhachhangTheoNhomKhachhang_Result">
+                <ScalarProperty Name="KhachhangId" ColumnName="KhachhangId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="HotenKhachhang" ColumnName="HotenKhachhang" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="Ngaysinh" ColumnName="Ngaysinh" />
+                <ScalarProperty Name="Gioitinh" ColumnName="Gioitinh" />
+                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
+                <ScalarProperty Name="DiachiGiaohang" ColumnName="DiachiGiaohang" />
+                <ScalarProperty Name="QuanhuyenId" ColumnName="QuanhuyenId" />
+                <ScalarProperty Name="TinhthanhId" ColumnName="TinhthanhId" />
+                <ScalarProperty Name="NhomKhachhangId" ColumnName="NhomKhachhangId" />
+                <ScalarProperty Name="Linkanh" ColumnName="Linkanh" />
+                <ScalarProperty Name="Congty" ColumnName="Congty" />
+                <ScalarProperty Name="Chucvu" ColumnName="Chucvu" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DiachiCongty" ColumnName="DiachiCongty" />
+                <ScalarProperty Name="PhoneCongty" ColumnName="PhoneCongty" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="MasoThue" ColumnName="MasoThue" />
+                <ScalarProperty Name="TenTaikhoan" ColumnName="TenTaikhoan" />
+                <ScalarProperty Name="SoTaikhoan" ColumnName="SoTaikhoan" />
+                <ScalarProperty Name="Nganhang" ColumnName="Nganhang" />
+                <ScalarProperty Name="HanmucCongno" ColumnName="HanmucCongno" />
+                <ScalarProperty Name="ThoigianCongno" ColumnName="ThoigianCongno" />
+                <ScalarProperty Name="ToahangCongno" ColumnName="ToahangCongno" />
+                <ScalarProperty Name="Ghichu" ColumnName="Ghichu" />
+                <ScalarProperty Name="NgayCapnhat" ColumnName="NgayCapnhat" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Step" ColumnName="Step" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="TenQuanhuyen" ColumnName="TenQuanhuyen" />
+                <ScalarProperty Name="TenTinhthanh" ColumnName="TenTinhthanh" />
+                <ScalarProperty Name="TenNhomKhachhang" ColumnName="TenNhomKhachhang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

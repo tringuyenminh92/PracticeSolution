@@ -22,7 +22,7 @@
             <br /><br />
 
             <tags-input ng-model="tags" min-length="4" replace-spaces-with-dashes="false" placeholder="Enter some things" template="CustomTemplateWithIcon">
-                @* <auto-complete source=""></auto-complete>*@
+               @* <auto-complete source=""></auto-complete>*@
                 @*loadTags($query)*@
 
             </tags-input>
@@ -31,11 +31,11 @@
             <button type="button" class="btn btn-danger" ng-click="Reset()">Clear</button>
 
             @*<ui-select multiple ng-model="colors" theme="bootstrap">
-                    <ui-select-match placeholder="Select colors..."><i class="fa fa-tags">{{$item}}</i></ui-select-match>
-                    <ui-select-choices repeat="color in availableColors | filter: $select.search">
-                        {{color}}
-                    </ui-select-choices>
-                </ui-select>*@
+                <ui-select-match placeholder="Select colors..."><i class="fa fa-tags">{{$item}}</i></ui-select-match>
+                <ui-select-choices repeat="color in availableColors | filter: $select.search">
+                    {{color}}
+                </ui-select-choices>
+            </ui-select>*@
             @* filter: $select.search >> to filter when type input *@
 
 
@@ -43,12 +43,7 @@
 
                 {{AppPath}}
                 <p>Selected: {{colors}}</p>
-
-
-                <div class="btn btn-primary" ng-file-select ng-file-change="upload($files)">Select File</div>
-
-
-        </div>
+</div>
     </div>
 
     <br />

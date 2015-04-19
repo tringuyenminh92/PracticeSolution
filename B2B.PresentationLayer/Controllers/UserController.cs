@@ -34,14 +34,7 @@ namespace B2B.PresentationLayer.Controllers
         }
         public bool SaveAllAccount(List<Model.AccountModel> listAccount)
         {
-            //var listAccount1 = new List<Model.AccountModel>();
-            //listAccount1.Add(listAccount);
-            if (listAccount.Count < 1)
-            {
-                return false;
-            }
-            return us.SaveAllAccount(listAccount);
-
+            return true;
         }
     }
 }

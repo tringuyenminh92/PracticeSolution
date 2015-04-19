@@ -1,8 +1,8 @@
 ﻿@{
-    ViewBag.Title = "";
+    ViewBag.Title = "LichSuMuaHang";
 }
 <script src="~/Scripts/Custom/DonhangController.js"></script>
-<div class="container-fluid" ng-controller="donhangController">
+<div class="container-fluid" ng-controller="donhangController" ng-init="LoadDonhang()">
     @*<div class="row">
             <div ng-controller="donhangController">
                 <button id="btnLoadData" type="button" class="btn btn-primary btn-group-sm" ng-click="LoadDonhang()" ng-init="LoadDonhang()">Load Data</button>
@@ -17,11 +17,14 @@
         </div>*@
 
     <div class="col-md-5">
-        <h2 style="margin-left:15px">Đơn hàng</h2>
+        <h2 style="margin-left:15px">Xem lịch sử mua hàng</h2>
         <div class="form-group">
 
             <div class="col-md-12" style="margin-top:15px">
-                <div external-scopes="$scope" ui-grid-pagination ui-grid-resize-columns ui-grid="gridDonhang">
+                <select class="form-control" ng-model="thang" ng-options="obj as obj.Thang for obj in thangs">
+                    <option value="">--Lọc theo tháng--</option>
+                </select>
+                <div style="margin-top:10px" external-scopes="$scope" ui-grid-pagination ui-grid-resize-columns ui-grid="gridDonhang">
                 </div>
             </div>
         </div>
@@ -29,9 +32,45 @@
 
     <div class="col-md-7" style="margin-top:70px">
         <div class="col-md-12" style="margin-top:10px">
-            <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridChitietDonhang">
+            <p ng-show="!isHienthiCtdh">Xem chi tiết hàng hóa</p>
+            <div ng-show="isHienthiCtdh">
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <font size="5"><b>Đơn hàng&nbsp;{{donhang.Code}}&nbsp;-&nbsp;{{donhang.TenTinhtrangDonhang}}</b></font>
+                        <div style="border-top: 1px solid #999; padding-bottom: 10px; margin-top: 10px">
+                            <div style="padding-top:10px">
+                                <label style="padding-bottom:10px"><font size="4">Địa chỉ giao hàng</font></label>
+                                <p>{{khachhang.HotenKhachhang}}</p>
+                                <p>{{donhang.DiachiGiao}}&nbsp;{{donhang.TenQuanhuyenGiao}}&nbsp;{{donhang.TenTinhthanhGiao}}</p>
+                                <p>Điện thoại:&nbsp;{{donhang.SoDienthoai}}</p>
+                            </div>
+                        </div>
+                        <div style="border-top: 1px solid #999; padding-bottom: 10px; margin-top: 10px">
+                            <div style="padding-top:10px">
+                                <label style="padding-bottom:10px"><font size="4">Thời gian giao hàng</font></label>
+                                <p>Giao hàng vào ngày:&nbsp;{{donhang.NgaygiaoString}}</p>
+                            </div>
+                        </div>
+                        <div style="border-top: 1px solid #999; padding-bottom: 10px; margin-top: 10px">
+                            <div style="padding-top:10px">
+                                <label style="padding-bottom:10px"><font size="4">Thông tin thanh toán</font></label>
+                                <p>Số lượng hàng:&nbsp;{{donhang.SoluongHang}}</p>
+                                <p>Tiền giảm:&nbsp;{{donhang.Tiengiam}}</p>
+                                <p>Phần trăm giảm:&nbsp;{{donhang.PhantramGiam}}</p>
+                                <p><b><font size="3">Tổng cộng:&nbsp;{{donhang.Tongtien}}</font></b></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <label><font size="4">Thông tin sản phẩm</font></label>
+                <div style="margin-top:10px">
+                    <div external-scopes="$scope" style="height:350px" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridChitietDonhang">
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 
 </div>
+
