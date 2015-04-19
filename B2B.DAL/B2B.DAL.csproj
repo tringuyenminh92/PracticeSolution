@@ -193,7 +193,6 @@
     </Compile>
     <Compile Include="Repository\DSHanghoaReponsitory.cs" />
     <Compile Include="Repository\HanghoaRepository.cs" />
-    <Compile Include="Repository\KhachhangRepository.cs" />
     <Compile Include="Repository\LoginReponsitory.cs" />
     <Compile Include="Repository\NhomHanghoaRepository.cs" />
     <Compile Include="Repository\QuanhuyenRepository.cs" />
@@ -247,24 +246,6 @@
     </Compile>
     <Compile Include="SP_GetUserDetails_Result.cs">
       <DependentUpon>QuoteSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition1_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition2_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams1_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams2_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_PipingSchem_Result.cs">
       <DependentUpon>QuoteSystem.tt</DependentUpon>
@@ -359,9 +340,6 @@
     <Compile Include="sys_QuanhuyenSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
-    <Compile Include="sys_sysdiagramsSelect_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
     <Compile Include="sys_ThuchiSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
@@ -372,6 +350,9 @@
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="sys_TinhtrangDonhangSelect_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sys_TinhtrangPhieunhapSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="sys_TinhtrangPhieuxuatSelect_Result.cs">
@@ -410,13 +391,13 @@
     <Compile Include="Tin_CheckLogin_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
-    <Compile Include="Tin_GetAllAccount1_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
     <Compile Include="Tin_GetAllAccount_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Tin_GetChitietPhieunhapTheoPhieunhap_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tin_GetCongnoNhapMoinhatTheoNhacungcap_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Tin_GetHanghoaActive_Result.cs">
@@ -429,6 +410,9 @@
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Tin_GetPhieunhapTheoThang_Kho_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tin_GetPhieunhapTheoThang_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Tin_GetSoluongtonTheoHanghoaTrongKho_Result.cs">

@@ -214,7 +214,6 @@
     <Compile Include="Controllers\MuaHangController.cs" />
     <Compile Include="Controllers\QuanlyHanghoaController.cs" />
     <Compile Include="Controllers\QuoteController.cs" />
-    <Compile Include="Controllers\TaikhoanController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">

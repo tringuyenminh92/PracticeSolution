@@ -49,8 +49,18 @@ namespace B2B.DAL.Repository
         }
         public List<Tin_GetAllAccount_Result> GetAllAccount()
         {
-            //var tam = dbContext.Tin_GetAllAccount().ToList();
             return dbContext.Tin_GetAllAccount().ToList();
+        }
+        //SaveAllAccount
+        public bool SaveAllAccount(List<Account> listAccount)
+        {
+            if (listAccount != null)
+            {
+                dbContext.Entry(listAccount).State = EntityState.Modified;
+                dbContext.SaveChanges();
+                return true;
+            }
+            return false;
         }
     }
 }

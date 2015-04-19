@@ -4,104 +4,104 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b32c0434f28940c69b949d5b672f4d77" Name="Diagram1" ZoomLevel="63">
-        <EntityTypeShape EntityType="B2BSystemModel.Account" Width="1.5" PointX="0.75" PointY="27.75" />
-        <EntityTypeShape EntityType="B2BSystemModel.ChitietDonhang" Width="1.5" PointX="13.5" PointY="31.625" />
-        <EntityTypeShape EntityType="B2BSystemModel.ChitietPhieunhap" Width="1.5" PointX="13.5" PointY="36.875" />
-        <EntityTypeShape EntityType="B2BSystemModel.ChitietPhieuxuat" Width="1.5" PointX="18.75" PointY="27.25" />
-        <EntityTypeShape EntityType="B2BSystemModel.CongnoNhap" Width="1.5" PointX="8.25" PointY="22.125" />
-        <EntityTypeShape EntityType="B2BSystemModel.CongnoXuat" Width="1.5" PointX="8.25" PointY="26.875" />
-        <EntityTypeShape EntityType="B2BSystemModel.Dongia" Width="1.5" PointX="21.75" PointY="37.375" />
-        <EntityTypeShape EntityType="B2BSystemModel.Donhang" Width="1.5" PointX="11.25" PointY="25.375" />
-        <EntityTypeShape EntityType="B2BSystemModel.Donvi" Width="1.5" PointX="14.25" PointY="45.25" />
-        <EntityTypeShape EntityType="B2BSystemModel.Hanghoa" Width="1.5" PointX="16.5" PointY="42.125" />
-        <EntityTypeShape EntityType="B2BSystemModel.HanghoaNhaCungcap" Width="1.5" PointX="18.75" PointY="39.875" />
-        <EntityTypeShape EntityType="B2BSystemModel.Khachhang" Width="1.5" PointX="3" PointY="24.625" />
-        <EntityTypeShape EntityType="B2BSystemModel.Kho" Width="1.5" PointX="9" PointY="16.625" />
-        <EntityTypeShape EntityType="B2BSystemModel.Khuvuc" Width="1.5" PointX="1.5" PointY="13.625" />
-        <EntityTypeShape EntityType="B2BSystemModel.LoHanghoa" Width="1.5" PointX="14.25" PointY="21.125" />
-        <EntityTypeShape EntityType="B2BSystemModel.NguyennhanLydo" Width="1.5" PointX="14.25" PointY="12.5" />
-        <EntityTypeShape EntityType="B2BSystemModel.NhaCungcap" Width="1.5" PointX="6" PointY="35" />
-        <EntityTypeShape EntityType="B2BSystemModel.Nhanvien" Width="1.5" PointX="6" PointY="24.25" />
-        <EntityTypeShape EntityType="B2BSystemModel.NhanvienKho" Width="1.5" PointX="14.25" PointY="27.625" />
-        <EntityTypeShape EntityType="B2BSystemModel.NhomHanghoa" Width="1.5" PointX="14.25" PointY="41.75" />
-        <EntityTypeShape EntityType="B2BSystemModel.NhomKhachhang" Width="1.5" PointX="0.75" PointY="30.75" />
-        <EntityTypeShape EntityType="B2BSystemModel.Phieunhap" Width="1.5" PointX="8.25" PointY="31.75" />
-        <EntityTypeShape EntityType="B2BSystemModel.Phieuxuat" Width="1.5" PointX="16.5" PointY="26" />
-        <EntityTypeShape EntityType="B2BSystemModel.Phongban" Width="1.5" PointX="3.75" PointY="20.5" />
-        <EntityTypeShape EntityType="B2BSystemModel.Quanhuyen" Width="1.5" PointX="0.75" PointY="23.125" />
-        <EntityTypeShape EntityType="B2BSystemModel.Thuchi" Width="1.5" PointX="18.75" PointY="32" />
-        <EntityTypeShape EntityType="B2BSystemModel.ThuoctinhHanghoa" Width="1.5" PointX="18.75" PointY="44.375" />
-        <EntityTypeShape EntityType="B2BSystemModel.Tinhthanh" Width="1.5" PointX="1.5" PointY="18.125" />
-        <EntityTypeShape EntityType="B2BSystemModel.Tinhtrang" Width="1.5" PointX="14.25" PointY="16.25" />
-        <EntityTypeShape EntityType="B2BSystemModel.TinhtrangDonhang" Width="1.5" PointX="16.5" PointY="21.375" />
-        <EntityTypeShape EntityType="B2BSystemModel.TinhtrangPhieunhap" Width="1.5" PointX="10.5" PointY="33.75" />
-        <EntityTypeShape EntityType="B2BSystemModel.TinhtrangPhieuxuat" Width="1.5" PointX="21.75" PointY="27.375" />
-        <EntityTypeShape EntityType="B2BSystemModel.Tonkho" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="B2BSystemModel.User" Width="1.5" PointX="8.25" PointY="46.5" />
-        <AssociationConnector Association="B2BSystemModel.FK_Khachhang_Account" />
-        <AssociationConnector Association="B2BSystemModel.FK_Nhanvien_Account" />
-        <AssociationConnector Association="B2BSystemModel.FK_ChitietDonhang_Donhang" />
-        <AssociationConnector Association="B2BSystemModel.FK_ChitietDonhang_Hanghoa" />
-        <AssociationConnector Association="B2BSystemModel.FK_ChitietPhieunhap_Hanghoa" />
-        <AssociationConnector Association="B2BSystemModel.FK_ChitietPhieunhap_Phieunhap" />
-        <AssociationConnector Association="B2BSystemModel.FK_ChitietPhieuxuat_Hanghoa" />
-        <AssociationConnector Association="B2BSystemModel.FK_ChitietPhieuxuat_Phieuxuat" />
-        <AssociationConnector Association="B2BSystemModel.FK_CongnoNhap_NhaCungcap" />
-        <AssociationConnector Association="B2BSystemModel.FK_CongnoNhap_Nhanvien" />
-        <AssociationConnector Association="B2BSystemModel.FK_CongnoXuat_Khachhang" />
-        <AssociationConnector Association="B2BSystemModel.FK_CongnoXuat_Nhanvien" />
-        <AssociationConnector Association="B2BSystemModel.FK_Dongia_Hanghoa" />
-        <AssociationConnector Association="B2BSystemModel.FK_Dongia_NhomKhachhang" />
-        <AssociationConnector Association="B2BSystemModel.FK_Donhang_Khachhang" />
-        <AssociationConnector Association="B2BSystemModel.FK_Donhang_Kho" />
-        <AssociationConnector Association="B2BSystemModel.FK_Donhang_Nhanvien" />
-        <AssociationConnector Association="B2BSystemModel.FK_Donhang_Nhanvien1" />
-        <AssociationConnector Association="B2BSystemModel.FK_Phieuxuat_Donhang" />
-        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangDonhang_Donhang" />
-        <AssociationConnector Association="B2BSystemModel.FK_Hanghoa_Donvi" />
-        <AssociationConnector Association="B2BSystemModel.FK_Hanghoa_NhomHanghoa" />
-        <AssociationConnector Association="B2BSystemModel.FK_HanghoaNhaCungcap_Hanghoa" />
-        <AssociationConnector Association="B2BSystemModel.FK_LoHanghoa_Hanghoa" />
-        <AssociationConnector Association="B2BSystemModel.FK_ThuoctinhHanghoa_Hanghoa" />
-        <AssociationConnector Association="B2BSystemModel.FK_HanghoaNhaCungcap_NhaCungcap" />
-        <AssociationConnector Association="B2BSystemModel.FK_Khachhang_NhomKhachhang1" />
-        <AssociationConnector Association="B2BSystemModel.FK_Khachhang_Quanhuyen" />
-        <AssociationConnector Association="B2BSystemModel.FK_Khachhang_Tinhthanh" />
-        <AssociationConnector Association="B2BSystemModel.FK_Kho_Quanhuyen" />
-        <AssociationConnector Association="B2BSystemModel.FK_Kho_Tinhthanh" />
-        <AssociationConnector Association="B2BSystemModel.FK_LoHanghoa_Kho" />
-        <AssociationConnector Association="B2BSystemModel.FK_NhanvienKho_Kho" />
-        <AssociationConnector Association="B2BSystemModel.FK_Phieunhap_Kho" />
-        <AssociationConnector Association="B2BSystemModel.FK_Phieuxuat_Kho" />
-        <AssociationConnector Association="B2BSystemModel.FK_Tinhthanh_Khuvuc" />
-        <AssociationConnector Association="B2BSystemModel.FK_LoHanghoa_Nhanvien" />
-        <AssociationConnector Association="B2BSystemModel.FK_Phieunhap_NguyennhanLydo" />
-        <AssociationConnector Association="B2BSystemModel.FK_Phieuxuat_NguyennhanLydo" />
-        <AssociationConnector Association="B2BSystemModel.FK_NhaCungcap_Quanhuyen" />
-        <AssociationConnector Association="B2BSystemModel.FK_NhaCungcap_Tinhthanh" />
-        <AssociationConnector Association="B2BSystemModel.FK_Phieunhap_NhaCungcap" />
-        <AssociationConnector Association="B2BSystemModel.FK_Nhanvien_Phongban" />
-        <AssociationConnector Association="B2BSystemModel.FK_Nhanvien_Quanhuyen" />
-        <AssociationConnector Association="B2BSystemModel.FK_Nhanvien_Tinhthanh" />
-        <AssociationConnector Association="B2BSystemModel.FK_NhanvienKho_Nhanvien" />
-        <AssociationConnector Association="B2BSystemModel.FK_Phieunhap_Nhanvien" />
-        <AssociationConnector Association="B2BSystemModel.FK_Phieuxuat_Nhanvien" />
-        <AssociationConnector Association="B2BSystemModel.FK_Phieuxuat_Nhanvien3" />
-        <AssociationConnector Association="B2BSystemModel.FK_Phieuxuat_Nhanvien4" />
-        <AssociationConnector Association="B2BSystemModel.FK_Thuchi_Nhanvien" />
-        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangDonhang_Nhanvien" />
-        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangPhieunhap_Nhanvien" />
-        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangPhieuxuat_Nhanvien" />
-        <AssociationConnector Association="B2BSystemModel.FK_User_Nhanvien" />
-        <AssociationConnector Association="B2BSystemModel.FK_Thuchi_Phieunhap" />
-        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangPhieunhap_Phieunhap" />
-        <AssociationConnector Association="B2BSystemModel.FK_Thuchi_Phieuxuat" />
-        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangPhieuxuat_Phieuxuat" />
-        <AssociationConnector Association="B2BSystemModel.FK_Quanhuyen_Tinhthanh" />
-        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangDonhang_Tinhtrang" />
-        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangPhieunhap_Tinhtrang" />
-        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangPhieuxuat_Tinhtrang" />
+      <Diagram DiagramId="76ac1b77d2264264b6950a91b3c1048e" Name="Diagram1">
+        <EntityTypeShape EntityType="B2BSystemModel.Account" Width="1.5" PointX="0.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.ChitietDonhang" Width="1.5" PointX="16.5" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.ChitietPhieunhap" Width="1.5" PointX="19.5" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.ChitietPhieuxuat" Width="1.5" PointX="15.75" PointY="32.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.CongnoNhap" Width="1.5" PointX="8.25" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.CongnoXuat" Width="1.5" PointX="8.25" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Dongia" Width="1.5" PointX="18.5" PointY="36" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Donhang" Width="1.5" PointX="11.25" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Donvi" Width="1.5" PointX="12" PointY="37.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Hanghoa" Width="1.5" PointX="14.25" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.HanghoaNhaCungcap" Width="1.5" PointX="22.5" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Khachhang" Width="1.5" PointX="3" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Kho" Width="1.5" PointX="9" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Khuvuc" Width="1.5" PointX="1.5" PointY="41.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.LoHanghoa" Width="1.5" PointX="8.25" PointY="32.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.NguyennhanLydo" Width="1.5" PointX="11.25" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.NhaCungcap" Width="1.5" PointX="12" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Nhanvien" Width="1.5" PointX="6" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.NhanvienKho" Width="1.5" PointX="14.25" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.NhomHanghoa" Width="1.5" PointX="12" PointY="41.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.NhomKhachhang" Width="1.5" PointX="0.75" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Phieunhap" Width="1.5" PointX="14.25" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Phieuxuat" Width="1.5" PointX="13.5" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Phongban" Width="1.5" PointX="3.75" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Quanhuyen" Width="1.5" PointX="0.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Thuchi" Width="1.5" PointX="19.5" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.ThuoctinhHanghoa" Width="1.5" PointX="16.5" PointY="40.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Tinhthanh" Width="1.5" PointX="1.5" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Tinhtrang" Width="1.5" PointX="14.25" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.TinhtrangDonhang" Width="1.5" PointX="16.5" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.TinhtrangPhieunhap" Width="1.5" PointX="19.5" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.TinhtrangPhieuxuat" Width="1.5" PointX="21.75" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.Tonkho" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2BSystemModel.User" Width="1.5" PointX="8.25" PointY="46.75" IsExpanded="true" />
+        <AssociationConnector Association="B2BSystemModel.FK_Khachhang_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Nhanvien_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_ChitietDonhang_Donhang" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_ChitietDonhang_Hanghoa" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_ChitietPhieunhap_Hanghoa" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_ChitietPhieunhap_Phieunhap" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_ChitietPhieuxuat_Hanghoa" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_ChitietPhieuxuat_Phieuxuat" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_CongnoNhap_NhaCungcap" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_CongnoNhap_Nhanvien" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_CongnoXuat_Khachhang" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_CongnoXuat_Nhanvien" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Dongia_Hanghoa" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Dongia_NhomKhachhang" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Donhang_Khachhang" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Donhang_Kho" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Donhang_Nhanvien" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Donhang_Nhanvien1" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Phieuxuat_Donhang" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangDonhang_Donhang" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Hanghoa_Donvi" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Hanghoa_NhomHanghoa" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_HanghoaNhaCungcap_Hanghoa" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_LoHanghoa_Hanghoa" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_ThuoctinhHanghoa_Hanghoa" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_HanghoaNhaCungcap_NhaCungcap" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Khachhang_NhomKhachhang1" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Khachhang_Quanhuyen" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Khachhang_Tinhthanh" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Kho_Quanhuyen" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Kho_Tinhthanh" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_LoHanghoa_Kho" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_NhanvienKho_Kho" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Phieunhap_Kho" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Phieuxuat_Kho" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Tinhthanh_Khuvuc" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_LoHanghoa_Nhanvien" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Phieunhap_NguyennhanLydo" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Phieuxuat_NguyennhanLydo" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_NhaCungcap_Quanhuyen" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_NhaCungcap_Tinhthanh" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Phieunhap_NhaCungcap" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Nhanvien_Phongban" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Nhanvien_Quanhuyen" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Nhanvien_Tinhthanh" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_NhanvienKho_Nhanvien" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Phieunhap_Nhanvien" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Phieuxuat_Nhanvien" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Phieuxuat_Nhanvien3" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Phieuxuat_Nhanvien4" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Thuchi_Nhanvien" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangDonhang_Nhanvien" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangPhieunhap_Nhanvien" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangPhieuxuat_Nhanvien" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_User_Nhanvien" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Thuchi_Phieunhap" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangPhieunhap_Phieunhap" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Thuchi_Phieuxuat" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangPhieuxuat_Phieuxuat" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_Quanhuyen_Tinhthanh" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangDonhang_Tinhtrang" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangPhieunhap_Tinhtrang" ManuallyRouted="false" />
+        <AssociationConnector Association="B2BSystemModel.FK_TinhtrangPhieuxuat_Tinhtrang" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
