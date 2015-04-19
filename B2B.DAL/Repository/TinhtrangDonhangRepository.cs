@@ -6,33 +6,24 @@ using System.Threading.Tasks;
 
 namespace B2B.DAL.Repository
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    namespace B2B.DAL
+    public class TinhtrangDonhangRepository
     {
-        public class TinhtrangDonhangRepository
+        B2BSystemEntities dbContext;
+        public TinhtrangDonhangRepository()
         {
-            B2BSystemEntities dbContext;
-            public TinhtrangDonhangRepository()
+            dbContext = new B2BSystemEntities();
+        }
+        public bool Insert(TinhtrangDonhang tinhtrangDonhang)
+        {
+            try
             {
-                dbContext = new B2BSystemEntities();
+                dbContext.TinhtrangDonhangs.Add(tinhtrangDonhang);
+                dbContext.SaveChanges();
+                return true;
             }
-            public bool Insert(TinhtrangDonhang tinhtrangDonhang)
+            catch (System.Exception ex)
             {
-                try
-                {
-                    dbContext.TinhtrangDonhangs.Add(tinhtrangDonhang);
-                    dbContext.SaveChanges();
-                    return true;
-                }
-                catch (System.Exception ex)
-                {
-                    return false;
-                }
+                return false;
             }
         }
     }

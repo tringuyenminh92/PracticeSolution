@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using B2B.Model;
+using B2B.DAL.Repository;
 
 namespace B2B.BL.Service
 {

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using B2B.DAL;
+using B2B.DAL.Repository;
 using B2B.Model;
 using System;
 using System.Collections.Generic;
