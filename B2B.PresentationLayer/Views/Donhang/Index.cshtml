@@ -2,7 +2,7 @@
     ViewBag.Title = "LichSuMuaHang";
 }
 <script src="~/Scripts/Custom/DonhangController.js"></script>
-<div class="container-fluid" ng-controller="donhangController" ng-init="LoadDonhang()">
+<div class="container-fluid" ng-controller="donhangController" ng-init="InitXemlichsuMuahang()">
     @*<div class="row">
             <div ng-controller="donhangController">
                 <button id="btnLoadData" type="button" class="btn btn-primary btn-group-sm" ng-click="LoadDonhang()" ng-init="LoadDonhang()">Load Data</button>
@@ -19,23 +19,58 @@
         <h2>Xem lịch sử mua hàng</h2>
         <div class="form-group">
             <div style="margin-top:15px">
-                <select class="form-control" ng-model="thang" ng-options="obj as obj.Thang for obj in thangs">
-                    <option value="">--Lọc theo tháng--</option>
-                </select>
+                @*<select class="form-control" ng-model="thang" ng-options="obj as obj.Thang for obj in thangs">
+                        <option value="">--Lọc theo tháng--</option>
+                    </select>*@
+                <div class="panel panel-primary">
+                    <div class="panel-body" style="padding-bottom:0px">
+                        <div class="col-md-5">
+                            <div>Từ ngày:</div>
+                            <div class="form-group">
+                                <p class="input-group">
+                                    <input type="text" disabled style="background:#ffffff" class="form-control" datepicker-popup="{{format}}"
+                                           ng-model="datefrom" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" placeholder="Từ ngày"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open1($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <div>Đến ngày:</div>
+                                <p class="input-group">
+                                    <input type="text" disabled style="background:#ffffff" class="form-control" datepicker-popup="{{format}}"
+                                           ng-model="dateto" is-open="opened2" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" placeholder="Đến ngày" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <input type="button" class="btn btn-primary" value="Lọc" ng-click="">
+                        </div>
+                    </div>
+                </div>
+                
+
                 <div style="margin-top:20px; height:410px" external-scopes="$scope" ui-grid-pagination ui-grid-resize-columns ui-grid="gridDonhang">
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-6" style="margin-top:60px">
+    <div class="col-md-6" style="margin-top:58px">
         <div style="margin-top:10px">
             <div class="panel panel-primary">
                 <div class="panel-body">
-                    <p ng-show="!isHienthiCtdh"><b><i>Xem chi tiết hàng hóa</i></b></p>
-                    <div ng-show="isHienthiCtdh">
-                        <font size="4"><b>Đơn hàng&nbsp;{{donhang.Code}}&nbsp;-&nbsp;{{donhang.TenTinhtrangDonhang}}</b></font>
-                        <div style="border-top: 1px solid #999; padding-bottom: 10px; margin-top: 10px">
+                    <p ng-show="!isHienthiCtdh" style="margin-top:17px; margin-bottom:17px"><b><i>Mời bạn chọn đơn hàng để xem chi tiết</i></b></p>
+                    <div ng-show="isHienthiCtdh" style="margin-top: 16px">
+                        <font size="5"><b>Đơn hàng&nbsp;{{donhang.Code}}&nbsp;-&nbsp;{{donhang.TenTinhtrangDonhang}}</b></font>
+                        <div style="border-top: 1px solid #999; padding-bottom: 10px; margin-top: 22px">
                             <div style="padding-top:10px">
                                 <label style="padding-bottom:10px"><font size="4">Địa chỉ giao hàng</font></label>
                                 <p>{{khachhang.HotenKhachhang}}</p>
@@ -50,7 +85,7 @@
                             </div>
                         </div>
                         <div style="border-top: 1px solid #999; padding-bottom: 10px; margin-top: 10px">
-                            <div style="padding-top:10px">
+                            <div style="padding-top:10px; margin-bottom:30px">
                                 <label style="padding-bottom:10px"><font size="4">Thông tin thanh toán</font></label>
                                 <p>Số lượng hàng:&nbsp;{{donhang.SoluongHang}}</p>
                                 <p>Tiền giảm:&nbsp;{{donhang.Tiengiam}}</p>
@@ -67,7 +102,7 @@
 
     <div class="col-md-12" ng-show="isHienthiCtdh">
         <label><font size="4">Thông tin sản phẩm</font></label>
-        <div style="margin-top:10px">
+        <div style="margin-top:10px; margin-bottom:100px">
             <div external-scopes="$scope" style="height:350px" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridChitietDonhang">
             </div>
         </div>

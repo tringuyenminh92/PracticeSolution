@@ -14,9 +14,14 @@ namespace B2B.DAL.Repository
             _BSE = new B2BSystemEntities();
         }
         public IQueryable<Donhang> GetDonhang()
-          {
-              return _BSE.Donhangs.AsQueryable<Donhang>().OrderByDescending(dh => dh.Ngaylap);
-          }
+        {
+            return _BSE.Donhangs.AsQueryable<Donhang>().OrderByDescending(dh => dh.Ngaylap);
+        }
+        public DateTime? GetNgaylapDonhangDautien()
+        {
+            Donhang donhangDautien = _BSE.Donhangs.AsQueryable<Donhang>().OrderBy(dh => dh.Ngaylap).FirstOrDefault(); 
+            return donhangDautien.Ngaylap;
+        }
         public IQueryable<Tri_GetDonhangTheoThang_Result> GetDonhangsByMonth(DateTime ngaylap,int loaiDonhang)
         {
             return _BSE.Tri_GetDonhangTheoThang(ngaylap,loaiDonhang).AsQueryable();

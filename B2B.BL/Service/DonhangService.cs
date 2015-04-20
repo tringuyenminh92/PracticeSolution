@@ -17,6 +17,10 @@ namespace B2B.BL.Service
         {
             _donhangRepository = new DonhangRepository();
         }
+        public DateTime? GetNgaylapDonhangDautien()
+        {
+            return _donhangRepository.GetNgaylapDonhangDautien();
+        }
         public List<DonhangModel> GetDonhang()
         {
             Mapper.CreateMap<Donhang, DonhangModel>();

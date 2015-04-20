@@ -211,6 +211,7 @@
     <Compile Include="Controllers\HoadonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MuaHangController.cs" />
     <Compile Include="Controllers\QuanlyHanghoaController.cs" />
     <Compile Include="Controllers\QuoteController.cs" />
     <Compile Include="Controllers\TaikhoanController.cs" />

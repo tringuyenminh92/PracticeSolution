@@ -1,19 +1,44 @@
 ﻿
 angular.module("GlobalModule").controller("donhangController", DonhangController);
 
-DonhangController.$inject = ['$scope', '$http'];
+DonhangController.$inject = ['$scope', '$http', '$q'];
 
-function DonhangController($scope, $http) {
+function DonhangController($scope, $http, $q) {
 
     $scope.$scope = $scope;
     $scope.donhangs = [];
     $scope.chitietdonhang = [];
     $scope.isHienthiCtdh = false;
 
+    $scope.getNgaylapDonhangDautien = function () {
+        var defer = $q.defer();
+        $http.get("/Donhang/GetNgaylapDonhangDautien").success(function (data, status, headers, config) {
+            if (data.ngaylapdautien == "")
+            {
+                $scope.minDate = new Date() + "";
+            }
+            else
+            {
+                $scope.minDate = new Date(data.ngaylapdautien)+ "";
+            }
+            $scope.datefrom = new Date(data.ngaylapdautien);
+            $scope.dateto = new Date();
+            defer.resolve(data);
+        }).error(defer.reject);
+        return defer.promise;
+    }
+
+    
+
+    $scope.InitXemlichsuMuahang = function () {
+        $scope.getNgaylapDonhangDautien().then($scope.LoadDonhang);
+    }
+
     $scope.LoadDonhang = function () {
-        $http.get("Donhang/LoadDonhang").success(function (data, status, headers, config) {
+        $http.get("/Donhang/LoadDonhang").success(function (data, status, headers, config) {
             $scope.donhangs = data;
         }).error(function (data, status, headers, config) {
+            alert('Lỗi load đơn hàng');
         });
     }
 
@@ -76,5 +101,28 @@ function DonhangController($scope, $http) {
     $scope.gridChitietDonhang.enableCellEdit = false;
     $scope.gridChitietDonhang.enableFiltering = false;
     $scope.gridChitietDonhang.rowHeight = 100;
+
+
+    //Datetime Picker
+    $scope.open1 = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened1 = true;
+    };
+    $scope.open2 = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened2 = true;
+    };
+    $scope.format = 'dd/MM/yyyy';
+
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+    };
+
+    $scope.maxDate = new Date() + "";
 }
 

@@ -199,6 +199,7 @@
     <Compile Include="Repository\QuanhuyenRepository.cs" />
     <Compile Include="Repository\QuoteRepository.cs" />
     <Compile Include="Repository\TinhthanhRepository.cs" />
+    <Compile Include="Repository\TinhtrangRepository.cs" />
     <Compile Include="Repository\UserResponsitory.cs" />
     <Compile Include="SP_GetApprovedQuoteDetails_Result.cs">
       <DependentUpon>QuoteSystem.tt</DependentUpon>

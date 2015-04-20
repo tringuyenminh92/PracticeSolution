@@ -25,7 +25,24 @@ namespace B2B.PresentationLayer.Controllers
         {
             return View();
         }
+        public JsonResult GetNgaylapDonhangDautien()
+        {
+            DateTime? nl = _donhangService.GetNgaylapDonhangDautien();
+            string ngaylapdautien = "";
+            if(nl!=null)
+            {
+                string ngay = "";
+                if (nl.Value.Day < 10) ngay = ngay + "0" + nl.Value.Day;
+                else ngay = ngay + nl.Value.Day;
 
+                string thang = "";
+                if (nl.Value.Month < 10) thang = thang + "0" + nl.Value.Month;
+                else thang = thang + nl.Value.Month;
+
+                ngaylapdautien = nl.Value.Year + "-" + thang + "-" + ngay;
+            }
+            return Json(new { ngaylapdautien = ngaylapdautien }, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult GetHanghoasByMonth(string ngaylap,int loaiDonhang)
         {
             var ngay = DateTime.Parse(ngaylap);
