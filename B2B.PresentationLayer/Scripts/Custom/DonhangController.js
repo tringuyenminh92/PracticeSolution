@@ -23,12 +23,14 @@ function DonhangController($scope, $http) {
         if ($scope.donhang.SoDienthoai == null) { $scope.donhang.SoDienthoai = 'Chưa có'; }
         $scope.donhang.SoluongHang = 0;
         $http.post("/Donhang/LoadChitietDonhangTheoDonhang", { donhangId: team.DonhangId }).success(function (data, status, headers, config) {
+            var stt = 0;
             $scope.chitietdonhang = data;
             for (i = 0; i < $scope.chitietdonhang.length; i++) {
                 if ($scope.chitietdonhang[i].LinkHinhanh_Web == null) {
                     $scope.chitietdonhang[i].LinkHinhanh_Web = "/Images/Hinhhanghoa/noPhoto-icon.png";
                 }
-
+                stt = stt + 1;
+                $scope.chitietdonhang[i].STT = stt;
                 $scope.donhang.SoluongHang += $scope.chitietdonhang[i].Soluong;
             }
             $scope.isHienthiCtdh = true;
@@ -41,14 +43,14 @@ function DonhangController($scope, $http) {
     $scope.gridDonhang = {};
     $scope.detailsCellTemplate = '<button ng-click="getExternalScopes().getDonhangDetails(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-camera"/></button> ';
     $scope.gridDonhang.columnDefs = [
-        { name: 'Code', displayName: 'Code', width: 95 },
+        { name: 'Code', displayName: 'Code', width: 150 },
   	    { name: 'NgaylapString', displayName: 'Ngày lập', width: 85 },
-        { name: 'Tongtien', displayName: 'Tổng tiền', width: 80 },
-        { name: 'TenTinhtrangDonhang', displayName: 'Tình trạng ', width: 130 },
+        { name: 'Tongtien', displayName: 'Tổng tiền', width: 120 },
+        { name: 'TenTinhtrangDonhang', displayName: 'Tình trạng ', width: 170 },
         { name: 'Details', displayName: '', width: 15, cellTemplate: $scope.detailsCellTemplate, enableFiltering: false }
     ];
-    $scope.gridDonhang.paginationPageSizes = [25, 50, 75];
-    $scope.gridDonhang.paginationPageSize = 25;
+    $scope.gridDonhang.paginationPageSizes = [10, 15, 30];
+    $scope.gridDonhang.paginationPageSize = 10;
     $scope.gridDonhang.data = "donhangs";
     $scope.gridDonhang.enableCellEdit = false;
     $scope.gridDonhang.enableFiltering = true;
@@ -56,20 +58,23 @@ function DonhangController($scope, $http) {
 
     $scope.gridChitietDonhang = {};
     $scope.imageCellTemplate = '<img ng-src={{row.entity.LinkHinhanh_Web}} class="img-responsive" width="200" height="300">';
+    $scope.dacdiemCellTemplate = '<ul><li ng-repeat="dd in row.entity.ThuoctinhHanghoaItems">{{ dd }}</li></ul>';
     $scope.gridChitietDonhang.columnDefs = [
-        { name: '_hinhanh', displayName: '', cellTemplate: $scope.imageCellTemplate, enableFiltering: false, width: 80 },
-        { name: 'Code', displayName: 'Code', width: 90 },
-  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 170 },
+        { name: 'STT', displayName: 'STT', width: 50, enableFiltering: false },
+        { name: '_hinhanh', displayName: '', cellTemplate: $scope.imageCellTemplate, width: 100 },
+        { name: 'Code', displayName: 'Code', width: 150 },
+  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 220 },
+        { name: '_dacdiem', displayName: 'Đặc điểm', cellTemplate: $scope.dacdiemCellTemplate, width: 255 },
         { name: 'Soluong', displayName: 'Số lượng', width: 80 },
-        { name: 'Giaban', displayName: 'Đơn giá', width: 100 },
-        { name: 'Thanhtien', displayName: 'Thành tiền', width: 100 },
+        { name: 'Giaban', displayName: 'Đơn giá', width: 150 },
+        { name: 'Thanhtien', displayName: 'Thành tiền', width: 150 },
     ];
 
-    $scope.gridChitietDonhang.paginationPageSizes = [25, 50, 75];
-    $scope.gridChitietDonhang.paginationPageSize = 25;
+    $scope.gridChitietDonhang.paginationPageSizes = [5, 10, 20];
+    $scope.gridChitietDonhang.paginationPageSize = 5;
     $scope.gridChitietDonhang.data = "chitietdonhang";
     $scope.gridChitietDonhang.enableCellEdit = false;
     $scope.gridChitietDonhang.enableFiltering = false;
-    $scope.gridChitietDonhang.rowHeight = 80;
+    $scope.gridChitietDonhang.rowHeight = 100;
 }
 
