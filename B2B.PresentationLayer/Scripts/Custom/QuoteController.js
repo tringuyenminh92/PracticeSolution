@@ -7,8 +7,8 @@ $(function () {
 })
 
 angular.module("GlobalModule").controller("quoteController", QuoteController);
-QuoteController.$inject = ['$scope', '$http', '$location', '$q'];
-function QuoteController($scope, $http, $location, $q, $modalInstance) {
+QuoteController.$inject = ['$scope', '$http', '$upload', '$location', '$q'];
+function QuoteController($scope, $http, $upload, $location, $q, $modalInstance) {
 
     $scope.$scope = $scope;
 
@@ -54,13 +54,17 @@ function QuoteController($scope, $http, $location, $q, $modalInstance) {
         });
     };
 
+    $scope.dataForTuoi=[{id:1,tuoi:12},{id:2,tuoi:12},{id:3,tuoi:17},{id:4,tuoi:19},{id:5,tuoi:16}];
+
     $scope.gridOptions = {};
     $scope.deleteCellTemplate = '<button ng-click="getExternalScopes().deleteRow(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-trash"/></button> ';
     $scope.detailsCellTemplate = '<button ng-click="getExternalScopes().getDetails(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-camera"/></button> ';
     $scope.gridOptions.columnDefs = [
           { name: '_delete', displayName: "", cellTemplate: $scope.deleteCellTemplate, width: 25, enableFiltering: false, enableCellEdit: false },
   	      { name: 'name', displayName: 'Name', headerCellTemplate: '<div title="Tooltip Content">Name</div>', width: 150 },
-  	      { name: 'tuoi', displayName: 'tuoi', width: 50, type: 'number' },
+  	      {
+  	          name: 'tuoi', displayName: 'tuoi', width: 50, type: 'number', cellFilter: '{            1: 12,            2: 12,            3:17,            4:19,            5:16    }', editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'tuoi', editDropdownOptionsArray: $scope.dataForTuoi
+  	      },
           { name: 'Details', displayName: 'Details', width: 50, cellTemplate: $scope.detailsCellTemplate }
     ];
     $scope.gridOptions.paginationPageSizes = [25, 50, 75];
@@ -68,7 +72,29 @@ function QuoteController($scope, $http, $location, $q, $modalInstance) {
     $scope.gridOptions.data = "myData";
     $scope.gridOptions.enableFiltering = false;
 
+
+    //angular.copy();
+
+
     //Demo show datetime formart
     $scope.Giatri = Date.now();
+    …
+
+    $scope.upload = function (file) {
+        if (file && file.length) {
+            $upload.upload({
+                url: 'Quote/UploadFile',
+                method: 'POST',
+                file: file
+            }).progress(function (evt) {
+                //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            }).success(function (data, status, headers, config) {
+                //console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+                if (data) {
+                    alert(data.FileName);
+                }
+            });
+        }
+    };
 }
 
