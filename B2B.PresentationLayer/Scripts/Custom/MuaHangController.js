@@ -318,6 +318,9 @@ function MuaHangController($scope, $http, $q) {
     $scope.isLuuthanhMacdinh = false;
     //Hàm xử lý khi khách hàng hoàn tất thông tin và lưu đơn hàng
     $scope.TienhanhLuuDonhang = function () {
+        if ($scope.account.AccountId == null) {
+            window.location.href = "/Taikhoan/Dangnhap";
+        }
         $scope.donhang.KhachhangId = $scope.khachhang.KhachhangId;
         //alert($scope.donhang.Tongtien);
         //Trường hợp khách không chọn địa chỉ giao hàng khác

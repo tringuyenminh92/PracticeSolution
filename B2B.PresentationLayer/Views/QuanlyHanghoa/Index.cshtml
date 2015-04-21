@@ -21,7 +21,7 @@
             </div>*@
             </div>
 
-            <div external-scopes="$scope" class="gridStyle" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
+            <div external-scopes="$scope" style="height:685px" class="gridStyle" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
             </div>
         </div>
     </div>
@@ -76,6 +76,35 @@
                         </div>
 
                     </div>
+
+                    <div class="col-md-12">
+                        <accordion>
+                            <accordion-group is-open="status.open">
+                                <accordion-heading>
+                                    Thuộc tính hàng hóa <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                                </accordion-heading>
+
+                                <table style="width:100%" ng-show="thuoctinhhanghoas.length != 0">
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Thuộc tính</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr ng-repeat="tt in thuoctinhhanghoas">
+                                        <td>{{tt.STT}}</td>
+                                        <td>{{tt.TenThuoctinh}}</td>
+                                        <td><a ng-click="deleteThuoctinh(tt)">Xóa</a></td>
+                                    </tr>
+                                </table>
+
+                                <a ng-click="YeucauThemThuoctinh()">Thêm thuộc tính</a>
+                                <div ng-show="themtt" ng-class="{error: thongtinhanghoa.thuoctinh.$invalid}">
+                                    <input type="text" name="thuoctinh" class="form-control" placeholder="Ví dụ 'Màu sắc: Đỏ'" ng-model="Thuoctinh.tenThuoctinh" required>
+                                    <button class="btn btn-default btn-sm" style="margin-top:5px" ng-disabled="thongtinhanghoa.thuoctinh.$error.required" ng-click="addThuoctinh()">Đồng ý</button>
+                                </div>
+                            </accordion-group>
+                        </accordion>
+                    </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             <textarea class="form-control" style="resize:none" placeholder="Ghi chú" ng-model="hanghoa.Ghichu"></textarea>
@@ -96,4 +125,27 @@
             </div>
         </form>
     </div>
+
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">I'm a modal!</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li ng-repeat="item in items">
+                    <a ng-click="selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+    <button class="btn btn-default" ng-click="open()">Open me!</button>
+    <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
+    <button class="btn btn-default" ng-click="open('sm')">Small modal</button>
+    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
 </div>

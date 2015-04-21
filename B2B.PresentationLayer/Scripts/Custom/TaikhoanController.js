@@ -118,6 +118,9 @@ function TaikhoanController($scope, $http,$q) {
     $scope.passnew = '';
     var m = { AccountName: 'vinhpham', Password: $scope.passold };
     $scope.XulyDoiPassword = function () {
+        if ($scope.account.AccountId == null) {
+            window.location.href = "/Taikhoan/Dangnhap";
+        }
         if ($scope.passold == $scope.account.AccountPassword) {
             $http.post("/Taikhoan/XulyDoiPassword", { account: $scope.account, passnew: $scope.passnew }).success(function (data, status, headers, config) {
                 alert(data.thongbao);
@@ -169,7 +172,9 @@ function TaikhoanController($scope, $http,$q) {
 
     //Hàm lưu thông tin account thay đổi
     $scope.ThaydoiThongtinDangnhap = function () {
-
+        if ($scope.account.AccountId == null) {
+            window.location.href = "/Taikhoan/Dangnhap";
+        }
         $http.post("/Taikhoan/ThaydoiThongtinDangnhap", { account: $scope.account }).success(function (data, status, headers, config) {
             alert(data.thongbao);
         }).error(function (data, status, headers, config) {
@@ -188,6 +193,9 @@ function TaikhoanController($scope, $http,$q) {
 
     //Hàm lưu thông tin khách hàng thay đổi
     $scope.ThaydoiThongtinKhachhang = function () {
+        if ($scope.account.AccountId == null) {
+            window.location.href = "/Taikhoan/Dangnhap";
+        }
         $http.post("/Taikhoan/ThaydoiThongtinKhachhang", { khachhang: $scope.khachhang }).success(function (data, status, headers, config) {
             alert(data.thongbao);
         }).error(function (data, status, headers, config) {
