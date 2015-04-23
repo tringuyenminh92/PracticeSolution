@@ -7,8 +7,8 @@ $(function () {
 })
 
 angular.module("GlobalModule").controller("quoteController", QuoteController);
-QuoteController.$inject = ['$scope', '$http', '$upload', '$location', '$q'];
-function QuoteController($scope, $http, $upload, $location, $q, $modalInstance) {
+QuoteController.$inject = ['$scope', '$http', '$upload', '$location', '$q', 'modalService'];
+function QuoteController($scope, $http, $upload, $location, $q, modalService) {
 
     $scope.$scope = $scope;
 
@@ -48,13 +48,13 @@ function QuoteController($scope, $http, $upload, $location, $q, $modalInstance) 
             $scope.myData = data;
             //var wait = new WaitDialog();
             //wait.Show();
-            //$scope.ShowModal(null, null, "abc", "cds", "Cancel", "Submit");
+            $scope.ShowModal(null, null, { Title: '', Content: '', OkButton:'',CancelButton:'',,Template: '', MessageController: '', Size: '' });
 
         }).error(function (data, status, headers, config) {
         });
     };
 
-    $scope.dataForTuoi=[{id:1,tuoi:12},{id:2,tuoi:12},{id:3,tuoi:17},{id:4,tuoi:19},{id:5,tuoi:16}];
+    $scope.dataForTuoi = [{ id: 1, tuoi: 12 }, { id: 2, tuoi: 12 }, { id: 3, tuoi: 17 }, { id: 4, tuoi: 19 }, { id: 5, tuoi: 16 }];
 
     $scope.gridOptions = {};
     $scope.deleteCellTemplate = '<button ng-click="getExternalScopes().deleteRow(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-trash"/></button> ';
@@ -63,7 +63,7 @@ function QuoteController($scope, $http, $upload, $location, $q, $modalInstance) 
           { name: '_delete', displayName: "", cellTemplate: $scope.deleteCellTemplate, width: 25, enableFiltering: false, enableCellEdit: false },
   	      { name: 'name', displayName: 'Name', headerCellTemplate: '<div title="Tooltip Content">Name</div>', width: 150 },
   	      {
-  	          name: 'tuoi', displayName: 'tuoi', width: 50, type: 'number', cellFilter: '{            1: 12,            2: 12,            3:17,            4:19,            5:16    }', editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'tuoi', editDropdownOptionsArray: $scope.dataForTuoi
+  	          name: 'tuoi', displayName: 'tuoi', width: 50, type: 'number', editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'tuoi', editDropdownOptionsArray: $scope.dataForTuoi
   	      },
           { name: 'Details', displayName: 'Details', width: 50, cellTemplate: $scope.detailsCellTemplate }
     ];
@@ -78,7 +78,6 @@ function QuoteController($scope, $http, $upload, $location, $q, $modalInstance) 
 
     //Demo show datetime formart
     $scope.Giatri = Date.now();
-    …
 
     $scope.upload = function (file) {
         if (file && file.length) {
@@ -96,5 +95,10 @@ function QuoteController($scope, $http, $upload, $location, $q, $modalInstance) 
             });
         }
     };
+
+    $scope.ShowGridModal = function () {
+        modalService.ShowModal(null, null);
+    };
+
 }
 

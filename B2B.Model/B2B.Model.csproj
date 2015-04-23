@@ -59,6 +59,7 @@
     <Compile Include="QuoteSummaryModel.cs" />
     <Compile Include="SalesGroupModel.cs" />
     <Compile Include="SalesOfficeModel.cs" />
+    <Compile Include="ThuoctinhHanghoaModel.cs" />
     <Compile Include="TinhthanhModel.cs" />
     <Compile Include="TinhtrangDonhangModel.cs" />
     <Compile Include="TinhtrangModel.cs" />
