@@ -26,6 +26,10 @@
         </div>
     </div>
     <div class="col-md-5" style="margin-top:60px">
+        <form id="form1" runat="server">
+            <input type='file' id="imgInp" />
+            <img id="blah" src="#" alt="your image" />
+        </form>
         <form name="thongtinhanghoa">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -35,16 +39,25 @@
                     <div class="col-md-12" style="margin-bottom:20px">
                         <div class="form-group">
                             <div class="col-md-offset-3 col-md-6">
-                                <img ng-src={{img}} class="img-thumbnail" width="200" height="300">
+                                <img ng-src={{img}} class="img-thumbnail" width="200" height="300" ng-mouseover="">
+                            </div>
+                            <div class="col-md-offset-3 col-md-6"  style="margin-top:15px">
+                                <span>{{fullPath}}</span>
+                                <div class="btn btn-primary" ng-file-select ng-file-change="uploadImage($files)">Chọn ảnh cho hàng hóa</div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="col-md-12" style="margin-bottom:20px">
+                    @*<div class="col-md-12" style="margin-bottom:20px">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Hình ảnh">
+                            <p class="input-group">
+                                <input type="text" disabled style="background:#ffffff" class="form-control" placeholder="Hình ảnh">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" ng-click=""><i class="glyphicon glyphicon-upload"></i></button>
+                                </span>
+                            </p>
                         </div>
-                    </div>
+                    </div>*@
 
                     <div class="col-md-6">
                         <div class="form-group">
@@ -126,7 +139,7 @@
         </form>
     </div>
 
-    <script type="text/ng-template" id="myModalContent.html">
+    @*<script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
             <h3 class="modal-title">I'm a modal!</h3>
         </div>
@@ -147,5 +160,5 @@
     <button class="btn btn-default" ng-click="open()">Open me!</button>
     <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
     <button class="btn btn-default" ng-click="open('sm')">Small modal</button>
-    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+    <div ng-show="selected">Selection from a modal: {{ selected }}</div>*@
 </div>

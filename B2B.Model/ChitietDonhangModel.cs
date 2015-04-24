@@ -28,5 +28,6 @@ namespace B2B.Model
         public String Code { get; set; }
         public ChitietDonhangModel() { ChitietDonhangId = Guid.NewGuid(); }
         public String LinkHinhanh_Web { get; set; }
+        public List<ThuoctinhHanghoaModel> ThuoctinhHanghoaItems { get; set; }
     }
 }

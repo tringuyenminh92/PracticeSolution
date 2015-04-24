@@ -198,6 +198,7 @@
     <Compile Include="Repository\NhomHanghoaRepository.cs" />
     <Compile Include="Repository\QuanhuyenRepository.cs" />
     <Compile Include="Repository\QuoteRepository.cs" />
+    <Compile Include="Repository\ThuoctinhHanghoaRepository.cs" />
     <Compile Include="Repository\TinhthanhRepository.cs" />
     <Compile Include="Repository\TinhtrangRepository.cs" />
     <Compile Include="Repository\UserResponsitory.cs" />
@@ -802,6 +803,7 @@
     <Content Include="Database\DB_20150406.sql" />
     <Content Include="Database\DB_20150410.sql" />
     <Content Include="Database\DB_20150415.sql" />
+    <Content Include="Database\Khuyen_GetDonhangTungayDenngay.sql" />
     <Content Include="Database\Tin_CheckLogin.sql" />
     <Content Include="Database\Tin_GetAllAccount.sql" />
   </ItemGroup>

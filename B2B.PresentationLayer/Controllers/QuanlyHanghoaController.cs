@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using B2B.BL.Service;
+using System.IO;
 
 namespace B2B.PresentationLayer.Controllers
 {
@@ -72,19 +73,27 @@ namespace B2B.PresentationLayer.Controllers
             string thongbao;
             if (kq)
             {
+                string thongbao1 = "";
                 if (lstThuoctinhHanghoa.Count != 0)
                 {
-                    if (!_thuoctinhHanghoaService.InsertList(lstThuoctinhHanghoa)) { kq = false; }
+                    for (int i = 0; i < lstThuoctinhHanghoa.Count; ++i)
+                    {
+                        lstThuoctinhHanghoa[i].HanghoaId = hanghoa.HanghoaId;
+                        lstThuoctinhHanghoa[i].Active = true;
+                        lstThuoctinhHanghoa[i].NgayCapnhat = DateTime.Now;
+                    }
+                    if (!_thuoctinhHanghoaService.InsertList(lstThuoctinhHanghoa)) { kq = false; thongbao1 = "Thêm thuộc tính không thành công. "; }
                 }
+                thongbao = thongbao1;
+            }
+            else
+            {
+                thongbao = "Thêm hàng hóa không thành công";
             }
 
             if (kq)
             {
                 thongbao = "Thêm hàng hóa thành công";
-            }
-            else
-            {
-                thongbao = "Thêm hàng hóa không thành công";
             }
 
 
@@ -126,6 +135,39 @@ namespace B2B.PresentationLayer.Controllers
                 thongbao = "Sửa hàng hóa thành công";
             }
             return Json(new { thongbao = thongbao, kq = kq }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult UploadImage(HttpPostedFileBase file)
+        {
+            string fullPath = "";
+            if (file != null)
+            {
+                var filename = Path.GetFileName(file.FileName);
+                fullPath = Path.GetFullPath(filename);
+            }
+            return Json(new { fullPath = fullPath });
+        }
+
+        public string SaveImage(HttpPostedFileBase file)
+        {
+            string pathSave = "";
+            
+            try
+            {
+                if (file != null)
+                {
+                    var filename = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Images/Hinhhanghoa"), filename);
+                    file.SaveAs(path);
+                    pathSave = "/Images/Hinhhanghoa/" + filename;
+                }
+                
+            }
+            catch (System.Exception ex)
+            {
+            }
+
+            return pathSave;
         }
     }
 }

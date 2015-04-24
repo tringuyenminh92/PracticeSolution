@@ -17,7 +17,7 @@ function TaikhoanController($scope, $http,$q) {
                 if (data.result) {
                     alert("Đăng nhập thành công.");
                     //window.location.reload();
-                    window.location.href = '/Quote';
+                    window.location.href = '/MuaHang/DatHang';
                     //window.history.go(-1);
                 }
                 else {

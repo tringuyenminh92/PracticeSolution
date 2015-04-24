@@ -15,11 +15,13 @@ namespace B2B.PresentationLayer.Controllers
         DonhangService _donhangService;
         ChitietDonhangService _chitietDonhangService;
         HanghoaService _hanghoaService;
+        ThuoctinhHanghoaService _thuoctinhHanghoaService;
         public DonhangController()
         {
             _donhangService = new DonhangService();
             _chitietDonhangService = new ChitietDonhangService();
             _hanghoaService = new HanghoaService();
+            _thuoctinhHanghoaService = new ThuoctinhHanghoaService();
         }
         public ActionResult Index()
         {
@@ -63,6 +65,7 @@ namespace B2B.PresentationLayer.Controllers
                     var hanghoa = _hanghoaService.GetHanghoaTheoHanghoaId(lstChitietHanghoa[i].HanghoaId.ToString());
                     lstChitietHanghoa[i].LinkHinhanh_Web = hanghoa.LinkHinhanh_Web;
                     lstChitietHanghoa[i].Code = hanghoa.Code;
+                    lstChitietHanghoa[i].ThuoctinhHanghoaItems = _thuoctinhHanghoaService.GetThuoctinhHanghoaTheoHanghoa(lstChitietHanghoa[i].HanghoaId.ToString());
                 }
             }
             return Json(lstChitietHanghoa, JsonRequestBehavior.AllowGet);

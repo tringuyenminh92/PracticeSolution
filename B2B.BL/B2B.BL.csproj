@@ -60,6 +60,7 @@
     <Compile Include="Service\NhomHanghoaService.cs" />
     <Compile Include="Service\QuanhuyenService.cs" />
     <Compile Include="Service\QuoteService.cs" />
+    <Compile Include="Service\ThuoctinhHanghoaService.cs" />
     <Compile Include="Service\TinhthanhService.cs" />
     <Compile Include="Service\TinhtrangDonhangService.cs" />
     <Compile Include="Service\TinhtrangService.cs" />

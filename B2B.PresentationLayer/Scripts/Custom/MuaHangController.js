@@ -1,7 +1,7 @@
 ﻿angular.module("GlobalModule").controller("muaHangController", MuaHangController);
 
-MuaHangController.$inject = ['$scope', '$http', '$q'];
-function MuaHangController($scope, $http, $q) {
+MuaHangController.$inject = ['$scope', '$http', '$q', '$modal', '$log'];
+function MuaHangController($scope, $http, $q, $modal, $log) {
     $scope.$scope = $scope;
     $scope.hanghoas = [];
     $scope.nhomhanghoas = [];
@@ -20,9 +20,8 @@ function MuaHangController($scope, $http, $q) {
     $scope.LoadHanghoaTheoNhomHanghoa = function () {
         $http.post("/MuaHang/LoadHanghoaTheoNhomHanghoa", { nhomHanghoaId: $scope.nhomHanghoaId }).success(function (data, status, headers, config) {
             $scope.hanghoas = data;
-            for(i = 0; i<$scope.hanghoas.length; i++){
-                if ($scope.hanghoas[i].LinkHinhanh_Web == null)
-                {
+            for (i = 0; i < $scope.hanghoas.length; i++) {
+                if ($scope.hanghoas[i].LinkHinhanh_Web == null) {
                     $scope.hanghoas[i].LinkHinhanh_Web = "/Images/Hinhhanghoa/noPhoto-icon.png";
                 }
             }
@@ -51,6 +50,11 @@ function MuaHangController($scope, $http, $q) {
             if (data.lst != null) {
                 $scope.chitietdonhangs = data.lst;
                 $scope.donhang = data.dh;
+                $scope.tongsoHang = 0;
+                for (i = 0; i < $scope.chitietdonhangs.length; ++i)
+                {
+                    $scope.tongsoHang += $scope.chitietdonhangs[i].Soluong;
+                }
             }
         }).error(defer.reject);
         return defer.promise;
@@ -73,7 +77,7 @@ function MuaHangController($scope, $http, $q) {
         }).error(defer.reject);
         return defer.promise;
     }
-    
+
     $scope.XulyDathang = function () {
         if ($scope.chitietdonhangs.length == 0) {
             alert('Đơn hàng rỗng.');
@@ -160,7 +164,7 @@ function MuaHangController($scope, $http, $q) {
         var ctdh = {
             STT: $scope.chitietdonhangs.length + 1,
             Code: team.Code,
-            HanghoaId : team.HanghoaId,
+            HanghoaId: team.HanghoaId,
             TenHanghoa: team.TenHanghoa,
             Giaban: team.Giagoc,
             VAT: 0,
@@ -169,7 +173,7 @@ function MuaHangController($scope, $http, $q) {
             PhantramGiam: 0,
             Thanhtien: team.Giagoc,
             SoluongGiao: 0,
-            SoluongConlai : 1
+            SoluongConlai: 1
         };
         $scope.chitietdonhangs.push(ctdh);
         $scope.donhang.Tongtien += ctdh.Thanhtien;
@@ -182,12 +186,13 @@ function MuaHangController($scope, $http, $q) {
 
     $scope.gridOptions = {};
     $scope.addCellTemplate = '<button ng-click="getExternalScopes().addHanghoa(row.entity)" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-shopping-cart"/></button> ';
-    $scope.imageCellTemplate = '<img ng-src={{row.entity.LinkHinhanh_Web}} class="img-responsive" width="200" height="300">';
+    $scope.imageCellTemplate = '<img ng-src={{row.entity.LinkHinhanh_Web}} ng-click="getExternalScopes().openModalChitietHanghoa(row.entity)" class="img-responsive" width="200" height="300">';
+    //$scope.imageCellTemplate = '<button class="btn btn-default" ng-click="getExternalScopes().openModalChitietHanghoa()">Open me!</button>';
     $scope.gridOptions.columnDefs = [
         { name: '_hinhanh', displayName: '', cellTemplate: $scope.imageCellTemplate, enableFiltering: false, width: 80 },
         { name: 'Code', displayName: 'Code', width: 80 },
   	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 150 },
-        { name: 'Giagoc', displayName: 'Giá gốc', width: 80 },
+        { name: 'Giagoc', displayName: 'Giá gốc', cellFilter: 'number', width: 80 },
         { name: '_addHanghoa', displayName: "", cellTemplate: $scope.addCellTemplate, width: 15, enableFiltering: false },
     ];
 
@@ -222,8 +227,8 @@ function MuaHangController($scope, $http, $q) {
         { name: 'Code', displayName: 'Code', width: 80, enableCellEdit: false },
   	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 170, enableCellEdit: false },
         { name: 'Soluong', displayName: 'Số lượng', width: 80, enableCellEdit: true },
-        { name: 'Giaban', displayName: 'Đơn giá', width: 100, enableCellEdit: false },
-        { name: 'Thanhtien', displayName: 'Thành tiền', width: 100, enableCellEdit: false },
+        { name: 'Giaban', displayName: 'Đơn giá', cellFilter: 'number', width: 100, enableCellEdit: false },
+        { name: 'Thanhtien', displayName: 'Thành tiền', cellFilter: 'number', width: 100, enableCellEdit: false },
         { name: '_removeHanghoa', displayName: "", cellTemplate: $scope.removeCellTemplate, width: 15, enableFiltering: false, enableCellEdit: false },
     ];
 
@@ -242,7 +247,7 @@ function MuaHangController($scope, $http, $q) {
                 rowEntity.Thanhtien = newValue * rowEntity.Giaban;
                 rowEntity.SoluongConlai = newValue;
             }
-            
+
             $scope.donhang.Tongtien -= oldValue * rowEntity.Giaban;
             $scope.donhang.Tongtien += rowEntity.Thanhtien;
             $scope.$apply();
@@ -375,11 +380,56 @@ function MuaHangController($scope, $http, $q) {
         $http.post("/MuaHang/InsertDonhang", { donhang: $scope.donhang, lstChitietDonhang: $scope.chitietdonhangs, khachhang: $scope.khachhang, truonghop: $scope.truonghop }).success(function (data, status, headers, config) {
             alert(data.thongbao);
             if (data.kq == true) {
-                window.location.href = '/Quote';
+                window.location.href = '/MuaHang/DatHang';
             }
         }).error(function (data, status, headers, config) {
             // log 
             alert('Lỗi insert Đơn hàng');
         });
     }
-}
+
+
+    //modal
+    //$scope.items = ['item1', 'item2', 'item3'];
+    $scope.openModalChitietHanghoa = function (hanghoa) {
+        //alert(hanghoa.TenHanghoa);
+        var modalInstance = $modal.open({
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                hanghoa: function () {
+                    return hanghoa;
+                }
+            }
+        });
+
+        //modalInstance.result.then(function (selectedItem) {
+        //    $scope.selected = selectedItem;
+        //}, function () {
+        //    $log.info('Modal dismissed at: ' + new Date());
+        //});
+    };
+};
+
+angular.module("GlobalModule").controller('ModalInstanceCtrl', function ($scope, $modalInstance, $http, hanghoa) {
+
+    $scope.hanghoa = hanghoa;
+    //Load thuộc tính hàng hóa
+    $http.post("/QuanlyHanghoa/LoadThuoctinhHanghoa", { hanghoaId: hanghoa.HanghoaId }).success(function (data, status, headers, config) {
+        $scope.thuoctinhhanghoas = [];
+
+        if (data.lst != null) {
+            $scope.thuoctinhhanghoas = data.lst;
+        }
+    }).error(function (data, status, headers, config) {
+        // log 
+        alert('Lỗi load thuộc tính hàng hóa theo hàng hóa');
+    });
+    //$scope.ok = function () {
+    //    $modalInstance.close($scope.selected.item);
+    //};
+
+    //$scope.cancel = function () {
+    //    $modalInstance.dismiss('cancel');
+    //};
+});

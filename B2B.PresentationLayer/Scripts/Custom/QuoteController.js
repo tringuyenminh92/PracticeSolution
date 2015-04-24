@@ -78,12 +78,11 @@ function QuoteController($scope, $http, $upload, $location, $q, $modalInstance) 
 
     //Demo show datetime formart
     $scope.Giatri = Date.now();
-    …
-
+    
     $scope.upload = function (file) {
         if (file && file.length) {
             $upload.upload({
-                url: 'Quote/UploadFile',
+                url: '/Quote/UploadFile',
                 method: 'POST',
                 file: file
             }).progress(function (evt) {

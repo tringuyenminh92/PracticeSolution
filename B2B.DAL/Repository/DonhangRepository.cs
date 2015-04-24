@@ -17,6 +17,10 @@ namespace B2B.DAL.Repository
         {
             return _BSE.Donhangs.AsQueryable<Donhang>().OrderByDescending(dh => dh.Ngaylap);
         }
+        public IQueryable<Donhang> GetDonhangTungayDenngay()
+        {
+            return _BSE.Donhangs.AsQueryable<Donhang>().OrderByDescending(dh => dh.Ngaylap);
+        }
         public DateTime? GetNgaylapDonhangDautien()
         {
             Donhang donhangDautien = _BSE.Donhangs.AsQueryable<Donhang>().OrderBy(dh => dh.Ngaylap).FirstOrDefault(); 
@@ -30,6 +34,7 @@ namespace B2B.DAL.Repository
         {
             //try
             //{
+                donhang.KhoId = _BSE.Khoes.AsQueryable<Kho>().FirstOrDefault().KhoId;
                 _BSE.Donhangs.Add(donhang);
                 _BSE.SaveChanges();
                 return true;

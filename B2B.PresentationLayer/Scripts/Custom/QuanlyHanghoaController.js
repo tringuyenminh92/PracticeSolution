@@ -1,12 +1,12 @@
 ﻿angular.module("GlobalModule").controller("quanlyHanghoaController", QuanlyHanghoaController);
 
-QuanlyHanghoaController.$inject = ['$scope', '$http', '$modal', '$log'];
-function QuanlyHanghoaController($scope, $http, $modal, $log) {
+QuanlyHanghoaController.$inject = ['$scope', '$http', '$modal', '$log', '$upload'];
+function QuanlyHanghoaController($scope, $http, $modal, $log, $upload) {
     $scope.$scope = $scope;
     $scope.hanghoas = [];
     $scope.nhomhanghoas = [];
     $scope.donvis = [];
-    ////$scope.thuoctinhhanghoas = [];
+    $scope.thuoctinhhanghoas = [];
     $scope.thuoctinhhanghoasXoa = [];
     $scope.thuoctinhhanghoasThem = [];
 
@@ -55,7 +55,7 @@ function QuanlyHanghoaController($scope, $http, $modal, $log) {
         $scope.isEdit = true;
         $scope.editIndex = $scope.hanghoas.indexOf(team);
         $http.post("/QuanlyHanghoa/LoadThuoctinhHanghoa", { hanghoaId: team.HanghoaId }).success(function (data, status, headers, config) {
-            $scope.thuoctinhhanghoas = [];
+            //$scope.thuoctinhhanghoas = [];
             //$scope.thuoctinhhanghoasXoa = [];
             //$scope.thuoctinhhanghoasThem = [];
 
@@ -179,7 +179,7 @@ function QuanlyHanghoaController($scope, $http, $modal, $log) {
         { name: 'Code', displayName: 'Code', width: 80, enableCellEdit: false },
   	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 170, enableCellEdit: false },
         { name: 'Barcode', displayName: 'Barcode', width: 90, enableCellEdit: false },
-        { name: 'Giagoc', displayName: 'Giá gốc', width: 80, enableCellEdit: false },
+        { name: 'Giagoc', displayName: 'Giá gốc', cellFilter: 'number', width: 80, enableCellEdit: false },
         { name: 'Active', displayName: 'Active', cellTemplate: $scope.activeCellTemplate, width: 60, enableFiltering: false },
         { name: 'NgayCapnhatString', displayName: 'Cập nhật', width: 85, enableCellEdit: false },
         { name: '_delete', displayName: "", cellTemplate: $scope.deleteCellTemplate, width: 15, enableFiltering: false, enableCellEdit: false },
@@ -190,43 +190,79 @@ function QuanlyHanghoaController($scope, $http, $modal, $log) {
     $scope.gridOptions.data = "hanghoas";
     $scope.gridOptions.enableFiltering = true;
 
+    $scope.uploadImage = function (file) {
+        if (file && file.length) {
 
-
-    $scope.items = ['item1', 'item2', 'item3'];
-
-    $scope.open = function (size) {
-
-        var modalInstance = $modal.open({
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            size: size,
-            resolve: {
-                items: function () {
-                    return $scope.items;
+            $upload.upload({
+                url: '/QuanlyHanghoa/UploadImage',
+                method: 'POST',
+                file: file
+            }).progress(function (evt) {
+                //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            }).success(function (data, status, headers, config) {
+                //console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+                if (data) {
+                    //$scope.img = data.fullPath;
+                    alert(data.fullPath);
                 }
-            }
-        });
-
-        modalInstance.result.then(function (selectedItem) {
-            $scope.selected = selectedItem;
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
+            });
+        }
     };
+
+    //$scope.items = ['item1', 'item2', 'item3'];
+
+    //$scope.open = function (size) {
+
+    //    var modalInstance = $modal.open({
+    //        templateUrl: 'myModalContent.html',
+    //        controller: 'ModalInstanceCtrl',
+    //        size: size,
+    //        resolve: {
+    //            items: function () {
+    //                return $scope.items;
+    //            }
+    //        }
+    //    });
+
+    //    modalInstance.result.then(function (selectedItem) {
+    //        $scope.selected = selectedItem;
+    //    }, function () {
+    //        $log.info('Modal dismissed at: ' + new Date());
+    //    });
+    //};
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+            $scope.file = input.files[0];
+        }
+    }
+
+    $("#imgInp").change(function () {
+        readURL(this);
+    });
+
 };
 
-angular.module("GlobalModule").controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
+//angular.module("GlobalModule").controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
 
-    $scope.items = items;
-    $scope.selected = {
-        item: $scope.items[0]
-    };
+//    $scope.items = items;
+//    $scope.selected = {
+//        item: $scope.items[0]
+//    };
 
-    $scope.ok = function () {
-        $modalInstance.close($scope.selected.item);
-    };
+//    $scope.ok = function () {
+//        $modalInstance.close($scope.selected.item);
+//    };
 
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-});
+//    $scope.cancel = function () {
+//        $modalInstance.dismiss('cancel');
+//    };
+//});
+

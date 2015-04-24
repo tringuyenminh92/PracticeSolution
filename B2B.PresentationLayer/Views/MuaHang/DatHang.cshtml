@@ -14,6 +14,8 @@
                 </select>
             </div>
 
+            
+
             <div class="col-md-12" style="margin-top:20px">
                 <div external-scopes="$scope" style="height:350px" ui-grid-pagination ui-grid-resize-columns ui-grid="gridOptions">
                 </div>
@@ -62,7 +64,7 @@
                             <div class="col-md-6 control-label">Tiền giảm:</div>
                             <div class="col-md-6">
                                 <span>
-                                    {{donhang.Tiengiam}}
+                                    {{donhang.Tiengiam | number}}
                                 </span>
                             </div>
                         </div>
@@ -79,7 +81,7 @@
                                 <div class="col-md-6 control-label">Tổng tiền:</div>
                                 <div class="col-md-6">
                                     <span>
-                                        <b>{{donhang.Tongtien}}</b>
+                                        <b>{{donhang.Tongtien | number}}</b>
                                     </span>
                                 </div>
                             </font>
@@ -105,6 +107,49 @@
         </div>
         @*</div>*@
     </div>
+
+
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">{{hanghoa.TenHanghoa}}</h3>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="col-md-4">
+                    <img ng-src={{hanghoa.LinkHinhanh_Web}} class="img-thumbnail" width="200" height="300">
+                </div>
+                <div class="col-md-8">
+                    <div><font size="6" style="color:#ff6a00" ><b>{{hanghoa.Giagoc | number}}</b></font><sup><font size="3" style="color:#ff6a00"><b> vnd</b></font></sup></div>
+                    <div ng-show="thuoctinhhanghoas.length != 0">
+                        @*<div>Đặc điểm:</div>*@
+                        <ul style="margin-left:-35px; list-style-type:none">
+                            <li ng-repeat="tt in thuoctinhhanghoas">
+                                {{tt.TenThuoctinh}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div ng-show="hanghoa.Ghichu!=null">{{hanghoa.Ghichu}}</div>
+                </div>
+            </div>
+            
+            
+            @*<ul>
+                <li ng-repeat="item in items">
+                    <a ng-click="selected.item = item">{{ item }}</a>
+                </li>
+            </ul>*@
+            @*Selected: <b>{{ selected.item }}</b>*@
+        </div>
+        @*<div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>*@
+    </script>
+
+    @*<button class="btn btn-default" ng-click="openModalChitietHanghoa(test)">Open me!</button>*@
+    @*<button class="btn btn-default" ng-click="open('lg')">Large modal</button>
+    <button class="btn btn-default" ng-click="open('sm')">Small modal</button>*@
+    @*<div ng-show="selected">Selection from a modal: {{ selected }}</div>*@
 
 </div>
 

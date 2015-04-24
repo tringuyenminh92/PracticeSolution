@@ -80,24 +80,45 @@ namespace B2B.PresentationLayer.Controllers
             {
                 _khachhangService.Update(khachhang);
             }
-            donhang.Ngaylap = DateTime.Now;
-            donhang.NgayCapnhat = DateTime.Now;
+            //donhang.DonhangId = Guid.NewGuid();
+            //donhang.Ngaylap = DateTime.Now;
+            //donhang.NgayCapnhat = DateTime.Now;
             var tinhtrangDonhangDalap = _tinhtrangService.GetTinhtrangTheoCode("TTDH01");
-            donhang.TinhtrangDonhangCurrentId = tinhtrangDonhangDalap.TinhtrangId;
-            donhang.TenTinhtrangDonhang = tinhtrangDonhangDalap.TenTinhtrang;
+            Guid? tinhtrangId = tinhtrangDonhangDalap.TinhtrangId;
+            string tenTinhtrang = tinhtrangDonhangDalap.TenTinhtrang;
+            //donhang.TinhtrangDonhangCurrentId = tinhtrangDonhangDalap.TinhtrangId;
+            //donhang.TenTinhtrangDonhang = tinhtrangDonhangDalap.TenTinhtrang;
 
-            if(_donhangService.Insert(donhang))
+            DonhangModel donhang1 = new DonhangModel();
+            donhang1.DonhangId = Guid.NewGuid();
+            donhang1.Ngaylap = DateTime.Now;
+            donhang1.NgayCapnhat = DateTime.Now;
+            donhang1.TinhtrangDonhangCurrentId = tinhtrangId;
+            donhang1.TenTinhtrangDonhang = tenTinhtrang;
+            donhang1.KhachhangId = donhang.KhachhangId;
+            donhang1.DiachiGiao = donhang.DiachiGiao;
+            donhang1.TenTinhthanhGiao = donhang.TenTinhthanhGiao;
+            donhang1.TenQuanhuyenGiao = donhang.TenQuanhuyenGiao;
+            donhang1.SoDienthoai = donhang.SoDienthoai;
+            donhang1.Tiengiam = donhang.Tiengiam;
+            donhang1.PhantramGiam = donhang.PhantramGiam;
+            donhang1.Tongtien = donhang.Tongtien;
+            donhang1.Ghichu = donhang.Ghichu;
+            donhang1.LoaiDonhang = donhang.LoaiDonhang;
+            donhang1.Active = true;
+
+            if (_donhangService.Insert(donhang1))
             {
                 var tinhtrangDonhang = new TinhtrangDonhangModel();
-                tinhtrangDonhang.DonhangId = donhang.DonhangId;
+                tinhtrangDonhang.DonhangId = donhang1.DonhangId;
                 tinhtrangDonhang.TinhtrangId = donhang.TinhtrangDonhangCurrentId;
                 tinhtrangDonhang.NgayCapnhat = DateTime.Now;
-                if(_tinhtrangDonhangService.Insert(tinhtrangDonhang))
+                if (_tinhtrangDonhangService.Insert(tinhtrangDonhang))
                 {
                     kq = true;
                     for (int i = 0; i < lstChitietDonhang.Count; ++i)
                     {
-                        lstChitietDonhang[i].DonhangId = donhang.DonhangId;
+                        lstChitietDonhang[i].DonhangId = donhang1.DonhangId;
                         lstChitietDonhang[i].NgayCapnhat = DateTime.Now;
                         if (!_chitietDonhangService.Insert(lstChitietDonhang[i]))
                         {
@@ -109,6 +130,7 @@ namespace B2B.PresentationLayer.Controllers
                 }
                 //Cập nhật tình trạng đơn hàng không thành công
                 else { kq = false; }
+                kq = true;
                 
             }
             //Cập nhật đơn hàng không thành công
@@ -117,6 +139,8 @@ namespace B2B.PresentationLayer.Controllers
 
             if (kq)
             {
+                Session["chitietDonhangTams"] = null;
+                Session["donhangTam"] = null;
                 thongbao = "Lưu đơn hàng thành công.";
             }
             else

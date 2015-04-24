@@ -1,6 +1,14 @@
 ﻿@{
     ViewBag.Title = "ChonDiachiGiaohang";
 }
+<style>
+    tr:nth-child(even) {
+        background-color: #eee;
+    }
+    tr:nth-child(odd) {
+        background-color: #fff;
+    }
+</style>
 <script src="~/Scripts/Custom/MuaHangController.js"></script>
 <div ng-controller="muaHangController" ng-init="InitChonDiachiGiaohang();LayDonhangTam()">
     <div class="col-md-offset-1 col-md-6">
@@ -121,10 +129,34 @@
     <div class="col-md-4">
         <div class="panel panel-primary">
             <div class="panel-body">
-                <div style="margin-top:-2px; padding-bottom:9px"><b>Đơn hàng</b></div>
+                <div style="margin-top:-2px; padding-bottom:9px"><b>Đơn hàng</b>&nbsp;({{tongsoHang}}&nbsp;sản phẩm)</div>
                 <div style="border-top: 1px solid #999; padding-bottom: 9px">
-                    <div style="padding-bottom:9px">
-                        Bạn muốn giao hàng đến địa chỉ khác?&nbsp;<a ng-click="XulyThemDiachiGiaohang()">Thêm địa chỉ giao hàng mới</a>
+                    <div style="padding-top: 9px">
+                        <div ng-show="chitietdonhangs.length != 0">
+                            @*<ul style="margin-left:-35px; list-style-type:none">
+                                <li ng-repeat="cthh in chitietdonhangs">
+                                    {{cthh.Soluong}}&nbsp;
+                                </li>
+                            </ul>*@
+
+                            <table style="width: 100%; table-layout: fixed;">
+                                <tr ng-repeat="cthh in chitietdonhangs">
+                                    <td style="word-wrap: break-word; width: 15%; nth-child(even)"><b>{{cthh.Soluong}}&nbsp;x</b></td>
+                                    <td style="word-wrap: break-word; width: 50%"><div>{{cthh.TenHanghoa}}</div></td>
+                                    <td style="word-wrap: break-word; width: 5%"></td>
+                                    <td style="word-wrap: break-word; width: 30%">{{cthh.Thanhtien | number}}&nbsp;vnd</td>
+                                </tr>
+                            </table>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                <div style="border-top: 1px solid #999">
+                    <div style="padding-top: 9px">
+                        <div>Tiền giảm:&nbsp;{{donhang.Tiengiam}}</div>
+                        <div>Phần trăm giảm:&nbsp;{{donhang.PhantramGiam}}%</div>
+                        <div><b><font size="4">Tổng cộng:&nbsp;{{donhang.Tongtien | number}}&nbsp;vnd</font></b></div>
                     </div>
                 </div>
             </div>

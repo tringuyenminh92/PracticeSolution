@@ -70,7 +70,7 @@ function DonhangController($scope, $http, $q) {
     $scope.gridDonhang.columnDefs = [
         { name: 'Code', displayName: 'Code', width: 150 },
   	    { name: 'NgaylapString', displayName: 'Ngày lập', width: 85 },
-        { name: 'Tongtien', displayName: 'Tổng tiền', width: 120 },
+        { name: 'Tongtien', displayName: 'Tổng tiền', cellFilter: 'number', width: 120 },
         { name: 'TenTinhtrangDonhang', displayName: 'Tình trạng ', width: 170 },
         { name: 'Details', displayName: '', width: 15, cellTemplate: $scope.detailsCellTemplate, enableFiltering: false }
     ];
@@ -83,7 +83,7 @@ function DonhangController($scope, $http, $q) {
 
     $scope.gridChitietDonhang = {};
     $scope.imageCellTemplate = '<img ng-src={{row.entity.LinkHinhanh_Web}} class="img-responsive" width="200" height="300">';
-    $scope.dacdiemCellTemplate = '<ul><li ng-repeat="dd in row.entity.ThuoctinhHanghoaItems">{{ dd }}</li></ul>';
+    $scope.dacdiemCellTemplate = '<ul style="margin-left:-35px; margin-top:5px; list-style-type:none"><li ng-repeat="dd in row.entity.ThuoctinhHanghoaItems">{{ dd.TenThuoctinh }}</li></ul>';
     $scope.gridChitietDonhang.columnDefs = [
         { name: 'STT', displayName: 'STT', width: 50, enableFiltering: false },
         { name: '_hinhanh', displayName: '', cellTemplate: $scope.imageCellTemplate, width: 100 },
@@ -91,8 +91,8 @@ function DonhangController($scope, $http, $q) {
   	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 220 },
         { name: '_dacdiem', displayName: 'Đặc điểm', cellTemplate: $scope.dacdiemCellTemplate, width: 255 },
         { name: 'Soluong', displayName: 'Số lượng', width: 80 },
-        { name: 'Giaban', displayName: 'Đơn giá', width: 150 },
-        { name: 'Thanhtien', displayName: 'Thành tiền', width: 150 },
+        { name: 'Giaban', displayName: 'Đơn giá', cellFilter: 'number', width: 150 },
+        { name: 'Thanhtien', displayName: 'Thành tiền', cellFilter: 'number', width: 150 },
     ];
 
     $scope.gridChitietDonhang.paginationPageSizes = [5, 10, 20];
