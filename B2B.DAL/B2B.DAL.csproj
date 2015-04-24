@@ -119,6 +119,9 @@
     <Compile Include="Khuyen_GetCongnoXuat_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="Khuyen_GetDonhangTungayDenngay_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="Khuyen_GetDonhang_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
@@ -250,6 +253,12 @@
     <Compile Include="SP_GetUserDetails_Result.cs">
       <DependentUpon>QuoteSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_PipingSchem_Result.cs">
       <DependentUpon>QuoteSystem.tt</DependentUpon>
     </Compile>
@@ -272,6 +281,9 @@
       <DependentUpon>QuoteSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\TinhtrangDonhangRepository.cs" />
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="sys_ChitietDonhangSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>

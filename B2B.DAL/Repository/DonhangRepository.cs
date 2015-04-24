@@ -17,9 +17,9 @@ namespace B2B.DAL.Repository
         {
             return _BSE.Donhangs.AsQueryable<Donhang>().OrderByDescending(dh => dh.Ngaylap);
         }
-        public IQueryable<Donhang> GetDonhangTungayDenngay()
+        public IQueryable<Khuyen_GetDonhangTungayDenngay_Result> GetDonhangTungayDenngay(DateTime tungay, DateTime denngay)
         {
-            return _BSE.Donhangs.AsQueryable<Donhang>().OrderByDescending(dh => dh.Ngaylap);
+            return _BSE.Khuyen_GetDonhangTungayDenngay(tungay, denngay).AsQueryable().OrderByDescending(dh => dh.Ngaylap);
         }
         public DateTime? GetNgaylapDonhangDautien()
         {
