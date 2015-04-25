@@ -43,5 +43,26 @@ namespace B2B.PresentationLayer.Controllers
             return us.SaveAllAccount(listAccount);
 
         }
+        //Paage Addnew Account
+        public ActionResult AddAccount()
+        {
+            return View();
+        }
+        public JsonResult AddnewAccout(string user, string pass)
+        {
+            bool f = false;
+            Model.AccountModel ac = new Model.AccountModel();
+            if(user!=null&& user!="" && pass!="" && pass!=null)
+            {
+                ac.Active = true;
+                ac.AccountName = user;
+                ac.AccountPassword = pass;
+                if (us.CheckAccount(ac.AccountName))
+                {
+                    f = us.AddnewAccount(ac);
+                }
+            }
+            return Json(new { result = f });
+        }
     }
 }

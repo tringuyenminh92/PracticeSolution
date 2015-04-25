@@ -99,5 +99,26 @@ namespace B2B.BL.Service
             //    throw;
             //}
         }
+        //___________________Addnew Account
+        public bool AddnewAccount(AccountModel ac)
+        {
+            if (ac != null)
+            {
+                Mapper.CreateMap<AccountModel, Account>()
+                .ForMember(dest => dest.AccountId, opt => opt.MapFrom(src => src.AccountId))
+                .ForMember(dest => dest.AccountName, opt => opt.MapFrom(src => src.AccountName))
+                .ForMember(dest => dest.Active, opt => opt.MapFrom(src => src.Active))
+                .ForMember(dest => dest.AccountPassword, opt => opt.MapFrom(src => src.AccountPassword));
+                var rs = Mapper.Map<AccountModel, Account>(ac);
+                return respository.AddnewAccount(rs);
+            }
+            return false;
+        }
+        //Kiem tra Account User
+        public bool CheckAccount(string user)
+        {
+            return respository.CheckAccount(user);
+        }
+
     }
 }
