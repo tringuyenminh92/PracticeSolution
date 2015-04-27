@@ -7,10 +7,11 @@ $(function () {
 })
 
 angular.module("GlobalModule").controller("quoteController", QuoteController);
-QuoteController.$inject = ['$scope', '$http', '$upload', '$location', '$q', 'modalService'];
-function QuoteController($scope, $http, $upload, $location, $q, modalService) {
+QuoteController.$inject = ['$scope', '$http', 'Upload', '$location', '$q', 'modalService'];
+function QuoteController($scope, $http, Upload, $location, $q, modalService) {
 
     $scope.$scope = $scope;
+    $scope.fileReaderSupported = window.FileReader != null && (window.FileAPI == null || FileAPI.html5 != false);
 
     $scope.colors = ['Red', 'Green'];
     $scope.availableColors = ['Blue', 'Yellow', 'Magenta', 'Maroon', 'Umbra', 'Turquoise'];
@@ -48,7 +49,7 @@ function QuoteController($scope, $http, $upload, $location, $q, modalService) {
             $scope.myData = data;
             //var wait = new WaitDialog();
             //wait.Show();
-            $scope.ShowModal(null, null, { Title: '', Content: '', OkButton:'',CancelButton:'',,Template: '', MessageController: '', Size: '' });
+            //   $scope.ShowModal(null, null, { Title: '', Content: '', OkButton:'',CancelButton:'',Template: '', MessageController: '', Size: '' });
 
         }).error(function (data, status, headers, config) {
         });
@@ -79,10 +80,13 @@ function QuoteController($scope, $http, $upload, $location, $q, modalService) {
     //Demo show datetime formart
     $scope.Giatri = Date.now();
 
+    //upload file region
+    $scope.myFile = {};
+
     $scope.upload = function (file) {
         if (file && file.length) {
-            $upload.upload({
-                url: 'Quote/UploadFile',
+            Upload.upload({
+                url: '/Quote/UploadFile',
                 method: 'POST',
                 file: file
             }).progress(function (evt) {
