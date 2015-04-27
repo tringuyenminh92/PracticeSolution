@@ -490,6 +490,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\MuaHang\ChonHinhThucMuaHang.cshtml" />
     <Content Include="Views\MuaHang\ChonDiachigiaohang.cshtml" />
+    <Content Include="Views\User\AddAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

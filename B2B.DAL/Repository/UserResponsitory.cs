@@ -66,5 +66,28 @@ namespace B2B.DAL.Repository
             }
             return false;
         }
+        //_______________________Addnew Account
+        public bool AddnewAccount( Account ac)
+        {
+            bool f = false;
+            if(ac!=null)
+            {
+                dbContext.Accounts.Add(ac);
+                dbContext.SaveChanges();
+                f = true;
+            }
+            return f;
+        }
+        //Kiem tra
+        public bool CheckAccount(string user)
+        {
+            bool f = true;
+            var ac = dbContext.Accounts.Where(p => p.AccountName == user).FirstOrDefault();
+            if(ac!=null)
+            {
+                f = false;
+            }
+            return f;
+        }
     }
 }
