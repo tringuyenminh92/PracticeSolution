@@ -12,26 +12,41 @@ function DonhangController($scope, $http, $q) {
 
     $scope.getNgaylapDonhangDautien = function () {
         var defer = $q.defer();
-        $http.get("/Donhang/GetNgaylapDonhangDautien").success(function (data, status, headers, config) {
-            if (data.ngaylapdautien == "")
+        $http.post("/Donhang/GetNgaylapDonhangDautien", { khachhangId: $scope.khachhang.KhachhangId }).success(function (data, status, headers, config) {
+            $scope.datefrom = new Date();
+            
+            if (data.ngaylapdautien != null && data.ngaylapdautien != "")
             {
-                $scope.minDate = new Date() + "";
+                $scope.datefrom = new Date(data.ngaylapdautien);
             }
-            else
-            {
-                $scope.minDate = new Date(data.ngaylapdautien)+ "";
-            }
-            $scope.datefrom = new Date(data.ngaylapdautien);
+            $scope.minDate = $scope.datefrom + "";
             $scope.dateto = new Date();
             defer.resolve(data);
         }).error(defer.reject);
         return defer.promise;
     }
 
-    
+    $scope.LayAccountId = function () {
+        var defer = $q.defer();
+        $http.post("/Taikhoan/LayAccountId").success(function (data, status, headers, config) {
+            $scope.accountIdTmp = data.accountId;
+            defer.resolve(data);
+        }).error(defer.reject);
+        return defer.promise;
+    }
+
+    $scope.LayThongtinTaikhoan = function () {
+        var defer = $q.defer();
+        $http.post("/Taikhoan/HienthiThongtinTaikhoan", { accountId: $scope.accountIdTmp }).success(function (data, status, headers, config) {
+            $scope.account = data.acc;
+            $scope.khachhang = data.kh;
+            defer.resolve(data);
+        }).error(defer.reject);
+        return defer.promise;
+    }
 
     $scope.InitXemlichsuMuahang = function () {
-        $scope.getNgaylapDonhangDautien().then($scope.LoadDonhang);
+        $scope.LayAccountId().then($scope.LayThongtinTaikhoan).then($scope.getNgaylapDonhangDautien).then($scope.LodDonhangTungayDenngay);
     }
 
     $scope.LoadDonhang = function () {
@@ -40,6 +55,24 @@ function DonhangController($scope, $http, $q) {
         }).error(function (data, status, headers, config) {
             alert('Lỗi load đơn hàng');
         });
+    }
+
+    $scope.LodDonhangTungayDenngay = function () {
+        if($scope.datefrom > $scope.dateto)
+        {
+            alert('Từ ngày phải nhỏ hơn đến ngày.')
+        }
+        else
+        {
+            //var tu = $scope.datefrom.toString();
+            //var den = $scope.dateto.toString();
+            //alert(tu);
+            $http.post("/Donhang/LoadDonhangTungayDenngay", { tungay: $scope.datefrom, denngay: $scope.dateto, khachhangId: $scope.khachhang.KhachhangId }).success(function (data, status, headers, config) {
+                $scope.donhangs = data;
+            }).error(function (data, status, headers, config) {
+                alert('Lỗi load đơn hàng từ ngày đến ngày');
+            });
+        }
     }
 
     //Load chi tiết đơn hàng theo mã đơn hàng và các chi tiết của đơn hàng

@@ -27,9 +27,9 @@ namespace B2B.PresentationLayer.Controllers
         {
             return View();
         }
-        public JsonResult GetNgaylapDonhangDautien()
+        public JsonResult GetNgaylapDonhangDautien(string khachhangId)
         {
-            DateTime? nl = _donhangService.GetNgaylapDonhangDautien();
+            DateTime? nl = _donhangService.GetNgaylapDonhangDautien(khachhangId);
             string ngaylapdautien = "";
             if(nl!=null)
             {
@@ -53,6 +53,10 @@ namespace B2B.PresentationLayer.Controllers
         public JsonResult LoadDonhang()
         {
             return Json(_donhangService.GetDonhang(), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult LoadDonhangTungayDenngay(DateTime tungay, DateTime denngay, string khachhangId)
+        {
+            return Json(_donhangService.GetDonhangTungayDenngay(tungay, denngay, khachhangId));
         }
         public JsonResult LoadChitietDonhangTheoDonhang(string donhangId)
         {

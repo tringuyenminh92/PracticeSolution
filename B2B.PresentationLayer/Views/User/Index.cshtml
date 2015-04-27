@@ -3,21 +3,19 @@
 }
 <script src="~/Scripts/Custom/UserController.js"></script>
 <h2>Danh sách Account</h2>
-<div class="row">
-    <div ng-controller="userController" class="col-sm-offset-2" ng-init="loadData()">
+<div ng-controller="userController" class="col-md-offset-1 col-md-10" ng-init="loadData()">
+    <div>
         <div>
-            <div>
-                <button id="btnCreate" class="btn btn-success" type="button" ng-click="createNew()">Add New</button>
-            </div>
-            <br />
-            @*<button id="btnLoadData" type="button" class="btn btn-primary btn-group-sm" ng-click="loadData()" ng-init="loadData()">Load Data</button>*@
-            <div style="width:960px;" class="gridStyle" external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
-            </div>
-            <br />
-            <br />
-            <div>
-                <button id="btnSave" type="button" class="btn btn-primary" ng-click="saveGrid()">Save</button>
-            </div>
+            <button id="btnCreate" class="btn btn-success" type="button" ng-click="createNew()">Add New</button>
+        </div>
+        <br />
+        @*<button id="btnLoadData" type="button" class="btn btn-primary btn-group-sm" ng-click="loadData()" ng-init="loadData()">Load Data</button>*@
+        <div style="width:960px;" class="gridStyle" external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
+        </div>
+        <br />
+        <br />
+        <div>
+            <button id="btnSave" type="button" class="btn btn-primary" ng-click="saveGrid()">Save</button>
         </div>
     </div>
 </div>

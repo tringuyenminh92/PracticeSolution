@@ -17,14 +17,18 @@ namespace B2B.DAL.Repository
         {
             return _BSE.Donhangs.AsQueryable<Donhang>().OrderByDescending(dh => dh.Ngaylap);
         }
-        public IQueryable<Khuyen_GetDonhangTungayDenngay_Result> GetDonhangTungayDenngay(DateTime tungay, DateTime denngay)
+        public IQueryable<Khuyen_GetDonhangTungayDenngay_Result> GetDonhangTungayDenngay(DateTime tungay, DateTime denngay, string khachhangId)
         {
-            return _BSE.Khuyen_GetDonhangTungayDenngay(tungay, denngay).AsQueryable().OrderByDescending(dh => dh.Ngaylap);
+            return _BSE.Khuyen_GetDonhangTungayDenngay(tungay, denngay).AsQueryable().Where(dh => dh.KhachhangId == new Guid(khachhangId)).OrderByDescending(dh => dh.Ngaylap);
         }
-        public DateTime? GetNgaylapDonhangDautien()
+        public DateTime? GetNgaylapDonhangDautien(string khachhangId)
         {
-            Donhang donhangDautien = _BSE.Donhangs.AsQueryable<Donhang>().OrderBy(dh => dh.Ngaylap).FirstOrDefault(); 
-            return donhangDautien.Ngaylap;
+            Donhang donhangDautien = _BSE.Donhangs.AsQueryable<Donhang>().Where(dh => dh.KhachhangId == new Guid(khachhangId)).OrderBy(dh => dh.Ngaylap).FirstOrDefault();
+            if (donhangDautien == null) { return null; }
+            else
+            {
+                return donhangDautien.Ngaylap;
+            }
         }
         public IQueryable<Tri_GetDonhangTheoThang_Result> GetDonhangsByMonth(DateTime ngaylap,int loaiDonhang)
         {

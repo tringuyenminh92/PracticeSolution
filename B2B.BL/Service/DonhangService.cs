@@ -17,14 +17,19 @@ namespace B2B.BL.Service
         {
             _donhangRepository = new DonhangRepository();
         }
-        public DateTime? GetNgaylapDonhangDautien()
+        public DateTime? GetNgaylapDonhangDautien(string khachhangId)
         {
-            return _donhangRepository.GetNgaylapDonhangDautien();
+            return _donhangRepository.GetNgaylapDonhangDautien(khachhangId);
         }
         public List<DonhangModel> GetDonhang()
         {
             Mapper.CreateMap<Donhang, DonhangModel>();
             return Mapper.Map<IQueryable<Donhang>, List<DonhangModel>>(_donhangRepository.GetDonhang());
+        }
+        public List<DonhangModel> GetDonhangTungayDenngay(DateTime tungay, DateTime denngay, string khachhangId)
+        {
+            Mapper.CreateMap<Khuyen_GetDonhangTungayDenngay_Result, DonhangModel>();
+            return Mapper.Map<IQueryable<Khuyen_GetDonhangTungayDenngay_Result>, List<DonhangModel>>(_donhangRepository.GetDonhangTungayDenngay(tungay, denngay, khachhangId));
         }
         public IEnumerable<DonhangModel> GetDonhangsByMonth(DateTime ngaylap, int loaiDonhang)
         {
