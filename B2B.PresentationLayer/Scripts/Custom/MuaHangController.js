@@ -189,11 +189,11 @@ function MuaHangController($scope, $http, $q, $modal, $log) {
     $scope.imageCellTemplate = '<img ng-src={{row.entity.LinkHinhanh_Web}} ng-click="getExternalScopes().openModalChitietHanghoa(row.entity)" class="img-responsive" width="200" height="300">';
     //$scope.imageCellTemplate = '<button class="btn btn-default" ng-click="getExternalScopes().openModalChitietHanghoa()">Open me!</button>';
     $scope.gridOptions.columnDefs = [
-        { name: '_hinhanh', displayName: '', cellTemplate: $scope.imageCellTemplate, enableFiltering: false, width: 80 },
-        { name: 'Code', displayName: 'Code', width: 80 },
-  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 150 },
-        { name: 'Giagoc', displayName: 'Giá gốc', cellFilter: 'number', width: 80 },
-        { name: '_addHanghoa', displayName: "", cellTemplate: $scope.addCellTemplate, width: 15, enableFiltering: false },
+        { name: '_hinhanh', displayName: '', cellTemplate: $scope.imageCellTemplate, enableFiltering: false, width: '20%' },
+        { name: 'Code', displayName: 'Code', width: '15%' },
+  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: '40%' },
+        { name: 'Giagoc', displayName: 'Giá gốc', cellFilter: 'number', width: '17%' },
+        { name: '_addHanghoa', displayName: "", cellTemplate: $scope.addCellTemplate, width: '8%', enableFiltering: false },
     ];
 
     $scope.gridOptions.paginationPageSizes = [10, 25, 50];
@@ -223,13 +223,13 @@ function MuaHangController($scope, $http, $q, $modal, $log) {
     $scope.removeCellTemplate = '<button ng-click="getExternalScopes().removeHanghoa(row.entity)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"/></button> ';
     //$scope.soluongCellTemplate = '<input type="number" ng-change=$scope.Test()>';
     $scope.gridOptions1.columnDefs = [
-        { name: 'STT', displayName: 'STT', width: 60, enableFiltering: false, enableCellEdit: false },
-        { name: 'Code', displayName: 'Code', width: 80, enableCellEdit: false },
-  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 170, enableCellEdit: false },
-        { name: 'Soluong', displayName: 'Số lượng', width: 80, enableCellEdit: true },
-        { name: 'Giaban', displayName: 'Đơn giá', cellFilter: 'number', width: 100, enableCellEdit: false },
-        { name: 'Thanhtien', displayName: 'Thành tiền', cellFilter: 'number', width: 100, enableCellEdit: false },
-        { name: '_removeHanghoa', displayName: "", cellTemplate: $scope.removeCellTemplate, width: 15, enableFiltering: false, enableCellEdit: false },
+        { name: 'STT', displayName: 'STT', width: '5%', enableFiltering: false, enableCellEdit: false },
+        { name: 'Code', displayName: 'Code', width: '10%', enableCellEdit: false },
+  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: '35%', enableCellEdit: false },
+        { name: 'Soluong', displayName: 'Số lượng', width: '10%', enableCellEdit: true },
+        { name: 'Giaban', displayName: 'Đơn giá', cellFilter: 'number', width: '10%', enableCellEdit: false },
+        { name: 'Thanhtien', displayName: 'Thành tiền', cellFilter: 'number', width: '20%', enableCellEdit: false },
+        { name: '_removeHanghoa', displayName: "Xoá", cellTemplate: $scope.removeCellTemplate, width: '10%', enableFiltering: false, enableCellEdit: false },
     ];
 
     $scope.gridOptions1.paginationPageSizes = [25, 50, 75];

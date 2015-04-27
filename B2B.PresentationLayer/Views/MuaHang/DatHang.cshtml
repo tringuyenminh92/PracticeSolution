@@ -6,7 +6,6 @@
 <script src="~/Scripts/Custom/MuaHangController.js"></script>
 <div class="container-fluid" ng-controller="muaHangController" ng-init="LoadNhomHanghoa();LoadHanghoaTheoNhomHanghoa();LayDonhangTam()">
     <div class="col-md-5">
-        <h2 style="margin-left:15px">Đặt hàng</h2>
         <div class="form-group">
             <div class="col-md-12">
                 <select class="form-control" ng-model="nhomHanghoaId" ng-options="obj.NhomHanghoaId as obj.TenNhomHanghoa for obj in nhomhanghoas" ng-change="LoadHanghoaTheoNhomHanghoa()">
@@ -14,40 +13,20 @@
                 </select>
             </div>
 
-            
-
             <div class="col-md-12" style="margin-top:20px">
-                <div external-scopes="$scope" style="height:350px" ui-grid-pagination ui-grid-resize-columns ui-grid="gridOptions">
+                <div external-scopes="$scope"  class="gridMuaHangStyle" ui-grid-pagination ui-grid-resize-columns ui-grid="gridOptions">
                 </div>
             </div>
 
-
-
-            @*<div class="col-md-12" style="margin-top:80px">
-                    <div style="height: 150px; width: 120px; border: 1px solid #0053ff">
-                        <div style="height:30px; width:119px; background:#0053ff; top:120px; position:absolute; ">
-                            <p>
-                                <button ng-click="" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-shopping-cart"></i></button>
-                                <div class="float-left">
-                                    Giá
-                                </div>
-                            </p>
-                        </div>
-                    </div>
-                </div>*@
-
-
-
-
         </div>
     </div>
-    <div class="col-md-7" style="margin-top:70px">
-        <div class="col-md-12">
-            Nhóm khách hàng:
-        </div>
-        <form name="chitietDonhang">
-            <div class="col-md-12" style="margin-top:27px">
-                <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions1">
+    <div class="col-md-7" >
+       
+       <br />
+        <br />
+        <form name="chitietDonhang" style="padding-top:13px;">
+            <div class="col-md-12">
+                <div external-scopes="$scope" class="gridHangDachon" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions1">
                 </div>
             </div>
         </form>
@@ -102,7 +81,7 @@
         <div class="col-md-12 form-group" style=" margin-top:10px">
             <input type="button" ng-disabled="" class="btn btn-primary" value="Đặt hàng" ng-click="Dathang()">
             &nbsp;
-            <input type="button" ng-disabled="" class="btn btn-primary" value="Hủy" ng-click="Reset()">
+            <input type="button" ng-disabled="" class="btn btn-danger" value="Hủy" ng-click="Reset()">
             &nbsp;
         </div>
         @*</div>*@
@@ -110,7 +89,7 @@
 
 
     <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
+        <div class="modal-header bg-primary">
             <h3 class="modal-title">{{hanghoa.TenHanghoa}}</h3>
         </div>
         <div class="modal-body">
@@ -133,23 +112,8 @@
             </div>
             
             
-            @*<ul>
-                <li ng-repeat="item in items">
-                    <a ng-click="selected.item = item">{{ item }}</a>
-                </li>
-            </ul>*@
-            @*Selected: <b>{{ selected.item }}</b>*@
         </div>
-        @*<div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </div>*@
     </script>
-
-    @*<button class="btn btn-default" ng-click="openModalChitietHanghoa(test)">Open me!</button>*@
-    @*<button class="btn btn-default" ng-click="open('lg')">Large modal</button>
-    <button class="btn btn-default" ng-click="open('sm')">Small modal</button>*@
-    @*<div ng-show="selected">Selection from a modal: {{ selected }}</div>*@
 
 </div>
 
