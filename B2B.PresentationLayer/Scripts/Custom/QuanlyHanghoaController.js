@@ -1,7 +1,7 @@
 ﻿angular.module("GlobalModule").controller("quanlyHanghoaController", QuanlyHanghoaController);
 
-QuanlyHanghoaController.$inject = ['$scope', '$http', '$modal', '$log', '$upload'];
-function QuanlyHanghoaController($scope, $http, $modal, $log, $upload) {
+QuanlyHanghoaController.$inject = ['$scope', '$http', '$modal', '$log', 'Upload'];
+function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
     $scope.$scope = $scope;
     $scope.hanghoas = [];
     $scope.nhomhanghoas = [];
@@ -173,17 +173,17 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, $upload) {
 
     $scope.gridOptions = {};
     $scope.deleteCellTemplate = '<button ng-click="getExternalScopes().deleteRow(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-trash"/></button> ';
-    $scope.editCellTemplate = '<button ng-click="getExternalScopes().editRow(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-pencil"/></button> ';
+    $scope.editCellTemplate = '<button ng-click="getExternalScopes().editRow(row.entity)" class="btn btn-primary btn-xs"><i class="fa fa-pencil"/></button> ';
     $scope.activeCellTemplate = '<input type="checkbox" ng-checked="row.entity.Active" ng-click="getExternalScopes().ChangeActive(row.entity)"> ';
     $scope.gridOptions.columnDefs = [
-        { name: 'Code', displayName: 'Code', width: 80, enableCellEdit: false },
-  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 170, enableCellEdit: false },
-        { name: 'Barcode', displayName: 'Barcode', width: 90, enableCellEdit: false },
-        { name: 'Giagoc', displayName: 'Giá gốc', cellFilter: 'number', width: 80, enableCellEdit: false },
-        { name: 'Active', displayName: 'Active', cellTemplate: $scope.activeCellTemplate, width: 60, enableFiltering: false },
-        { name: 'NgayCapnhatString', displayName: 'Cập nhật', width: 85, enableCellEdit: false },
-        { name: '_delete', displayName: "", cellTemplate: $scope.deleteCellTemplate, width: 15, enableFiltering: false, enableCellEdit: false },
-        { name: '_edit', displayName: "", cellTemplate: $scope.editCellTemplate, width: 15, enableFiltering: false, enableCellEdit: false },
+        { name: 'Code', displayName: 'Code', width: '10%', enableCellEdit: false },
+  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: '40%', enableCellEdit: false },
+        { name: 'Barcode', displayName: 'Barcode', width: '10%', enableCellEdit: false },
+        { name: 'Giagoc', displayName: 'Giá gốc', cellFilter: 'number', width: '10%', enableCellEdit: false },
+        { name: 'Active', displayName: 'Active', cellTemplate: $scope.activeCellTemplate, width: '5%', enableFiltering: false },
+        { name: 'NgayCapnhatString', displayName: 'Cập nhật', width: '10%', enableCellEdit: false },
+        { name: '_edit', displayName: "Sửa", cellTemplate: $scope.editCellTemplate, width: '7.5%', enableFiltering: false, enableCellEdit: false },
+        { name: '_delete', displayName: "Xóa", cellTemplate: $scope.deleteCellTemplate, width: '7.5%', enableFiltering: false, enableCellEdit: false }
     ];
     $scope.gridOptions.paginationPageSizes = [25, 50, 75];
     $scope.gridOptions.paginationPageSize = 25;
@@ -193,7 +193,7 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, $upload) {
     $scope.uploadImage = function (file) {
         if (file && file.length) {
 
-            $upload.upload({
+            Upload.upload({
                 url: '/QuanlyHanghoa/UploadImage',
                 method: 'POST',
                 file: file
