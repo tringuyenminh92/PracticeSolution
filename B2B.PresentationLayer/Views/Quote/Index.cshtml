@@ -46,9 +46,13 @@
 
                 <button type="button" class="btn btn-primary" ng-click="ShowGridModal()">Show</button>
 
+                <img ng-src="{{img}}" class="img-thumbnail" width="200" height="300" ng-mouseover="" id="imgAvatar">
+                <div style="margin-top:15px" id="divImage">
+                    <input type='file' ngf-select ngf-change="readURL($files,$event)" ng-model="myFile" accept="image/x-png, image/gif, image/jpeg" />
+                </div>
+                <button type="button" class="btn btn-primary" ng-click="upload(myFile)">Up</button>
 
-                <input type="file" ngf-select ng-model="myFile" class="upload"></input>
-                <button type="button" class="btn btn-primary" ng-click="upload(myFile)"></button>
+                <button ng-click="learnEvent($event)" class="btn btn-primary" id="abc">Test</button>
         </div>
     </div>
 

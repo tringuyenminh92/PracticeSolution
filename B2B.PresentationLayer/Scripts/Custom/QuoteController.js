@@ -104,5 +104,26 @@ function QuoteController($scope, $http, Upload, $location, $q, modalService) {
         modalService.ShowModal(null, null);
     };
 
+    //$scope.myFile = {};
+    //$scope.readURL = function (files, e) {
+    //    var input = e.target;
+    //    if (input.files && input.files[0]) {
+    //        var reader = new FileReader();
+
+    //        reader.onload = function (e) {
+    //            //$('#imgAvatar').attr('src', e.target.result);
+    //            $timeout(function () {
+    //                $scope.img = e.target.result;
+    //            });
+    //        }
+
+    //        reader.readAsDataURL(input.files[0]);
+    //        $scope.myFile = input.files[0];
+    //    }
+    //}
+
+    $scope.learnEvent = function (e) {
+        alert(e.target.id);
+    };
 }
 
