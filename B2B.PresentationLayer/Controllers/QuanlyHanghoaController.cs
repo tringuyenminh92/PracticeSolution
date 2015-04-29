@@ -139,35 +139,23 @@ namespace B2B.PresentationLayer.Controllers
 
         public JsonResult UploadImage(HttpPostedFileBase file)
         {
-            string fullPath = "";
-            if (file != null)
-            {
-                var filename = Path.GetFileName(file.FileName);
-                fullPath = Path.GetFullPath(filename);
-            }
-            return Json(new { fullPath = fullPath });
-        }
-
-        public string SaveImage(HttpPostedFileBase file)
-        {
             string pathSave = "";
-            
             try
             {
-                if (file != null)
+                if (file == null)
                 {
-                    var filename = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Images/Hinhhanghoa"), filename);
-                    file.SaveAs(path);
-                    pathSave = "/Images/Hinhhanghoa/" + filename;
+                    return Json(null);
                 }
-                
+                var filename = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images/Hinhhanghoa"), filename);
+                file.SaveAs(path);
+                pathSave = "/Images/Hinhhanghoa/" + filename;
             }
             catch (System.Exception ex)
             {
+            	
             }
-
-            return pathSave;
+            return Json(new { pathSave = pathSave });
         }
     }
 }

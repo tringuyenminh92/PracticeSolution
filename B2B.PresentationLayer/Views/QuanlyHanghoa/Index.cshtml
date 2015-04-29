@@ -25,8 +25,8 @@
     </div>
     <div class="col-md-5" style="padding-top:7px;">
         <div class="col-lg-4" >
-            <input type='file' id="imgInp" />
-            <img id="blah" src="#" alt="your image" class="img-responsive" />
+            @*<input type='file' id="imgInp" />*@
+        @*    <img id="blah" src="#" alt="your image" class="img-responsive" />*@
         </div>
 
         <br />
@@ -38,28 +38,26 @@
                     <div class="panel-title">Thông tin hàng hóa</div>
                 </div>
                 <div class="panel-body">
-                    <div class="col-md-12" style="margin-bottom:20px">
+                    <div class="col-md-12" style="margin-bottom:5px">
                         <div class="form-group">
-                            <div class="col-md-offset-3 col-md-6">
-                                <img ng-src={{img}} class="img-thumbnail" width="200" height="300" ng-mouseover="">
+                            <img ng-src="{{img}}" class="img-thumbnail" width="200" height="300" ng-mouseover="" id="imgAvatar">
+                            <div style="margin-top:15px" id="divImage">
+                                <input type='file' ngf-select ng-model="myFile"  accept="image/x-png, image/gif, image/jpeg" />
                             </div>
-                            <div class="col-md-offset-3 col-md-6" style="margin-top:15px">
-                                <span>{{fullPath}}</span>
-                                <div class="btn btn-primary" ngf-select ngf-change="uploadImage($files)">Chọn ảnh cho hàng hóa</div>
-                            </div>
+                            <button type="button" class="btn btn-primary"  ng-click="upload(myFile)">Up</button>
                         </div>
                     </div>
 
                     @*<div class="col-md-12" style="margin-bottom:20px">
-                            <div class="form-group">
-                                <p class="input-group">
-                                    <input type="text" disabled style="background:#ffffff" class="form-control" placeholder="Hình ảnh">
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-primary" ng-click=""><i class="glyphicon glyphicon-upload"></i></button>
-                                    </span>
-                                </p>
-                            </div>
-                        </div>*@
+                        <div class="form-group">
+                            <p class="input-group">
+                                <input type="text" disabled style="background:#ffffff" class="form-control" placeholder="Hình ảnh">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" ng-click=""><i class="glyphicon glyphicon-upload"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                    </div>*@
                     <div class="col-md-6">
                         <div class="form-group">
                             <input type="text" name="code" class="form-control" placeholder="Code" ng-model="hanghoa.Code">

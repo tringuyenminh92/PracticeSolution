@@ -43,13 +43,16 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
 
     $scope.editIndex;
     $scope.editRow = function (team) {
+        var imgInp = $("#imgInp");
+        imgInp.replaceWith(imgInp.val('').clone(true));
+        $('#imgAvatar').attr('src', "/Images/Hinhhanghoa/noPhoto-icon.png");
         $scope.hanghoa = team;
         if ($scope.hanghoa.LinkHinhanh_Web != null) {
             $scope.img = $scope.hanghoa.LinkHinhanh_Web;
         }
-        else {
-            $scope.img = "/Images/Hinhhanghoa/noPhoto-icon.png";
-        }
+        //else {
+        //    $scope.img = "/Images/Hinhhanghoa/noPhoto-icon.png";
+        //}
 
         //if ($scope.hanghoa.LinkHinhanh_Web == null) { $scope.hanghoa.LinkHinhanh_Web = "/Images/Hinhhanghoa/noPhoto-icon.jpg"; }
         $scope.isEdit = true;
@@ -84,11 +87,13 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
             alert('Lỗi load hàng hóa theo nhóm hàng');
         });
         $scope.hanghoa = {};
-        $scope.img = "/Images/Hinhhanghoa/noPhoto-icon.png";
         $scope.thuoctinhhanghoas = [];
         $scope.thuoctinhhanghoasXoa = [];
         $scope.thuoctinhhanghoasThem = [];
         $scope.Thuoctinh = {};
+        var imgInp = $("#imgInp");
+        imgInp.replaceWith(imgInp.val('').clone(true));
+        $('#imgAvatar').attr('src', "/Images/Hinhhanghoa/noPhoto-icon.png");
     };
 
     //$scope.LoadHinh = function () {
@@ -160,14 +165,13 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
             alert('Lỗi Insert Hàng hóa');
         });
     };
-
     $scope.UpdateHanghoa = function () {
         $http.post("/QuanlyHanghoa/UpdateHanghoa", { hanghoa: $scope.hanghoa, lstThuoctinhHanghoaThem: $scope.thuoctinhhanghoasThem, lstThuoctinhHanghoaXoa: $scope.thuoctinhhanghoasXoa }).success(function (data, status, headers, config) {
             alert(data.thongbao);
             $scope.ResetValue();
         }).error(function (data, status, headers, config) {
             // log 
-            alert('Error');
+            //alert('Error');
         });
     };
 
@@ -208,6 +212,25 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
             });
         }
     };
+    $scope.myFile = {};
+    $scope.upload = function (file) {
+        alert($());
+        //alert(file.length);
+        if (file) {
+            Upload.upload({
+                url: '/QuanlyHanghoa/UploadImage',
+                method: 'POST',
+                file: file
+            }).progress(function (evt) {
+                //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            }).success(function (data, status, headers, config) {
+                //console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+                if (data) {
+                    alert(data.pathSave);
+                }
+            });
+        }
+    };
 
     //$scope.items = ['item1', 'item2', 'item3'];
 
@@ -236,7 +259,8 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                $('#blah').attr('src', e.target.result);
+                $('#imgAvatar').attr('src', e.target.result);
+                //  $scope.img=e.target.result;
             }
 
             reader.readAsDataURL(input.files[0]);
@@ -244,9 +268,9 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
         }
     }
 
-    $("#imgInp").change(function () {
-        readURL(this);
-    });
+    //$("#divImage :input").change(function () {
+    //    readURL(this);
+    //});
 
 };
 
