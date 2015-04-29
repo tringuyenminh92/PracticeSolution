@@ -214,8 +214,6 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
     };
     $scope.myFile = {};
     $scope.upload = function (file) {
-        alert($());
-        //alert(file.length);
         if (file) {
             Upload.upload({
                 url: '/QuanlyHanghoa/UploadImage',
@@ -254,7 +252,8 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
     //    });
     //};
 
-    function readURL(input) {
+    $scope.readURL = function (files, e) {
+        var input = e.target;
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
@@ -264,7 +263,7 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
             }
 
             reader.readAsDataURL(input.files[0]);
-            $scope.file = input.files[0];
+            $scope.myFile = input.files[0];
         }
     }
 
