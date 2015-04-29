@@ -1,7 +1,7 @@
 ﻿angular.module("GlobalModule").controller("quanlyHanghoaController", QuanlyHanghoaController);
 
-QuanlyHanghoaController.$inject = ['$scope', '$http', '$modal', '$log', 'Upload'];
-function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
+QuanlyHanghoaController.$inject = ['$scope', '$http', '$modal', '$log', 'Upload', '$q'];
+function QuanlyHanghoaController($scope, $http, $modal, $log, Upload, $q) {
     $scope.$scope = $scope;
     $scope.hanghoas = [];
     $scope.nhomhanghoas = [];
@@ -9,6 +9,8 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
     $scope.thuoctinhhanghoas = [];
     $scope.thuoctinhhanghoasXoa = [];
     $scope.thuoctinhhanghoasThem = [];
+
+    $scope.Thuoctinh = {};
 
     $scope.img = "/Images/Hinhhanghoa/noPhoto-icon.png";
 
@@ -45,14 +47,14 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
     $scope.editRow = function (team) {
         var imgInp = $("#imgInp");
         imgInp.replaceWith(imgInp.val('').clone(true));
-        $('#imgAvatar').attr('src', "/Images/Hinhhanghoa/noPhoto-icon.png");
+
         $scope.hanghoa = team;
         if ($scope.hanghoa.LinkHinhanh_Web != null) {
             $scope.img = $scope.hanghoa.LinkHinhanh_Web;
         }
-        //else {
-        //    $scope.img = "/Images/Hinhhanghoa/noPhoto-icon.png";
-        //}
+        else {
+            $scope.img = "/Images/Hinhhanghoa/noPhoto-icon.png";
+        }
 
         //if ($scope.hanghoa.LinkHinhanh_Web == null) { $scope.hanghoa.LinkHinhanh_Web = "/Images/Hinhhanghoa/noPhoto-icon.jpg"; }
         $scope.isEdit = true;
@@ -90,7 +92,7 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
         $scope.thuoctinhhanghoas = [];
         $scope.thuoctinhhanghoasXoa = [];
         $scope.thuoctinhhanghoasThem = [];
-        $scope.Thuoctinh = {};
+        $scope.Thuoctinh.tenThuoctinh = null;
         var imgInp = $("#imgInp");
         imgInp.replaceWith(imgInp.val('').clone(true));
         $('#imgAvatar').attr('src', "/Images/Hinhhanghoa/noPhoto-icon.png");
@@ -153,7 +155,6 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
         else {
             $scope.thuoctinhhanghoasXoa.push(team);
         }
-        alert(index2);
     }
 
     $scope.InsertHanghoa = function () {
@@ -175,6 +176,14 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
         });
     };
 
+    $scope.InsertHanghoaVaHinh = function () {
+        $scope.upload($scope.myFile).then($scope.InsertHanghoa);
+    }
+
+    $scope.UpdateHanghoaVaHinh = function () {
+        $scope.upload($scope.myFile).then($scope.UpdateHanghoa);
+    }
+
     $scope.gridOptions = {};
     $scope.deleteCellTemplate = '<button ng-click="getExternalScopes().deleteRow(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-trash"/></button> ';
     $scope.editCellTemplate = '<button ng-click="getExternalScopes().editRow(row.entity)" class="btn btn-primary btn-xs"><i class="fa fa-pencil"/></button> ';
@@ -195,6 +204,7 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
     $scope.gridOptions.enableFiltering = true;
 
     $scope.uploadImage = function (file) {
+        var defer = $q.defer();
         if (file && file.length) {
 
             Upload.upload({
@@ -207,13 +217,16 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
                 //console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
                 if (data) {
                     //$scope.img = data.fullPath;
-                    alert(data.fullPath);
+                    alert(data.fullPath);  
                 }
-            });
+                defer.resolve(data);
+            }).error(defer.reject);
+            return defer.promise;
         }
     };
     $scope.myFile = {};
     $scope.upload = function (file) {
+        var defer = $q.defer();
         if (file) {
             Upload.upload({
                 url: '/QuanlyHanghoa/UploadImage',
@@ -224,33 +237,13 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
             }).success(function (data, status, headers, config) {
                 //console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
                 if (data) {
-                    alert(data.pathSave);
+                    $scope.hanghoa.LinkHinhanh_Web = data.pathSave;
                 }
-            });
+                defer.resolve(data);
+            }).error(defer.reject);
+            return defer.promise;
         }
     };
-
-    //$scope.items = ['item1', 'item2', 'item3'];
-
-    //$scope.open = function (size) {
-
-    //    var modalInstance = $modal.open({
-    //        templateUrl: 'myModalContent.html',
-    //        controller: 'ModalInstanceCtrl',
-    //        size: size,
-    //        resolve: {
-    //            items: function () {
-    //                return $scope.items;
-    //            }
-    //        }
-    //    });
-
-    //    modalInstance.result.then(function (selectedItem) {
-    //        $scope.selected = selectedItem;
-    //    }, function () {
-    //        $log.info('Modal dismissed at: ' + new Date());
-    //    });
-    //};
 
     $scope.readURL = function (files, e) {
         var input = e.target;
@@ -266,10 +259,6 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload) {
             $scope.myFile = input.files[0];
         }
     }
-
-    //$("#divImage :input").change(function () {
-    //    readURL(this);
-    //});
 
 };
 

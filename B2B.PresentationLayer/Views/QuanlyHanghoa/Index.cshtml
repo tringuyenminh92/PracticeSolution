@@ -108,7 +108,7 @@
                                 <a ng-click="YeucauThemThuoctinh()">Thêm thuộc tính</a>
                                 <div ng-show="themtt" ng-class="{error: thongtinhanghoa.thuoctinh.$invalid}">
                                     <input type="text" name="thuoctinh" class="form-control" placeholder="Ví dụ 'Màu sắc: Đỏ'" ng-model="Thuoctinh.tenThuoctinh" required>
-                                    <button class="btn btn-default btn-sm" style="margin-top:5px" ng-disabled="thongtinhanghoa.thuoctinh.$error.required" ng-click="addThuoctinh()">Đồng ý</button>
+                                    <button class="btn btn-default btn-sm" style="margin-top:5px" ng-show="Thuoctinh.tenThuoctinh!=null" ng-click="addThuoctinh()">Đồng ý</button>
                                 </div>
                             </accordion-group>
                         </accordion>
@@ -125,8 +125,8 @@
                         </div>
                     </div>
                     <div class="col-md-12 form-group">
-                        <input type="button" ng-disabled="thongtinhanghoa.giagoc.$error.number" class="btn btn-primary" value="Thêm" ng-show="!isEdit" ng-click="InsertHanghoa()">
-                        <input type="button" ng-disabled="thongtinhanghoa.giagoc.$error.number" ng-show="isEdit" class="btn btn-primary" value="Lưu thay đổi" ng-click="UpdateHanghoa()">
+                        <input type="button" ng-disabled="thongtinhanghoa.giagoc.$error.number" class="btn btn-primary" value="Thêm" ng-show="!isEdit" ng-click="InsertHanghoaVaHinh()">
+                        <input type="button" ng-disabled="thongtinhanghoa.giagoc.$error.number" ng-show="isEdit" class="btn btn-primary" value="Lưu thay đổi" ng-click="UpdateHanghoaVaHinh()">
                         <input type="button" ng-disabled="" ng-show=" true" class="btn btn-primary" value="Hủy" ng-click="ResetValue()">
                     </div>
                 </div>

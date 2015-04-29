@@ -226,7 +226,6 @@
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\AutoMapper.dll" />
-    <Content Include="bin\AutoMapper.Net4.dll" />
     <Content Include="bin\B2B.BL.dll" />
     <Content Include="bin\B2B.DAL.dll" />
     <Content Include="bin\B2B.Model.dll" />
