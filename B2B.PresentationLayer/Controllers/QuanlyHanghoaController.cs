@@ -74,7 +74,7 @@ namespace B2B.PresentationLayer.Controllers
             if (kq)
             {
                 string thongbao1 = "";
-                if (lstThuoctinhHanghoa.Count != 0)
+                if (lstThuoctinhHanghoa != null)
                 {
                     for (int i = 0; i < lstThuoctinhHanghoa.Count; ++i)
                     {

@@ -66,6 +66,10 @@ function MuaHangController($scope, $http, $q, $modal, $log) {
         $scope.donhang.Tongtien = 0;
         $scope.donhang.Tiengiam = 0;
         $scope.donhang.PhantramGiam = 0;
+        $http.post("/MuaHang/CapnhatDonhangTam", { lstChitietDonhangTam: $scope.chitietdonhangs, donhang: $scope.donhang }).success(function (data, status, headers, config) {
+        }).error(function (data, status, headers, config) {
+            alert('Cập nhật đơn hàng tạm không thành công');
+        });
     }
 
     //Lấy Account để kiểm tra đã đăng nhập chưa và có đầy đủ thông tin chưa
@@ -190,9 +194,9 @@ function MuaHangController($scope, $http, $q, $modal, $log) {
     //$scope.imageCellTemplate = '<button class="btn btn-default" ng-click="getExternalScopes().openModalChitietHanghoa()">Open me!</button>';
     $scope.gridOptions.columnDefs = [
         { name: '_hinhanh', displayName: '', cellTemplate: $scope.imageCellTemplate, enableFiltering: false, width: '20%' },
-        { name: 'Code', displayName: 'Code', width: '15%' },
-  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: '40%' },
-        { name: 'Giagoc', displayName: 'Giá gốc', cellFilter: 'number', width: '17%' },
+        { name: 'Code', displayName: 'Code', width: '20%' },
+  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: '32%' },
+        { name: 'Giagoc', displayName: 'Giá gốc', cellFilter: 'number', width: '20%' },
         { name: '_addHanghoa', displayName: "", cellTemplate: $scope.addCellTemplate, width: '8%', enableFiltering: false },
     ];
 
@@ -200,7 +204,7 @@ function MuaHangController($scope, $http, $q, $modal, $log) {
     $scope.gridOptions.paginationPageSize = 10;
     $scope.gridOptions.data = "hanghoas";
     $scope.gridOptions.enableFiltering = true;
-    $scope.gridOptions.rowHeight = 80;
+    $scope.gridOptions.rowHeight = 90;
 
     //Hàm remove hàng hóa khỏi chi tiết hàng hóa
     $scope.removeHanghoa = function (team) {
@@ -223,17 +227,17 @@ function MuaHangController($scope, $http, $q, $modal, $log) {
     $scope.removeCellTemplate = '<button ng-click="getExternalScopes().removeHanghoa(row.entity)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"/></button> ';
     //$scope.soluongCellTemplate = '<input type="number" ng-change=$scope.Test()>';
     $scope.gridOptions1.columnDefs = [
-        { name: 'STT', displayName: 'STT', width: '5%', enableFiltering: false, enableCellEdit: false },
-        { name: 'Code', displayName: 'Code', width: '10%', enableCellEdit: false },
-  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: '35%', enableCellEdit: false },
-        { name: 'Soluong', displayName: 'Số lượng', width: '10%', enableCellEdit: true },
-        { name: 'Giaban', displayName: 'Đơn giá', cellFilter: 'number', width: '10%', enableCellEdit: false },
+        { name: 'STT', displayName: 'STT', width: '6%', enableFiltering: false, enableCellEdit: false },
+        { name: 'Code', displayName: 'Code', width: '15%', enableCellEdit: false },
+  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: '31%', enableCellEdit: false },
+        { name: 'Soluong', displayName: 'SL', width: '8%', enableCellEdit: true },
+        { name: 'Giaban', displayName: 'Đơn giá', cellFilter: 'number', width: '15%', enableCellEdit: false },
         { name: 'Thanhtien', displayName: 'Thành tiền', cellFilter: 'number', width: '20%', enableCellEdit: false },
-        { name: '_removeHanghoa', displayName: "Xoá", cellTemplate: $scope.removeCellTemplate, width: '10%', enableFiltering: false, enableCellEdit: false },
+        { name: '_removeHanghoa', displayName: "Bỏ", cellTemplate: $scope.removeCellTemplate, width: '5%', enableFiltering: false, enableCellEdit: false },
     ];
 
-    $scope.gridOptions1.paginationPageSizes = [25, 50, 75];
-    $scope.gridOptions1.paginationPageSize = 25;
+    $scope.gridOptions1.paginationPageSizes = [9, 18, 27];
+    $scope.gridOptions1.paginationPageSize = 9;
     $scope.gridOptions1.data = "chitietdonhangs";
     $scope.gridOptions1.enableFiltering = false;
 

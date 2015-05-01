@@ -119,10 +119,10 @@ function DonhangController($scope, $http, $q) {
     $scope.dacdiemCellTemplate = '<ul style="margin-left:-35px; margin-top:5px; list-style-type:none"><li ng-repeat="dd in row.entity.ThuoctinhHanghoaItems">{{ dd.TenThuoctinh }}</li></ul>';
     $scope.gridChitietDonhang.columnDefs = [
         { name: 'STT', displayName: 'STT', width: 50, enableFiltering: false },
-        { name: '_hinhanh', displayName: '', cellTemplate: $scope.imageCellTemplate, width: 100 },
+        { name: '_hinhanh', displayName: '', cellTemplate: $scope.imageCellTemplate, width: 120 },
         { name: 'Code', displayName: 'Code', width: 150 },
-  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 220 },
-        { name: '_dacdiem', displayName: 'Đặc điểm', cellTemplate: $scope.dacdiemCellTemplate, width: 255 },
+  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: 260 },
+        { name: '_dacdiem', displayName: 'Đặc điểm', cellTemplate: $scope.dacdiemCellTemplate, width: 260 },
         { name: 'Soluong', displayName: 'Số lượng', width: 80 },
         { name: 'Giaban', displayName: 'Đơn giá', cellFilter: 'number', width: 150 },
         { name: 'Thanhtien', displayName: 'Thành tiền', cellFilter: 'number', width: 150 },

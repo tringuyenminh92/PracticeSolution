@@ -89,10 +89,11 @@ namespace B2B.PresentationLayer.Controllers
             //donhang.TinhtrangDonhangCurrentId = tinhtrangDonhangDalap.TinhtrangId;
             //donhang.TenTinhtrangDonhang = tinhtrangDonhangDalap.TenTinhtrang;
 
+            DateTime today = DateTime.Now;
             DonhangModel donhang1 = new DonhangModel();
             donhang1.DonhangId = Guid.NewGuid();
-            donhang1.Ngaylap = DateTime.Now;
-            donhang1.NgayCapnhat = DateTime.Now;
+            donhang1.Ngaylap = today;
+            donhang1.NgayCapnhat = today;
             donhang1.TinhtrangDonhangCurrentId = tinhtrangId;
             donhang1.TenTinhtrangDonhang = tenTinhtrang;
             donhang1.KhachhangId = donhang.KhachhangId;
@@ -106,6 +107,8 @@ namespace B2B.PresentationLayer.Controllers
             donhang1.Ghichu = donhang.Ghichu;
             donhang1.LoaiDonhang = donhang.LoaiDonhang;
             donhang1.Active = true;
+            donhang1.Ngaygiao = today.AddDays(3);
+            donhang1.Code = "" + today.Day + today.Month + today.Year + today.TimeOfDay.Hours + today.TimeOfDay.Minutes + today.TimeOfDay.Seconds;
 
             if (_donhangService.Insert(donhang1))
             {

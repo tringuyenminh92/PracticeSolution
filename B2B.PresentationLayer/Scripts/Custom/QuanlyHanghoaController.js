@@ -9,6 +9,7 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload, $q) {
     $scope.thuoctinhhanghoas = [];
     $scope.thuoctinhhanghoasXoa = [];
     $scope.thuoctinhhanghoasThem = [];
+    
 
     $scope.Thuoctinh = {};
 
@@ -45,8 +46,7 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload, $q) {
 
     $scope.editIndex;
     $scope.editRow = function (team) {
-        var imgInp = $("#imgInp");
-        imgInp.replaceWith(imgInp.val('').clone(true));
+        $scope.ResetValue();
 
         $scope.hanghoa = team;
         if ($scope.hanghoa.LinkHinhanh_Web != null) {
@@ -93,9 +93,12 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload, $q) {
         $scope.thuoctinhhanghoasXoa = [];
         $scope.thuoctinhhanghoasThem = [];
         $scope.Thuoctinh.tenThuoctinh = null;
-        var imgInp = $("#imgInp");
-        imgInp.replaceWith(imgInp.val('').clone(true));
+        //var imgInp = $("[name='image']");
+        //imgInp.replaceWith(imgInp.val('').clone(true));
+        $("[name='thongtinhanghoa']").closest('form').trigger('reset');
+        $scope.myFile = null;
         $('#imgAvatar').attr('src', "/Images/Hinhhanghoa/noPhoto-icon.png");
+
     };
 
     //$scope.LoadHinh = function () {
@@ -105,6 +108,7 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload, $q) {
     $scope.LoadHanghoaTheoNhomHanghoa = function () {
         $http.post("/QuanlyHanghoa/LoadHanghoaTheoNhomHanghoa", { nhomHanghoaId: $scope.nhomHanghoaId }).success(function (data, status, headers, config) {
             $scope.hanghoas = data;
+            $scope.myFile = null;
         }).error(function (data, status, headers, config) {
             // log 
             alert('Error');
@@ -177,11 +181,19 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload, $q) {
     };
 
     $scope.InsertHanghoaVaHinh = function () {
-        $scope.upload($scope.myFile).then($scope.InsertHanghoa);
+        if ($scope.myFile != null) {
+            $scope.upload($scope.myFile).then($scope.InsertHanghoa);
+        }
+        else
+            $scope.InsertHanghoa();
     }
 
     $scope.UpdateHanghoaVaHinh = function () {
-        $scope.upload($scope.myFile).then($scope.UpdateHanghoa);
+        if ($scope.myFile != null) {
+            $scope.upload($scope.myFile).then($scope.UpdateHanghoa);
+        }
+        else
+            $scope.UpdateHanghoa();
     }
 
     $scope.gridOptions = {};
@@ -189,41 +201,41 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload, $q) {
     $scope.editCellTemplate = '<button ng-click="getExternalScopes().editRow(row.entity)" class="btn btn-primary btn-xs"><i class="fa fa-pencil"/></button> ';
     $scope.activeCellTemplate = '<input type="checkbox" ng-checked="row.entity.Active" ng-click="getExternalScopes().ChangeActive(row.entity)"> ';
     $scope.gridOptions.columnDefs = [
-        { name: 'Code', displayName: 'Code', width: '10%', enableCellEdit: false },
-  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: '40%', enableCellEdit: false },
-        { name: 'Barcode', displayName: 'Barcode', width: '10%', enableCellEdit: false },
-        { name: 'Giagoc', displayName: 'Giá gốc', cellFilter: 'number', width: '10%', enableCellEdit: false },
-        { name: 'Active', displayName: 'Active', cellTemplate: $scope.activeCellTemplate, width: '5%', enableFiltering: false },
-        { name: 'NgayCapnhatString', displayName: 'Cập nhật', width: '10%', enableCellEdit: false },
+        { name: 'Code', displayName: 'Code', width: '12%', enableCellEdit: false },
+  	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: '28%', enableCellEdit: false },
+        { name: 'Barcode', displayName: 'Barcode', width: '15%', enableCellEdit: false },
+        { name: 'Giagoc', displayName: 'Giá gốc', cellFilter: 'number', width: '15%', enableCellEdit: false },
+        { name: 'Active', displayName: 'A', cellTemplate: $scope.activeCellTemplate, width: '1%', enableFiltering: false },
+        { name: 'NgayCapnhatString', displayName: 'Cập nhật', width: '12%', enableCellEdit: false },
         { name: '_edit', displayName: "Sửa", cellTemplate: $scope.editCellTemplate, width: '7.5%', enableFiltering: false, enableCellEdit: false },
         { name: '_delete', displayName: "Xóa", cellTemplate: $scope.deleteCellTemplate, width: '7.5%', enableFiltering: false, enableCellEdit: false }
     ];
-    $scope.gridOptions.paginationPageSizes = [25, 50, 75];
-    $scope.gridOptions.paginationPageSize = 25;
+    $scope.gridOptions.paginationPageSizes = [18, 36, 72];
+    $scope.gridOptions.paginationPageSize = 18;
     $scope.gridOptions.data = "hanghoas";
     $scope.gridOptions.enableFiltering = true;
 
-    $scope.uploadImage = function (file) {
-        var defer = $q.defer();
-        if (file && file.length) {
+    //$scope.uploadImage = function (file) {
+    //    var defer = $q.defer();
+    //    if (file && file.length) {
 
-            Upload.upload({
-                url: '/QuanlyHanghoa/UploadImage',
-                method: 'POST',
-                file: file
-            }).progress(function (evt) {
-                //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            }).success(function (data, status, headers, config) {
-                //console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-                if (data) {
-                    //$scope.img = data.fullPath;
-                    alert(data.fullPath);  
-                }
-                defer.resolve(data);
-            }).error(defer.reject);
-            return defer.promise;
-        }
-    };
+    //        Upload.upload({
+    //            url: '/QuanlyHanghoa/UploadImage',
+    //            method: 'POST',
+    //            file: file
+    //        }).progress(function (evt) {
+    //            //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+    //        }).success(function (data, status, headers, config) {
+    //            //console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+    //            if (data) {
+    //                //$scope.img = data.fullPath;
+    //                alert(data.fullPath);  
+    //            }
+    //            defer.resolve(data);
+    //        }).error(defer.reject);
+    //        return defer.promise;
+    //    }
+    //};
     $scope.myFile = {};
     $scope.upload = function (file) {
         var defer = $q.defer();
@@ -240,9 +252,9 @@ function QuanlyHanghoaController($scope, $http, $modal, $log, Upload, $q) {
                     $scope.hanghoa.LinkHinhanh_Web = data.pathSave;
                 }
                 defer.resolve(data);
-            }).error(defer.reject);
-            return defer.promise;
+            }).error(defer.reject);  
         }
+        return defer.promise;
     };
 
     $scope.readURL = function (files, e) {

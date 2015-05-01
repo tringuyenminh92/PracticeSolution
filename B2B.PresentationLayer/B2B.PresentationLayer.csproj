@@ -487,7 +487,6 @@
     <Content Include="Views\Taikhoan\Dangnhap.cshtml" />
     <Content Include="Views\Donhang\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\MuaHang\ChonHinhThucMuaHang.cshtml" />
     <Content Include="Views\MuaHang\ChonDiachigiaohang.cshtml" />
     <Content Include="Views\User\AddAccount.cshtml" />
   </ItemGroup>
