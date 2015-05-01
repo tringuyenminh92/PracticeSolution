@@ -28,6 +28,18 @@ function UserController($scope, $http) {
     $scope.createNew = function () {
         window.location.href = '/Taikhoan/Dangky';
     };
+    $scope.addNew = function () {
+        $http.post("/User/AddnewAccout", { user: $scope.username, pass: $scope.password }).success(function (data, status, headers, config) {
+            if (data) {
+                alert("Success!");
+            }
+            else {
+                alert("Fail!");
+            }
+        }).error(function (data, status, headers, config) {
+            alert("Error!");
+        });
+    };
     $scope.loadData = function () {
         $http.get("/User/GetAllAccount").success(function (data, status, headers, config) {
             $scope.myData = data;
