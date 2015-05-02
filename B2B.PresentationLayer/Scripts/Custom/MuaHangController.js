@@ -232,8 +232,8 @@ function MuaHangController($scope, $http, $q, $modal, $log) {
   	    { name: 'TenHanghoa', displayName: 'Tên hàng hóa', width: '31%', enableCellEdit: false },
         { name: 'Soluong', displayName: 'SL', width: '8%', enableCellEdit: true },
         { name: 'Giaban', displayName: 'Đơn giá', cellFilter: 'number', width: '15%', enableCellEdit: false },
-        { name: 'Thanhtien', displayName: 'Thành tiền', cellFilter: 'number', width: '20%', enableCellEdit: false },
-        { name: '_removeHanghoa', displayName: "Bỏ", cellTemplate: $scope.removeCellTemplate, width: '5%', enableFiltering: false, enableCellEdit: false },
+        { name: 'Thanhtien', displayName: 'Thành tiền', cellFilter: 'number', width: '17%', enableCellEdit: false },
+        { name: '_removeHanghoa', displayName: "Bỏ", cellTemplate: $scope.removeCellTemplate, width: '8%', enableFiltering: false, enableCellEdit: false },
     ];
 
     $scope.gridOptions1.paginationPageSizes = [9, 18, 27];
