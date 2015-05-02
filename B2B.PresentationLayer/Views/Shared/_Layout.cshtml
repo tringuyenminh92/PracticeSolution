@@ -17,12 +17,12 @@
     <nav class="navbar navbar-inverse navbar-static-top ">
         <div class="container">
             <div class="pull-left">
-                <a class="navbar-brand" href="#">B2B System</a>
+                <a class="navbar-brand" href="">B2B System</a>
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "DatHang", "MuaHang")</li>
+                    <li>@Html.ActionLink(" Đặt Hàng", "DatHang", "MuaHang", null, new { @class = "fa fa-home" })</li>
                     @*<li>@Html.ActionLink("Mua hàng", "DatHang", "MuaHang")</li>*@
-                    <li>@Html.ActionLink("Quản lý hàng hóa", "Index", "QuanlyHanghoa")</li>
-                    <li>@Html.ActionLink("Quản lý người dùng", "Index", "User")</li>
+                    <li>@Html.ActionLink(" Quản lý Hàng hóa", "Index", "QuanlyHanghoa", null, new { @class = "fa fa-th-list" })</li>
+                    <li>@Html.ActionLink(" Quản lý Tài khoản", "Index", "User", null, new { @class = "fa fa-user" })</li>
                 </ul>
             </div>
             @Html.Partial("_LoginPartial")
@@ -33,12 +33,10 @@
             @RenderBody()
         </section>
     </div>
-  
-    <link id="appPath" href="@Url.Content("~/")" />
 
+    <link id="appPath" href="@Url.Content("~/")" />
     @* Modal Message Template Definition  *@
     <script type="text/ng-template" id="messageModal.html">
-
         <div class="modal-header bg-primary">
             <div class="modal-title">{{data.Title}}</div>
         </div>
@@ -49,25 +47,21 @@
             <button class="btn btn-default" ng-click="cancel()" ng-show="data.CancelButton">{{data.CancelButton}}</button>
             <button class="btn btn-primary" ng-click="ok()" ng-show="data.OkButton">{{data.OkButton}}</button>
         </div>
-
     </script>
-
 
     @* Grid Modal Template Definition  *@
     <script type="text/ng-template" id="gridModal.html">
-
         <div class="modal-header bg-primary">
-            <div class="modal-title" >{{data.Title}}</div>
+            <div class="modal-title">{{data.Title}}</div>
         </div>
         <div class="modal-body">
             @*{{data.Content}}*@
             <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions"></div>
         </div>
-            <div class="modal-footer">
-                <button class="btn btn-default" ng-click="cancel()" ng-show="data.CancelButton">{{data.CancelButton}}</button>
-                <button class="btn btn-primary" ng-click="ok()" ng-show="data.OkButton">{{data.OkButton}}</button>
-            </div>
-
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()" ng-show="data.CancelButton">{{data.CancelButton}}</button>
+            <button class="btn btn-primary" ng-click="ok()" ng-show="data.OkButton">{{data.OkButton}}</button>
+        </div>
     </script>
 </body>
 </html>
