@@ -16,8 +16,12 @@
 
         @if (!string.IsNullOrWhiteSpace(Session["accountId"] + ""))
         {
-            <li>@Html.ActionLink(" Lịch sử mua hàng", "Index", "Donhang", null, new { @class = "fa fa-shopping-cart" })</li>
-            <li>@Html.ActionLink((string)Session["accountName"], "SuaTaikhoan", "Taikhoan", null, new { @class = "fa fa-pencil-square-o" })</li>
+
+            if ((Session["TypeAccount"] as string) != "Admin")
+            {
+                <li>@Html.ActionLink(" Lịch sử mua hàng", "Index", "Donhang", null, new { @class = "fa fa-shopping-cart" })</li>
+                <li>@Html.ActionLink((string)Session["accountName"], "SuaTaikhoan", "Taikhoan", null, new { @class = "fa fa-pencil-square-o" })</li>
+            }
             <li>@Html.ActionLink(" Đăng xuất", "Dangxuat", "Taikhoan", null, new { @class = "fa fa-sign-out" })</li>
         }
         else
