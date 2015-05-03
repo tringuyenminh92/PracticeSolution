@@ -23,5 +23,7 @@ namespace B2B.DAL
         public Nullable<int> Step { get; set; }
         public byte[] Version { get; set; }
         public Nullable<System.Guid> NguyennhanLydo { get; set; }
+        public Nullable<double> Tongtien { get; set; }
+        public Nullable<System.Guid> TinhtrangPhieunhapCurrentId { get; set; }
     }
 }

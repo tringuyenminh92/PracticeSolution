@@ -11,7 +11,7 @@ namespace B2B.DAL
 {
     using System;
     
-    public partial class Tin_SelectCongnoNhap_Result
+    public partial class Tin_GetCongnoNhapMoinhatTheoNhacungcap_Result
     {
         public System.Guid CongnoNhapId { get; set; }
         public Nullable<System.Guid> NhaCungcapId { get; set; }
@@ -24,7 +24,5 @@ namespace B2B.DAL
         public string Ghichu { get; set; }
         public Nullable<int> Step { get; set; }
         public byte[] Version { get; set; }
-        public string TenNhaCungcap { get; set; }
-        public string TenNhanvien { get; set; }
     }
 }

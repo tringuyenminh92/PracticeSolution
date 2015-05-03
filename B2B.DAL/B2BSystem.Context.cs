@@ -30,6 +30,7 @@ namespace B2B.DAL
     
         public DbSet<Account> Accounts { get; set; }
         public DbSet<ChitietDonhang> ChitietDonhangs { get; set; }
+        public DbSet<ChitietKiemke> ChitietKiemkes { get; set; }
         public DbSet<ChitietPhieunhap> ChitietPhieunhaps { get; set; }
         public DbSet<ChitietPhieuxuat> ChitietPhieuxuats { get; set; }
         public DbSet<CongnoNhap> CongnoNhaps { get; set; }
@@ -37,11 +38,14 @@ namespace B2B.DAL
         public DbSet<Dongia> Dongias { get; set; }
         public DbSet<Donhang> Donhangs { get; set; }
         public DbSet<Donvi> Donvis { get; set; }
+        public DbSet<GroupItem> GroupItems { get; set; }
         public DbSet<Hanghoa> Hanghoas { get; set; }
         public DbSet<HanghoaNhaCungcap> HanghoaNhaCungcaps { get; set; }
+        public DbSet<Item> Items { get; set; }
         public DbSet<Khachhang> Khachhangs { get; set; }
         public DbSet<Kho> Khoes { get; set; }
         public DbSet<Khuvuc> Khuvucs { get; set; }
+        public DbSet<Kiemke> Kiemkes { get; set; }
         public DbSet<LoHanghoa> LoHanghoas { get; set; }
         public DbSet<NguyennhanLydo> NguyennhanLydoes { get; set; }
         public DbSet<NhaCungcap> NhaCungcaps { get; set; }
@@ -53,6 +57,8 @@ namespace B2B.DAL
         public DbSet<Phieuxuat> Phieuxuats { get; set; }
         public DbSet<Phongban> Phongbans { get; set; }
         public DbSet<Quanhuyen> Quanhuyens { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<RoleRight> RoleRights { get; set; }
         public DbSet<Thuchi> Thuchis { get; set; }
         public DbSet<ThuoctinhHanghoa> ThuoctinhHanghoas { get; set; }
         public DbSet<Tinhthanh> Tinhthanhs { get; set; }
@@ -62,7 +68,7 @@ namespace B2B.DAL
         public DbSet<TinhtrangPhieuxuat> TinhtrangPhieuxuats { get; set; }
         public DbSet<Tonkho> Tonkhoes { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
     
         public virtual ObjectResult<Khuyen_GetBaogiaTheoNhomKhachhang_Result> Khuyen_GetBaogiaTheoNhomKhachhang(Nullable<System.Guid> nhomKhachhangId)
         {
@@ -92,6 +98,19 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Khuyen_GetDonhang_Result>("Khuyen_GetDonhang");
         }
     
+        public virtual ObjectResult<Khuyen_GetDonhangTungayDenngay_Result> Khuyen_GetDonhangTungayDenngay(Nullable<System.DateTime> tungay, Nullable<System.DateTime> denngay)
+        {
+            var tungayParameter = tungay.HasValue ?
+                new ObjectParameter("Tungay", tungay) :
+                new ObjectParameter("Tungay", typeof(System.DateTime));
+    
+            var denngayParameter = denngay.HasValue ?
+                new ObjectParameter("Denngay", denngay) :
+                new ObjectParameter("Denngay", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Khuyen_GetDonhangTungayDenngay_Result>("Khuyen_GetDonhangTungayDenngay", tungayParameter, denngayParameter);
+        }
+    
         public virtual ObjectResult<Khuyen_GetHanghoa_Result> Khuyen_GetHanghoa()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Khuyen_GetHanghoa_Result>("Khuyen_GetHanghoa");
@@ -111,6 +130,20 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Khuyen_GetKhachhang_Result>("Khuyen_GetKhachhang");
         }
     
+        public virtual ObjectResult<Khuyen_GetKhachhangTheoPhieuxuat_Result> Khuyen_GetKhachhangTheoPhieuxuat(Nullable<System.Guid> phieuxuatId)
+        {
+            var phieuxuatIdParameter = phieuxuatId.HasValue ?
+                new ObjectParameter("PhieuxuatId", phieuxuatId) :
+                new ObjectParameter("PhieuxuatId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Khuyen_GetKhachhangTheoPhieuxuat_Result>("Khuyen_GetKhachhangTheoPhieuxuat", phieuxuatIdParameter);
+        }
+    
+        public virtual ObjectResult<Khuyen_GetPhieuxuat_Result> Khuyen_GetPhieuxuat()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Khuyen_GetPhieuxuat_Result>("Khuyen_GetPhieuxuat");
+        }
+    
         public virtual ObjectResult<Khuyen_GetPhieuxuatTheoDonhang_Result> Khuyen_GetPhieuxuatTheoDonhang(Nullable<System.Guid> donhangId)
         {
             var donhangIdParameter = donhangId.HasValue ?
@@ -123,6 +156,72 @@ namespace B2B.DAL
         public virtual ObjectResult<Khuyen_GetThuchi_Result> Khuyen_GetThuchi()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Khuyen_GetThuchi_Result>("Khuyen_GetThuchi");
+        }
+    
+        public virtual ObjectResult<Phanquyen_Danh_GetItemByGroupItemId_Result> Phanquyen_Danh_GetItemByGroupItemId(Nullable<System.Guid> groupItemId)
+        {
+            var groupItemIdParameter = groupItemId.HasValue ?
+                new ObjectParameter("GroupItemId", groupItemId) :
+                new ObjectParameter("GroupItemId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phanquyen_Danh_GetItemByGroupItemId_Result>("Phanquyen_Danh_GetItemByGroupItemId", groupItemIdParameter);
+        }
+    
+        public virtual ObjectResult<Phanquyen_Danh_GetItemsByUserId_Result> Phanquyen_Danh_GetItemsByUserId(Nullable<System.Guid> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phanquyen_Danh_GetItemsByUserId_Result>("Phanquyen_Danh_GetItemsByUserId", userIdParameter);
+        }
+    
+        public virtual ObjectResult<Phanquyen_Danh_GetRoleRightByRoleId_Result> Phanquyen_Danh_GetRoleRightByRoleId(Nullable<System.Guid> roleId)
+        {
+            var roleIdParameter = roleId.HasValue ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phanquyen_Danh_GetRoleRightByRoleId_Result>("Phanquyen_Danh_GetRoleRightByRoleId", roleIdParameter);
+        }
+    
+        public virtual ObjectResult<Phanquyen_Danh_GetUserRoleByUserId_Result> Phanquyen_Danh_GetUserRoleByUserId(Nullable<System.Guid> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phanquyen_Danh_GetUserRoleByUserId_Result>("Phanquyen_Danh_GetUserRoleByUserId", userIdParameter);
+        }
+    
+        public virtual int Phanquyen_Danh_SaveRoleRight(Nullable<System.Guid> roleId, string itemIds, Nullable<System.Guid> groupItemId)
+        {
+            var roleIdParameter = roleId.HasValue ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(System.Guid));
+    
+            var itemIdsParameter = itemIds != null ?
+                new ObjectParameter("ItemIds", itemIds) :
+                new ObjectParameter("ItemIds", typeof(string));
+    
+            var groupItemIdParameter = groupItemId.HasValue ?
+                new ObjectParameter("GroupItemId", groupItemId) :
+                new ObjectParameter("GroupItemId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phanquyen_Danh_SaveRoleRight", roleIdParameter, itemIdsParameter, groupItemIdParameter);
+        }
+    
+        public virtual int Phanquyen_Danh_SaveUserRole(Nullable<System.Guid> userId, string roleIds)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            var roleIdsParameter = roleIds != null ?
+                new ObjectParameter("RoleIds", roleIds) :
+                new ObjectParameter("RoleIds", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phanquyen_Danh_SaveUserRole", userIdParameter, roleIdsParameter);
         }
     
         public virtual int sys_ChitietDonhangDelete(Nullable<System.Guid> chitietDonhangId, Nullable<System.Guid> donhangId, Nullable<System.Guid> hanghoaId, Nullable<int> soluong, Nullable<int> soluongGiao, Nullable<int> soluongConlai, Nullable<int> step, Nullable<System.DateTime> ngayCapnhat, Nullable<double> giaban, Nullable<double> vAT, Nullable<double> tiengiam, Nullable<double> phantramGiam, Nullable<double> thanhtien, string tenHanghoa, string ghichuTrahang, ObjectParameter version)
@@ -325,48 +424,123 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietDonhangUpdate", chitietDonhangIdParameter, donhangIdParameter, hanghoaIdParameter, soluongParameter, soluongGiaoParameter, soluongConlaiParameter, stepParameter, ngayCapnhatParameter, giabanParameter, vATParameter, tiengiamParameter, phantramGiamParameter, thanhtienParameter, tenHanghoaParameter, ghichuTrahangParameter, version);
         }
     
-        public virtual int sys_ChitietPhieunhapDelete(Nullable<System.Guid> chitietPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> hanghoaId, Nullable<int> soluong, Nullable<int> step, Nullable<System.DateTime> nSX, Nullable<System.DateTime> hSD, string barcode, string ghichu, ObjectParameter version)
+        public virtual int sys_ChitietKiemkeDelete(Nullable<System.Guid> chitietKiemkeId, Nullable<System.Guid> kiemkeId, Nullable<System.Guid> hanghoaId, Nullable<int> soluongTon, Nullable<int> soluongThuc, Nullable<int> step, string tenHanghoa, string ghichu, ObjectParameter version)
         {
-            var chitietPhieunhapIdParameter = chitietPhieunhapId.HasValue ?
-                new ObjectParameter("ChitietPhieunhapId", chitietPhieunhapId) :
-                new ObjectParameter("ChitietPhieunhapId", typeof(System.Guid));
+            var chitietKiemkeIdParameter = chitietKiemkeId.HasValue ?
+                new ObjectParameter("ChitietKiemkeId", chitietKiemkeId) :
+                new ObjectParameter("ChitietKiemkeId", typeof(System.Guid));
     
-            var phieunhapIdParameter = phieunhapId.HasValue ?
-                new ObjectParameter("PhieunhapId", phieunhapId) :
-                new ObjectParameter("PhieunhapId", typeof(System.Guid));
+            var kiemkeIdParameter = kiemkeId.HasValue ?
+                new ObjectParameter("KiemkeId", kiemkeId) :
+                new ObjectParameter("KiemkeId", typeof(System.Guid));
     
             var hanghoaIdParameter = hanghoaId.HasValue ?
                 new ObjectParameter("HanghoaId", hanghoaId) :
                 new ObjectParameter("HanghoaId", typeof(System.Guid));
     
-            var soluongParameter = soluong.HasValue ?
-                new ObjectParameter("Soluong", soluong) :
-                new ObjectParameter("Soluong", typeof(int));
+            var soluongTonParameter = soluongTon.HasValue ?
+                new ObjectParameter("SoluongTon", soluongTon) :
+                new ObjectParameter("SoluongTon", typeof(int));
+    
+            var soluongThucParameter = soluongThuc.HasValue ?
+                new ObjectParameter("SoluongThuc", soluongThuc) :
+                new ObjectParameter("SoluongThuc", typeof(int));
     
             var stepParameter = step.HasValue ?
                 new ObjectParameter("Step", step) :
                 new ObjectParameter("Step", typeof(int));
     
-            var nSXParameter = nSX.HasValue ?
-                new ObjectParameter("NSX", nSX) :
-                new ObjectParameter("NSX", typeof(System.DateTime));
-    
-            var hSDParameter = hSD.HasValue ?
-                new ObjectParameter("HSD", hSD) :
-                new ObjectParameter("HSD", typeof(System.DateTime));
-    
-            var barcodeParameter = barcode != null ?
-                new ObjectParameter("Barcode", barcode) :
-                new ObjectParameter("Barcode", typeof(string));
+            var tenHanghoaParameter = tenHanghoa != null ?
+                new ObjectParameter("TenHanghoa", tenHanghoa) :
+                new ObjectParameter("TenHanghoa", typeof(string));
     
             var ghichuParameter = ghichu != null ?
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietPhieunhapDelete", chitietPhieunhapIdParameter, phieunhapIdParameter, hanghoaIdParameter, soluongParameter, stepParameter, nSXParameter, hSDParameter, barcodeParameter, ghichuParameter, version);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietKiemkeDelete", chitietKiemkeIdParameter, kiemkeIdParameter, hanghoaIdParameter, soluongTonParameter, soluongThucParameter, stepParameter, tenHanghoaParameter, ghichuParameter, version);
         }
     
-        public virtual int sys_ChitietPhieunhapInsert(Nullable<System.Guid> chitietPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> hanghoaId, Nullable<int> soluong, Nullable<int> step, Nullable<System.DateTime> nSX, Nullable<System.DateTime> hSD, string barcode, string ghichu, ObjectParameter version)
+        public virtual int sys_ChitietKiemkeInsert(Nullable<System.Guid> chitietKiemkeId, Nullable<System.Guid> kiemkeId, Nullable<System.Guid> hanghoaId, Nullable<int> soluongTon, Nullable<int> soluongThuc, Nullable<int> step, string tenHanghoa, string ghichu, ObjectParameter version)
+        {
+            var chitietKiemkeIdParameter = chitietKiemkeId.HasValue ?
+                new ObjectParameter("ChitietKiemkeId", chitietKiemkeId) :
+                new ObjectParameter("ChitietKiemkeId", typeof(System.Guid));
+    
+            var kiemkeIdParameter = kiemkeId.HasValue ?
+                new ObjectParameter("KiemkeId", kiemkeId) :
+                new ObjectParameter("KiemkeId", typeof(System.Guid));
+    
+            var hanghoaIdParameter = hanghoaId.HasValue ?
+                new ObjectParameter("HanghoaId", hanghoaId) :
+                new ObjectParameter("HanghoaId", typeof(System.Guid));
+    
+            var soluongTonParameter = soluongTon.HasValue ?
+                new ObjectParameter("SoluongTon", soluongTon) :
+                new ObjectParameter("SoluongTon", typeof(int));
+    
+            var soluongThucParameter = soluongThuc.HasValue ?
+                new ObjectParameter("SoluongThuc", soluongThuc) :
+                new ObjectParameter("SoluongThuc", typeof(int));
+    
+            var stepParameter = step.HasValue ?
+                new ObjectParameter("Step", step) :
+                new ObjectParameter("Step", typeof(int));
+    
+            var tenHanghoaParameter = tenHanghoa != null ?
+                new ObjectParameter("TenHanghoa", tenHanghoa) :
+                new ObjectParameter("TenHanghoa", typeof(string));
+    
+            var ghichuParameter = ghichu != null ?
+                new ObjectParameter("Ghichu", ghichu) :
+                new ObjectParameter("Ghichu", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietKiemkeInsert", chitietKiemkeIdParameter, kiemkeIdParameter, hanghoaIdParameter, soluongTonParameter, soluongThucParameter, stepParameter, tenHanghoaParameter, ghichuParameter, version);
+        }
+    
+        public virtual ObjectResult<sys_ChitietKiemkeSelect_Result> sys_ChitietKiemkeSelect()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sys_ChitietKiemkeSelect_Result>("sys_ChitietKiemkeSelect");
+        }
+    
+        public virtual int sys_ChitietKiemkeUpdate(Nullable<System.Guid> chitietKiemkeId, Nullable<System.Guid> kiemkeId, Nullable<System.Guid> hanghoaId, Nullable<int> soluongTon, Nullable<int> soluongThuc, Nullable<int> step, string tenHanghoa, string ghichu, ObjectParameter version)
+        {
+            var chitietKiemkeIdParameter = chitietKiemkeId.HasValue ?
+                new ObjectParameter("ChitietKiemkeId", chitietKiemkeId) :
+                new ObjectParameter("ChitietKiemkeId", typeof(System.Guid));
+    
+            var kiemkeIdParameter = kiemkeId.HasValue ?
+                new ObjectParameter("KiemkeId", kiemkeId) :
+                new ObjectParameter("KiemkeId", typeof(System.Guid));
+    
+            var hanghoaIdParameter = hanghoaId.HasValue ?
+                new ObjectParameter("HanghoaId", hanghoaId) :
+                new ObjectParameter("HanghoaId", typeof(System.Guid));
+    
+            var soluongTonParameter = soluongTon.HasValue ?
+                new ObjectParameter("SoluongTon", soluongTon) :
+                new ObjectParameter("SoluongTon", typeof(int));
+    
+            var soluongThucParameter = soluongThuc.HasValue ?
+                new ObjectParameter("SoluongThuc", soluongThuc) :
+                new ObjectParameter("SoluongThuc", typeof(int));
+    
+            var stepParameter = step.HasValue ?
+                new ObjectParameter("Step", step) :
+                new ObjectParameter("Step", typeof(int));
+    
+            var tenHanghoaParameter = tenHanghoa != null ?
+                new ObjectParameter("TenHanghoa", tenHanghoa) :
+                new ObjectParameter("TenHanghoa", typeof(string));
+    
+            var ghichuParameter = ghichu != null ?
+                new ObjectParameter("Ghichu", ghichu) :
+                new ObjectParameter("Ghichu", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietKiemkeUpdate", chitietKiemkeIdParameter, kiemkeIdParameter, hanghoaIdParameter, soluongTonParameter, soluongThucParameter, stepParameter, tenHanghoaParameter, ghichuParameter, version);
+        }
+    
+        public virtual int sys_ChitietPhieunhapDelete(Nullable<System.Guid> chitietPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> hanghoaId, Nullable<int> soluong, Nullable<int> step, Nullable<System.DateTime> nSX, Nullable<System.DateTime> hSD, Nullable<double> gianhap, Nullable<double> thanhtien, string barcode, string ghichu, string tenHanghoa, ObjectParameter version)
         {
             var chitietPhieunhapIdParameter = chitietPhieunhapId.HasValue ?
                 new ObjectParameter("ChitietPhieunhapId", chitietPhieunhapId) :
@@ -396,6 +570,14 @@ namespace B2B.DAL
                 new ObjectParameter("HSD", hSD) :
                 new ObjectParameter("HSD", typeof(System.DateTime));
     
+            var gianhapParameter = gianhap.HasValue ?
+                new ObjectParameter("Gianhap", gianhap) :
+                new ObjectParameter("Gianhap", typeof(double));
+    
+            var thanhtienParameter = thanhtien.HasValue ?
+                new ObjectParameter("Thanhtien", thanhtien) :
+                new ObjectParameter("Thanhtien", typeof(double));
+    
             var barcodeParameter = barcode != null ?
                 new ObjectParameter("Barcode", barcode) :
                 new ObjectParameter("Barcode", typeof(string));
@@ -404,7 +586,64 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietPhieunhapInsert", chitietPhieunhapIdParameter, phieunhapIdParameter, hanghoaIdParameter, soluongParameter, stepParameter, nSXParameter, hSDParameter, barcodeParameter, ghichuParameter, version);
+            var tenHanghoaParameter = tenHanghoa != null ?
+                new ObjectParameter("TenHanghoa", tenHanghoa) :
+                new ObjectParameter("TenHanghoa", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietPhieunhapDelete", chitietPhieunhapIdParameter, phieunhapIdParameter, hanghoaIdParameter, soluongParameter, stepParameter, nSXParameter, hSDParameter, gianhapParameter, thanhtienParameter, barcodeParameter, ghichuParameter, tenHanghoaParameter, version);
+        }
+    
+        public virtual int sys_ChitietPhieunhapInsert(Nullable<System.Guid> chitietPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> hanghoaId, Nullable<int> soluong, Nullable<int> step, Nullable<System.DateTime> nSX, Nullable<System.DateTime> hSD, Nullable<double> gianhap, Nullable<double> thanhtien, string barcode, string ghichu, string tenHanghoa, ObjectParameter version)
+        {
+            var chitietPhieunhapIdParameter = chitietPhieunhapId.HasValue ?
+                new ObjectParameter("ChitietPhieunhapId", chitietPhieunhapId) :
+                new ObjectParameter("ChitietPhieunhapId", typeof(System.Guid));
+    
+            var phieunhapIdParameter = phieunhapId.HasValue ?
+                new ObjectParameter("PhieunhapId", phieunhapId) :
+                new ObjectParameter("PhieunhapId", typeof(System.Guid));
+    
+            var hanghoaIdParameter = hanghoaId.HasValue ?
+                new ObjectParameter("HanghoaId", hanghoaId) :
+                new ObjectParameter("HanghoaId", typeof(System.Guid));
+    
+            var soluongParameter = soluong.HasValue ?
+                new ObjectParameter("Soluong", soluong) :
+                new ObjectParameter("Soluong", typeof(int));
+    
+            var stepParameter = step.HasValue ?
+                new ObjectParameter("Step", step) :
+                new ObjectParameter("Step", typeof(int));
+    
+            var nSXParameter = nSX.HasValue ?
+                new ObjectParameter("NSX", nSX) :
+                new ObjectParameter("NSX", typeof(System.DateTime));
+    
+            var hSDParameter = hSD.HasValue ?
+                new ObjectParameter("HSD", hSD) :
+                new ObjectParameter("HSD", typeof(System.DateTime));
+    
+            var gianhapParameter = gianhap.HasValue ?
+                new ObjectParameter("Gianhap", gianhap) :
+                new ObjectParameter("Gianhap", typeof(double));
+    
+            var thanhtienParameter = thanhtien.HasValue ?
+                new ObjectParameter("Thanhtien", thanhtien) :
+                new ObjectParameter("Thanhtien", typeof(double));
+    
+            var barcodeParameter = barcode != null ?
+                new ObjectParameter("Barcode", barcode) :
+                new ObjectParameter("Barcode", typeof(string));
+    
+            var ghichuParameter = ghichu != null ?
+                new ObjectParameter("Ghichu", ghichu) :
+                new ObjectParameter("Ghichu", typeof(string));
+    
+            var tenHanghoaParameter = tenHanghoa != null ?
+                new ObjectParameter("TenHanghoa", tenHanghoa) :
+                new ObjectParameter("TenHanghoa", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietPhieunhapInsert", chitietPhieunhapIdParameter, phieunhapIdParameter, hanghoaIdParameter, soluongParameter, stepParameter, nSXParameter, hSDParameter, gianhapParameter, thanhtienParameter, barcodeParameter, ghichuParameter, tenHanghoaParameter, version);
         }
     
         public virtual ObjectResult<sys_ChitietPhieunhapSelect_Result> sys_ChitietPhieunhapSelect()
@@ -412,7 +651,7 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sys_ChitietPhieunhapSelect_Result>("sys_ChitietPhieunhapSelect");
         }
     
-        public virtual int sys_ChitietPhieunhapUpdate(Nullable<System.Guid> chitietPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> hanghoaId, Nullable<int> soluong, Nullable<int> step, Nullable<System.DateTime> nSX, Nullable<System.DateTime> hSD, string barcode, string ghichu, ObjectParameter version)
+        public virtual int sys_ChitietPhieunhapUpdate(Nullable<System.Guid> chitietPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> hanghoaId, Nullable<int> soluong, Nullable<int> step, Nullable<System.DateTime> nSX, Nullable<System.DateTime> hSD, Nullable<double> gianhap, Nullable<double> thanhtien, string barcode, string ghichu, string tenHanghoa, ObjectParameter version)
         {
             var chitietPhieunhapIdParameter = chitietPhieunhapId.HasValue ?
                 new ObjectParameter("ChitietPhieunhapId", chitietPhieunhapId) :
@@ -442,6 +681,14 @@ namespace B2B.DAL
                 new ObjectParameter("HSD", hSD) :
                 new ObjectParameter("HSD", typeof(System.DateTime));
     
+            var gianhapParameter = gianhap.HasValue ?
+                new ObjectParameter("Gianhap", gianhap) :
+                new ObjectParameter("Gianhap", typeof(double));
+    
+            var thanhtienParameter = thanhtien.HasValue ?
+                new ObjectParameter("Thanhtien", thanhtien) :
+                new ObjectParameter("Thanhtien", typeof(double));
+    
             var barcodeParameter = barcode != null ?
                 new ObjectParameter("Barcode", barcode) :
                 new ObjectParameter("Barcode", typeof(string));
@@ -450,7 +697,11 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietPhieunhapUpdate", chitietPhieunhapIdParameter, phieunhapIdParameter, hanghoaIdParameter, soluongParameter, stepParameter, nSXParameter, hSDParameter, barcodeParameter, ghichuParameter, version);
+            var tenHanghoaParameter = tenHanghoa != null ?
+                new ObjectParameter("TenHanghoa", tenHanghoa) :
+                new ObjectParameter("TenHanghoa", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ChitietPhieunhapUpdate", chitietPhieunhapIdParameter, phieunhapIdParameter, hanghoaIdParameter, soluongParameter, stepParameter, nSXParameter, hSDParameter, gianhapParameter, thanhtienParameter, barcodeParameter, ghichuParameter, tenHanghoaParameter, version);
         }
     
         public virtual int sys_ChitietPhieuxuatDelete(Nullable<System.Guid> chitietPhieuxuatId, Nullable<System.Guid> phieuxuatId, Nullable<System.Guid> hanghoaId, Nullable<System.Guid> chitietDonhangId, Nullable<int> soluong, Nullable<int> step, Nullable<double> thanhtien, Nullable<bool> active, string ghichu, ObjectParameter version)
@@ -1025,7 +1276,7 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_DongiaUpdate", dongiaIdParameter, hanghoaIdParameter, nhomKhachhangIdParameter, stepParameter, ngayCapnhatParameter, apdungTuParameter, dongiaParameter, activeParameter, codeParameter, ghichuParameter, version);
         }
     
-        public virtual int sys_DonhangDelete(Nullable<System.Guid> donhangId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> khachhangId, Nullable<System.Guid> nhanvienCapnhatId, Nullable<int> loaiDonhang, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<System.DateTime> ngaygiao, Nullable<System.DateTime> ngayCapnhat, Nullable<double> tiengiam, Nullable<double> phantramGiam, Nullable<double> tongtien, string code, string tenTinhtrangDonhang, string diachiGiao, string tenTinhthanhGiao, string tenQuanhuyenGiao, string soDienthoai, string ghichu, ObjectParameter version)
+        public virtual int sys_DonhangDelete(Nullable<System.Guid> donhangId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> khachhangId, Nullable<System.Guid> nhanvienCapnhatId, Nullable<System.Guid> tinhtrangDonhangCurrentId, Nullable<int> loaiDonhang, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<System.DateTime> ngaygiao, Nullable<System.DateTime> ngayCapnhat, Nullable<System.DateTime> hanDonhang, Nullable<double> tiengiam, Nullable<double> phantramGiam, Nullable<double> tongtien, Nullable<bool> active, string code, string tenTinhtrangDonhang, string diachiGiao, string tenTinhthanhGiao, string tenQuanhuyenGiao, string soDienthoai, string ghichu, ObjectParameter version)
         {
             var donhangIdParameter = donhangId.HasValue ?
                 new ObjectParameter("DonhangId", donhangId) :
@@ -1047,6 +1298,10 @@ namespace B2B.DAL
                 new ObjectParameter("NhanvienCapnhatId", nhanvienCapnhatId) :
                 new ObjectParameter("NhanvienCapnhatId", typeof(System.Guid));
     
+            var tinhtrangDonhangCurrentIdParameter = tinhtrangDonhangCurrentId.HasValue ?
+                new ObjectParameter("TinhtrangDonhangCurrentId", tinhtrangDonhangCurrentId) :
+                new ObjectParameter("TinhtrangDonhangCurrentId", typeof(System.Guid));
+    
             var loaiDonhangParameter = loaiDonhang.HasValue ?
                 new ObjectParameter("LoaiDonhang", loaiDonhang) :
                 new ObjectParameter("LoaiDonhang", typeof(int));
@@ -1067,6 +1322,10 @@ namespace B2B.DAL
                 new ObjectParameter("NgayCapnhat", ngayCapnhat) :
                 new ObjectParameter("NgayCapnhat", typeof(System.DateTime));
     
+            var hanDonhangParameter = hanDonhang.HasValue ?
+                new ObjectParameter("HanDonhang", hanDonhang) :
+                new ObjectParameter("HanDonhang", typeof(System.DateTime));
+    
             var tiengiamParameter = tiengiam.HasValue ?
                 new ObjectParameter("Tiengiam", tiengiam) :
                 new ObjectParameter("Tiengiam", typeof(double));
@@ -1078,6 +1337,10 @@ namespace B2B.DAL
             var tongtienParameter = tongtien.HasValue ?
                 new ObjectParameter("Tongtien", tongtien) :
                 new ObjectParameter("Tongtien", typeof(double));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
     
             var codeParameter = code != null ?
                 new ObjectParameter("Code", code) :
@@ -1107,10 +1370,10 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_DonhangDelete", donhangIdParameter, nhanvienIdParameter, khoIdParameter, khachhangIdParameter, nhanvienCapnhatIdParameter, loaiDonhangParameter, stepParameter, ngaylapParameter, ngaygiaoParameter, ngayCapnhatParameter, tiengiamParameter, phantramGiamParameter, tongtienParameter, codeParameter, tenTinhtrangDonhangParameter, diachiGiaoParameter, tenTinhthanhGiaoParameter, tenQuanhuyenGiaoParameter, soDienthoaiParameter, ghichuParameter, version);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_DonhangDelete", donhangIdParameter, nhanvienIdParameter, khoIdParameter, khachhangIdParameter, nhanvienCapnhatIdParameter, tinhtrangDonhangCurrentIdParameter, loaiDonhangParameter, stepParameter, ngaylapParameter, ngaygiaoParameter, ngayCapnhatParameter, hanDonhangParameter, tiengiamParameter, phantramGiamParameter, tongtienParameter, activeParameter, codeParameter, tenTinhtrangDonhangParameter, diachiGiaoParameter, tenTinhthanhGiaoParameter, tenQuanhuyenGiaoParameter, soDienthoaiParameter, ghichuParameter, version);
         }
     
-        public virtual int sys_DonhangInsert(Nullable<System.Guid> donhangId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> khachhangId, Nullable<System.Guid> nhanvienCapnhatId, Nullable<int> loaiDonhang, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<System.DateTime> ngaygiao, Nullable<System.DateTime> ngayCapnhat, Nullable<double> tiengiam, Nullable<double> phantramGiam, Nullable<double> tongtien, string code, string tenTinhtrangDonhang, string diachiGiao, string tenTinhthanhGiao, string tenQuanhuyenGiao, string soDienthoai, string ghichu, ObjectParameter version)
+        public virtual int sys_DonhangInsert(Nullable<System.Guid> donhangId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> khachhangId, Nullable<System.Guid> nhanvienCapnhatId, Nullable<System.Guid> tinhtrangDonhangCurrentId, Nullable<int> loaiDonhang, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<System.DateTime> ngaygiao, Nullable<System.DateTime> ngayCapnhat, Nullable<System.DateTime> hanDonhang, Nullable<double> tiengiam, Nullable<double> phantramGiam, Nullable<double> tongtien, Nullable<bool> active, string code, string tenTinhtrangDonhang, string diachiGiao, string tenTinhthanhGiao, string tenQuanhuyenGiao, string soDienthoai, string ghichu, ObjectParameter version)
         {
             var donhangIdParameter = donhangId.HasValue ?
                 new ObjectParameter("DonhangId", donhangId) :
@@ -1132,6 +1395,10 @@ namespace B2B.DAL
                 new ObjectParameter("NhanvienCapnhatId", nhanvienCapnhatId) :
                 new ObjectParameter("NhanvienCapnhatId", typeof(System.Guid));
     
+            var tinhtrangDonhangCurrentIdParameter = tinhtrangDonhangCurrentId.HasValue ?
+                new ObjectParameter("TinhtrangDonhangCurrentId", tinhtrangDonhangCurrentId) :
+                new ObjectParameter("TinhtrangDonhangCurrentId", typeof(System.Guid));
+    
             var loaiDonhangParameter = loaiDonhang.HasValue ?
                 new ObjectParameter("LoaiDonhang", loaiDonhang) :
                 new ObjectParameter("LoaiDonhang", typeof(int));
@@ -1152,6 +1419,10 @@ namespace B2B.DAL
                 new ObjectParameter("NgayCapnhat", ngayCapnhat) :
                 new ObjectParameter("NgayCapnhat", typeof(System.DateTime));
     
+            var hanDonhangParameter = hanDonhang.HasValue ?
+                new ObjectParameter("HanDonhang", hanDonhang) :
+                new ObjectParameter("HanDonhang", typeof(System.DateTime));
+    
             var tiengiamParameter = tiengiam.HasValue ?
                 new ObjectParameter("Tiengiam", tiengiam) :
                 new ObjectParameter("Tiengiam", typeof(double));
@@ -1163,6 +1434,10 @@ namespace B2B.DAL
             var tongtienParameter = tongtien.HasValue ?
                 new ObjectParameter("Tongtien", tongtien) :
                 new ObjectParameter("Tongtien", typeof(double));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
     
             var codeParameter = code != null ?
                 new ObjectParameter("Code", code) :
@@ -1192,7 +1467,7 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_DonhangInsert", donhangIdParameter, nhanvienIdParameter, khoIdParameter, khachhangIdParameter, nhanvienCapnhatIdParameter, loaiDonhangParameter, stepParameter, ngaylapParameter, ngaygiaoParameter, ngayCapnhatParameter, tiengiamParameter, phantramGiamParameter, tongtienParameter, codeParameter, tenTinhtrangDonhangParameter, diachiGiaoParameter, tenTinhthanhGiaoParameter, tenQuanhuyenGiaoParameter, soDienthoaiParameter, ghichuParameter, version);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_DonhangInsert", donhangIdParameter, nhanvienIdParameter, khoIdParameter, khachhangIdParameter, nhanvienCapnhatIdParameter, tinhtrangDonhangCurrentIdParameter, loaiDonhangParameter, stepParameter, ngaylapParameter, ngaygiaoParameter, ngayCapnhatParameter, hanDonhangParameter, tiengiamParameter, phantramGiamParameter, tongtienParameter, activeParameter, codeParameter, tenTinhtrangDonhangParameter, diachiGiaoParameter, tenTinhthanhGiaoParameter, tenQuanhuyenGiaoParameter, soDienthoaiParameter, ghichuParameter, version);
         }
     
         public virtual ObjectResult<sys_DonhangSelect_Result> sys_DonhangSelect()
@@ -1200,7 +1475,7 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sys_DonhangSelect_Result>("sys_DonhangSelect");
         }
     
-        public virtual int sys_DonhangUpdate(Nullable<System.Guid> donhangId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> khachhangId, Nullable<System.Guid> nhanvienCapnhatId, Nullable<int> loaiDonhang, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<System.DateTime> ngaygiao, Nullable<System.DateTime> ngayCapnhat, Nullable<double> tiengiam, Nullable<double> phantramGiam, Nullable<double> tongtien, string code, string tenTinhtrangDonhang, string diachiGiao, string tenTinhthanhGiao, string tenQuanhuyenGiao, string soDienthoai, string ghichu, ObjectParameter version)
+        public virtual int sys_DonhangUpdate(Nullable<System.Guid> donhangId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> khachhangId, Nullable<System.Guid> nhanvienCapnhatId, Nullable<System.Guid> tinhtrangDonhangCurrentId, Nullable<int> loaiDonhang, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<System.DateTime> ngaygiao, Nullable<System.DateTime> ngayCapnhat, Nullable<System.DateTime> hanDonhang, Nullable<double> tiengiam, Nullable<double> phantramGiam, Nullable<double> tongtien, Nullable<bool> active, string code, string tenTinhtrangDonhang, string diachiGiao, string tenTinhthanhGiao, string tenQuanhuyenGiao, string soDienthoai, string ghichu, ObjectParameter version)
         {
             var donhangIdParameter = donhangId.HasValue ?
                 new ObjectParameter("DonhangId", donhangId) :
@@ -1222,6 +1497,10 @@ namespace B2B.DAL
                 new ObjectParameter("NhanvienCapnhatId", nhanvienCapnhatId) :
                 new ObjectParameter("NhanvienCapnhatId", typeof(System.Guid));
     
+            var tinhtrangDonhangCurrentIdParameter = tinhtrangDonhangCurrentId.HasValue ?
+                new ObjectParameter("TinhtrangDonhangCurrentId", tinhtrangDonhangCurrentId) :
+                new ObjectParameter("TinhtrangDonhangCurrentId", typeof(System.Guid));
+    
             var loaiDonhangParameter = loaiDonhang.HasValue ?
                 new ObjectParameter("LoaiDonhang", loaiDonhang) :
                 new ObjectParameter("LoaiDonhang", typeof(int));
@@ -1242,6 +1521,10 @@ namespace B2B.DAL
                 new ObjectParameter("NgayCapnhat", ngayCapnhat) :
                 new ObjectParameter("NgayCapnhat", typeof(System.DateTime));
     
+            var hanDonhangParameter = hanDonhang.HasValue ?
+                new ObjectParameter("HanDonhang", hanDonhang) :
+                new ObjectParameter("HanDonhang", typeof(System.DateTime));
+    
             var tiengiamParameter = tiengiam.HasValue ?
                 new ObjectParameter("Tiengiam", tiengiam) :
                 new ObjectParameter("Tiengiam", typeof(double));
@@ -1253,6 +1536,10 @@ namespace B2B.DAL
             var tongtienParameter = tongtien.HasValue ?
                 new ObjectParameter("Tongtien", tongtien) :
                 new ObjectParameter("Tongtien", typeof(double));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
     
             var codeParameter = code != null ?
                 new ObjectParameter("Code", code) :
@@ -1282,7 +1569,7 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_DonhangUpdate", donhangIdParameter, nhanvienIdParameter, khoIdParameter, khachhangIdParameter, nhanvienCapnhatIdParameter, loaiDonhangParameter, stepParameter, ngaylapParameter, ngaygiaoParameter, ngayCapnhatParameter, tiengiamParameter, phantramGiamParameter, tongtienParameter, codeParameter, tenTinhtrangDonhangParameter, diachiGiaoParameter, tenTinhthanhGiaoParameter, tenQuanhuyenGiaoParameter, soDienthoaiParameter, ghichuParameter, version);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_DonhangUpdate", donhangIdParameter, nhanvienIdParameter, khoIdParameter, khachhangIdParameter, nhanvienCapnhatIdParameter, tinhtrangDonhangCurrentIdParameter, loaiDonhangParameter, stepParameter, ngaylapParameter, ngaygiaoParameter, ngayCapnhatParameter, hanDonhangParameter, tiengiamParameter, phantramGiamParameter, tongtienParameter, activeParameter, codeParameter, tenTinhtrangDonhangParameter, diachiGiaoParameter, tenTinhthanhGiaoParameter, tenQuanhuyenGiaoParameter, soDienthoaiParameter, ghichuParameter, version);
         }
     
         public virtual int sys_DonviDelete(Nullable<System.Guid> donviId, Nullable<int> step, Nullable<System.DateTime> ngayCapnhat, Nullable<bool> active, string code, string tenDonvi, string ghichu, ObjectParameter version)
@@ -1387,6 +1674,62 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_DonviUpdate", donviIdParameter, stepParameter, ngayCapnhatParameter, activeParameter, codeParameter, tenDonviParameter, ghichuParameter, version);
+        }
+    
+        public virtual int sys_GroupItemDelete(Nullable<System.Guid> groupItemId, string tennhom, string mota)
+        {
+            var groupItemIdParameter = groupItemId.HasValue ?
+                new ObjectParameter("GroupItemId", groupItemId) :
+                new ObjectParameter("GroupItemId", typeof(System.Guid));
+    
+            var tennhomParameter = tennhom != null ?
+                new ObjectParameter("Tennhom", tennhom) :
+                new ObjectParameter("Tennhom", typeof(string));
+    
+            var motaParameter = mota != null ?
+                new ObjectParameter("Mota", mota) :
+                new ObjectParameter("Mota", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_GroupItemDelete", groupItemIdParameter, tennhomParameter, motaParameter);
+        }
+    
+        public virtual int sys_GroupItemInsert(Nullable<System.Guid> groupItemId, string tennhom, string mota)
+        {
+            var groupItemIdParameter = groupItemId.HasValue ?
+                new ObjectParameter("GroupItemId", groupItemId) :
+                new ObjectParameter("GroupItemId", typeof(System.Guid));
+    
+            var tennhomParameter = tennhom != null ?
+                new ObjectParameter("Tennhom", tennhom) :
+                new ObjectParameter("Tennhom", typeof(string));
+    
+            var motaParameter = mota != null ?
+                new ObjectParameter("Mota", mota) :
+                new ObjectParameter("Mota", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_GroupItemInsert", groupItemIdParameter, tennhomParameter, motaParameter);
+        }
+    
+        public virtual ObjectResult<sys_GroupItemSelect_Result> sys_GroupItemSelect()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sys_GroupItemSelect_Result>("sys_GroupItemSelect");
+        }
+    
+        public virtual int sys_GroupItemUpdate(Nullable<System.Guid> groupItemId, string tennhom, string mota)
+        {
+            var groupItemIdParameter = groupItemId.HasValue ?
+                new ObjectParameter("GroupItemId", groupItemId) :
+                new ObjectParameter("GroupItemId", typeof(System.Guid));
+    
+            var tennhomParameter = tennhom != null ?
+                new ObjectParameter("Tennhom", tennhom) :
+                new ObjectParameter("Tennhom", typeof(string));
+    
+            var motaParameter = mota != null ?
+                new ObjectParameter("Mota", mota) :
+                new ObjectParameter("Mota", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_GroupItemUpdate", groupItemIdParameter, tennhomParameter, motaParameter);
         }
     
         public virtual int sys_HanghoaDelete(Nullable<System.Guid> hanghoaId, Nullable<System.Guid> nhomHanghoaId, Nullable<System.Guid> donviId, Nullable<int> step, Nullable<System.DateTime> ngayCapnhat, Nullable<double> giagoc, Nullable<bool> active, string code, string tenHanghoa, string barcode, string linkHinhanh, string ghichu, ObjectParameter version)
@@ -1643,6 +1986,290 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_HanghoaUpdate", hanghoaIdParameter, nhomHanghoaIdParameter, donviIdParameter, stepParameter, ngayCapnhatParameter, giagocParameter, activeParameter, codeParameter, tenHanghoaParameter, barcodeParameter, linkHinhanhParameter, ghichuParameter, version);
+        }
+    
+        public virtual int sys_ItemDelete(byte[] image, byte[] largeImage, Nullable<System.Guid> itemId, Nullable<System.Guid> itemChaId, Nullable<System.Guid> groupItemId, Nullable<int> width, Nullable<int> cap, Nullable<bool> isLarge, Nullable<bool> showImage, Nullable<bool> showFormAsTab, Nullable<bool> enable, Nullable<bool> visible, Nullable<bool> @lock, Nullable<bool> allow, Nullable<bool> beginGroup, string thutu, string typeName, string objectTypeName, string name, string text, string tenForm, string tenFileDLL)
+        {
+            var imageParameter = image != null ?
+                new ObjectParameter("Image", image) :
+                new ObjectParameter("Image", typeof(byte[]));
+    
+            var largeImageParameter = largeImage != null ?
+                new ObjectParameter("LargeImage", largeImage) :
+                new ObjectParameter("LargeImage", typeof(byte[]));
+    
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(System.Guid));
+    
+            var itemChaIdParameter = itemChaId.HasValue ?
+                new ObjectParameter("ItemChaId", itemChaId) :
+                new ObjectParameter("ItemChaId", typeof(System.Guid));
+    
+            var groupItemIdParameter = groupItemId.HasValue ?
+                new ObjectParameter("GroupItemId", groupItemId) :
+                new ObjectParameter("GroupItemId", typeof(System.Guid));
+    
+            var widthParameter = width.HasValue ?
+                new ObjectParameter("Width", width) :
+                new ObjectParameter("Width", typeof(int));
+    
+            var capParameter = cap.HasValue ?
+                new ObjectParameter("Cap", cap) :
+                new ObjectParameter("Cap", typeof(int));
+    
+            var isLargeParameter = isLarge.HasValue ?
+                new ObjectParameter("IsLarge", isLarge) :
+                new ObjectParameter("IsLarge", typeof(bool));
+    
+            var showImageParameter = showImage.HasValue ?
+                new ObjectParameter("ShowImage", showImage) :
+                new ObjectParameter("ShowImage", typeof(bool));
+    
+            var showFormAsTabParameter = showFormAsTab.HasValue ?
+                new ObjectParameter("ShowFormAsTab", showFormAsTab) :
+                new ObjectParameter("ShowFormAsTab", typeof(bool));
+    
+            var enableParameter = enable.HasValue ?
+                new ObjectParameter("Enable", enable) :
+                new ObjectParameter("Enable", typeof(bool));
+    
+            var visibleParameter = visible.HasValue ?
+                new ObjectParameter("Visible", visible) :
+                new ObjectParameter("Visible", typeof(bool));
+    
+            var lockParameter = @lock.HasValue ?
+                new ObjectParameter("Lock", @lock) :
+                new ObjectParameter("Lock", typeof(bool));
+    
+            var allowParameter = allow.HasValue ?
+                new ObjectParameter("Allow", allow) :
+                new ObjectParameter("Allow", typeof(bool));
+    
+            var beginGroupParameter = beginGroup.HasValue ?
+                new ObjectParameter("BeginGroup", beginGroup) :
+                new ObjectParameter("BeginGroup", typeof(bool));
+    
+            var thutuParameter = thutu != null ?
+                new ObjectParameter("Thutu", thutu) :
+                new ObjectParameter("Thutu", typeof(string));
+    
+            var typeNameParameter = typeName != null ?
+                new ObjectParameter("TypeName", typeName) :
+                new ObjectParameter("TypeName", typeof(string));
+    
+            var objectTypeNameParameter = objectTypeName != null ?
+                new ObjectParameter("ObjectTypeName", objectTypeName) :
+                new ObjectParameter("ObjectTypeName", typeof(string));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var textParameter = text != null ?
+                new ObjectParameter("Text", text) :
+                new ObjectParameter("Text", typeof(string));
+    
+            var tenFormParameter = tenForm != null ?
+                new ObjectParameter("TenForm", tenForm) :
+                new ObjectParameter("TenForm", typeof(string));
+    
+            var tenFileDLLParameter = tenFileDLL != null ?
+                new ObjectParameter("TenFileDLL", tenFileDLL) :
+                new ObjectParameter("TenFileDLL", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ItemDelete", imageParameter, largeImageParameter, itemIdParameter, itemChaIdParameter, groupItemIdParameter, widthParameter, capParameter, isLargeParameter, showImageParameter, showFormAsTabParameter, enableParameter, visibleParameter, lockParameter, allowParameter, beginGroupParameter, thutuParameter, typeNameParameter, objectTypeNameParameter, nameParameter, textParameter, tenFormParameter, tenFileDLLParameter);
+        }
+    
+        public virtual int sys_ItemInsert(byte[] image, byte[] largeImage, Nullable<System.Guid> itemId, Nullable<System.Guid> itemChaId, Nullable<System.Guid> groupItemId, Nullable<int> width, Nullable<int> cap, Nullable<bool> isLarge, Nullable<bool> showImage, Nullable<bool> showFormAsTab, Nullable<bool> enable, Nullable<bool> visible, Nullable<bool> @lock, Nullable<bool> allow, Nullable<bool> beginGroup, string thutu, string typeName, string objectTypeName, string name, string text, string tenForm, string tenFileDLL)
+        {
+            var imageParameter = image != null ?
+                new ObjectParameter("Image", image) :
+                new ObjectParameter("Image", typeof(byte[]));
+    
+            var largeImageParameter = largeImage != null ?
+                new ObjectParameter("LargeImage", largeImage) :
+                new ObjectParameter("LargeImage", typeof(byte[]));
+    
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(System.Guid));
+    
+            var itemChaIdParameter = itemChaId.HasValue ?
+                new ObjectParameter("ItemChaId", itemChaId) :
+                new ObjectParameter("ItemChaId", typeof(System.Guid));
+    
+            var groupItemIdParameter = groupItemId.HasValue ?
+                new ObjectParameter("GroupItemId", groupItemId) :
+                new ObjectParameter("GroupItemId", typeof(System.Guid));
+    
+            var widthParameter = width.HasValue ?
+                new ObjectParameter("Width", width) :
+                new ObjectParameter("Width", typeof(int));
+    
+            var capParameter = cap.HasValue ?
+                new ObjectParameter("Cap", cap) :
+                new ObjectParameter("Cap", typeof(int));
+    
+            var isLargeParameter = isLarge.HasValue ?
+                new ObjectParameter("IsLarge", isLarge) :
+                new ObjectParameter("IsLarge", typeof(bool));
+    
+            var showImageParameter = showImage.HasValue ?
+                new ObjectParameter("ShowImage", showImage) :
+                new ObjectParameter("ShowImage", typeof(bool));
+    
+            var showFormAsTabParameter = showFormAsTab.HasValue ?
+                new ObjectParameter("ShowFormAsTab", showFormAsTab) :
+                new ObjectParameter("ShowFormAsTab", typeof(bool));
+    
+            var enableParameter = enable.HasValue ?
+                new ObjectParameter("Enable", enable) :
+                new ObjectParameter("Enable", typeof(bool));
+    
+            var visibleParameter = visible.HasValue ?
+                new ObjectParameter("Visible", visible) :
+                new ObjectParameter("Visible", typeof(bool));
+    
+            var lockParameter = @lock.HasValue ?
+                new ObjectParameter("Lock", @lock) :
+                new ObjectParameter("Lock", typeof(bool));
+    
+            var allowParameter = allow.HasValue ?
+                new ObjectParameter("Allow", allow) :
+                new ObjectParameter("Allow", typeof(bool));
+    
+            var beginGroupParameter = beginGroup.HasValue ?
+                new ObjectParameter("BeginGroup", beginGroup) :
+                new ObjectParameter("BeginGroup", typeof(bool));
+    
+            var thutuParameter = thutu != null ?
+                new ObjectParameter("Thutu", thutu) :
+                new ObjectParameter("Thutu", typeof(string));
+    
+            var typeNameParameter = typeName != null ?
+                new ObjectParameter("TypeName", typeName) :
+                new ObjectParameter("TypeName", typeof(string));
+    
+            var objectTypeNameParameter = objectTypeName != null ?
+                new ObjectParameter("ObjectTypeName", objectTypeName) :
+                new ObjectParameter("ObjectTypeName", typeof(string));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var textParameter = text != null ?
+                new ObjectParameter("Text", text) :
+                new ObjectParameter("Text", typeof(string));
+    
+            var tenFormParameter = tenForm != null ?
+                new ObjectParameter("TenForm", tenForm) :
+                new ObjectParameter("TenForm", typeof(string));
+    
+            var tenFileDLLParameter = tenFileDLL != null ?
+                new ObjectParameter("TenFileDLL", tenFileDLL) :
+                new ObjectParameter("TenFileDLL", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ItemInsert", imageParameter, largeImageParameter, itemIdParameter, itemChaIdParameter, groupItemIdParameter, widthParameter, capParameter, isLargeParameter, showImageParameter, showFormAsTabParameter, enableParameter, visibleParameter, lockParameter, allowParameter, beginGroupParameter, thutuParameter, typeNameParameter, objectTypeNameParameter, nameParameter, textParameter, tenFormParameter, tenFileDLLParameter);
+        }
+    
+        public virtual ObjectResult<sys_ItemSelect_Result> sys_ItemSelect()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sys_ItemSelect_Result>("sys_ItemSelect");
+        }
+    
+        public virtual int sys_ItemUpdate(byte[] image, byte[] largeImage, Nullable<System.Guid> itemId, Nullable<System.Guid> itemChaId, Nullable<System.Guid> groupItemId, Nullable<int> width, Nullable<int> cap, Nullable<bool> isLarge, Nullable<bool> showImage, Nullable<bool> showFormAsTab, Nullable<bool> enable, Nullable<bool> visible, Nullable<bool> @lock, Nullable<bool> allow, Nullable<bool> beginGroup, string thutu, string typeName, string objectTypeName, string name, string text, string tenForm, string tenFileDLL)
+        {
+            var imageParameter = image != null ?
+                new ObjectParameter("Image", image) :
+                new ObjectParameter("Image", typeof(byte[]));
+    
+            var largeImageParameter = largeImage != null ?
+                new ObjectParameter("LargeImage", largeImage) :
+                new ObjectParameter("LargeImage", typeof(byte[]));
+    
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(System.Guid));
+    
+            var itemChaIdParameter = itemChaId.HasValue ?
+                new ObjectParameter("ItemChaId", itemChaId) :
+                new ObjectParameter("ItemChaId", typeof(System.Guid));
+    
+            var groupItemIdParameter = groupItemId.HasValue ?
+                new ObjectParameter("GroupItemId", groupItemId) :
+                new ObjectParameter("GroupItemId", typeof(System.Guid));
+    
+            var widthParameter = width.HasValue ?
+                new ObjectParameter("Width", width) :
+                new ObjectParameter("Width", typeof(int));
+    
+            var capParameter = cap.HasValue ?
+                new ObjectParameter("Cap", cap) :
+                new ObjectParameter("Cap", typeof(int));
+    
+            var isLargeParameter = isLarge.HasValue ?
+                new ObjectParameter("IsLarge", isLarge) :
+                new ObjectParameter("IsLarge", typeof(bool));
+    
+            var showImageParameter = showImage.HasValue ?
+                new ObjectParameter("ShowImage", showImage) :
+                new ObjectParameter("ShowImage", typeof(bool));
+    
+            var showFormAsTabParameter = showFormAsTab.HasValue ?
+                new ObjectParameter("ShowFormAsTab", showFormAsTab) :
+                new ObjectParameter("ShowFormAsTab", typeof(bool));
+    
+            var enableParameter = enable.HasValue ?
+                new ObjectParameter("Enable", enable) :
+                new ObjectParameter("Enable", typeof(bool));
+    
+            var visibleParameter = visible.HasValue ?
+                new ObjectParameter("Visible", visible) :
+                new ObjectParameter("Visible", typeof(bool));
+    
+            var lockParameter = @lock.HasValue ?
+                new ObjectParameter("Lock", @lock) :
+                new ObjectParameter("Lock", typeof(bool));
+    
+            var allowParameter = allow.HasValue ?
+                new ObjectParameter("Allow", allow) :
+                new ObjectParameter("Allow", typeof(bool));
+    
+            var beginGroupParameter = beginGroup.HasValue ?
+                new ObjectParameter("BeginGroup", beginGroup) :
+                new ObjectParameter("BeginGroup", typeof(bool));
+    
+            var thutuParameter = thutu != null ?
+                new ObjectParameter("Thutu", thutu) :
+                new ObjectParameter("Thutu", typeof(string));
+    
+            var typeNameParameter = typeName != null ?
+                new ObjectParameter("TypeName", typeName) :
+                new ObjectParameter("TypeName", typeof(string));
+    
+            var objectTypeNameParameter = objectTypeName != null ?
+                new ObjectParameter("ObjectTypeName", objectTypeName) :
+                new ObjectParameter("ObjectTypeName", typeof(string));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var textParameter = text != null ?
+                new ObjectParameter("Text", text) :
+                new ObjectParameter("Text", typeof(string));
+    
+            var tenFormParameter = tenForm != null ?
+                new ObjectParameter("TenForm", tenForm) :
+                new ObjectParameter("TenForm", typeof(string));
+    
+            var tenFileDLLParameter = tenFileDLL != null ?
+                new ObjectParameter("TenFileDLL", tenFileDLL) :
+                new ObjectParameter("TenFileDLL", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_ItemUpdate", imageParameter, largeImageParameter, itemIdParameter, itemChaIdParameter, groupItemIdParameter, widthParameter, capParameter, isLargeParameter, showImageParameter, showFormAsTabParameter, enableParameter, visibleParameter, lockParameter, allowParameter, beginGroupParameter, thutuParameter, typeNameParameter, objectTypeNameParameter, nameParameter, textParameter, tenFormParameter, tenFileDLLParameter);
         }
     
         public virtual int sys_KhachhangDelete(Nullable<System.Guid> khachhangId, Nullable<System.Guid> quanhuyenId, Nullable<System.Guid> tinhthanhId, Nullable<System.Guid> nhomKhachhangId, Nullable<System.Guid> accountId, Nullable<int> thoigianCongno, Nullable<int> toahangCongno, Nullable<int> step, Nullable<System.DateTime> ngaysinh, Nullable<System.DateTime> ngayCapnhat, Nullable<double> hanmucCongno, Nullable<bool> gioitinh, Nullable<bool> active, string code, string hotenKhachhang, string cMND, string diachi, string diachiGiaohang, string linkanh, string ghichu, string mobile, string fax, string masoThue, string tenTaikhoan, string soTaikhoan, string nganhang, string congty, string chucvu, string email, string diachiCongty, string phoneCongty, string tel, ObjectParameter version)
@@ -2291,6 +2918,110 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_KhuvucUpdate", khuvucIdParameter, stepParameter, ngayCapnhatParameter, activeParameter, codeParameter, tenKhuvucParameter, ghichuParameter, version);
+        }
+    
+        public virtual int sys_KiemkeDelete(Nullable<System.Guid> kiemkeId, Nullable<System.Guid> khoId, Nullable<System.Guid> nhanvienId, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<bool> active, string code, ObjectParameter version)
+        {
+            var kiemkeIdParameter = kiemkeId.HasValue ?
+                new ObjectParameter("KiemkeId", kiemkeId) :
+                new ObjectParameter("KiemkeId", typeof(System.Guid));
+    
+            var khoIdParameter = khoId.HasValue ?
+                new ObjectParameter("KhoId", khoId) :
+                new ObjectParameter("KhoId", typeof(System.Guid));
+    
+            var nhanvienIdParameter = nhanvienId.HasValue ?
+                new ObjectParameter("NhanvienId", nhanvienId) :
+                new ObjectParameter("NhanvienId", typeof(System.Guid));
+    
+            var stepParameter = step.HasValue ?
+                new ObjectParameter("Step", step) :
+                new ObjectParameter("Step", typeof(int));
+    
+            var ngaylapParameter = ngaylap.HasValue ?
+                new ObjectParameter("Ngaylap", ngaylap) :
+                new ObjectParameter("Ngaylap", typeof(System.DateTime));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            var codeParameter = code != null ?
+                new ObjectParameter("Code", code) :
+                new ObjectParameter("Code", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_KiemkeDelete", kiemkeIdParameter, khoIdParameter, nhanvienIdParameter, stepParameter, ngaylapParameter, activeParameter, codeParameter, version);
+        }
+    
+        public virtual int sys_KiemkeInsert(Nullable<System.Guid> kiemkeId, Nullable<System.Guid> khoId, Nullable<System.Guid> nhanvienId, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<bool> active, string code, ObjectParameter version)
+        {
+            var kiemkeIdParameter = kiemkeId.HasValue ?
+                new ObjectParameter("KiemkeId", kiemkeId) :
+                new ObjectParameter("KiemkeId", typeof(System.Guid));
+    
+            var khoIdParameter = khoId.HasValue ?
+                new ObjectParameter("KhoId", khoId) :
+                new ObjectParameter("KhoId", typeof(System.Guid));
+    
+            var nhanvienIdParameter = nhanvienId.HasValue ?
+                new ObjectParameter("NhanvienId", nhanvienId) :
+                new ObjectParameter("NhanvienId", typeof(System.Guid));
+    
+            var stepParameter = step.HasValue ?
+                new ObjectParameter("Step", step) :
+                new ObjectParameter("Step", typeof(int));
+    
+            var ngaylapParameter = ngaylap.HasValue ?
+                new ObjectParameter("Ngaylap", ngaylap) :
+                new ObjectParameter("Ngaylap", typeof(System.DateTime));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            var codeParameter = code != null ?
+                new ObjectParameter("Code", code) :
+                new ObjectParameter("Code", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_KiemkeInsert", kiemkeIdParameter, khoIdParameter, nhanvienIdParameter, stepParameter, ngaylapParameter, activeParameter, codeParameter, version);
+        }
+    
+        public virtual ObjectResult<sys_KiemkeSelect_Result> sys_KiemkeSelect()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sys_KiemkeSelect_Result>("sys_KiemkeSelect");
+        }
+    
+        public virtual int sys_KiemkeUpdate(Nullable<System.Guid> kiemkeId, Nullable<System.Guid> khoId, Nullable<System.Guid> nhanvienId, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<bool> active, string code, ObjectParameter version)
+        {
+            var kiemkeIdParameter = kiemkeId.HasValue ?
+                new ObjectParameter("KiemkeId", kiemkeId) :
+                new ObjectParameter("KiemkeId", typeof(System.Guid));
+    
+            var khoIdParameter = khoId.HasValue ?
+                new ObjectParameter("KhoId", khoId) :
+                new ObjectParameter("KhoId", typeof(System.Guid));
+    
+            var nhanvienIdParameter = nhanvienId.HasValue ?
+                new ObjectParameter("NhanvienId", nhanvienId) :
+                new ObjectParameter("NhanvienId", typeof(System.Guid));
+    
+            var stepParameter = step.HasValue ?
+                new ObjectParameter("Step", step) :
+                new ObjectParameter("Step", typeof(int));
+    
+            var ngaylapParameter = ngaylap.HasValue ?
+                new ObjectParameter("Ngaylap", ngaylap) :
+                new ObjectParameter("Ngaylap", typeof(System.DateTime));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            var codeParameter = code != null ?
+                new ObjectParameter("Code", code) :
+                new ObjectParameter("Code", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_KiemkeUpdate", kiemkeIdParameter, khoIdParameter, nhanvienIdParameter, stepParameter, ngaylapParameter, activeParameter, codeParameter, version);
         }
     
         public virtual int sys_LoHanghoaDelete(Nullable<System.Guid> loHanghoaId, Nullable<System.Guid> hanghoaId, Nullable<System.Guid> khoId, Nullable<System.Guid> nhanvienCapnhat, Nullable<int> ngay, Nullable<int> thang, Nullable<int> nam, Nullable<int> soduDauky, Nullable<int> soluongNhap, Nullable<int> soluongXuat, Nullable<int> soluongHuy, Nullable<int> soluongTon, Nullable<int> step, Nullable<System.DateTime> hSD, Nullable<System.DateTime> ngayCapnhat, Nullable<bool> active, string code, string tenloHanghoa, string ghichu, ObjectParameter version)
@@ -3453,7 +4184,7 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_NhomKhachhangUpdate", nhomKhachhangIdParameter, stepParameter, ngayCapnhatParameter, activeParameter, codeParameter, tenNhomKhachhangParameter, ghichuParameter, version);
         }
     
-        public virtual int sys_PhieunhapDelete(Nullable<System.Guid> phieunhapId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> nhacungcapId, Nullable<int> step, Nullable<System.DateTime> ngaylap, string code, string ghichu, ObjectParameter version)
+        public virtual int sys_PhieunhapDelete(Nullable<System.Guid> phieunhapId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> nhacungcapId, Nullable<System.Guid> nguyennhanLydo, Nullable<System.Guid> tinhtrangPhieunhapCurrentId, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<double> tongtien, string code, string ghichu, ObjectParameter version)
         {
             var phieunhapIdParameter = phieunhapId.HasValue ?
                 new ObjectParameter("PhieunhapId", phieunhapId) :
@@ -3471,6 +4202,14 @@ namespace B2B.DAL
                 new ObjectParameter("NhacungcapId", nhacungcapId) :
                 new ObjectParameter("NhacungcapId", typeof(System.Guid));
     
+            var nguyennhanLydoParameter = nguyennhanLydo.HasValue ?
+                new ObjectParameter("NguyennhanLydo", nguyennhanLydo) :
+                new ObjectParameter("NguyennhanLydo", typeof(System.Guid));
+    
+            var tinhtrangPhieunhapCurrentIdParameter = tinhtrangPhieunhapCurrentId.HasValue ?
+                new ObjectParameter("TinhtrangPhieunhapCurrentId", tinhtrangPhieunhapCurrentId) :
+                new ObjectParameter("TinhtrangPhieunhapCurrentId", typeof(System.Guid));
+    
             var stepParameter = step.HasValue ?
                 new ObjectParameter("Step", step) :
                 new ObjectParameter("Step", typeof(int));
@@ -3478,6 +4217,10 @@ namespace B2B.DAL
             var ngaylapParameter = ngaylap.HasValue ?
                 new ObjectParameter("Ngaylap", ngaylap) :
                 new ObjectParameter("Ngaylap", typeof(System.DateTime));
+    
+            var tongtienParameter = tongtien.HasValue ?
+                new ObjectParameter("Tongtien", tongtien) :
+                new ObjectParameter("Tongtien", typeof(double));
     
             var codeParameter = code != null ?
                 new ObjectParameter("Code", code) :
@@ -3487,10 +4230,10 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_PhieunhapDelete", phieunhapIdParameter, nhanvienIdParameter, khoIdParameter, nhacungcapIdParameter, stepParameter, ngaylapParameter, codeParameter, ghichuParameter, version);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_PhieunhapDelete", phieunhapIdParameter, nhanvienIdParameter, khoIdParameter, nhacungcapIdParameter, nguyennhanLydoParameter, tinhtrangPhieunhapCurrentIdParameter, stepParameter, ngaylapParameter, tongtienParameter, codeParameter, ghichuParameter, version);
         }
     
-        public virtual int sys_PhieunhapInsert(Nullable<System.Guid> phieunhapId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> nhacungcapId, Nullable<int> step, Nullable<System.DateTime> ngaylap, string code, string ghichu, ObjectParameter version)
+        public virtual int sys_PhieunhapInsert(Nullable<System.Guid> phieunhapId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> nhacungcapId, Nullable<System.Guid> nguyennhanLydo, Nullable<System.Guid> tinhtrangPhieunhapCurrentId, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<double> tongtien, string code, string ghichu, ObjectParameter version)
         {
             var phieunhapIdParameter = phieunhapId.HasValue ?
                 new ObjectParameter("PhieunhapId", phieunhapId) :
@@ -3508,6 +4251,14 @@ namespace B2B.DAL
                 new ObjectParameter("NhacungcapId", nhacungcapId) :
                 new ObjectParameter("NhacungcapId", typeof(System.Guid));
     
+            var nguyennhanLydoParameter = nguyennhanLydo.HasValue ?
+                new ObjectParameter("NguyennhanLydo", nguyennhanLydo) :
+                new ObjectParameter("NguyennhanLydo", typeof(System.Guid));
+    
+            var tinhtrangPhieunhapCurrentIdParameter = tinhtrangPhieunhapCurrentId.HasValue ?
+                new ObjectParameter("TinhtrangPhieunhapCurrentId", tinhtrangPhieunhapCurrentId) :
+                new ObjectParameter("TinhtrangPhieunhapCurrentId", typeof(System.Guid));
+    
             var stepParameter = step.HasValue ?
                 new ObjectParameter("Step", step) :
                 new ObjectParameter("Step", typeof(int));
@@ -3515,6 +4266,10 @@ namespace B2B.DAL
             var ngaylapParameter = ngaylap.HasValue ?
                 new ObjectParameter("Ngaylap", ngaylap) :
                 new ObjectParameter("Ngaylap", typeof(System.DateTime));
+    
+            var tongtienParameter = tongtien.HasValue ?
+                new ObjectParameter("Tongtien", tongtien) :
+                new ObjectParameter("Tongtien", typeof(double));
     
             var codeParameter = code != null ?
                 new ObjectParameter("Code", code) :
@@ -3524,7 +4279,7 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_PhieunhapInsert", phieunhapIdParameter, nhanvienIdParameter, khoIdParameter, nhacungcapIdParameter, stepParameter, ngaylapParameter, codeParameter, ghichuParameter, version);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_PhieunhapInsert", phieunhapIdParameter, nhanvienIdParameter, khoIdParameter, nhacungcapIdParameter, nguyennhanLydoParameter, tinhtrangPhieunhapCurrentIdParameter, stepParameter, ngaylapParameter, tongtienParameter, codeParameter, ghichuParameter, version);
         }
     
         public virtual ObjectResult<sys_PhieunhapSelect_Result> sys_PhieunhapSelect()
@@ -3532,7 +4287,7 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sys_PhieunhapSelect_Result>("sys_PhieunhapSelect");
         }
     
-        public virtual int sys_PhieunhapUpdate(Nullable<System.Guid> phieunhapId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> nhacungcapId, Nullable<int> step, Nullable<System.DateTime> ngaylap, string code, string ghichu, ObjectParameter version)
+        public virtual int sys_PhieunhapUpdate(Nullable<System.Guid> phieunhapId, Nullable<System.Guid> nhanvienId, Nullable<System.Guid> khoId, Nullable<System.Guid> nhacungcapId, Nullable<System.Guid> nguyennhanLydo, Nullable<System.Guid> tinhtrangPhieunhapCurrentId, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<double> tongtien, string code, string ghichu, ObjectParameter version)
         {
             var phieunhapIdParameter = phieunhapId.HasValue ?
                 new ObjectParameter("PhieunhapId", phieunhapId) :
@@ -3550,6 +4305,14 @@ namespace B2B.DAL
                 new ObjectParameter("NhacungcapId", nhacungcapId) :
                 new ObjectParameter("NhacungcapId", typeof(System.Guid));
     
+            var nguyennhanLydoParameter = nguyennhanLydo.HasValue ?
+                new ObjectParameter("NguyennhanLydo", nguyennhanLydo) :
+                new ObjectParameter("NguyennhanLydo", typeof(System.Guid));
+    
+            var tinhtrangPhieunhapCurrentIdParameter = tinhtrangPhieunhapCurrentId.HasValue ?
+                new ObjectParameter("TinhtrangPhieunhapCurrentId", tinhtrangPhieunhapCurrentId) :
+                new ObjectParameter("TinhtrangPhieunhapCurrentId", typeof(System.Guid));
+    
             var stepParameter = step.HasValue ?
                 new ObjectParameter("Step", step) :
                 new ObjectParameter("Step", typeof(int));
@@ -3557,6 +4320,10 @@ namespace B2B.DAL
             var ngaylapParameter = ngaylap.HasValue ?
                 new ObjectParameter("Ngaylap", ngaylap) :
                 new ObjectParameter("Ngaylap", typeof(System.DateTime));
+    
+            var tongtienParameter = tongtien.HasValue ?
+                new ObjectParameter("Tongtien", tongtien) :
+                new ObjectParameter("Tongtien", typeof(double));
     
             var codeParameter = code != null ?
                 new ObjectParameter("Code", code) :
@@ -3566,7 +4333,7 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_PhieunhapUpdate", phieunhapIdParameter, nhanvienIdParameter, khoIdParameter, nhacungcapIdParameter, stepParameter, ngaylapParameter, codeParameter, ghichuParameter, version);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_PhieunhapUpdate", phieunhapIdParameter, nhanvienIdParameter, khoIdParameter, nhacungcapIdParameter, nguyennhanLydoParameter, tinhtrangPhieunhapCurrentIdParameter, stepParameter, ngaylapParameter, tongtienParameter, codeParameter, ghichuParameter, version);
         }
     
         public virtual int sys_PhieuxuatDelete(Nullable<System.Guid> phieuxuatId, Nullable<System.Guid> nhanvienLapId, Nullable<System.Guid> khoId, Nullable<System.Guid> donhangId, Nullable<System.Guid> nhanvienGiaohangId, Nullable<System.Guid> nguyennhanLydo, Nullable<System.Guid> tinhtrangPhieuxuatCurrentId, Nullable<System.Guid> nhanvienDonhang, Nullable<int> step, Nullable<System.DateTime> ngaylap, Nullable<System.DateTime> ngayCapnhat, Nullable<double> tongtien, string code, string tenTinhtrangPhieuxuat, string ghichu, ObjectParameter version)
@@ -3987,6 +4754,190 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_QuanhuyenUpdate", quanhuyenIdParameter, tinhthanhIdParameter, stepParameter, ngayCapnhatParameter, activeParameter, codeParameter, tenQuanhuyenParameter, ghichuParameter, version);
+        }
+    
+        public virtual int sys_RoleDelete(Nullable<System.Guid> roleId, Nullable<bool> enable, string name, string mota)
+        {
+            var roleIdParameter = roleId.HasValue ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(System.Guid));
+    
+            var enableParameter = enable.HasValue ?
+                new ObjectParameter("Enable", enable) :
+                new ObjectParameter("Enable", typeof(bool));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var motaParameter = mota != null ?
+                new ObjectParameter("Mota", mota) :
+                new ObjectParameter("Mota", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_RoleDelete", roleIdParameter, enableParameter, nameParameter, motaParameter);
+        }
+    
+        public virtual int sys_RoleInsert(Nullable<System.Guid> roleId, Nullable<bool> enable, string name, string mota)
+        {
+            var roleIdParameter = roleId.HasValue ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(System.Guid));
+    
+            var enableParameter = enable.HasValue ?
+                new ObjectParameter("Enable", enable) :
+                new ObjectParameter("Enable", typeof(bool));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var motaParameter = mota != null ?
+                new ObjectParameter("Mota", mota) :
+                new ObjectParameter("Mota", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_RoleInsert", roleIdParameter, enableParameter, nameParameter, motaParameter);
+        }
+    
+        public virtual int sys_RoleRightDelete(Nullable<System.Guid> roleRightId, Nullable<System.Guid> roleId, Nullable<System.Guid> itemId, Nullable<System.Guid> itemChaId, Nullable<System.Guid> assemblyFileId, Nullable<System.Guid> serviceItemId, Nullable<System.Guid> databaseItemId, Nullable<int> enable)
+        {
+            var roleRightIdParameter = roleRightId.HasValue ?
+                new ObjectParameter("RoleRightId", roleRightId) :
+                new ObjectParameter("RoleRightId", typeof(System.Guid));
+    
+            var roleIdParameter = roleId.HasValue ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(System.Guid));
+    
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(System.Guid));
+    
+            var itemChaIdParameter = itemChaId.HasValue ?
+                new ObjectParameter("ItemChaId", itemChaId) :
+                new ObjectParameter("ItemChaId", typeof(System.Guid));
+    
+            var assemblyFileIdParameter = assemblyFileId.HasValue ?
+                new ObjectParameter("AssemblyFileId", assemblyFileId) :
+                new ObjectParameter("AssemblyFileId", typeof(System.Guid));
+    
+            var serviceItemIdParameter = serviceItemId.HasValue ?
+                new ObjectParameter("ServiceItemId", serviceItemId) :
+                new ObjectParameter("ServiceItemId", typeof(System.Guid));
+    
+            var databaseItemIdParameter = databaseItemId.HasValue ?
+                new ObjectParameter("DatabaseItemId", databaseItemId) :
+                new ObjectParameter("DatabaseItemId", typeof(System.Guid));
+    
+            var enableParameter = enable.HasValue ?
+                new ObjectParameter("Enable", enable) :
+                new ObjectParameter("Enable", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_RoleRightDelete", roleRightIdParameter, roleIdParameter, itemIdParameter, itemChaIdParameter, assemblyFileIdParameter, serviceItemIdParameter, databaseItemIdParameter, enableParameter);
+        }
+    
+        public virtual int sys_RoleRightInsert(Nullable<System.Guid> roleRightId, Nullable<System.Guid> roleId, Nullable<System.Guid> itemId, Nullable<System.Guid> itemChaId, Nullable<System.Guid> assemblyFileId, Nullable<System.Guid> serviceItemId, Nullable<System.Guid> databaseItemId, Nullable<int> enable)
+        {
+            var roleRightIdParameter = roleRightId.HasValue ?
+                new ObjectParameter("RoleRightId", roleRightId) :
+                new ObjectParameter("RoleRightId", typeof(System.Guid));
+    
+            var roleIdParameter = roleId.HasValue ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(System.Guid));
+    
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(System.Guid));
+    
+            var itemChaIdParameter = itemChaId.HasValue ?
+                new ObjectParameter("ItemChaId", itemChaId) :
+                new ObjectParameter("ItemChaId", typeof(System.Guid));
+    
+            var assemblyFileIdParameter = assemblyFileId.HasValue ?
+                new ObjectParameter("AssemblyFileId", assemblyFileId) :
+                new ObjectParameter("AssemblyFileId", typeof(System.Guid));
+    
+            var serviceItemIdParameter = serviceItemId.HasValue ?
+                new ObjectParameter("ServiceItemId", serviceItemId) :
+                new ObjectParameter("ServiceItemId", typeof(System.Guid));
+    
+            var databaseItemIdParameter = databaseItemId.HasValue ?
+                new ObjectParameter("DatabaseItemId", databaseItemId) :
+                new ObjectParameter("DatabaseItemId", typeof(System.Guid));
+    
+            var enableParameter = enable.HasValue ?
+                new ObjectParameter("Enable", enable) :
+                new ObjectParameter("Enable", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_RoleRightInsert", roleRightIdParameter, roleIdParameter, itemIdParameter, itemChaIdParameter, assemblyFileIdParameter, serviceItemIdParameter, databaseItemIdParameter, enableParameter);
+        }
+    
+        public virtual ObjectResult<sys_RoleRightSelect_Result> sys_RoleRightSelect()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sys_RoleRightSelect_Result>("sys_RoleRightSelect");
+        }
+    
+        public virtual int sys_RoleRightUpdate(Nullable<System.Guid> roleRightId, Nullable<System.Guid> roleId, Nullable<System.Guid> itemId, Nullable<System.Guid> itemChaId, Nullable<System.Guid> assemblyFileId, Nullable<System.Guid> serviceItemId, Nullable<System.Guid> databaseItemId, Nullable<int> enable)
+        {
+            var roleRightIdParameter = roleRightId.HasValue ?
+                new ObjectParameter("RoleRightId", roleRightId) :
+                new ObjectParameter("RoleRightId", typeof(System.Guid));
+    
+            var roleIdParameter = roleId.HasValue ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(System.Guid));
+    
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(System.Guid));
+    
+            var itemChaIdParameter = itemChaId.HasValue ?
+                new ObjectParameter("ItemChaId", itemChaId) :
+                new ObjectParameter("ItemChaId", typeof(System.Guid));
+    
+            var assemblyFileIdParameter = assemblyFileId.HasValue ?
+                new ObjectParameter("AssemblyFileId", assemblyFileId) :
+                new ObjectParameter("AssemblyFileId", typeof(System.Guid));
+    
+            var serviceItemIdParameter = serviceItemId.HasValue ?
+                new ObjectParameter("ServiceItemId", serviceItemId) :
+                new ObjectParameter("ServiceItemId", typeof(System.Guid));
+    
+            var databaseItemIdParameter = databaseItemId.HasValue ?
+                new ObjectParameter("DatabaseItemId", databaseItemId) :
+                new ObjectParameter("DatabaseItemId", typeof(System.Guid));
+    
+            var enableParameter = enable.HasValue ?
+                new ObjectParameter("Enable", enable) :
+                new ObjectParameter("Enable", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_RoleRightUpdate", roleRightIdParameter, roleIdParameter, itemIdParameter, itemChaIdParameter, assemblyFileIdParameter, serviceItemIdParameter, databaseItemIdParameter, enableParameter);
+        }
+    
+        public virtual ObjectResult<sys_RoleSelect_Result> sys_RoleSelect()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sys_RoleSelect_Result>("sys_RoleSelect");
+        }
+    
+        public virtual int sys_RoleUpdate(Nullable<System.Guid> roleId, Nullable<bool> enable, string name, string mota)
+        {
+            var roleIdParameter = roleId.HasValue ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(System.Guid));
+    
+            var enableParameter = enable.HasValue ?
+                new ObjectParameter("Enable", enable) :
+                new ObjectParameter("Enable", typeof(bool));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var motaParameter = mota != null ?
+                new ObjectParameter("Mota", mota) :
+                new ObjectParameter("Mota", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_RoleUpdate", roleIdParameter, enableParameter, nameParameter, motaParameter);
         }
     
         public virtual int sys_sysdiagramsDelete(Nullable<int> principal_id, Nullable<int> diagram_id, Nullable<int> version, byte[] definition, string name)
@@ -4514,7 +5465,7 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_TinhtrangDelete", tinhtrangIdParameter, stepParameter, ngayCapnhatParameter, activeParameter, canDeleteParameter, codeParameter, tenTinhtrangParameter, ghichuParameter, version);
         }
     
-        public virtual int sys_TinhtrangDonhangDelete(Nullable<System.Guid> tinhtrangDonhangId, Nullable<System.Guid> donhangId, Nullable<System.Guid> phieuxuatId, Nullable<System.Guid> nhanvienCapnhatId, Nullable<System.DateTime> ngayCapnhat, string ghichu, ObjectParameter version)
+        public virtual int sys_TinhtrangDonhangDelete(Nullable<System.Guid> tinhtrangDonhangId, Nullable<System.Guid> donhangId, Nullable<System.Guid> phieuxuatId, Nullable<System.Guid> nhanvienCapnhatId, Nullable<System.Guid> tinhtrangId, Nullable<System.DateTime> ngayCapnhat, string ghichu, ObjectParameter version)
         {
             var tinhtrangDonhangIdParameter = tinhtrangDonhangId.HasValue ?
                 new ObjectParameter("TinhtrangDonhangId", tinhtrangDonhangId) :
@@ -4532,6 +5483,10 @@ namespace B2B.DAL
                 new ObjectParameter("NhanvienCapnhatId", nhanvienCapnhatId) :
                 new ObjectParameter("NhanvienCapnhatId", typeof(System.Guid));
     
+            var tinhtrangIdParameter = tinhtrangId.HasValue ?
+                new ObjectParameter("TinhtrangId", tinhtrangId) :
+                new ObjectParameter("TinhtrangId", typeof(System.Guid));
+    
             var ngayCapnhatParameter = ngayCapnhat.HasValue ?
                 new ObjectParameter("NgayCapnhat", ngayCapnhat) :
                 new ObjectParameter("NgayCapnhat", typeof(System.DateTime));
@@ -4540,10 +5495,10 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_TinhtrangDonhangDelete", tinhtrangDonhangIdParameter, donhangIdParameter, phieuxuatIdParameter, nhanvienCapnhatIdParameter, ngayCapnhatParameter, ghichuParameter, version);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_TinhtrangDonhangDelete", tinhtrangDonhangIdParameter, donhangIdParameter, phieuxuatIdParameter, nhanvienCapnhatIdParameter, tinhtrangIdParameter, ngayCapnhatParameter, ghichuParameter, version);
         }
     
-        public virtual int sys_TinhtrangDonhangInsert(Nullable<System.Guid> tinhtrangDonhangId, Nullable<System.Guid> donhangId, Nullable<System.Guid> phieuxuatId, Nullable<System.Guid> nhanvienCapnhatId, Nullable<System.DateTime> ngayCapnhat, string ghichu, ObjectParameter version)
+        public virtual int sys_TinhtrangDonhangInsert(Nullable<System.Guid> tinhtrangDonhangId, Nullable<System.Guid> donhangId, Nullable<System.Guid> phieuxuatId, Nullable<System.Guid> nhanvienCapnhatId, Nullable<System.Guid> tinhtrangId, Nullable<System.DateTime> ngayCapnhat, string ghichu, ObjectParameter version)
         {
             var tinhtrangDonhangIdParameter = tinhtrangDonhangId.HasValue ?
                 new ObjectParameter("TinhtrangDonhangId", tinhtrangDonhangId) :
@@ -4561,6 +5516,10 @@ namespace B2B.DAL
                 new ObjectParameter("NhanvienCapnhatId", nhanvienCapnhatId) :
                 new ObjectParameter("NhanvienCapnhatId", typeof(System.Guid));
     
+            var tinhtrangIdParameter = tinhtrangId.HasValue ?
+                new ObjectParameter("TinhtrangId", tinhtrangId) :
+                new ObjectParameter("TinhtrangId", typeof(System.Guid));
+    
             var ngayCapnhatParameter = ngayCapnhat.HasValue ?
                 new ObjectParameter("NgayCapnhat", ngayCapnhat) :
                 new ObjectParameter("NgayCapnhat", typeof(System.DateTime));
@@ -4569,7 +5528,7 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_TinhtrangDonhangInsert", tinhtrangDonhangIdParameter, donhangIdParameter, phieuxuatIdParameter, nhanvienCapnhatIdParameter, ngayCapnhatParameter, ghichuParameter, version);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_TinhtrangDonhangInsert", tinhtrangDonhangIdParameter, donhangIdParameter, phieuxuatIdParameter, nhanvienCapnhatIdParameter, tinhtrangIdParameter, ngayCapnhatParameter, ghichuParameter, version);
         }
     
         public virtual ObjectResult<sys_TinhtrangDonhangSelect_Result> sys_TinhtrangDonhangSelect()
@@ -4577,7 +5536,7 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sys_TinhtrangDonhangSelect_Result>("sys_TinhtrangDonhangSelect");
         }
     
-        public virtual int sys_TinhtrangDonhangUpdate(Nullable<System.Guid> tinhtrangDonhangId, Nullable<System.Guid> donhangId, Nullable<System.Guid> phieuxuatId, Nullable<System.Guid> nhanvienCapnhatId, Nullable<System.DateTime> ngayCapnhat, string ghichu, ObjectParameter version)
+        public virtual int sys_TinhtrangDonhangUpdate(Nullable<System.Guid> tinhtrangDonhangId, Nullable<System.Guid> donhangId, Nullable<System.Guid> phieuxuatId, Nullable<System.Guid> nhanvienCapnhatId, Nullable<System.Guid> tinhtrangId, Nullable<System.DateTime> ngayCapnhat, string ghichu, ObjectParameter version)
         {
             var tinhtrangDonhangIdParameter = tinhtrangDonhangId.HasValue ?
                 new ObjectParameter("TinhtrangDonhangId", tinhtrangDonhangId) :
@@ -4595,6 +5554,10 @@ namespace B2B.DAL
                 new ObjectParameter("NhanvienCapnhatId", nhanvienCapnhatId) :
                 new ObjectParameter("NhanvienCapnhatId", typeof(System.Guid));
     
+            var tinhtrangIdParameter = tinhtrangId.HasValue ?
+                new ObjectParameter("TinhtrangId", tinhtrangId) :
+                new ObjectParameter("TinhtrangId", typeof(System.Guid));
+    
             var ngayCapnhatParameter = ngayCapnhat.HasValue ?
                 new ObjectParameter("NgayCapnhat", ngayCapnhat) :
                 new ObjectParameter("NgayCapnhat", typeof(System.DateTime));
@@ -4603,7 +5566,7 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", ghichu) :
                 new ObjectParameter("Ghichu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_TinhtrangDonhangUpdate", tinhtrangDonhangIdParameter, donhangIdParameter, phieuxuatIdParameter, nhanvienCapnhatIdParameter, ngayCapnhatParameter, ghichuParameter, version);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_TinhtrangDonhangUpdate", tinhtrangDonhangIdParameter, donhangIdParameter, phieuxuatIdParameter, nhanvienCapnhatIdParameter, tinhtrangIdParameter, ngayCapnhatParameter, ghichuParameter, version);
         }
     
         public virtual int sys_TinhtrangInsert(Nullable<System.Guid> tinhtrangId, Nullable<int> step, Nullable<System.DateTime> ngayCapnhat, Nullable<bool> active, Nullable<bool> canDelete, string code, string tenTinhtrang, string ghichu, ObjectParameter version)
@@ -4641,6 +5604,86 @@ namespace B2B.DAL
                 new ObjectParameter("Ghichu", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_TinhtrangInsert", tinhtrangIdParameter, stepParameter, ngayCapnhatParameter, activeParameter, canDeleteParameter, codeParameter, tenTinhtrangParameter, ghichuParameter, version);
+        }
+    
+        public virtual int sys_TinhtrangPhieunhapDelete(Nullable<System.Guid> tinhtrangPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> tinhtrangId, Nullable<System.Guid> nhanvienCapnhat, Nullable<System.DateTime> ngayCapnhat, ObjectParameter version)
+        {
+            var tinhtrangPhieunhapIdParameter = tinhtrangPhieunhapId.HasValue ?
+                new ObjectParameter("TinhtrangPhieunhapId", tinhtrangPhieunhapId) :
+                new ObjectParameter("TinhtrangPhieunhapId", typeof(System.Guid));
+    
+            var phieunhapIdParameter = phieunhapId.HasValue ?
+                new ObjectParameter("PhieunhapId", phieunhapId) :
+                new ObjectParameter("PhieunhapId", typeof(System.Guid));
+    
+            var tinhtrangIdParameter = tinhtrangId.HasValue ?
+                new ObjectParameter("TinhtrangId", tinhtrangId) :
+                new ObjectParameter("TinhtrangId", typeof(System.Guid));
+    
+            var nhanvienCapnhatParameter = nhanvienCapnhat.HasValue ?
+                new ObjectParameter("NhanvienCapnhat", nhanvienCapnhat) :
+                new ObjectParameter("NhanvienCapnhat", typeof(System.Guid));
+    
+            var ngayCapnhatParameter = ngayCapnhat.HasValue ?
+                new ObjectParameter("NgayCapnhat", ngayCapnhat) :
+                new ObjectParameter("NgayCapnhat", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_TinhtrangPhieunhapDelete", tinhtrangPhieunhapIdParameter, phieunhapIdParameter, tinhtrangIdParameter, nhanvienCapnhatParameter, ngayCapnhatParameter, version);
+        }
+    
+        public virtual int sys_TinhtrangPhieunhapInsert(Nullable<System.Guid> tinhtrangPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> tinhtrangId, Nullable<System.Guid> nhanvienCapnhat, Nullable<System.DateTime> ngayCapnhat, ObjectParameter version)
+        {
+            var tinhtrangPhieunhapIdParameter = tinhtrangPhieunhapId.HasValue ?
+                new ObjectParameter("TinhtrangPhieunhapId", tinhtrangPhieunhapId) :
+                new ObjectParameter("TinhtrangPhieunhapId", typeof(System.Guid));
+    
+            var phieunhapIdParameter = phieunhapId.HasValue ?
+                new ObjectParameter("PhieunhapId", phieunhapId) :
+                new ObjectParameter("PhieunhapId", typeof(System.Guid));
+    
+            var tinhtrangIdParameter = tinhtrangId.HasValue ?
+                new ObjectParameter("TinhtrangId", tinhtrangId) :
+                new ObjectParameter("TinhtrangId", typeof(System.Guid));
+    
+            var nhanvienCapnhatParameter = nhanvienCapnhat.HasValue ?
+                new ObjectParameter("NhanvienCapnhat", nhanvienCapnhat) :
+                new ObjectParameter("NhanvienCapnhat", typeof(System.Guid));
+    
+            var ngayCapnhatParameter = ngayCapnhat.HasValue ?
+                new ObjectParameter("NgayCapnhat", ngayCapnhat) :
+                new ObjectParameter("NgayCapnhat", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_TinhtrangPhieunhapInsert", tinhtrangPhieunhapIdParameter, phieunhapIdParameter, tinhtrangIdParameter, nhanvienCapnhatParameter, ngayCapnhatParameter, version);
+        }
+    
+        public virtual ObjectResult<sys_TinhtrangPhieunhapSelect_Result> sys_TinhtrangPhieunhapSelect()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sys_TinhtrangPhieunhapSelect_Result>("sys_TinhtrangPhieunhapSelect");
+        }
+    
+        public virtual int sys_TinhtrangPhieunhapUpdate(Nullable<System.Guid> tinhtrangPhieunhapId, Nullable<System.Guid> phieunhapId, Nullable<System.Guid> tinhtrangId, Nullable<System.Guid> nhanvienCapnhat, Nullable<System.DateTime> ngayCapnhat, ObjectParameter version)
+        {
+            var tinhtrangPhieunhapIdParameter = tinhtrangPhieunhapId.HasValue ?
+                new ObjectParameter("TinhtrangPhieunhapId", tinhtrangPhieunhapId) :
+                new ObjectParameter("TinhtrangPhieunhapId", typeof(System.Guid));
+    
+            var phieunhapIdParameter = phieunhapId.HasValue ?
+                new ObjectParameter("PhieunhapId", phieunhapId) :
+                new ObjectParameter("PhieunhapId", typeof(System.Guid));
+    
+            var tinhtrangIdParameter = tinhtrangId.HasValue ?
+                new ObjectParameter("TinhtrangId", tinhtrangId) :
+                new ObjectParameter("TinhtrangId", typeof(System.Guid));
+    
+            var nhanvienCapnhatParameter = nhanvienCapnhat.HasValue ?
+                new ObjectParameter("NhanvienCapnhat", nhanvienCapnhat) :
+                new ObjectParameter("NhanvienCapnhat", typeof(System.Guid));
+    
+            var ngayCapnhatParameter = ngayCapnhat.HasValue ?
+                new ObjectParameter("NgayCapnhat", ngayCapnhat) :
+                new ObjectParameter("NgayCapnhat", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_TinhtrangPhieunhapUpdate", tinhtrangPhieunhapIdParameter, phieunhapIdParameter, tinhtrangIdParameter, nhanvienCapnhatParameter, ngayCapnhatParameter, version);
         }
     
         public virtual int sys_TinhtrangPhieuxuatDelete(Nullable<System.Guid> tinhtrangPhieuxuatId, Nullable<System.Guid> phieuxuatId, Nullable<System.Guid> tinhtrangId, Nullable<System.Guid> nhanvienCapnhatId, Nullable<System.DateTime> ngayCapnhat, string ghichuLydo, ObjectParameter version)
@@ -5071,6 +6114,74 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_UserInsert", userIdParameter, nhanvienIdParameter, stepParameter, activeParameter, p_UsernameParameter, p_PasswordParameter, version);
         }
     
+        public virtual int sys_UserRoleDelete(Nullable<System.Guid> userRoleId, Nullable<System.Guid> userId, Nullable<System.Guid> roleId, Nullable<bool> enable)
+        {
+            var userRoleIdParameter = userRoleId.HasValue ?
+                new ObjectParameter("UserRoleId", userRoleId) :
+                new ObjectParameter("UserRoleId", typeof(System.Guid));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            var roleIdParameter = roleId.HasValue ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(System.Guid));
+    
+            var enableParameter = enable.HasValue ?
+                new ObjectParameter("Enable", enable) :
+                new ObjectParameter("Enable", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_UserRoleDelete", userRoleIdParameter, userIdParameter, roleIdParameter, enableParameter);
+        }
+    
+        public virtual int sys_UserRoleInsert(Nullable<System.Guid> userRoleId, Nullable<System.Guid> userId, Nullable<System.Guid> roleId, Nullable<bool> enable)
+        {
+            var userRoleIdParameter = userRoleId.HasValue ?
+                new ObjectParameter("UserRoleId", userRoleId) :
+                new ObjectParameter("UserRoleId", typeof(System.Guid));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            var roleIdParameter = roleId.HasValue ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(System.Guid));
+    
+            var enableParameter = enable.HasValue ?
+                new ObjectParameter("Enable", enable) :
+                new ObjectParameter("Enable", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_UserRoleInsert", userRoleIdParameter, userIdParameter, roleIdParameter, enableParameter);
+        }
+    
+        public virtual ObjectResult<sys_UserRoleSelect_Result> sys_UserRoleSelect()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sys_UserRoleSelect_Result>("sys_UserRoleSelect");
+        }
+    
+        public virtual int sys_UserRoleUpdate(Nullable<System.Guid> userRoleId, Nullable<System.Guid> userId, Nullable<System.Guid> roleId, Nullable<bool> enable)
+        {
+            var userRoleIdParameter = userRoleId.HasValue ?
+                new ObjectParameter("UserRoleId", userRoleId) :
+                new ObjectParameter("UserRoleId", typeof(System.Guid));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            var roleIdParameter = roleId.HasValue ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(System.Guid));
+    
+            var enableParameter = enable.HasValue ?
+                new ObjectParameter("Enable", enable) :
+                new ObjectParameter("Enable", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_UserRoleUpdate", userRoleIdParameter, userIdParameter, roleIdParameter, enableParameter);
+        }
+    
         public virtual ObjectResult<sys_UserSelect_Result> sys_UserSelect()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sys_UserSelect_Result>("sys_UserSelect");
@@ -5105,19 +6216,6 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sys_UserUpdate", userIdParameter, nhanvienIdParameter, stepParameter, activeParameter, p_UsernameParameter, p_PasswordParameter, version);
         }
     
-        public virtual ObjectResult<Tin_CheckLogin_Result> Tin_CheckLogin(string accountname, string accountpassword)
-        {
-            var accountnameParameter = accountname != null ?
-                new ObjectParameter("accountname", accountname) :
-                new ObjectParameter("accountname", typeof(string));
-    
-            var accountpasswordParameter = accountpassword != null ?
-                new ObjectParameter("accountpassword", accountpassword) :
-                new ObjectParameter("accountpassword", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_CheckLogin_Result>("Tin_CheckLogin", accountnameParameter, accountpasswordParameter);
-        }
-    
         public virtual int Tin_DeletePhieunhap(Nullable<System.Guid> phieunhapId)
         {
             var phieunhapIdParameter = phieunhapId.HasValue ?
@@ -5141,6 +6239,15 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetChitietPhieunhapTheoPhieunhap_Result>("Tin_GetChitietPhieunhapTheoPhieunhap", phieunhapIdParameter);
         }
     
+        public virtual ObjectResult<Tin_GetCongnoNhapMoinhatTheoNhacungcap_Result> Tin_GetCongnoNhapMoinhatTheoNhacungcap(Nullable<System.Guid> nhacungcapId)
+        {
+            var nhacungcapIdParameter = nhacungcapId.HasValue ?
+                new ObjectParameter("NhacungcapId", nhacungcapId) :
+                new ObjectParameter("NhacungcapId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetCongnoNhapMoinhatTheoNhacungcap_Result>("Tin_GetCongnoNhapMoinhatTheoNhacungcap", nhacungcapIdParameter);
+        }
+    
         public virtual ObjectResult<Tin_GetHanghoaActive_Result> Tin_GetHanghoaActive()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetHanghoaActive_Result>("Tin_GetHanghoaActive");
@@ -5158,6 +6265,15 @@ namespace B2B.DAL
         public virtual ObjectResult<Tin_GetNhomKhachhangActive_Result> Tin_GetNhomKhachhangActive()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetNhomKhachhangActive_Result>("Tin_GetNhomKhachhangActive");
+        }
+    
+        public virtual ObjectResult<Tin_GetPhieunhapTheoThang_Result> Tin_GetPhieunhapTheoThang(Nullable<System.DateTime> ngaylap)
+        {
+            var ngaylapParameter = ngaylap.HasValue ?
+                new ObjectParameter("Ngaylap", ngaylap) :
+                new ObjectParameter("Ngaylap", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetPhieunhapTheoThang_Result>("Tin_GetPhieunhapTheoThang", ngaylapParameter);
         }
     
         public virtual ObjectResult<Tin_GetPhieunhapTheoThang_Kho_Result> Tin_GetPhieunhapTheoThang_Kho(Nullable<System.DateTime> ngaylap, Nullable<System.Guid> khoId)
@@ -5186,9 +6302,18 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetSoluongtonTheoHanghoaTrongKho_Result>("Tin_GetSoluongtonTheoHanghoaTrongKho", khoIdParameter, hanghoaIdParameter);
         }
     
-        public virtual ObjectResult<Tin_GetThuoctinHanghoaTheoHanghoa_Result> Tin_GetThuoctinHanghoaTheoHanghoa()
+        public virtual ObjectResult<Tin_GetThuoctinHanghoaTheoHanghoa_Result> Tin_GetThuoctinHanghoaTheoHanghoa(Nullable<System.Guid> hanghoaId)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetThuoctinHanghoaTheoHanghoa_Result>("Tin_GetThuoctinHanghoaTheoHanghoa");
+            var hanghoaIdParameter = hanghoaId.HasValue ?
+                new ObjectParameter("HanghoaId", hanghoaId) :
+                new ObjectParameter("HanghoaId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetThuoctinHanghoaTheoHanghoa_Result>("Tin_GetThuoctinHanghoaTheoHanghoa", hanghoaIdParameter);
+        }
+    
+        public virtual ObjectResult<Tin_GetTinhtrangCuaPhieunhap_Result> Tin_GetTinhtrangCuaPhieunhap()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetTinhtrangCuaPhieunhap_Result>("Tin_GetTinhtrangCuaPhieunhap");
         }
     
         public virtual ObjectResult<Tin_GetTonkhoMaxHang_Kho_Result> Tin_GetTonkhoMaxHang_Kho(Nullable<System.Guid> khoId, Nullable<System.Guid> hanghoaId)
@@ -5217,13 +6342,13 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_GetTonkhoMoinhatHanghoaTheoKho_Result>("Tin_GetTonkhoMoinhatHanghoaTheoKho", khoIdParameter, hanghoaIdParameter);
         }
     
-        public virtual int Tin_SelectChitietKiemkeTheoKiemke(Nullable<System.Guid> kiemkeId)
+        public virtual ObjectResult<Tin_SelectChitietKiemkeTheoKiemke_Result> Tin_SelectChitietKiemkeTheoKiemke(Nullable<System.Guid> kiemkeId)
         {
             var kiemkeIdParameter = kiemkeId.HasValue ?
                 new ObjectParameter("KiemkeId", kiemkeId) :
                 new ObjectParameter("KiemkeId", typeof(System.Guid));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Tin_SelectChitietKiemkeTheoKiemke", kiemkeIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_SelectChitietKiemkeTheoKiemke_Result>("Tin_SelectChitietKiemkeTheoKiemke", kiemkeIdParameter);
         }
     
         public virtual ObjectResult<Tin_SelectCongnoNhap_Result> Tin_SelectCongnoNhap()
@@ -5231,13 +6356,13 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_SelectCongnoNhap_Result>("Tin_SelectCongnoNhap");
         }
     
-        public virtual int Tin_SelectKiemkeTheoKho(Nullable<System.Guid> khoId)
+        public virtual ObjectResult<Tin_SelectKiemkeTheoKho_Result> Tin_SelectKiemkeTheoKho(Nullable<System.Guid> khoId)
         {
             var khoIdParameter = khoId.HasValue ?
                 new ObjectParameter("KhoId", khoId) :
                 new ObjectParameter("KhoId", typeof(System.Guid));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Tin_SelectKiemkeTheoKho", khoIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_SelectKiemkeTheoKho_Result>("Tin_SelectKiemkeTheoKho", khoIdParameter);
         }
     
         public virtual ObjectResult<Tri_GetChitietDonhangTheoDonhang_Result> Tri_GetChitietDonhangTheoDonhang(Nullable<System.Guid> donhangId)
@@ -5394,6 +6519,24 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tri_GetTinhtrangDalap_Result>("Tri_GetTinhtrangDalap", codeParameter);
         }
     
+        public virtual ObjectResult<Tri_GetTinhtrangDonhangCurrent_Result> Tri_GetTinhtrangDonhangCurrent(Nullable<System.Guid> donhangId)
+        {
+            var donhangIdParameter = donhangId.HasValue ?
+                new ObjectParameter("DonhangId", donhangId) :
+                new ObjectParameter("DonhangId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tri_GetTinhtrangDonhangCurrent_Result>("Tri_GetTinhtrangDonhangCurrent", donhangIdParameter);
+        }
+    
+        public virtual ObjectResult<Tri_GetTinhtrangTheoLoai_Result> Tri_GetTinhtrangTheoLoai(Nullable<int> loaiTinhtrangValue)
+        {
+            var loaiTinhtrangValueParameter = loaiTinhtrangValue.HasValue ?
+                new ObjectParameter("LoaiTinhtrangValue", loaiTinhtrangValue) :
+                new ObjectParameter("LoaiTinhtrangValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tri_GetTinhtrangTheoLoai_Result>("Tri_GetTinhtrangTheoLoai", loaiTinhtrangValueParameter);
+        }
+    
         public virtual ObjectResult<Tri_GetTonkhoTheoNgay_Result> Tri_GetTonkhoTheoNgay(Nullable<System.DateTime> ngay)
         {
             var ngayParameter = ngay.HasValue ?
@@ -5442,6 +6585,15 @@ namespace B2B.DAL
         public virtual ObjectResult<Vinh_GetDonviActive_Result> Vinh_GetDonviActive()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Vinh_GetDonviActive_Result>("Vinh_GetDonviActive");
+        }
+    
+        public virtual ObjectResult<Vinh_GetKhachhangTheoPhieuxuat_Result> Vinh_GetKhachhangTheoPhieuxuat(Nullable<System.Guid> phieuxuatId)
+        {
+            var phieuxuatIdParameter = phieuxuatId.HasValue ?
+                new ObjectParameter("PhieuxuatId", phieuxuatId) :
+                new ObjectParameter("PhieuxuatId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Vinh_GetKhachhangTheoPhieuxuat_Result>("Vinh_GetKhachhangTheoPhieuxuat", phieuxuatIdParameter);
         }
     
         public virtual ObjectResult<Vinh_GetKhoActive_Result> Vinh_GetKhoActive()
@@ -5500,120 +6652,17 @@ namespace B2B.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Vinh_GetTinhtrangPhieuxuatTheoPhieuxuat_Result>("Vinh_GetTinhtrangPhieuxuatTheoPhieuxuat", phieuxuatIdParameter);
         }
     
-        public virtual ObjectResult<Khuyen_GetDonhangTungayDenngay_Result> Khuyen_GetDonhangTungayDenngay(Nullable<System.DateTime> tungay, Nullable<System.DateTime> denngay)
+        public virtual ObjectResult<Tin_CheckLogin_Result> Tin_CheckLogin(string accountname, string accountpassword)
         {
-            var tungayParameter = tungay.HasValue ?
-                new ObjectParameter("Tungay", tungay) :
-                new ObjectParameter("Tungay", typeof(System.DateTime));
+            var accountnameParameter = accountname != null ?
+                new ObjectParameter("accountname", accountname) :
+                new ObjectParameter("accountname", typeof(string));
     
-            var denngayParameter = denngay.HasValue ?
-                new ObjectParameter("Denngay", denngay) :
-                new ObjectParameter("Denngay", typeof(System.DateTime));
+            var accountpasswordParameter = accountpassword != null ?
+                new ObjectParameter("accountpassword", accountpassword) :
+                new ObjectParameter("accountpassword", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Khuyen_GetDonhangTungayDenngay_Result>("Khuyen_GetDonhangTungayDenngay", tungayParameter, denngayParameter);
-        }
-    
-        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var new_diagramnameParameter = new_diagramname != null ?
-                new ObjectParameter("new_diagramname", new_diagramname) :
-                new ObjectParameter("new_diagramname", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
-        }
-    
-        public virtual int sp_upgraddiagrams()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tin_CheckLogin_Result>("Tin_CheckLogin", accountnameParameter, accountpasswordParameter);
         }
     }
 }

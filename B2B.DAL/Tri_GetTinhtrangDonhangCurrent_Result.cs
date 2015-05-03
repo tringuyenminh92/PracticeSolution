@@ -11,12 +11,14 @@ namespace B2B.DAL
 {
     using System;
     
-    public partial class sp_helpdiagrams_Result
+    public partial class Tri_GetTinhtrangDonhangCurrent_Result
     {
-        public string Database { get; set; }
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
+        public System.Guid TinhtrangDonhangId { get; set; }
+        public Nullable<System.Guid> DonhangId { get; set; }
+        public Nullable<System.Guid> TinhtrangId { get; set; }
+        public Nullable<System.DateTime> NgayCapnhat { get; set; }
+        public Nullable<System.Guid> NhanvienCapnhatId { get; set; }
+        public string Ghichu { get; set; }
+        public byte[] Version { get; set; }
     }
 }

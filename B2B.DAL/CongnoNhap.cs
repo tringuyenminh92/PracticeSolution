@@ -19,7 +19,7 @@ namespace B2B.DAL
         public Nullable<System.DateTime> NgayGiaodich { get; set; }
         public Nullable<double> SoduTruocGiaodich { get; set; }
         public Nullable<double> SotienGiaodich { get; set; }
-        public string Tongno { get; set; }
+        public Nullable<double> Tongno { get; set; }
         public Nullable<System.DateTime> NgayHentra { get; set; }
         public Nullable<System.Guid> NhanvienId { get; set; }
         public string Ghichu { get; set; }

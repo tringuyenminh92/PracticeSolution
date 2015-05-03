@@ -26,7 +26,7 @@ namespace B2B.DAL
         public string Ghichu { get; set; }
         public Nullable<int> Step { get; set; }
         public byte[] Version { get; set; }
-        public string HotenKhachhang { get; set; }
-        public string HovatenNhanvien { get; set; }
+        public string TenKhachhang { get; set; }
+        public string TenNhanvien { get; set; }
     }
 }

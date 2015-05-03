@@ -21,8 +21,11 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink(" Đặt Hàng", "DatHang", "MuaHang", null, new { @class = "fa fa-home" })</li>
                     @*<li>@Html.ActionLink("Mua hàng", "DatHang", "MuaHang")</li>*@
-                    <li>@Html.ActionLink(" Quản lý Hàng hóa", "Index", "QuanlyHanghoa", null, new { @class = "fa fa-th-list" })</li>
-                    <li>@Html.ActionLink(" Quản lý Tài khoản", "Index", "User", null, new { @class = "fa fa-user" })</li>
+                    @if (!string.IsNullOrWhiteSpace(Session["TypeAccount"] as string) && (Session["TypeAccount"] as string) == "Admin")
+                    {
+                        <li>@Html.ActionLink(" Quản lý Hàng hóa", "Index", "QuanlyHanghoa", null, new { @class = "fa fa-th-list" })</li>
+                        <li>@Html.ActionLink(" Quản lý Tài khoản", "Index", "User", null, new { @class = "fa fa-user" })</li>
+                    }
                 </ul>
             </div>
             @Html.Partial("_LoginPartial")

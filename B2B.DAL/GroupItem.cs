@@ -10,12 +10,19 @@
 namespace B2B.DAL
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class Tin_CheckLogin_Result
+    public partial class GroupItem
     {
-        public System.Guid AccountId { get; set; }
-        public string AccountName { get; set; }
-        public string AccountPassword { get; set; }
-        public string TypeAccount { get; set; }
+        public GroupItem()
+        {
+            this.Items = new HashSet<Item>();
+        }
+    
+        public System.Guid GroupItemId { get; set; }
+        public string Tennhom { get; set; }
+        public string Mota { get; set; }
+    
+        public virtual ICollection<Item> Items { get; set; }
     }
 }

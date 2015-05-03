@@ -16,7 +16,7 @@ namespace B2B.PresentationLayer
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Quote", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Muahang", action = "Dathang", id = UrlParameter.Optional }
             );
         }
     }

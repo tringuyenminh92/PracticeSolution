@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace B2B.PresentationLayer.Controllers
 {
-    public class DonhangController : Controller
+    public class DonhangController : Controller,ICustomAuthorize
     {
         //
         // GET: /Donhang/
@@ -25,13 +25,17 @@ namespace B2B.PresentationLayer.Controllers
         }
         public ActionResult Index()
         {
+            if (!AllowAccessAsUser())
+            {
+                return Redirect("/Taikhoan/Dangnhap");
+            }
             return View();
         }
         public JsonResult GetNgaylapDonhangDautien(string khachhangId)
         {
             DateTime? nl = _donhangService.GetNgaylapDonhangDautien(khachhangId);
             string ngaylapdautien = "";
-            if(nl!=null)
+            if (nl != null)
             {
                 string ngay = "";
                 if (nl.Value.Day < 10) ngay = ngay + "0" + nl.Value.Day;
@@ -45,7 +49,7 @@ namespace B2B.PresentationLayer.Controllers
             }
             return Json(new { ngaylapdautien = ngaylapdautien }, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult GetHanghoasByMonth(string ngaylap,int loaiDonhang)
+        public JsonResult GetHanghoasByMonth(string ngaylap, int loaiDonhang)
         {
             var ngay = DateTime.Parse(ngaylap);
             return Json(null, JsonRequestBehavior.AllowGet);
@@ -64,7 +68,7 @@ namespace B2B.PresentationLayer.Controllers
             if (donhangId != null)
             {
                 lstChitietHanghoa = _chitietDonhangService.GetChitietDonhangTheoDonhang(donhangId);
-                for(int i=0; i<lstChitietHanghoa.Count; ++i)
+                for (int i = 0; i < lstChitietHanghoa.Count; ++i)
                 {
                     var hanghoa = _hanghoaService.GetHanghoaTheoHanghoaId(lstChitietHanghoa[i].HanghoaId.ToString());
                     lstChitietHanghoa[i].LinkHinhanh_Web = hanghoa.LinkHinhanh_Web;
@@ -75,5 +79,24 @@ namespace B2B.PresentationLayer.Controllers
             return Json(lstChitietHanghoa, JsonRequestBehavior.AllowGet);
         }
 
+        public bool AllowAccessAsAdmin()
+        {
+            var typeAcc = Session["TypeAccount"] as string;
+            if (typeAcc == "Admin")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool AllowAccessAsUser()
+        {
+            var typeAcc = Session["TypeAccount"] as string;
+            if (typeAcc == "User" || typeAcc == "Admin")
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

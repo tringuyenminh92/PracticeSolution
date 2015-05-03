@@ -12,12 +12,20 @@ namespace B2B.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class Role
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public Role()
+        {
+            this.RoleRights = new HashSet<RoleRight>();
+            this.UserRoles = new HashSet<UserRole>();
+        }
+    
+        public System.Guid RoleId { get; set; }
+        public string Name { get; set; }
+        public string Mota { get; set; }
+        public Nullable<bool> Enable { get; set; }
+    
+        public virtual ICollection<RoleRight> RoleRights { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

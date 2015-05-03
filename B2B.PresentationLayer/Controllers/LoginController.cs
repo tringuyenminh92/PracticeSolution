@@ -40,6 +40,7 @@ namespace B2B.PresentationLayer.Controllers
                 kq = true;
                 Session["accountId"] = rs.AccountId;
                 Session["accountName"] = rs.AccountName;
+                Session["TypeAccount"] = rs.TypeAccount;
             }
             return Json(new { result = kq });
 

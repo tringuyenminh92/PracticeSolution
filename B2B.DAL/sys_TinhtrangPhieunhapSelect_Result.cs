@@ -11,11 +11,13 @@ namespace B2B.DAL
 {
     using System;
     
-    public partial class Tin_CheckLogin_Result
+    public partial class sys_TinhtrangPhieunhapSelect_Result
     {
-        public System.Guid AccountId { get; set; }
-        public string AccountName { get; set; }
-        public string AccountPassword { get; set; }
-        public string TypeAccount { get; set; }
+        public System.Guid TinhtrangPhieunhapId { get; set; }
+        public Nullable<System.Guid> PhieunhapId { get; set; }
+        public Nullable<System.Guid> TinhtrangId { get; set; }
+        public Nullable<System.Guid> NhanvienCapnhat { get; set; }
+        public Nullable<System.DateTime> NgayCapnhat { get; set; }
+        public byte[] Version { get; set; }
     }
 }

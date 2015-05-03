@@ -11,9 +11,15 @@ namespace B2B.DAL
 {
     using System;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class Tri_GetTinhtrangTheoLoai_Result
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public System.Guid TinhtrangId { get; set; }
+        public string Code { get; set; }
+        public string TenTinhtrang { get; set; }
+        public string Ghichu { get; set; }
+        public Nullable<bool> Active { get; set; }
+        public Nullable<System.DateTime> NgayCapnhat { get; set; }
+        public Nullable<int> Step { get; set; }
+        public byte[] Version { get; set; }
     }
 }

@@ -20,5 +20,6 @@ namespace B2B.DAL
         public Nullable<System.Guid> NhanvienCapnhatId { get; set; }
         public string Ghichu { get; set; }
         public byte[] Version { get; set; }
+        public Nullable<System.Guid> TinhtrangId { get; set; }
     }
 }

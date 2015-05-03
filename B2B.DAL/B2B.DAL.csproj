@@ -70,6 +70,9 @@
     <Compile Include="ChitietDonhang.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChitietKiemke.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="ChitietPhieunhap.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
@@ -94,6 +97,9 @@
     <Compile Include="Donvi.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="GroupItem.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="Hanghoa.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
@@ -101,6 +107,9 @@
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="IRepository\IQuoteRepository.cs" />
+    <Compile Include="Item.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="Khachhang.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
@@ -131,13 +140,22 @@
     <Compile Include="Khuyen_GetHanghoa_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="Khuyen_GetKhachhangTheoPhieuxuat_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="Khuyen_GetKhachhang_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Khuyen_GetPhieuxuatTheoDonhang_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="Khuyen_GetPhieuxuat_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="Khuyen_GetThuchi_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Kiemke.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="LoHanghoa.cs">
@@ -159,6 +177,18 @@
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="NhomKhachhang.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Phanquyen_Danh_GetItemByGroupItemId_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Phanquyen_Danh_GetItemsByUserId_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Phanquyen_Danh_GetRoleRightByRoleId_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Phanquyen_Danh_GetUserRoleByUserId_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Phieunhap.cs">
@@ -205,6 +235,12 @@
     <Compile Include="Repository\TinhthanhRepository.cs" />
     <Compile Include="Repository\TinhtrangRepository.cs" />
     <Compile Include="Repository\UserResponsitory.cs" />
+    <Compile Include="Role.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RoleRight.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_GetApprovedQuoteDetails_Result.cs">
       <DependentUpon>QuoteSystem.tt</DependentUpon>
     </Compile>
@@ -253,12 +289,6 @@
     <Compile Include="SP_GetUserDetails_Result.cs">
       <DependentUpon>QuoteSystem.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>B2BSystem.tt</DependentUpon>
-    </Compile>
     <Compile Include="SP_PipingSchem_Result.cs">
       <DependentUpon>QuoteSystem.tt</DependentUpon>
     </Compile>
@@ -281,10 +311,10 @@
       <DependentUpon>QuoteSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\TinhtrangDonhangRepository.cs" />
-    <Compile Include="sysdiagram.cs">
+    <Compile Include="sys_ChitietDonhangSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
-    <Compile Include="sys_ChitietDonhangSelect_Result.cs">
+    <Compile Include="sys_ChitietKiemkeSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="sys_ChitietPhieunhapSelect_Result.cs">
@@ -308,10 +338,16 @@
     <Compile Include="sys_DonviSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="sys_GroupItemSelect_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="sys_HanghoaNhaCungcapSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="sys_HanghoaSelect_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sys_ItemSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="sys_KhachhangSelect_Result.cs">
@@ -321,6 +357,9 @@
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="sys_KhuvucSelect_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sys_KiemkeSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="sys_LoHanghoaSelect_Result.cs">
@@ -356,6 +395,12 @@
     <Compile Include="sys_QuanhuyenSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="sys_RoleRightSelect_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sys_RoleSelect_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="sys_ThuchiSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
@@ -368,6 +413,9 @@
     <Compile Include="sys_TinhtrangDonhangSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="sys_TinhtrangPhieunhapSelect_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="sys_TinhtrangPhieuxuatSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
@@ -375,6 +423,9 @@
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="sys_TonkhoSelect_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sys_UserRoleSelect_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="sys_UserSelect_Result.cs">
@@ -410,6 +461,9 @@
     <Compile Include="Tin_GetChitietPhieunhapTheoPhieunhap_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tin_GetCongnoNhapMoinhatTheoNhacungcap_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="Tin_GetHanghoaActive_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
@@ -422,10 +476,16 @@
     <Compile Include="Tin_GetPhieunhapTheoThang_Kho_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tin_GetPhieunhapTheoThang_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="Tin_GetSoluongtonTheoHanghoaTrongKho_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Tin_GetThuoctinHanghoaTheoHanghoa_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tin_GetTinhtrangCuaPhieunhap_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Tin_GetTonkhoMaxHang_Kho_Result.cs">
@@ -434,7 +494,13 @@
     <Compile Include="Tin_GetTonkhoMoinhatHanghoaTheoKho_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tin_SelectChitietKiemkeTheoKiemke_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="Tin_SelectCongnoNhap_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tin_SelectKiemkeTheoKho_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Tonkho.cs">
@@ -504,6 +570,12 @@
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Tri_GetTinhtrangDalap_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tri_GetTinhtrangDonhangCurrent_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tri_GetTinhtrangTheoLoai_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Tri_GetTonkhoTheoNgay_Result.cs">
@@ -770,6 +842,9 @@
     <Compile Include="User.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserRole.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="Vinh_GetChitietDonhangTheoDonHang_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
@@ -783,6 +858,9 @@
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Vinh_GetDonviActive_Result.cs">
+      <DependentUpon>B2BSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vinh_GetKhachhangTheoPhieuxuat_Result.cs">
       <DependentUpon>B2BSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Vinh_GetKhoActive_Result.cs">

@@ -14,7 +14,7 @@ namespace B2B.DAL
     public partial class sys_CongnoXuatSelect_Result
     {
         public System.Guid CongnoXuatId { get; set; }
-        public System.Guid KhachhangId { get; set; }
+        public Nullable<System.Guid> KhachhangId { get; set; }
         public string Dienthoai { get; set; }
         public string Diachi { get; set; }
         public Nullable<System.DateTime> NgayGiaodich { get; set; }

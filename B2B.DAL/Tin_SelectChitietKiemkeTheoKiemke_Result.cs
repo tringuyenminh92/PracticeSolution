@@ -10,24 +10,17 @@
 namespace B2B.DAL
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class User
+    public partial class Tin_SelectChitietKiemkeTheoKiemke_Result
     {
-        public User()
-        {
-            this.UserRoles = new HashSet<UserRole>();
-        }
-    
-        public System.Guid UserId { get; set; }
-        public string C_Username { get; set; }
-        public string C_Password { get; set; }
-        public Nullable<System.Guid> NhanvienId { get; set; }
-        public Nullable<bool> Active { get; set; }
+        public System.Guid ChitietKiemkeId { get; set; }
+        public Nullable<System.Guid> KiemkeId { get; set; }
+        public Nullable<System.Guid> HanghoaId { get; set; }
+        public string TenHanghoa { get; set; }
+        public Nullable<int> SoluongTon { get; set; }
+        public Nullable<int> SoluongThuc { get; set; }
+        public string Ghichu { get; set; }
         public Nullable<int> Step { get; set; }
         public byte[] Version { get; set; }
-    
-        public virtual Nhanvien Nhanvien { get; set; }
-        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

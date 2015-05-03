@@ -11,7 +11,7 @@ namespace B2B.DAL
 {
     using System;
     
-    public partial class Tri_GetKhachhangTheoNhomKhachhang_Result
+    public partial class Khuyen_GetKhachhangTheoPhieuxuat_Result
     {
         public System.Guid KhachhangId { get; set; }
         public string Code { get; set; }
@@ -45,8 +45,5 @@ namespace B2B.DAL
         public Nullable<bool> Active { get; set; }
         public Nullable<int> Step { get; set; }
         public byte[] Version { get; set; }
-        public string TenQuanhuyen { get; set; }
-        public string TenTinhthanh { get; set; }
-        public string TenNhomKhachhang { get; set; }
     }
 }

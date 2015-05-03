@@ -13,5 +13,7 @@ namespace B2B.Model
         public String AccountPassword { get; set; }
         public bool Active { get; set; }
         public AccountModel() { AccountId = Guid.NewGuid(); }
+
+        public string TypeAccount { get; set; }
     }
 }

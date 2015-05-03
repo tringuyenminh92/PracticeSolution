@@ -11,7 +11,7 @@ namespace B2B.DAL
 {
     using System;
     
-    public partial class Khuyen_GetPhieuxuatTheoDonhang_Result
+    public partial class Khuyen_GetPhieuxuat_Result
     {
         public System.Guid PhieuxuatId { get; set; }
         public string Code { get; set; }
@@ -29,11 +29,5 @@ namespace B2B.DAL
         public Nullable<System.Guid> TinhtrangPhieuxuatCurrentId { get; set; }
         public Nullable<System.Guid> NhanvienDonhang { get; set; }
         public Nullable<double> Tongtien { get; set; }
-        public string TenNhanvienLap { get; set; }
-        public string TenKho { get; set; }
-        public string TenNhanvienGiaohang { get; set; }
-        public string CodeDonhang { get; set; }
-        public Nullable<System.DateTime> NgaylapDonhang { get; set; }
-        public string TenNguyennhanLydo { get; set; }
     }
 }

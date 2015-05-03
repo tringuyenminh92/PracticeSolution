@@ -18,8 +18,8 @@ namespace B2B.PresentationLayer.Controllers
         AccountService _accountService;
         KhachhangService _khachhangService;
 
-        public TaikhoanController() 
-        { 
+        public TaikhoanController()
+        {
             _tinhthanhService = new TinhthanhService();
             _quanhuyenService = new QuanhuyenService();
             _accountService = new AccountService();
@@ -36,8 +36,10 @@ namespace B2B.PresentationLayer.Controllers
         }
         public ActionResult Dangxuat()
         {
-            Session["accountId"] = null;
-            Session["accountName"] = null;
+            //Session["accountId"] = null;
+            //Session["accountName"] = null;
+            //Session["TypeAccount"] = null;
+            Session.RemoveAll();
             return View("dangnhap");
         }
         public JsonResult CheckLoginUser(string account, string password)
@@ -50,6 +52,7 @@ namespace B2B.PresentationLayer.Controllers
                 kq = true;
                 Session["accountId"] = rs.AccountId;
                 Session["accountName"] = rs.AccountName;
+                Session["TypeAccount"] = rs.TypeAccount;
             }
             return Json(new { result = kq });
 
@@ -84,7 +87,7 @@ namespace B2B.PresentationLayer.Controllers
             account.AccountPassword = passnew;
             var kq = _accountService.Update(account);
             string thongbao;
-            if(kq)
+            if (kq)
             {
                 thongbao = "Đổi password thành công";
             }
@@ -94,9 +97,9 @@ namespace B2B.PresentationLayer.Controllers
             }
             return Json(new { thongbao = thongbao, kq = kq }, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult KiemtraAccountName (AccountModel account)
+        public JsonResult KiemtraAccountName(AccountModel account)
         {
-            if(_accountService.CheckAccountNameExist(account))
+            if (_accountService.CheckAccountNameExist(account))
             {
                 return Json(new { thongbao = "Trùng Account", kq = true }, JsonRequestBehavior.AllowGet);
             }
@@ -104,10 +107,10 @@ namespace B2B.PresentationLayer.Controllers
         }
         public JsonResult XulyDangky(KhachhangModel khachhang, AccountModel account)
         {
-            if(_accountService.Insert(account))
+            if (_accountService.Insert(account))
             {
                 khachhang.AccountId = account.AccountId;
-                if(_khachhangService.Insert(khachhang))
+                if (_khachhangService.Insert(khachhang))
                 {
                     return Json(new { thongbao = "Đăng ký thành công", kq = true }, JsonRequestBehavior.AllowGet);
                 }
@@ -154,6 +157,6 @@ namespace B2B.PresentationLayer.Controllers
             }
             return Json(new { thongbao = thongbao, kq = kq }, JsonRequestBehavior.AllowGet);
         }
-        
+
     }
 }

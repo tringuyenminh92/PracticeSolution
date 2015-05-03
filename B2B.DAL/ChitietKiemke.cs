@@ -12,19 +12,16 @@ namespace B2B.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TinhtrangDonhang
+    public partial class ChitietKiemke
     {
-        public System.Guid TinhtrangDonhangId { get; set; }
-        public Nullable<System.Guid> DonhangId { get; set; }
-        public Nullable<System.Guid> PhieuxuatId { get; set; }
-        public Nullable<System.DateTime> NgayCapnhat { get; set; }
-        public Nullable<System.Guid> NhanvienCapnhatId { get; set; }
+        public System.Guid ChitietKiemkeId { get; set; }
+        public Nullable<System.Guid> KiemkeId { get; set; }
+        public Nullable<System.Guid> HanghoaId { get; set; }
+        public string TenHanghoa { get; set; }
+        public Nullable<int> SoluongTon { get; set; }
+        public Nullable<int> SoluongThuc { get; set; }
         public string Ghichu { get; set; }
+        public Nullable<int> Step { get; set; }
         public byte[] Version { get; set; }
-        public Nullable<System.Guid> TinhtrangId { get; set; }
-    
-        public virtual Donhang Donhang { get; set; }
-        public virtual Nhanvien Nhanvien { get; set; }
-        public virtual Tinhtrang Tinhtrang { get; set; }
     }
 }

@@ -10,12 +10,16 @@
 namespace B2B.DAL
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class Tin_CheckLogin_Result
+    public partial class UserRole
     {
-        public System.Guid AccountId { get; set; }
-        public string AccountName { get; set; }
-        public string AccountPassword { get; set; }
-        public string TypeAccount { get; set; }
+        public System.Guid UserRoleId { get; set; }
+        public Nullable<System.Guid> UserId { get; set; }
+        public Nullable<System.Guid> RoleId { get; set; }
+        public Nullable<bool> Enable { get; set; }
+    
+        public virtual Role Role { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -9,7 +9,7 @@ using System.IO;
 
 namespace B2B.PresentationLayer.Controllers
 {
-    public class QuanlyHanghoaController : Controller
+    public class QuanlyHanghoaController : Controller,ICustomAuthorize
     {
         //
         // GET: /QuanlyHanghoa/
@@ -27,6 +27,10 @@ namespace B2B.PresentationLayer.Controllers
         }
         public ActionResult Index()
         {
+            if (!AllowAccessAsAdmin())
+            {
+                return Redirect("/Taikhoan/Dangnhap");
+            }
             return View();
         }
         public JsonResult GetHanghoaTheoHanghoaId(string hanghoaId)
@@ -156,6 +160,26 @@ namespace B2B.PresentationLayer.Controllers
             	
             }
             return Json(new { pathSave = pathSave });
+        }
+
+        public bool AllowAccessAsAdmin()
+        {
+            var typeAcc = Session["TypeAccount"] as string;
+            if (typeAcc == "Admin")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool AllowAccessAsUser()
+        {
+            var typeAcc = Session["TypeAccount"] as string;
+            if (typeAcc == "User" || typeAcc == "Admin")
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

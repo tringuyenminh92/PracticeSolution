@@ -11,11 +11,11 @@ namespace B2B.DAL
 {
     using System;
     
-    public partial class Tin_CheckLogin_Result
+    public partial class sys_RoleSelect_Result
     {
-        public System.Guid AccountId { get; set; }
-        public string AccountName { get; set; }
-        public string AccountPassword { get; set; }
-        public string TypeAccount { get; set; }
+        public System.Guid RoleId { get; set; }
+        public string Name { get; set; }
+        public string Mota { get; set; }
+        public Nullable<bool> Enable { get; set; }
     }
 }

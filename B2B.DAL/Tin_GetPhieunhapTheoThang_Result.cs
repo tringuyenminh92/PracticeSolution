@@ -11,20 +11,24 @@ namespace B2B.DAL
 {
     using System;
     
-    public partial class Tin_SelectCongnoNhap_Result
+    public partial class Tin_GetPhieunhapTheoThang_Result
     {
-        public System.Guid CongnoNhapId { get; set; }
-        public Nullable<System.Guid> NhaCungcapId { get; set; }
-        public Nullable<System.DateTime> NgayGiaodich { get; set; }
-        public Nullable<double> SoduTruocGiaodich { get; set; }
-        public Nullable<double> SotienGiaodich { get; set; }
-        public Nullable<double> Tongno { get; set; }
-        public Nullable<System.DateTime> NgayHentra { get; set; }
+        public System.Guid PhieunhapId { get; set; }
+        public string Code { get; set; }
         public Nullable<System.Guid> NhanvienId { get; set; }
+        public Nullable<System.Guid> KhoId { get; set; }
+        public Nullable<System.Guid> NhaCungcapId { get; set; }
+        public Nullable<System.DateTime> Ngaylap { get; set; }
+        public Nullable<System.Guid> NguyennhanLydo { get; set; }
+        public Nullable<double> Tongtien { get; set; }
         public string Ghichu { get; set; }
         public Nullable<int> Step { get; set; }
         public byte[] Version { get; set; }
-        public string TenNhaCungcap { get; set; }
+        public Nullable<System.Guid> TinhtrangPhieunhapCurrentId { get; set; }
         public string TenNhanvien { get; set; }
+        public string TenKho { get; set; }
+        public string Noidung { get; set; }
+        public string TenNhaCungcap { get; set; }
+        public string TenTinhtrang { get; set; }
     }
 }

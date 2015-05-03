@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace B2B.PresentationLayer.Controllers
 {
-    public class MuaHangController : Controller
+    public class MuaHangController : Controller, ICustomAuthorize
     {
         HanghoaService _hanghoaService;
         NhomHanghoaService _nhomHanghoaService;
@@ -33,17 +33,30 @@ namespace B2B.PresentationLayer.Controllers
 
         public ActionResult DatHang()
         {
+            if (!AllowAccessAsUser())
+            {
+                return Redirect("/Taikhoan/Dangnhap");
+            }
+            if (string.IsNullOrWhiteSpace(Session["accountName"] as string))
+            {
+                return Redirect("/Taikhoan/Dangnhap");
+            }
             return View();
         }
 
         public ActionResult ChonDiachigiaohang()
         {
+            if (!AllowAccessAsUser())
+            {
+                return Redirect("/Taikhoan/Dangnhap");
+            }
             return View();
         }
 
         //Nhom hang hoa
         public JsonResult LoadNhomHanghoa()
         {
+
             List<NhomHanghoaModel> lst = _nhomHanghoaService.GetNhomHanghoaActive();
             return Json(_nhomHanghoaService.GetNhomHanghoaActive(), JsonRequestBehavior.AllowGet);
         }
@@ -76,7 +89,7 @@ namespace B2B.PresentationLayer.Controllers
         {
             bool kq;
             string thongbao = "";
-            if(truonghop != 0)
+            if (truonghop != 0)
             {
                 _khachhangService.Update(khachhang);
             }
@@ -134,7 +147,7 @@ namespace B2B.PresentationLayer.Controllers
                 //Cập nhật tình trạng đơn hàng không thành công
                 else { kq = false; }
                 kq = true;
-                
+
             }
             //Cập nhật đơn hàng không thành công
             else { kq = false; }
@@ -151,6 +164,26 @@ namespace B2B.PresentationLayer.Controllers
                 thongbao = "Lưu đơn hàng không thành công.";
             }
             return Json(new { thongbao = thongbao, kq = kq }, JsonRequestBehavior.AllowGet);
+        }
+
+        public bool AllowAccessAsAdmin()
+        {
+            var typeAcc = Session["TypeAccount"] as string;
+            if (typeAcc == "Admin")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool AllowAccessAsUser()
+        {
+            var typeAcc = Session["TypeAccount"] as string;
+            if (typeAcc == "User" || typeAcc == "Admin")
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
