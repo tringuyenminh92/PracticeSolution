@@ -7,8 +7,10 @@ $(function () {
 })
 
 angular.module("GlobalModule").controller("quoteController", QuoteController);
-QuoteController.$inject = ['$scope', '$http', 'Upload', '$location', '$q', 'modalService'];
-function QuoteController($scope, $http, Upload, $location, $q, modalService) {
+QuoteController.$inject = ['$scope', '$http', 'Upload', '$location', '$q', 'modalService', 'notifyService'];
+function QuoteController($scope, $http, Upload, $location, $q, modalService, notifyService) {
+
+    'use strict';
 
     $scope.$scope = $scope;
     $scope.fileReaderSupported = window.FileReader != null && (window.FileAPI == null || FileAPI.html5 != false);
@@ -125,5 +127,10 @@ function QuoteController($scope, $http, Upload, $location, $q, modalService) {
     $scope.learnEvent = function (e) {
         alert(e.target.id);
     };
+
+    $scope.CallMessage = function () {
+        notifyService.add({ type: 'warning', title: 'Wow', body: 'You`re a really good button clicker!' });
+    };
+
 }
 

@@ -1,8 +1,8 @@
 ﻿
 angular.module("GlobalModule").controller("homeController", HomeController);
 
-HomeController.$inject = ['$scope', '$http'];
-function HomeController($scope, $http) {
+HomeController.$inject = ['$scope', '$http','notifyService'];
+function HomeController($scope, $http, notifyService) {
     $scope.selectedObject = {}// $scope.dropdownMenu[0];
     $scope.account = { username: "", pass: "" };
 
@@ -47,5 +47,4 @@ function HomeController($scope, $http) {
         });
 
     }
-
 }
