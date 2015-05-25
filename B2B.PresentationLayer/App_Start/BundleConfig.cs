@@ -59,7 +59,8 @@ namespace B2B.PresentationLayer
                                                                 "~/Scripts/Angular/angular-route.js",
                                                                 "~/Scripts/Angular/ng-tags-input.js",
                                                                 "~/Scripts/Angular/angular-sanitize.js",
-                                                                 "~/Scripts/Angular/select.js"));
+                                                                 "~/Scripts/Angular/select.js",
+                                                                 "~/Scripts/Angular/progressBar.js"));
             bundles.Add(new ScriptBundle("~/bundles/Custom").Include("~/Scripts/Custom/MyApp.js"));
 
         }

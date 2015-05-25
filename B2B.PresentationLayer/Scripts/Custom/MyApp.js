@@ -5,18 +5,19 @@
 
     angular.module("GlobalModule", ['ngRoute', 'ui.bootstrap', 'ngTouch', 'ui.grid', 'ui.grid.pagination', 'ui.grid.edit', 'ui.grid.resizeColumns',
                                     'ui.grid.selection', 'ui.grid.moveColumns', 'ui.grid.saveState', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize',
-                                    'ui.select', 'ngFileUpload']);
+                                    'ui.select', 'ngFileUpload', 'progress.bar']);
 
-    angular.module("GlobalModule").run(RootModal);
-    angular.module("GlobalModule").factory("modalService", ModalService);
-    angular.module("GlobalModule").factory("notifyService", notifyService);
+    angular.module("GlobalModule").run(rootModal);
+    angular.module("GlobalModule").factory('modalService', modalService);
+    angular.module("GlobalModule").factory('notifyService', notifyService);
+    angular.module("GlobalModule").factory('shareService', shareService);
 
 })();
 
 // Controller xu ly cac thao tac cua message Modal
-angular.module("GlobalModule").controller("messageModalController", MessageModalController);
-MessageModalController.$inject = ['$scope', '$modalInstance', 'data'];
-function MessageModalController($scope, $modalInstance, data) {
+angular.module("GlobalModule").controller("messageModalController", messageModalController);
+messageModalController.$inject = ['$scope', '$modalInstance', 'data'];
+function messageModalController($scope, $modalInstance, data) {
 
     //set data in modal scope
     $scope.data = data;
@@ -31,9 +32,9 @@ function MessageModalController($scope, $modalInstance, data) {
 }
 
 // Controller xu ly cac thao tac cua message Modal
-angular.module("GlobalModule").controller("gridModalController", GridModalController);
-GridModalController.$inject = ['$scope', '$modalInstance', '$interval', 'data'];
-function GridModalController($scope, $modalInstance, $interval, data) {
+angular.module("GlobalModule").controller("gridModalController", gridModalController);
+gridModalController.$inject = ['$scope', '$modalInstance', '$interval', 'data'];
+function gridModalController($scope, $modalInstance, $interval, data) {
 
     $scope.$scope = $scope;
 
@@ -72,8 +73,8 @@ function GridModalController($scope, $modalInstance, $interval, data) {
 }
 
 //Storing modal object in rootScope for calling in controllers
-RootModal.$inject = ['$rootScope', '$modal'];
-function RootModal($rootScope, $modal) {
+rootModal.$inject = ['$rootScope', '$modal'];
+function rootModal($rootScope, $modal) {
 
     $rootScope.AppPath = $("#appPath").attr("href");
     $rootScope.ShowModal = function (funcOk, funcCancel, myData) {
@@ -85,7 +86,7 @@ function RootModal($rootScope, $modal) {
             size: myData.Size || 'sm',
             controller: myData.MessageController || 'messageModalController',
             resolve: {
-                data: function () { return { Title: title, Content: content, ButtonOk: okButton, ButtonCancel: cancelButton } }
+                data: function () { return myData; }
             }
         });
 
@@ -101,14 +102,14 @@ function WaitDialog(modalContent) {
 
     this.Show = function () {
         pleaseWaitDiv.modal();
-    }
+    };
     this.Hide = function () {
         pleaseWaitDiv.modal('hide');
-    }
+    };
 }
 
-ModalService.$inject = ['$modal'];
-function ModalService($modal) {
+modalService.$inject = ['$modal'];
+function modalService($modal) {
 
     var serviceObject = {};
     serviceObject.ShowModal = function (funcOk, funcCancel) {
@@ -132,25 +133,48 @@ function ModalService($modal) {
 }
 
 //Service to show notification message
-notifyService.$inject = ['$rootScope'];
-function notifyService($rootScope) {
+notifyService.$inject = ['$rootScope', '$timeout'];
+function notifyService($rootScope, $timeout) {
 
     $rootScope.queue = [];
     var serviceObject = {};
 
     serviceObject.add = function (item) {
         $rootScope.queue.push(item);
-        setTimeout(function () {
+        $timeout(function () {
             // remove the alert after 2000 ms
             $('.alerts .alert').eq(0).remove();
             $rootScope.queue.shift();
         }, 3000);
-    },
+    };
 
     serviceObject.pop = function () {
         $rootScope.queue.pop();
-    }
+    };
 
     return serviceObject;
 
+}
+
+//share service to share data between controllers
+shareService.$inject = ['$rootScope'];
+function shareService($rootScope) {
+
+    'use strict';
+
+    var serviceObject = {};
+
+    //publish event to another scope
+    serviceObject.raiseEvent = function (name, data) {
+        $rootScope.$broadcast(name, data);
+    };
+
+    //listen event to handle
+    serviceObject.onEvent = function ($scope, name, handler) {
+        $scope.$on(name, function (event, args) {
+            handler(args);
+        });
+    };
+
+    return serviceObject;
 }

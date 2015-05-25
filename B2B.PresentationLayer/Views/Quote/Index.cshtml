@@ -9,13 +9,20 @@
     </div>
 </script>
 <div class="col-lg-offset-2">
-    <div class="row">
-        <button id="alertButton" type="button" class="btn btn-primary btn-group-sm">Message</button>
-        <div id="alertDiv" role="alert" />
-    </div>
     <div class="row col-xs-12">
         <div ng-controller="quoteController">
+
+            <ng-progressbar type="primary" max="{{max_count}}" start="{{timer_running}}" on-stop="stopProgress()"></ng-progressbar>
+
+
+            <button class="btn btn-success" ng-if="!timer_running" ng-click="startProgress()">Start Timer</button>
+            <button class="btn btn-warning" ng-if="timer_running" ng-click="stopProgress()">Stop Timer</button>
+            <br />
+            <span class="label label-success" ng-if="timer_running">Timer Running</span>
+            <span class="label label-danger" ng-if="!timer_running">Timer Stopped</span>
+
             <button type="button" class="btn btn-primary" ng-click="CallMessage()">Show message</button>
+
 
             <button id="btnLoadData" type="button" class="btn btn-primary btn-group-sm" ng-click="loadData()" ng-init="loadData()">Load Data</button>
             <div external-scopes="$scope" ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid="gridOptions">
@@ -33,10 +40,10 @@
             <button type="button" class="btn btn-danger" ng-click="Reset()">Clear</button>
 
             @*<ui-select multiple ng-model="colors" theme="bootstrap">
-                    <ui-select-match placeholder="Select colors..."><i class="fa fa-tags">{{$item}}</i></ui-select-match>
-                    <ui-select-choices repeat="color in availableColors | filter: $select.search">
-                        {{color}}
-                    </ui-select-choices>
+                <ui-select-match placeholder="Select colors..."><i class="fa fa-tags">{{$item}}</i></ui-select-match>
+                <ui-select-choices repeat="color in availableColors | filter: $select.search">
+                {{color}}
+                </ui-select-choices>
                 </ui-select>*@
             @* filter: $select.search >> to filter when type input *@
 

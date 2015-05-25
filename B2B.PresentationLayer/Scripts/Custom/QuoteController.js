@@ -1,11 +1,4 @@
 ﻿
-$(function () {
-    $('#alertButton').click(function () {
-        var al = new Alert("alertDiv", "thoong baos", "success");
-        al.Show();
-    });
-})
-
 angular.module("GlobalModule").controller("quoteController", QuoteController);
 QuoteController.$inject = ['$scope', '$http', 'Upload', '$location', '$q', 'modalService', 'notifyService'];
 function QuoteController($scope, $http, Upload, $location, $q, modalService, notifyService) {
@@ -13,6 +6,19 @@ function QuoteController($scope, $http, Upload, $location, $q, modalService, not
     'use strict';
 
     $scope.$scope = $scope;
+
+
+    $scope.timer_running = false;
+    $scope.max_count = 25;
+
+    $scope.stopProgress = function () {
+        $scope.timer_running = false;
+    };
+
+    $scope.startProgress = function () {
+        $scope.timer_running = true;
+    };
+
     $scope.fileReaderSupported = window.FileReader != null && (window.FileAPI == null || FileAPI.html5 != false);
 
     $scope.colors = ['Red', 'Green'];
@@ -127,6 +133,8 @@ function QuoteController($scope, $http, Upload, $location, $q, modalService, not
     $scope.learnEvent = function (e) {
         alert(e.target.id);
     };
+
+
 
     $scope.CallMessage = function () {
         notifyService.add({ type: 'warning', title: 'Wow', body: 'You`re a really good button clicker!' });
