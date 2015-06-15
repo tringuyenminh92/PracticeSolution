@@ -1,12 +1,17 @@
 ﻿
 angular.module("GlobalModule").controller("quoteController", QuoteController);
-QuoteController.$inject = ['$scope', '$http', 'Upload', '$location', '$q', 'modalService', 'notifyService'];
-function QuoteController($scope, $http, Upload, $location, $q, modalService, notifyService) {
+QuoteController.$inject = ['$scope', '$http', 'Upload', '$location', '$q', 'modalService', 'notifyService', '$resource', '$templateCache'];
+function QuoteController($scope, $http, Upload, $location, $q, modalService, notifyService, $resource, $templateCache) {
 
     'use strict';
 
     $scope.$scope = $scope;
 
+
+    $scope.accessElement = function (e) {
+        alert(angular.element(e.target).prop("tagName"));
+        alert(angular.element(e.currentTarget).prop("tagName"));
+    }
 
     $scope.timer_running = false;
     $scope.max_count = 25;
@@ -69,7 +74,7 @@ function QuoteController($scope, $http, Upload, $location, $q, modalService, not
     $scope.deleteCellTemplate = '<button ng-click="getExternalScopes().deleteRow(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-trash"/></button> ';
     $scope.detailsCellTemplate = '<button ng-click="getExternalScopes().getDetails(row.entity)" class="btn btn-danger btn-xs"><i class="fa fa-camera"/></button> ';
     $scope.gridOptions.columnDefs = [
-          { name: '_delete', displayName: "", cellTemplate: $scope.deleteCellTemplate, width: 25, enableFiltering: false, enableCellEdit: false },
+          { name: '_delete', displayName: "", cellTemplate: '', width: 25, enableFiltering: false, enableCellEdit: false },
   	      { name: 'name', displayName: 'Name', headerCellTemplate: '<div title="Tooltip Content">Name</div>', width: 150 },
   	      {
   	          name: 'tuoi', displayName: 'tuoi', width: 50, type: 'number', editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'tuoi', editDropdownOptionsArray: $scope.dataForTuoi
@@ -138,6 +143,16 @@ function QuoteController($scope, $http, Upload, $location, $q, modalService, not
 
     $scope.CallMessage = function () {
         notifyService.add({ type: 'warning', title: 'Wow', body: 'You`re a really good button clicker!' });
+    };
+
+    $scope.getWebApiData = function () {
+        //var rs = $resource('http://localhost:1083/api/quote/:id', { id: 2 }, function () {
+        //    $scope.result = rs;
+        //    alert(rs);
+        //});
+        $http.get('http://localhost:1083/api/quote/1').success(function (data) {
+            alert(data);
+        });
     };
 
 }

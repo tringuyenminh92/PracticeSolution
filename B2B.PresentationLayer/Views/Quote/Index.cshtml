@@ -10,7 +10,7 @@
 </script>
 <div class="col-lg-offset-2">
     <div class="row col-xs-12">
-        <div ng-controller="quoteController">
+        <div ng-controller="quoteController" ng-init="getWebApiData()">
 
             <ng-progressbar type="primary" max="{{max_count}}" start="{{timer_running}}" on-stop="stopProgress()"></ng-progressbar>
 
@@ -18,10 +18,13 @@
             <button class="btn btn-success" ng-if="!timer_running" ng-click="startProgress()">Start Timer</button>
             <button class="btn btn-warning" ng-if="timer_running" ng-click="stopProgress()">Stop Timer</button>
             <br />
+
             <span class="label label-success" ng-if="timer_running">Timer Running</span>
             <span class="label label-danger" ng-if="!timer_running">Timer Stopped</span>
 
             <button type="button" class="btn btn-primary" ng-click="CallMessage()">Show message</button>
+
+            <a class="" data-id="1414124" ng-click="accessElement($event)"><i class="fa fa-trash"> </i></a>
 
 
             <button id="btnLoadData" type="button" class="btn btn-primary btn-group-sm" ng-click="loadData()" ng-init="loadData()">Load Data</button>
@@ -40,28 +43,28 @@
             <button type="button" class="btn btn-danger" ng-click="Reset()">Clear</button>
 
             @*<ui-select multiple ng-model="colors" theme="bootstrap">
-                <ui-select-match placeholder="Select colors..."><i class="fa fa-tags">{{$item}}</i></ui-select-match>
-                <ui-select-choices repeat="color in availableColors | filter: $select.search">
-                {{color}}
-                </ui-select-choices>
-                </ui-select>*@
+            <ui-select-match placeholder="Select colors..."><i class="fa fa-tags">{{$item}}</i></ui-select-match>
+            <ui-select-choices repeat="color in availableColors | filter: $select.search">
+            {{color}}
+            </ui-select-choices>
+            </ui-select>*@
             @* filter: $select.search >> to filter when type input *@
 
 
-            <tags-input ng-model="colors" min-length="4" replace-spaces-with-dashes="false" placeholder="Enter some things" template="CustomTemplateWithIcon">
+            <tags-input ng-model="colors" min-length="4" replace-spaces-with-dashes="false" placeholder="Enter some things" template="CustomTemplateWithIcon" />
 
-                {{AppPath}}
-                <p>Selected: {{colors}}</p>
+            {{AppPath}}
+            <p>Selected: {{colors}}</p>
 
-                <button type="button" class="btn btn-primary" ng-click="ShowGridModal()">Show</button>
+            <button type="button" class="btn btn-primary" ng-click="ShowGridModal()">Show</button>
 
-                <img ng-src="{{img}}" class="img-thumbnail" width="200" height="300" ng-mouseover="" id="imgAvatar">
-                <div style="margin-top:15px" id="divImage">
-                    <input type='file' ngf-select ngf-change="readURL($files,$event)" ng-model="myFile" accept="image/x-png, image/gif, image/jpeg" />
-                </div>
-                <button type="button" class="btn btn-primary" ng-click="upload(myFile)">Up</button>
+            <img ng-src="{{img}}" class="img-thumbnail" width="200" height="300" ng-mouseover="" id="imgAvatar">
+            <div style="margin-top:15px" id="divImage">
+                <input type='file' ngf-select ngf-change="readURL($files,$event)" ng-model="myFile" accept="image/x-png, image/gif, image/jpeg" />
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="upload(myFile)">Up</button>
 
-                <button ng-click="learnEvent($event)" class="btn btn-primary" id="abc">Test</button>
+            <button ng-click="learnEvent($event)" class="btn btn-primary" id="abc">Test</button>
         </div>
     </div>
 

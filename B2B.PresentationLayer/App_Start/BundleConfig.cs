@@ -53,6 +53,7 @@ namespace B2B.PresentationLayer
                                                                 "~/Scripts/Angular/bootstrap.js",
                                                                 "~/Scripts/Angular/ui-grid-unstable.js",
                                                                 "~/Scripts/Angular/ng-grid-1.3.2.js",
+                                                                "~/Scripts/Angular/angular-resource.js",
                                                                 "~/Scripts/Angular/angular-touch.js",
                                                                  "~/Scripts/Angular/ng-file-upload.js",
                                                                 "~/Scripts/Angular/ng-file-upload-shim.js",
