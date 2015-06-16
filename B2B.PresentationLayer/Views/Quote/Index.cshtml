@@ -10,8 +10,8 @@
 </script>
 <div class="col-lg-offset-2">
     <div class="row col-xs-12">
-        <div ng-controller="quoteController" ng-init="getWebApiData()">
-
+        @*<div ng-controller="quoteController" ng-init="getWebApiDataBy$HttGet(); getWebApiDataBy$Resource();">*@
+        <div ng-controller="quoteController" ng-init="PushDataToService();">
             <ng-progressbar type="primary" max="{{max_count}}" start="{{timer_running}}" on-stop="stopProgress()"></ng-progressbar>
 
 

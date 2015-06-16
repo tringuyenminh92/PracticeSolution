@@ -145,13 +145,32 @@ function QuoteController($scope, $http, Upload, $location, $q, modalService, not
         notifyService.add({ type: 'warning', title: 'Wow', body: 'You`re a really good button clicker!' });
     };
 
-    $scope.getWebApiData = function () {
-        //var rs = $resource('http://localhost:1083/api/quote/:id', { id: 2 }, function () {
-        //    $scope.result = rs;
-        //    alert(rs);
+    $scope.getWebApiDataBy$HttGet = function () {
+
+        //$http.get("http://localhost:1083/api/quote/1").success(function (data) {
+        //    alert(data + "$httpGet");
         //});
-        $http.get('http://localhost:1083/api/quote/1').success(function (data) {
-            alert(data);
+    };
+
+    $scope.getWebApiDataBy$Resource = function () {
+        var rs = $resource("http://localhost:1083/api/quote/:id", { id: 2 }, {});
+        //alert(rs.query()); // async issue
+
+
+        //rs.query().$promise.then(function(result) {
+        //    alert(result);
+        //});
+        //got issue
+        //Error: [$resource:badcfg] Error in resource configuration for action `query`. Expected response to contain an array but got an object 
+
+        rs.query({ id: 3 }, { method: 'GET', isArray: false }).$promise.then(function (result) {
+            alert(result);
+        });
+    };
+
+    $scope.PushDataToService = function () {
+        $http.post("http://localhost:1083/api/quote/", { value: 'abc' }).success(function () {
+            alert(1);
         });
     };
 
