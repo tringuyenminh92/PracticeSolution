@@ -153,7 +153,7 @@ function QuoteController($scope, $http, Upload, $location, $q, modalService, not
     };
 
     $scope.getWebApiDataBy$Resource = function () {
-        var rs = $resource("http://localhost:1083/api/quote/:id", { id: 2 }, {});
+        var rs = $resource("http://localhost:1083/api/quote/GetB/:id", { id: 2 }, { postMethodNameInClient: { method: 'POST', params: { FirtName: 'a', Age: 3 } } });
         //alert(rs.query()); // async issue
 
 
@@ -163,15 +163,26 @@ function QuoteController($scope, $http, Upload, $location, $q, modalService, not
         //got issue
         //Error: [$resource:badcfg] Error in resource configuration for action `query`. Expected response to contain an array but got an object 
 
-        rs.query({ id: 3 }, { method: 'GET', isArray: false }).$promise.then(function (result) {
+        rs.get({ id: 3 }).$promise.then(function (result) {
             alert(result);
+
         });
+        //rs.postMethodNameInClient();
+        rs.delete();
+        //rs.$save({data:'ab'}).then(function(data) {
+        //    alert(1);
+
+        //});
     };
 
     $scope.PushDataToService = function () {
-        $http.post("http://localhost:1083/api/quote/", { value: 'abc' }).success(function () {
-            alert(1);
-        });
+        //$http.post("http://localhost:1083/api/Quote/PushData", { FirstName: 'x', Age: 1 }).success(function () {
+        //    alert(1);
+        //});
+
+        //$http.get("http://localhost:1083/api/Quote/").success(function (data) {
+        //    alert(data);
+        //});
     };
 
 }
